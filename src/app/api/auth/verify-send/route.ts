@@ -56,7 +56,14 @@ export async function POST(request: NextRequest) {
     )
   } catch (error: unknown) {
     console.error('Verification send error:', error)
+    // Check if it's an SMTP authentication error
     const message = error instanceof Error ? error.message : 'Unknown error'
-    return NextResponse.json({ error: message }, { status: 500 })
+    if (message.includes('535') || message.includes('Authentication') || message.includes('EAUTH') || message.includes('Invalid login')) {
+      return NextResponse.json(
+        { error: 'Email service is currently unavailable. Please try again later or contact support.' },
+        { status: 503 }
+      )
+    }
+    return NextResponse.json({ error: 'Failed to send verification code. Please try again.' }, { status: 500 })
   }
 }
