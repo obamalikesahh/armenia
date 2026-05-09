@@ -12,8 +12,10 @@ model User {
   email        String    @unique
   firstName    String
   lastName     String
-  phone        String
-  passwordHash String
+  phone        String    @default("")
+  passwordHash String?
+  authProvider String    @default("email") // "email" or "google"
+  image        String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   bookings     Booking[]

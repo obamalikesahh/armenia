@@ -7,7 +7,7 @@ const getTransporter = () => {
   if (cachedTransporter) return cachedTransporter
 
   cachedTransporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.web.de',
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: Number(process.env.SMTP_PORT) || 587,
     secure: false,
     auth: {
@@ -23,7 +23,7 @@ const getTransporter = () => {
   return cachedTransporter
 }
 
-const OWNER_EMAIL = 'armen.arakelyan@web.de'
+const OWNER_EMAIL = 'caxkal22@gmail.com'
 const DISCOUNT_CODE = 'Armen5'
 const DISCOUNT_PERCENT = 5
 

@@ -25,7 +25,22 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Google OAuth users don't have passwords - they should use Google sign-in
+    if (user.authProvider === 'google' && !user.passwordHash) {
+      return NextResponse.json(
+        { error: 'This account uses Google sign-in. Please sign in with Google instead.' },
+        { status: 401 }
+      )
+    }
+
     // Verify password
+    if (!user.passwordHash) {
+      return NextResponse.json(
+        { error: 'Invalid email or password' },
+        { status: 401 }
+      )
+    }
+
     const isValid = await verifyPassword(password, user.passwordHash)
 
     if (!isValid) {
@@ -50,6 +65,7 @@ export async function POST(request: NextRequest) {
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
+        authProvider: user.authProvider,
       },
       token,
     })

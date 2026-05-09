@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { motion, useInView } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -88,6 +90,7 @@ function AnimatedSection({ children, className = '', id = '' }: { children: Reac
 /* ─── Main Page ─── */
 export default function Home() {
   const { t } = useLocale()
+  const { data: session, status: sessionStatus } = useSession()
 
   // --- Auth state ---
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -105,6 +108,27 @@ export default function Home() {
     } catch { /* ignore */ }
     return ''
   })
+
+  // Sync Google OAuth session with app auth state
+  useEffect(() => {
+    if (sessionStatus !== 'authenticated' || !session?.user?.email) return
+
+    // If already logged in via localStorage, skip
+    if (localStorage.getItem('auth_token')) return
+
+    // Fetch our custom token for this Google user
+    fetch('/api/auth/session')
+      .then(res => res.json())
+      .then(data => {
+        if (data.authenticated && data.token && data.user) {
+          localStorage.setItem('auth_token', data.token)
+          localStorage.setItem('user_info', JSON.stringify(data.user))
+          setIsLoggedIn(true)
+          setUserName(`${data.user.firstName} ${data.user.lastName}`.trim() || data.user.email)
+        }
+      })
+      .catch(console.error)
+  }, [session, sessionStatus])
 
   // --- State ---
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
@@ -201,6 +225,8 @@ export default function Home() {
     localStorage.removeItem('user_info')
     setIsLoggedIn(false)
     setUserName('')
+    // Also sign out from NextAuth (Google OAuth)
+    signOut({ redirect: false })
   }, [])
 
   const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
