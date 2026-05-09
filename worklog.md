@@ -169,3 +169,99 @@ Stage Summary:
 - Fixed the Prisma error that was shown in the user's screenshot (Invalid 'prisma.tourAvailability.findUnique()' invocation)
 - All gold → silver replacements complete and verified
 - No remaining gold/amber colors anywhere in the codebase
+
+---
+Task ID: 4-c
+Agent: theme-aware-page
+Task: Update page.tsx to use theme-aware CSS classes instead of hardcoded dark-mode colors
+
+Work Log:
+- Replaced all hardcoded color classes in src/app/page.tsx with Tailwind theme-aware equivalents
+- Background colors: `bg-[#0a0a0a]` → `bg-background`, `bg-[#0a0a0a]/80` → `bg-background/80`
+- Text colors: `text-white` → `text-foreground`, `text-white/40` → `text-muted-foreground`, `text-white/35` → `text-muted-foreground`, `text-white/30` → `text-muted-foreground`, `text-white/25` → `text-muted-foreground`, `text-white/20` → `text-foreground/20`, `text-white/15` → `text-foreground/15`, `text-white/10` → `text-foreground/10`, `text-white/60` → `text-foreground/60`, `text-white/80` → `text-foreground/80`
+- Silver accent colors: `bg-[#94A3B8]` → `bg-primary`, `text-[#94A3B8]` → `text-primary`, `text-[#94A3B8]/60` → `text-primary/60`, `bg-[#94A3B8]/8` → `bg-primary/8`, `bg-[#94A3B8]/30` → `bg-primary/30`, `hover:bg-[#7E8FA3]` → `hover:bg-primary/80`, `border-[#94A3B8]` → `border-primary`, `ring-[#94A3B8]` → `ring-primary`
+- Button text on primary buttons: `text-[#0a0a0a]` → `text-primary-foreground`
+- Border colors: `border-white/6` → `border-border`, `border-white/8` → `border-border`, `border-white/10` → `border-border`
+- Background overlays: `bg-white/3` → `bg-secondary`, `bg-white/5` (hover) → `hover:bg-secondary`, `bg-white/15` → `bg-foreground/15`
+- Gradient overlays: `from-[#0a0a0a]/40 via-transparent to-[#0a0a0a]` → `from-background/40 via-transparent to-background`, `from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/20` → `from-background/50 via-transparent to-background/20`
+- HeroScene loading state: `bg-[#0a0a0a]` → `bg-background`, `bg-white/5` → `bg-foreground/5`
+- Hero section headings: Added `dark:text-white` to h1 and stat values for proper visibility in both light and dark modes (`text-foreground dark:text-white`)
+- Verified zero remaining hardcoded hex colors (#0a0a0a, #94A3B8, #7E8FA3) in page.tsx
+- Verified zero remaining `text-white`, `bg-white`, `border-white` patterns (except intentional `dark:text-white` for hero headings)
+- Confirmed all CSS variables (--background, --foreground, --primary, --primary-foreground, --secondary, --muted-foreground, --border, --ring) exist in globals.css
+- TypeScript compilation passes with no new errors
+
+Stage Summary:
+- All hardcoded dark-mode colors in page.tsx replaced with theme-aware Tailwind CSS classes
+- 28 distinct class replacements applied across the file (~60+ individual occurrences)
+- Hero section uses `dark:text-white` pattern for headings to ensure visibility on dark 3D backgrounds
+- File is now fully theme-aware and will respond to light/dark mode via CSS variables
+
+---
+Task ID: 4-d
+Agent: theme-aware-tours
+Task: Update tour components to use theme-aware CSS classes
+
+Work Log:
+- Updated `src/components/tours/tour-card.tsx` with theme-aware CSS classes:
+  - `bg-[#94A3B8]/8` → `bg-primary/8` (hover glow), `bg-[#94A3B8]` → `bg-primary` (nav dot, button), `bg-[#94A3B8]/90` → `bg-primary/90` (featured badge)
+  - `bg-[#0a0a0a]/60` → `bg-background/60` (duration badge), `bg-[#0a0a0a]/50` → `bg-background/50` (category badge)
+  - `from-[#0a0a0a]/80 via-[#0a0a0a]/20` → `from-background/80 via-background/20` (gradient overlay)
+  - `text-[#0a0a0a]` → `text-primary-foreground` (featured badge, button)
+  - `text-[#94A3B8]` → `text-primary` (price), `hover:text-[#94A3B8]` → `hover:text-primary` (tour name)
+  - `hover:bg-[#7E8FA3]` → `hover:bg-primary/80` (button), `hover:shadow-[#94A3B8]/10` → `hover:shadow-primary/10`
+  - `border-white/6` → `border-border`, `border-white/8` → `border-border`, `border-white/10` → `border-border`
+  - `bg-white/3` → `bg-secondary` (card background)
+  - `text-white/35` → `text-muted-foreground` (description, labels), `text-white/45` → `text-muted-foreground` (region)
+  - `text-white/60` → `text-foreground/60` (price, category), `text-white/70` → `text-foreground/70` (duration)
+  - `text-white` → `text-foreground` (tour name)
+  - Kept `bg-white/50 hover:bg-white/80` on image overlay navigation dots for contrast
+
+- Updated `src/components/tours/tour-filters.tsx` with theme-aware CSS classes:
+  - `bg-[#94A3B8]` → `bg-primary` (active pill), `text-[#0a0a0a]` → `text-primary-foreground` (active pill text)
+  - `shadow-[#94A3B8]/10` → `shadow-primary/10` (active pill shadow)
+  - `border-[#94A3B8]/30` → `border-primary/30`, `ring-[#94A3B8]/10` → `ring-primary/10` (input focus)
+  - `border-white/6` → `border-border` (container, input, pills, badges)
+  - `bg-white/3` → `bg-secondary` (container, input, pills, badges, buttons), `bg-white/5` → `bg-secondary` (hover)
+  - `text-white/20` → `text-foreground/20` (placeholder), `text-white/30` → `text-foreground/30` (labels)
+  - `text-white/35` → `text-muted-foreground` (clear button, close X), `text-white/45` → `text-muted-foreground` (inactive pills)
+  - `text-white/50` → `text-foreground/50` (filter badges), `text-white/60` → `text-foreground/60` (hover states)
+  - `text-white` → `text-foreground` (input text, select trigger)
+  - Left `hover:bg-white/8` on badge hover (not in mapping)
+
+- Updated `src/components/tours/tour-detail-modal.tsx` with theme-aware CSS classes:
+  - `bg-[#0a0a0a]/95` → `bg-background/95` (dialog backgrounds), `bg-[#0a0a0a]/80` → `bg-background/80` (thumbnail strip)
+  - `bg-[#0a0a0a]/50` → `bg-background/50` (gallery nav, image counter), `bg-[#0a0a0a]/70` → `bg-background/70` (nav hover)
+  - `from-[#0a0a0a] via-[#0a0a0a]/40` → `from-background via-background/40` (gallery gradient)
+  - `ring-offset-[#0a0a0a]` → `ring-offset-background` (thumbnail ring offset)
+  - `bg-[#94A3B8]` → `bg-primary` (buttons, check icon, route markers, active street view)
+  - `bg-[#94A3B8]/10` → `bg-primary/10` (success circle, street view active), `bg-[#94A3B8]/8` → `bg-primary/8` (route markers)
+  - `bg-[#94A3B8]/5` → `bg-primary/5` (discount notice), `bg-[#94A3B8]/3` → `bg-primary/3` (price breakdown)
+  - `text-[#94A3B8]` → `text-primary` (check, ticket, route numbers, tab, discount code, total price, street view labels)
+  - `text-[#94A3B8]/70` → `text-primary/70` (route check, street view labels), `text-[#94A3B8]/60` → `text-primary/60` (discount ticket)
+  - `border-[#94A3B8]/15` → `border-primary/15` (discount border, price breakdown), `border-[#94A3B8]/20` → `border-primary/20` (route markers)
+  - `border-[#94A3B8]/30` → `border-primary/30` (radio selected, focus), `ring-[#94A3B8]` → `ring-primary` (thumbnail)
+  - `ring-[#94A3B8]/20` → `ring-primary/20` (street view active), `shadow-[#94A3B8]/10` → `shadow-primary/10` (button)
+  - `from-[#94A3B8]/30 to-[#94A3B8]/5` → `from-primary/30 to-primary/5` (route gradient)
+  - `hover:bg-[#7E8FA3]` → `hover:bg-primary/80` (buttons)
+  - `text-[#0a0a0a]` → `text-primary-foreground` (featured badge, buttons)
+  - `border-white/6` → `border-border`, `border-white/8` → `border-border`, `border-white/10` → `border-border`
+  - `border-white/15` → `border-foreground/15` (gallery nav hover)
+  - `bg-white/3` → `bg-secondary`, `bg-white/5` → `bg-secondary`, `bg-white/6` → `bg-secondary` (separators)
+  - `text-white/10` → `text-foreground/10`, `text-white/20` → `text-foreground/20`, `text-white/25` → `text-foreground/25`
+  - `text-white/30` → `text-foreground/30`, `text-white/35` → `text-muted-foreground`, `text-white/40` → `text-muted-foreground`
+  - `text-white/45` → `text-muted-foreground`, `text-white/50` → `text-foreground/50`, `text-white/55` → `text-foreground/55`
+  - `text-white/60` → `text-foreground/60`, `text-white/70` → `text-foreground/70`
+  - `text-white` → `text-foreground` (all non-overlay text: headings, labels, counts, calendar)
+  - Preserved `text-white` on image overlay tour name (h2 over gallery), `hover:text-white` on gallery nav buttons
+  - `border-white/30` → `border-foreground/30`, `border-t-[#0a0a0a]` → `border-t-primary-foreground` (spinner)
+  - Left `hover:bg-white/[0.04]` (not in mapping, very subtle hover)
+
+Stage Summary:
+- All three tour component files updated with theme-aware CSS classes
+- tour-card.tsx: 25 theme-aware class instances, zero remaining hardcoded hex colors
+- tour-filters.tsx: 46 theme-aware class instances, zero remaining hardcoded hex colors
+- tour-detail-modal.tsx: 170 theme-aware class instances, zero remaining hardcoded hex colors
+- Image overlay text (tour name in modal gallery, gallery nav buttons) preserved as `text-white` for contrast
+- Image overlay navigation dots in tour-card preserved as `bg-white/50 hover:bg-white/80` for contrast
+- All components will now respond to light/dark mode via CSS variables

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { LocaleProvider } from "@/hooks/use-locale";
 import { NextAuthProvider } from "@/components/auth/auth-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,14 +19,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased bg-[#0a0a0a] text-white`}>
-        <NextAuthProvider>
-          <LocaleProvider>
-            {children}
-            <Toaster />
-          </LocaleProvider>
-        </NextAuthProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} min-h-screen bg-background text-foreground antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextAuthProvider>
+            <LocaleProvider>
+              {children}
+              <Toaster />
+            </LocaleProvider>
+          </NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

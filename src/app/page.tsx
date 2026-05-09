@@ -39,14 +39,17 @@ const MouseSpotlight = dynamic(() => import('@/components/animations/mouse-spotl
 const HeroScene = dynamic(() => import('@/components/3d/hero-scene').then(m => ({ default: m.HeroScene })), {
   ssr: false,
   loading: () => (
-    <div className="absolute inset-0 z-0 bg-[#0a0a0a] flex items-center justify-center">
-      <div className="size-6 animate-pulse rounded-full bg-white/5" />
+    <div className="absolute inset-0 z-0 bg-background flex items-center justify-center">
+      <div className="size-6 animate-pulse rounded-full bg-foreground/5" />
     </div>
   ),
 })
 const TourRouteFluid = dynamic(() => import('@/components/3d/tour-route-fluid').then(m => ({ default: m.TourRouteFluid })), {
   ssr: false,
   loading: () => <div className="h-[200px] bg-transparent" />,
+})
+const FloatingGlassScene = dynamic(() => import('@/components/3d/floating-glass-scene').then(m => ({ default: m.FloatingGlassScene })), {
+  ssr: false,
 })
 
 /* ─── Animation helpers ─── */
@@ -254,7 +257,10 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+    <div className="min-h-screen flex flex-col bg-background">
+      {/* Global 3D glass sphere overlay — covers entire page */}
+      <FloatingGlassScene />
+
       {/* Global mouse effects */}
       <MagneticCursor />
       <MouseSpotlight />
@@ -271,11 +277,11 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           SECTION 1: HERO — clean, dramatic, minimal
           ═══════════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
         <HeroScene />
 
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-[#0a0a0a] z-[3]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background z-[3]" />
 
         {/* Content — clean, centered, minimal */}
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
@@ -286,12 +292,12 @@ export default function Home() {
             className="flex flex-col items-center"
           >
             {/* Thin line above heading */}
-            <motion.div variants={fadeUp} className="mb-8 h-px w-16 bg-white/15 sm:w-20" />
+            <motion.div variants={fadeUp} className="mb-8 h-px w-16 bg-foreground/15 sm:w-20" />
 
             {/* Main heading — large, clean, white */}
             <motion.h1
               variants={fadeUp}
-              className="mb-5 text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-[7rem]"
+              className="mb-5 text-5xl font-bold leading-[0.95] tracking-tight text-foreground dark:text-white sm:text-7xl md:text-8xl lg:text-[7rem]"
             >
               ARMENIA
               <br />
@@ -301,7 +307,7 @@ export default function Home() {
             {/* Subheading — clean, light */}
             <motion.p
               variants={fadeUp}
-              className="mb-12 max-w-xl text-sm font-light leading-relaxed text-white/40 sm:text-base"
+              className="mb-12 max-w-xl text-sm font-light leading-relaxed text-muted-foreground sm:text-base"
             >
               {t('hero.subtitle')}
             </motion.p>
@@ -311,7 +317,7 @@ export default function Home() {
               <Button
                 onClick={() => scrollToSection('tours')}
                 size="lg"
-                className="bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] transition-all duration-300 rounded-full px-8"
+                className="bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition-all duration-300 rounded-full px-8"
               >
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 size-4" />
@@ -319,7 +325,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/10 text-white/60 bg-transparent hover:bg-white/5 hover:text-white/80 transition-all duration-300 rounded-full px-8"
+                className="border-border text-foreground/60 bg-transparent hover:bg-secondary hover:text-foreground/80 transition-all duration-300 rounded-full px-8"
               >
                 <Play className="mr-2 size-4" />
                 {t('hero.secondaryCta')}
@@ -338,8 +344,8 @@ export default function Home() {
                 { value: '15+', label: t('hero.stat4') },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="text-2xl font-semibold text-white sm:text-3xl">{stat.value}</p>
-                  <p className="mt-1 text-[11px] font-light uppercase tracking-[0.15em] text-white/25">{stat.label}</p>
+                  <p className="text-2xl font-semibold text-foreground dark:text-white sm:text-3xl">{stat.value}</p>
+                  <p className="mt-1 text-[11px] font-light uppercase tracking-[0.15em] text-muted-foreground">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -358,10 +364,10 @@ export default function Home() {
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             className="flex flex-col items-center gap-2"
           >
-            <span className="text-[9px] font-light uppercase tracking-[0.25em] text-white/20">
+            <span className="text-[9px] font-light uppercase tracking-[0.25em] text-foreground/20">
               {t('hero.scrollDown')}
             </span>
-            <ChevronDown className="size-3 text-white/15" />
+            <ChevronDown className="size-3 text-foreground/15" />
           </motion.div>
         </motion.div>
       </section>
@@ -372,26 +378,26 @@ export default function Home() {
       <AnimatedSection className="relative py-24 overflow-hidden" id="featured">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-12 text-center">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-primary/60">
               {t('tours.featured')}
             </p>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
               {t('tours.title')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-12 bg-[#94A3B8]/30" />
+            <div className="mx-auto mt-4 h-px w-12 bg-primary/30" />
           </motion.div>
 
           <motion.div variants={fadeIn} className="relative">
             <button
               onClick={() => scrollCarousel('left')}
-              className="absolute -left-2 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-9 items-center justify-center rounded-full border border-white/8 bg-[#0a0a0a]/80 text-white/40 backdrop-blur-sm transition-all hover:bg-white/5 hover:text-white/60 lg:-left-4"
+              className="absolute -left-2 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-9 items-center justify-center rounded-full border border-border bg-background/80 text-muted-foreground backdrop-blur-sm transition-all hover:bg-secondary hover:text-foreground/60 lg:-left-4"
               aria-label="Scroll left"
             >
               <ChevronLeft className="size-4" />
             </button>
             <button
               onClick={() => scrollCarousel('right')}
-              className="absolute -right-2 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-9 items-center justify-center rounded-full border border-white/8 bg-[#0a0a0a]/80 text-white/40 backdrop-blur-sm transition-all hover:bg-white/5 hover:text-white/60 lg:-right-4"
+              className="absolute -right-2 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-9 items-center justify-center rounded-full border border-border bg-background/80 text-muted-foreground backdrop-blur-sm transition-all hover:bg-secondary hover:text-foreground/60 lg:-right-4"
               aria-label="Scroll right"
             >
               <ChevronRight className="size-4" />
@@ -415,7 +421,7 @@ export default function Home() {
             <Button
               onClick={() => scrollToSection('tours')}
               variant="outline"
-              className="border-white/8 bg-transparent text-white/40 hover:bg-white/5 hover:text-white/60 rounded-full px-6"
+              className="border-border bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground/60 rounded-full px-6"
             >
               {t('common.seeAll')} {t('tours.title')}
               <ArrowRight className="ml-2 size-3.5" />
@@ -430,10 +436,10 @@ export default function Home() {
       <AnimatedSection className="relative py-20" id="tours">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-10 text-center">
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
               {t('tours.allTours')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-10 bg-[#94A3B8]/30" />
+            <div className="mx-auto mt-4 h-px w-10 bg-primary/30" />
           </motion.div>
 
           <motion.div variants={fadeUp} className="mb-8">
@@ -442,8 +448,8 @@ export default function Home() {
 
           {filteredTours.length === 0 ? (
             <motion.div variants={fadeIn} className="py-20 text-center">
-              <Mountain className="mx-auto mb-4 size-10 text-white/10" />
-              <p className="text-sm text-white/30">{t('tours.noResults')}</p>
+              <Mountain className="mx-auto mb-4 size-10 text-foreground/10" />
+              <p className="text-sm text-muted-foreground">{t('tours.noResults')}</p>
             </motion.div>
           ) : (
             <motion.div
@@ -470,7 +476,7 @@ export default function Home() {
                 onClick={() => setDisplayCount((prev) => prev + 6)}
                 variant="outline"
                 size="lg"
-                className="border-white/8 bg-transparent text-white/40 hover:bg-white/5 hover:text-white/60 rounded-full px-6"
+                className="border-border bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground/60 rounded-full px-6"
               >
                 {t('common.more')} {t('tours.title')}
               </Button>
@@ -485,14 +491,14 @@ export default function Home() {
       <AnimatedSection className="relative py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-8 text-center">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-primary/60">
               {t('tours.route')}
             </p>
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
               Explore the Paths of Armenia
             </h2>
           </motion.div>
-          <motion.div variants={fadeIn} className="overflow-hidden rounded-2xl border border-white/6">
+          <motion.div variants={fadeIn} className="overflow-hidden rounded-2xl border border-border">
             <TourRouteFluid />
           </motion.div>
         </div>
@@ -504,13 +510,13 @@ export default function Home() {
       <AnimatedSection className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-14 text-center">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-primary/60">
               {t('whyChoose.title')}
             </p>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
               {t('whyChoose.subtitle')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-12 bg-[#94A3B8]/30" />
+            <div className="mx-auto mt-4 h-px w-12 bg-primary/30" />
           </motion.div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -538,13 +544,13 @@ export default function Home() {
                 key={feature.title}
                 variants={fadeUp}
                 transition={{ delay: feature.delay }}
-                className="group glass-card rounded-2xl p-6 transition-all duration-300 hover:border-white/10 sm:p-8"
+                className="group glass-card rounded-2xl p-6 transition-all duration-300 hover:border-border sm:p-8"
               >
-                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-[#94A3B8]/8 text-[#94A3B8]">
+                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary/8 text-primary">
                   <feature.icon className="size-5" />
                 </div>
-                <h3 className="mb-2 text-base font-semibold text-white">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-white/35">{feature.description}</p>
+                <h3 className="mb-2 text-base font-semibold text-foreground">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -558,17 +564,17 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <motion.div variants={fadeUp}>
-              <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-primary/60">
                 {t('about.title')}
               </p>
-              <div className="space-y-4 text-white/40 text-sm leading-relaxed">
+              <div className="space-y-4 text-muted-foreground text-sm leading-relaxed">
                 <p>{t('about.p1')}</p>
                 <p>{t('about.p2')}</p>
                 <p>{t('about.p3')}</p>
               </div>
               <Button
                 onClick={() => scrollToSection('tours')}
-                className="mt-8 bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] transition-all duration-300 rounded-full px-6"
+                className="mt-8 bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition-all duration-300 rounded-full px-6"
               >
                 {t('about.exploreTours')}
                 <ArrowRight className="ml-2 size-4" />
@@ -584,7 +590,7 @@ export default function Home() {
                   className="object-cover"
                   style={{ filter: 'brightness(0.7) saturate(0.7)' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-background/20" />
               </div>
             </motion.div>
           </div>
@@ -600,27 +606,27 @@ export default function Home() {
             variants={fadeUp}
             className="glass-strong rounded-2xl p-8 text-center sm:p-10"
           >
-            <h2 className="mb-2 text-xl font-bold text-white sm:text-2xl">
+            <h2 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">
               {t('newsletter.title')}
             </h2>
-            <p className="mb-6 text-sm text-white/30">
+            <p className="mb-6 text-sm text-muted-foreground">
               {t('newsletter.subtitle')}
             </p>
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
-                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/20" />
+                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-foreground/20" />
                 <Input
                   type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder={t('newsletter.placeholder')}
                   required
-                  className="border-white/8 bg-white/3 py-2.5 pl-10 text-sm text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30 focus-visible:ring-[#94A3B8]/10 rounded-full"
+                  className="border-border bg-secondary py-2.5 pl-10 text-sm text-foreground placeholder:text-foreground/20 focus-visible:border-primary/30 focus-visible:ring-primary/10 rounded-full"
                 />
               </div>
               <Button
                 type="submit"
-                className="bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] transition-all duration-300 rounded-full px-6"
+                className="bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition-all duration-300 rounded-full px-6"
               >
                 {newsletterSubscribed ? t('newsletter.subscribed') : t('newsletter.subscribe')}
               </Button>

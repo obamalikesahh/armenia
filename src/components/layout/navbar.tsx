@@ -22,6 +22,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { Locale, locales, localeFlags, localeNames } from '@/lib/i18n'
 import { useLocale } from '@/hooks/use-locale'
+import { ThemeToggle } from '@/components/theme/theme-toggle'
 
 interface NavbarProps {
   onLoginClick?: () => void
@@ -72,16 +73,16 @@ export function Navbar({
       transition={{ type: 'spring', stiffness: 200, damping: 25 }}
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'border-b border-white/6 bg-[#0a0a0a]/80 backdrop-blur-xl'
+          ? 'border-b border-border bg-background/80 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <Mountain className="size-5 text-[#94A3B8]" />
-          <span className="text-sm font-semibold tracking-[0.15em] text-white">
-            ARMENIA <span className="text-[#94A3B8]">TOURS</span>
+          <Mountain className="size-5 text-primary" />
+          <span className="text-sm font-semibold tracking-[0.15em] text-foreground">
+            ARMENIA <span className="text-primary">TOURS</span>
           </span>
         </a>
 
@@ -92,13 +93,13 @@ export function Navbar({
               key={link.key}
               href={link.href}
               onClick={() => setActiveLink(link.key)}
-              className="relative px-3 py-2 text-[13px] font-medium text-white/40 transition-colors hover:text-white/45"
+              className="relative px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {t(link.key)}
               {activeLink === link.key && (
                 <motion.div
                   layoutId="activeNav"
-                  className="absolute bottom-0 left-3 right-3 h-px rounded-full bg-[#94A3B8]/50"
+                  className="absolute bottom-0 left-3 right-3 h-px rounded-full bg-primary/50"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
@@ -108,13 +109,16 @@ export function Navbar({
 
         {/* Right side controls */}
         <div className="flex items-center gap-2">
+          {/* Theme toggle */}
+          <ThemeToggle />
+
           {/* Language switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-1.5 text-white/35 hover:bg-white/3 hover:text-white/35"
+                className="gap-1.5 text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
               >
                 <Globe className="size-4" />
                 <span className="hidden text-xs sm:inline">{currentFlag}</span>
@@ -123,14 +127,14 @@ export function Navbar({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="border-white/6 bg-[#111] text-white"
+              className="border-border bg-popover text-popover-foreground backdrop-blur-xl"
             >
               {locales.map((loc) => (
                 <DropdownMenuItem
                   key={loc}
                   onClick={() => setLocale(loc)}
-                  className={`cursor-pointer hover:bg-white/3 ${
-                    locale === loc ? 'bg-white/3 text-[#94A3B8]' : ''
+                  className={`cursor-pointer hover:bg-secondary ${
+                    locale === loc ? 'bg-secondary text-primary' : ''
                   }`}
                 >
                   <span className="mr-2">{localeFlags[loc]}</span>
@@ -148,9 +152,9 @@ export function Navbar({
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="gap-2 text-white/45 hover:bg-white/3 hover:text-white/45"
+                    className="gap-2 text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
                   >
-                    <div className="flex size-7 items-center justify-center rounded-full bg-[#94A3B8]/10 text-[#94A3B8]">
+                    <div className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <User className="size-4" />
                     </div>
                     <span className="max-w-[100px] truncate text-xs">{userName}</span>
@@ -158,18 +162,18 @@ export function Navbar({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="border-white/6 bg-[#111] text-white"
+                  className="border-border bg-popover text-popover-foreground backdrop-blur-xl"
                 >
-                  <DropdownMenuItem className="cursor-pointer hover:bg-white/3">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-secondary">
                     {t('nav.profile')}
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-white/3">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-secondary">
                     {t('nav.myBookings')}
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-white/3" />
+                  <DropdownMenuSeparator className="bg-border" />
                   <DropdownMenuItem
                     onClick={onLogout}
-                    className="cursor-pointer text-red-400 hover:bg-white/3"
+                    className="cursor-pointer text-red-400 hover:bg-secondary"
                   >
                     <LogOut className="mr-2 size-4" />
                     {t('nav.logout')}
@@ -182,14 +186,14 @@ export function Navbar({
                   variant="ghost"
                   size="sm"
                   onClick={onLoginClick}
-                  className="text-white/45 hover:bg-white/3 hover:text-white/45"
+                  className="text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
                 >
                   {t('nav.login')}
                 </Button>
                 <Button
                   size="sm"
                   onClick={onRegisterClick}
-                  className="bg-gradient-to-r bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3]"
+                  className="bg-primary text-primary-foreground font-medium hover:bg-primary/90"
                 >
                   {t('nav.register')}
                 </Button>
@@ -204,14 +208,14 @@ export function Navbar({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-white/45 hover:bg-white/3 hover:text-white/45"
+                  className="text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
                 >
                   <Menu className="size-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="border-white/6 bg-[#0a0a0a]/95 text-white backdrop-blur-xl"
+                className="border-border bg-background/95 text-foreground backdrop-blur-xl"
               >
                 <SheetTitle className="sr-only">{t('nav.menu')}</SheetTitle>
                 <div className="flex flex-col gap-6 pt-8">
@@ -227,8 +231,8 @@ export function Navbar({
                         }}
                         className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                           activeLink === link.key
-                            ? 'bg-[#94A3B8]/8 text-[#94A3B8]'
-                            : 'text-white/35 hover:bg-white/3 hover:text-white'
+                            ? 'bg-primary/8 text-primary'
+                            : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
                         }`}
                       >
                         {t(link.key)}
@@ -238,7 +242,7 @@ export function Navbar({
 
                   {/* Language selection */}
                   <div>
-                    <p className="mb-2 px-4 text-xs font-medium uppercase tracking-wider text-white/30">
+                    <p className="mb-2 px-4 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">
                       {t('common.language')}
                     </p>
                     <div className="flex gap-2 px-4">
@@ -248,8 +252,8 @@ export function Navbar({
                           onClick={() => setLocale(loc)}
                           className={`rounded-lg px-3 py-2 text-xs font-medium transition-all ${
                             locale === loc
-                              ? 'bg-[#94A3B8]/10 text-[#94A3B8]'
-                              : 'bg-white/3 text-white/35 hover:bg-white/3 hover:text-white/45'
+                              ? 'bg-primary/10 text-primary'
+                              : 'bg-secondary text-muted-foreground hover:bg-secondary hover:text-foreground'
                           }`}
                         >
                           {localeFlags[loc]} {localeNames[loc]}
@@ -264,7 +268,7 @@ export function Navbar({
                       <>
                         <Button
                           variant="outline"
-                          className="w-full border-white/6 bg-white/3 text-white/45 hover:bg-white/3 hover:text-white/45"
+                          className="w-full border-border bg-secondary text-muted-foreground hover:bg-secondary hover:text-foreground"
                         >
                           <User className="mr-2 size-4" />
                           {t('nav.profile')}
@@ -286,7 +290,7 @@ export function Navbar({
                             setMobileOpen(false)
                             onLoginClick?.()
                           }}
-                          className="w-full border-white/6 bg-white/3 text-white/45 hover:bg-white/3 hover:text-white/45"
+                          className="w-full border-border bg-secondary text-muted-foreground hover:bg-secondary hover:text-foreground"
                         >
                           {t('nav.login')}
                         </Button>
@@ -295,7 +299,7 @@ export function Navbar({
                             setMobileOpen(false)
                             onRegisterClick?.()
                           }}
-                          className="w-full bg-gradient-to-r bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3]"
+                          className="w-full bg-primary text-primary-foreground font-medium hover:bg-primary/90"
                         >
                           {t('nav.register')}
                         </Button>

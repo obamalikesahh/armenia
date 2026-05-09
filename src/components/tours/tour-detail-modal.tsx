@@ -312,7 +312,7 @@ export function TourDetailModal({
   if (reservationStatus === 'success') {
     return (
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="max-h-[90vh] overflow-y-auto border-white/6 bg-[#0a0a0a]/95 p-0 text-white backdrop-blur-2xl sm:max-w-md">
+        <DialogContent className="max-h-[90vh] overflow-y-auto border-border bg-background/95 p-0 text-foreground backdrop-blur-2xl sm:max-w-md">
           <DialogTitle className="sr-only">Reservation Confirmed</DialogTitle>
           <DialogDescription className="sr-only">Your tour reservation has been confirmed</DialogDescription>
           <div className="flex flex-col items-center justify-center p-10 text-center">
@@ -320,27 +320,27 @@ export function TourDetailModal({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-              className="mb-6 flex size-20 items-center justify-center rounded-full bg-[#94A3B8]/10"
+              className="mb-6 flex size-20 items-center justify-center rounded-full bg-primary/10"
             >
-              <Check className="size-10 text-[#94A3B8]" />
+              <Check className="size-10 text-primary" />
             </motion.div>
-            <h2 className="mb-2 text-2xl font-bold text-white">{t('booking.reservationConfirmed')}</h2>
-            <p className="mb-6 text-sm text-white/40">{t('booking.confirmationEmailSent')}</p>
+            <h2 className="mb-2 text-2xl font-bold text-foreground">{t('booking.reservationConfirmed')}</h2>
+            <p className="mb-6 text-sm text-muted-foreground">{t('booking.confirmationEmailSent')}</p>
             
-            <div className="mb-6 w-full rounded-xl border border-[#94A3B8]/15 bg-[#94A3B8]/5 p-4">
+            <div className="mb-6 w-full rounded-xl border border-primary/15 bg-primary/5 p-4">
               <div className="mb-2 flex items-center justify-center gap-2">
-                <Ticket className="size-5 text-[#94A3B8]" />
-                <span className="text-sm font-semibold text-[#94A3B8]">{t('booking.discountCode')}</span>
+                <Ticket className="size-5 text-primary" />
+                <span className="text-sm font-semibold text-primary">{t('booking.discountCode')}</span>
               </div>
-              <p className="text-center text-3xl font-bold tracking-widest text-[#94A3B8]">Armen5</p>
-              <p className="mt-1 text-center text-xs text-white/30">{t('booking.discountDescription')}</p>
+              <p className="text-center text-3xl font-bold tracking-widest text-primary">Armen5</p>
+              <p className="mt-1 text-center text-xs text-foreground/30">{t('booking.discountDescription')}</p>
             </div>
 
-            <p className="mb-6 text-xs text-white/25">{t('booking.payInPersonNotice')}</p>
+            <p className="mb-6 text-xs text-foreground/25">{t('booking.payInPersonNotice')}</p>
 
             <Button
               onClick={() => handleClose(false)}
-              className="bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] rounded-full px-8"
+              className="bg-primary text-primary-foreground font-medium hover:bg-primary/80 rounded-full px-8"
             >
               {t('common.close')}
             </Button>
@@ -353,7 +353,7 @@ export function TourDetailModal({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
-        className="max-h-[90vh] overflow-y-auto border-white/6 bg-[#0a0a0a]/95 p-0 text-white backdrop-blur-2xl sm:max-w-2xl lg:max-w-3xl"
+        className="max-h-[90vh] overflow-y-auto border-border bg-background/95 p-0 text-foreground backdrop-blur-2xl sm:max-w-2xl lg:max-w-3xl"
         showCloseButton={true}
       >
         <DialogTitle className="sr-only">{name}</DialogTitle>
@@ -391,7 +391,7 @@ export function TourDetailModal({
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
 
                 {images.length > 1 && (
                   <>
@@ -400,7 +400,7 @@ export function TourDetailModal({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: isHoveringGallery ? 1 : 0 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-1/2 left-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/8 bg-[#0a0a0a]/50 text-white/70 backdrop-blur-md transition-colors hover:bg-[#0a0a0a]/70 hover:border-white/15 hover:text-white"
+                      className="absolute top-1/2 left-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/50 text-foreground/70 backdrop-blur-md transition-colors hover:bg-background/70 hover:border-foreground/15 hover:text-white"
                       aria-label={t('common.back')}
                     >
                       <ChevronLeft className="size-5" />
@@ -410,7 +410,7 @@ export function TourDetailModal({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: isHoveringGallery ? 1 : 0 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-1/2 right-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/8 bg-[#0a0a0a]/50 text-white/70 backdrop-blur-md transition-colors hover:bg-[#0a0a0a]/70 hover:border-white/15 hover:text-white"
+                      className="absolute top-1/2 right-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/50 text-foreground/70 backdrop-blur-md transition-colors hover:bg-background/70 hover:border-foreground/15 hover:text-white"
                       aria-label={t('common.next')}
                     >
                       <ChevronRight className="size-5" />
@@ -420,7 +420,7 @@ export function TourDetailModal({
 
                 {images.length > 1 && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="rounded-full border border-white/8 bg-[#0a0a0a]/50 px-3 py-1 text-xs font-medium text-white/70 backdrop-blur-md">
+                    <span className="rounded-full border border-border bg-background/50 px-3 py-1 text-xs font-medium text-foreground/70 backdrop-blur-md">
                       {currentImageIndex + 1} / {images.length}
                     </span>
                   </div>
@@ -428,7 +428,7 @@ export function TourDetailModal({
 
                 {tour.featured && (
                   <div className="absolute top-4 left-4 z-10">
-                    <Badge className="border-0 bg-[#94A3B8]/90 text-[#0a0a0a] shadow-lg backdrop-blur-sm">
+                    <Badge className="border-0 bg-primary/90 text-primary-foreground shadow-lg backdrop-blur-sm">
                       <Star className="mr-1 size-3 fill-current" />
                       {t('tours.featured')}
                     </Badge>
@@ -438,15 +438,15 @@ export function TourDetailModal({
                 <div className="absolute right-0 bottom-0 left-0 z-10 p-6">
                   <h2 className="mb-2 text-2xl font-bold text-white sm:text-3xl">{name}</h2>
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="border-white/6 bg-white/5 text-white/70 backdrop-blur-sm">
+                    <Badge variant="secondary" className="border-border bg-secondary text-foreground/70 backdrop-blur-sm">
                       <Clock className="mr-1 size-3" />
                       {durationLabel}
                     </Badge>
-                    <Badge variant="secondary" className="border-white/6 bg-white/5 text-white/70 backdrop-blur-sm">
+                    <Badge variant="secondary" className="border-border bg-secondary text-foreground/70 backdrop-blur-sm">
                       <MapPin className="mr-1 size-3" />
                       {getRegionTranslation(tour.region)}
                     </Badge>
-                    <Badge variant="secondary" className="border-white/6 bg-white/5 text-white/70 backdrop-blur-sm">
+                    <Badge variant="secondary" className="border-border bg-secondary text-foreground/70 backdrop-blur-sm">
                       <Users className="mr-1 size-3" />
                       {tour.groupSize}
                     </Badge>
@@ -455,14 +455,14 @@ export function TourDetailModal({
               </div>
 
               {images.length > 1 && (
-                <div className="flex gap-2 bg-[#0a0a0a]/80 px-4 py-3">
+                <div className="flex gap-2 bg-background/80 px-4 py-3">
                   {images.map((img, idx) => (
                     <button
                       key={idx}
                       onClick={() => goToImage(idx)}
                       className={`relative shrink-0 overflow-hidden rounded-lg transition-all duration-300 ${
                         idx === currentImageIndex
-                          ? 'ring-2 ring-[#94A3B8] ring-offset-1 ring-offset-[#0a0a0a]'
+                          ? 'ring-2 ring-primary ring-offset-1 ring-offset-background'
                           : 'ring-1 ring-white/6 opacity-50 hover:opacity-80'
                       }`}
                       aria-label={`View image ${idx + 1}`}
@@ -479,7 +479,7 @@ export function TourDetailModal({
             </div>
 
             {/* Tab Navigation */}
-            <div className="border-b border-white/6 px-6">
+            <div className="border-b border-border px-6">
               <div className="flex gap-0">
                 {tabs.map((tab) => (
                   <button
@@ -487,8 +487,8 @@ export function TourDetailModal({
                     onClick={() => setActiveTab(tab.id)}
                     className={`relative flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === tab.id
-                        ? 'text-[#94A3B8]'
-                        : 'text-white/35 hover:text-white/60'
+                        ? 'text-primary'
+                        : 'text-muted-foreground hover:text-foreground/60'
                     }`}
                   >
                     <tab.icon className="size-4" />
@@ -496,7 +496,7 @@ export function TourDetailModal({
                     {activeTab === tab.id && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 left-0 right-0 h-px bg-[#94A3B8]"
+                        className="absolute bottom-0 left-0 right-0 h-px bg-primary"
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       />
                     )}
@@ -516,19 +516,19 @@ export function TourDetailModal({
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <p className="mb-6 text-sm leading-relaxed text-white/45">{description}</p>
+                    <p className="mb-6 text-sm leading-relaxed text-muted-foreground">{description}</p>
 
                     <div className="mb-6 grid gap-4 sm:grid-cols-2">
                       {tour.included.length > 0 && (
                         <div>
-                          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/30">
+                          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground/30">
                             {t('tours.included')}
                           </h3>
                           <ul className="space-y-2">
                             {tour.included.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-sm">
-                                <Check className="mt-0.5 size-4 shrink-0 text-[#94A3B8]/70" />
-                                <span className="text-white/50">{item}</span>
+                                <Check className="mt-0.5 size-4 shrink-0 text-primary/70" />
+                                <span className="text-foreground/50">{item}</span>
                               </li>
                             ))}
                           </ul>
@@ -536,14 +536,14 @@ export function TourDetailModal({
                       )}
                       {tour.excluded.length > 0 && (
                         <div>
-                          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/30">
+                          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground/30">
                             {t('tours.excluded')}
                           </h3>
                           <ul className="space-y-2">
                             {tour.excluded.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-sm">
                                 <X className="mt-0.5 size-4 shrink-0 text-red-400/60" />
-                                <span className="text-white/50">{item}</span>
+                                <span className="text-foreground/50">{item}</span>
                               </li>
                             ))}
                           </ul>
@@ -552,43 +552,43 @@ export function TourDetailModal({
                     </div>
 
                     <div className="mb-6 grid gap-4 sm:grid-cols-2">
-                      <div className="rounded-xl border border-white/6 bg-white/3 p-4">
-                        <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white/30">
+                      <div className="rounded-xl border border-border bg-secondary p-4">
+                        <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-foreground/30">
                           <CalendarDays className="size-4" />
                           {t('tours.availableDays')}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {tour.availableDays.map((day) => (
-                            <Badge key={day} variant="outline" className="border-white/6 text-white/50">
+                            <Badge key={day} variant="outline" className="border-border text-foreground/50">
                               {getDayTranslation(day)}
                             </Badge>
                           ))}
                         </div>
                       </div>
-                      <div className="rounded-xl border border-white/6 bg-white/3 p-4">
-                        <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white/30">
+                      <div className="rounded-xl border border-border bg-secondary p-4">
+                        <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-foreground/30">
                           <Info className="size-4" />
                           {t('tours.bestPeriod')}
                         </h4>
-                        <p className="text-sm text-white/50">{tour.bestPeriod}</p>
-                        <p className="mt-1 text-xs text-white/30">
+                        <p className="text-sm text-foreground/50">{tour.bestPeriod}</p>
+                        <p className="mt-1 text-xs text-foreground/30">
                           {t('tours.startEndPoint')}: {tour.startEndPoint}
                         </p>
-                        <p className="text-xs text-white/30">
+                        <p className="text-xs text-foreground/30">
                           {tour.startTime} - {tour.endTime}
                         </p>
                       </div>
                     </div>
 
-                    <Separator className="mb-6 bg-white/6" />
+                    <Separator className="mb-6 bg-secondary" />
 
                     {/* Reservation section */}
                     <div className="space-y-5">
                       <div className="flex items-center gap-3">
-                        <h3 className="text-lg font-semibold text-white">
+                        <h3 className="text-lg font-semibold text-foreground">
                           {t('booking.reserveTitle')}
                         </h3>
-                        <Badge className="border-[#94A3B8]/20 bg-[#94A3B8]/8 text-[#94A3B8]">
+                        <Badge className="border-primary/20 bg-primary/8 text-primary">
                           <Shield className="mr-1 size-3" />
                           {t('booking.payAtOffice')}
                         </Badge>
@@ -596,26 +596,26 @@ export function TourDetailModal({
 
                       {/* Date picker */}
                       <div>
-                        <Label className="mb-2 text-white/45">
+                        <Label className="mb-2 text-muted-foreground">
                           {t('booking.selectDate')}
                         </Label>
                         <Popover>
                           <PopoverTrigger asChild>
                             <Button
                               variant="outline"
-                              className="w-full justify-start border-white/6 bg-white/3 text-left text-white/50 hover:bg-white/5 hover:text-white/70"
+                              className="w-full justify-start border-border bg-secondary text-left text-foreground/50 hover:bg-secondary hover:text-foreground/70"
                             >
                               <CalendarDays className="mr-2 size-4" />
                               {date ? format(date, 'PPP') : t('booking.selectTourDate')}
                             </Button>
                           </PopoverTrigger>
-                          <PopoverContent className="w-auto border-white/6 bg-[#111] p-0">
+                          <PopoverContent className="w-auto border-border bg-[#111] p-0">
                             <Calendar
                               mode="single"
                               selected={date}
                               onSelect={setDate}
                               disabled={(d) => d < new Date()}
-                              className="bg-transparent text-white"
+                              className="bg-transparent text-foreground"
                             />
                           </PopoverContent>
                         </Popover>
@@ -625,17 +625,17 @@ export function TourDetailModal({
                       {date && availability && (
                         <div className={`flex items-center gap-3 rounded-xl border p-3 ${
                           hasEnoughSeats
-                            ? 'border-white/6 bg-white/3'
+                            ? 'border-border bg-secondary'
                             : 'border-red-500/20 bg-red-500/5'
                         }`}>
-                          <Users className={`size-5 ${hasEnoughSeats ? 'text-white/30' : 'text-red-400/60'}`} />
+                          <Users className={`size-5 ${hasEnoughSeats ? 'text-foreground/30' : 'text-red-400/60'}`} />
                           <div className="flex-1">
-                            <p className={`text-sm font-medium ${hasEnoughSeats ? 'text-white/60' : 'text-red-400'}`}>
+                            <p className={`text-sm font-medium ${hasEnoughSeats ? 'text-foreground/60' : 'text-red-400'}`}>
                               {hasEnoughSeats
                                 ? t('booking.seatsAvailable').replace('{count}', String(availability.availableSeats))
                                 : t('booking.notEnoughSeats')}
                             </p>
-                            <p className="text-xs text-white/25">
+                            <p className="text-xs text-foreground/25">
                               {availability.reservedSeats}/{availability.maxSeats} {t('booking.seatsReserved')}
                             </p>
                           </div>
@@ -644,7 +644,7 @@ export function TourDetailModal({
 
                       {/* Guide language */}
                       <div>
-                        <Label className="mb-3 text-white/45">
+                        <Label className="mb-3 text-muted-foreground">
                           {t('booking.guideLanguage')}
                         </Label>
                         <RadioGroup
@@ -654,26 +654,26 @@ export function TourDetailModal({
                         >
                           <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
                             guideLanguage === 'armenian'
-                              ? 'border-[#94A3B8]/30 bg-[#94A3B8]/8'
-                              : 'border-white/6 bg-white/3 hover:border-white/10'
+                              ? 'border-primary/30 bg-primary/8'
+                              : 'border-border bg-secondary hover:border-border'
                           }`}>
                             <RadioGroupItem value="armenian" id="armenian" />
                             <Label htmlFor="armenian" className="cursor-pointer flex-1">
-                              <p className="font-medium text-white">{t('booking.armenianSpeaker')}</p>
-                              <p className="text-sm text-white/35">
+                              <p className="font-medium text-foreground">{t('booking.armenianSpeaker')}</p>
+                              <p className="text-sm text-muted-foreground">
                                 {formatPrice(tour.priceEUR)} / {t('tours.perPerson')}
                               </p>
                             </Label>
                           </div>
                           <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
                             guideLanguage === 'english-russian'
-                              ? 'border-[#94A3B8]/30 bg-[#94A3B8]/8'
-                              : 'border-white/6 bg-white/3 hover:border-white/10'
+                              ? 'border-primary/30 bg-primary/8'
+                              : 'border-border bg-secondary hover:border-border'
                           }`}>
                             <RadioGroupItem value="english-russian" id="english-russian" />
                             <Label htmlFor="english-russian" className="cursor-pointer flex-1">
-                              <p className="font-medium text-white">{t('booking.englishRussianSpeaker')}</p>
-                              <p className="text-sm text-white/35">
+                              <p className="font-medium text-foreground">{t('booking.englishRussianSpeaker')}</p>
+                              <p className="text-sm text-muted-foreground">
                                 {formatPrice(tour.priceForeignEUR)} / {t('tours.perPerson')}
                               </p>
                             </Label>
@@ -684,28 +684,28 @@ export function TourDetailModal({
                       {/* Adults / Children */}
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label className="mb-2 text-white/45">{t('booking.adults')}</Label>
-                          <div className="flex items-center gap-3 rounded-xl border border-white/6 bg-white/3 px-4 py-2">
-                            <button onClick={() => setAdults(Math.max(1, adults - 1))} className="flex size-8 items-center justify-center rounded-lg text-white/35 transition-colors hover:bg-white/5 hover:text-white/60">
+                          <Label className="mb-2 text-muted-foreground">{t('booking.adults')}</Label>
+                          <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                            <button onClick={() => setAdults(Math.max(1, adults - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
                               <Minus className="size-4" />
                             </button>
-                            <span className="flex-1 text-center font-semibold text-white">{adults}</span>
-                            <button onClick={() => setAdults(Math.min(20, adults + 1))} className="flex size-8 items-center justify-center rounded-lg text-white/35 transition-colors hover:bg-white/5 hover:text-white/60">
+                            <span className="flex-1 text-center font-semibold text-foreground">{adults}</span>
+                            <button onClick={() => setAdults(Math.min(20, adults + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
                               <Plus className="size-4" />
                             </button>
                           </div>
                         </div>
                         <div>
-                          <Label className="mb-2 text-white/45">
+                          <Label className="mb-2 text-muted-foreground">
                             {t('booking.children')}
-                            <span className="ml-1 text-xs text-white/25">({t('booking.childrenDiscount')})</span>
+                            <span className="ml-1 text-xs text-foreground/25">({t('booking.childrenDiscount')})</span>
                           </Label>
-                          <div className="flex items-center gap-3 rounded-xl border border-white/6 bg-white/3 px-4 py-2">
-                            <button onClick={() => setChildren(Math.max(0, children - 1))} className="flex size-8 items-center justify-center rounded-lg text-white/35 transition-colors hover:bg-white/5 hover:text-white/60">
+                          <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                            <button onClick={() => setChildren(Math.max(0, children - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
                               <Minus className="size-4" />
                             </button>
-                            <span className="flex-1 text-center font-semibold text-white">{children}</span>
-                            <button onClick={() => setChildren(Math.min(10, children + 1))} className="flex size-8 items-center justify-center rounded-lg text-white/35 transition-colors hover:bg-white/5 hover:text-white/60">
+                            <span className="flex-1 text-center font-semibold text-foreground">{children}</span>
+                            <button onClick={() => setChildren(Math.min(10, children + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
                               <Plus className="size-4" />
                             </button>
                           </div>
@@ -713,43 +713,43 @@ export function TourDetailModal({
                       </div>
 
                       {/* Price breakdown */}
-                      <div className="rounded-xl border border-[#94A3B8]/15 bg-[#94A3B8]/3 p-4">
-                        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#94A3B8]/70">
+                      <div className="rounded-xl border border-primary/15 bg-primary/3 p-4">
+                        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary/70">
                           {t('booking.priceBreakdown')}
                         </h4>
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
-                            <span className="text-white/45">
+                            <span className="text-muted-foreground">
                               {adults} x {t('booking.adults')} ({formatPrice(pricePerPersonEUR)})
                             </span>
-                            <span className="text-white/70">
+                            <span className="text-foreground/70">
                               {formatPrice(pricePerPersonEUR * adults)}
                             </span>
                           </div>
                           {children > 0 && (
                             <div className="flex justify-between text-sm">
-                              <span className="text-white/45">
+                              <span className="text-muted-foreground">
                                 {children} x {t('booking.children')} ({t('booking.childrenDiscount')})
                               </span>
-                              <span className="text-white/70">
+                              <span className="text-foreground/70">
                                 {formatPrice(Math.round(pricePerPersonEUR * 0.5 * children))}
                               </span>
                             </div>
                           )}
-                          <Separator className="bg-white/6" />
+                          <Separator className="bg-secondary" />
                           <div className="flex justify-between">
-                            <span className="font-semibold text-white">{t('booking.total')}</span>
+                            <span className="font-semibold text-foreground">{t('booking.total')}</span>
                             <div className="text-right">
-                              <p className="font-bold text-[#94A3B8]">{formatPrice(totalPriceEUR)}</p>
-                              <p className="text-xs text-white/30">{t('common.eur')}</p>
+                              <p className="font-bold text-primary">{formatPrice(totalPriceEUR)}</p>
+                              <p className="text-xs text-foreground/30">{t('common.eur')}</p>
                             </div>
                           </div>
                         </div>
 
                         {/* Discount notice */}
-                        <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#94A3B8]/5 px-3 py-2">
-                          <Ticket className="size-4 shrink-0 text-[#94A3B8]/60" />
-                          <p className="text-xs text-[#94A3B8]/60">
+                        <div className="mt-3 flex items-center gap-2 rounded-lg bg-primary/5 px-3 py-2">
+                          <Ticket className="size-4 shrink-0 text-primary/60" />
+                          <p className="text-xs text-primary/60">
                             {t('booking.discountNotice')}
                           </p>
                         </div>
@@ -767,12 +767,12 @@ export function TourDetailModal({
                       <Button
                         onClick={handleReserve}
                         disabled={!date || !hasEnoughSeats || reservationStatus === 'loading'}
-                        className="w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#7E8FA3] hover:shadow-[#94A3B8]/10 disabled:opacity-50"
+                        className="w-full bg-primary text-primary-foreground font-medium shadow-lg transition-all duration-300 hover:bg-primary/80 hover:shadow-primary/10 disabled:opacity-50"
                         size="lg"
                       >
                         {reservationStatus === 'loading' ? (
                           <span className="flex items-center gap-2">
-                            <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-[#0a0a0a]" />
+                            <span className="size-4 animate-spin rounded-full border-2 border-foreground/30 border-t-primary-foreground" />
                             {t('common.loading')}
                           </span>
                         ) : !isLoggedIn ? (
@@ -786,7 +786,7 @@ export function TourDetailModal({
                         <ChevronRight className="ml-1 size-4" />
                       </Button>
 
-                      <p className="text-center text-xs text-white/20">
+                      <p className="text-center text-xs text-foreground/20">
                         {t('booking.cancelWithin24h')}
                       </p>
                     </div>
@@ -804,27 +804,27 @@ export function TourDetailModal({
                   >
                     {tour.route.length > 0 ? (
                       <div>
-                        <h3 className="mb-4 text-lg font-semibold text-white">{t('tours.route')}</h3>
+                        <h3 className="mb-4 text-lg font-semibold text-foreground">{t('tours.route')}</h3>
                         <div className="relative space-y-0">
                           {tour.route.map((stop, idx) => (
                             <div key={idx} className="relative flex gap-4 pb-6 last:pb-0">
                               {idx < tour.route.length - 1 && (
-                                <div className="absolute top-6 left-[15px] h-full w-px bg-gradient-to-b from-[#94A3B8]/30 to-[#94A3B8]/5" />
+                                <div className="absolute top-6 left-[15px] h-full w-px bg-gradient-to-b from-primary/30 to-primary/5" />
                               )}
-                              <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#94A3B8]/20 bg-[#94A3B8]/8 text-xs font-bold text-[#94A3B8]">
+                              <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/8 text-xs font-bold text-primary">
                                 {idx + 1}
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-medium text-white">{stop.name}</h4>
-                                <p className="mt-0.5 text-sm text-white/35">{stop.description}</p>
+                                <h4 className="font-medium text-foreground">{stop.name}</h4>
+                                <p className="mt-0.5 text-sm text-muted-foreground">{stop.description}</p>
                               </div>
                             </div>
                           ))}
                         </div>
                       </div>
                     ) : (
-                      <div className="py-8 text-center text-white/30">
-                        <Route className="mx-auto mb-3 size-10 text-white/10" />
+                      <div className="py-8 text-center text-foreground/30">
+                        <Route className="mx-auto mb-3 size-10 text-foreground/10" />
                         <p>{t('tours.noResults')}</p>
                       </div>
                     )}
@@ -840,8 +840,8 @@ export function TourDetailModal({
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
-                      <Eye className="size-5 text-[#94A3B8]/70" />
+                    <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+                      <Eye className="size-5 text-primary/70" />
                       {t('tours.tabStreetView')}
                     </h3>
 
@@ -852,8 +852,8 @@ export function TourDetailModal({
                           onClick={() => setSelectedLocationIdx(idx)}
                           className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                             selectedLocationIdx === idx
-                              ? 'bg-[#94A3B8]/10 text-[#94A3B8] ring-1 ring-[#94A3B8]/20'
-                              : 'border border-white/6 bg-white/3 text-white/45 hover:border-white/10 hover:bg-white/5 hover:text-white/60'
+                              ? 'bg-primary/10 text-primary ring-1 ring-primary/20'
+                              : 'border border-border bg-secondary text-muted-foreground hover:border-border hover:bg-secondary hover:text-foreground/60'
                           }`}
                         >
                           <MapPin className="size-3.5" />
@@ -863,7 +863,7 @@ export function TourDetailModal({
                     </div>
 
                     {selectedLocation && (
-                      <div className="overflow-hidden rounded-xl border border-white/6">
+                      <div className="overflow-hidden rounded-xl border border-border">
                         <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                           <iframe
                             src={`https://maps.google.com/maps?q=${selectedLocation.lat},${selectedLocation.lng}&t=k&z=16&ie=UTF8&iwloc=&output=embed`}
@@ -874,16 +874,16 @@ export function TourDetailModal({
                             referrerPolicy="no-referrer"
                           />
                         </div>
-                        <div className="flex items-center justify-between gap-2 border-t border-white/6 bg-white/3 p-3">
+                        <div className="flex items-center justify-between gap-2 border-t border-border bg-secondary p-3">
                           <div className="flex items-center gap-2 min-w-0">
-                            <MapPin className="size-4 shrink-0 text-[#94A3B8]/70" />
-                            <span className="truncate text-sm font-medium text-white/60">{selectedLocation.name}</span>
+                            <MapPin className="size-4 shrink-0 text-primary/70" />
+                            <span className="truncate text-sm font-medium text-foreground/60">{selectedLocation.name}</span>
                           </div>
                           <a
                             href={`https://www.google.com/maps/@${selectedLocation.lat},${selectedLocation.lng},15z`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex shrink-0 items-center gap-1 rounded-lg border border-white/6 bg-white/3 px-3 py-1.5 text-xs font-medium text-[#94A3B8]/70 transition-all duration-200 hover:border-[#94A3B8]/20 hover:bg-[#94A3B8]/5 hover:text-[#94A3B8]"
+                            className="flex shrink-0 items-center gap-1 rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs font-medium text-primary/70 transition-all duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-primary"
                           >
                             {t('tours.openInMaps')}
                             <ExternalLink className="size-3" />
@@ -902,7 +902,7 @@ export function TourDetailModal({
                               <button
                                 key={idx}
                                 onClick={() => setSelectedLocationIdx(originalIdx)}
-                                className="group overflow-hidden rounded-xl border border-white/6 bg-white/3 transition-all duration-200 hover:border-[#94A3B8]/15 hover:bg-white/[0.04]"
+                                className="group overflow-hidden rounded-xl border border-border bg-secondary transition-all duration-200 hover:border-primary/15 hover:bg-white/[0.04]"
                               >
                                 <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                                   <iframe
@@ -915,8 +915,8 @@ export function TourDetailModal({
                                   />
                                 </div>
                                 <div className="flex items-center gap-1.5 px-2.5 py-2">
-                                  <MapPin className="size-3 shrink-0 text-[#94A3B8]/50" />
-                                  <span className="truncate text-xs font-medium text-white/40 group-hover:text-white/55">
+                                  <MapPin className="size-3 shrink-0 text-primary/50" />
+                                  <span className="truncate text-xs font-medium text-muted-foreground group-hover:text-foreground/55">
                                     {location.name}
                                   </span>
                                 </div>

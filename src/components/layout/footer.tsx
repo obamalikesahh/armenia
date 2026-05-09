@@ -25,18 +25,18 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="mt-auto border-t border-white/5 bg-gradient-to-b from-[#0a0a0a] to-[#050505]">
+    <footer className="mt-auto border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* About Column */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <Mountain className="size-6 text-[#94A3B8]" />
-              <span className="text-lg font-bold text-white">
-                ARMENIA <span className="text-[#94A3B8]">TOURS</span>
+              <Mountain className="size-6 text-primary" />
+              <span className="text-lg font-bold text-foreground">
+                ARMENIA <span className="text-primary">TOURS</span>
               </span>
             </div>
-            <p className="mb-4 text-sm leading-relaxed text-white/40">
+            <p className="mb-4 text-sm leading-relaxed text-foreground/40">
               {t('footer.description')}
             </p>
             <div className="flex gap-3">
@@ -45,7 +45,7 @@ export function Footer() {
                 <a
                   key={social}
                   href="#"
-                  className="flex size-9 items-center justify-center rounded-lg border border-white/6 bg-white/3 text-white/40 transition-all hover:border-white/20 hover:bg-white/3 hover:text-white"
+                  className="flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-muted-foreground transition-all hover:border-foreground/20 hover:bg-secondary hover:text-foreground"
                   aria-label={social}
                 >
                   {social === 'facebook' && (
@@ -75,7 +75,7 @@ export function Footer() {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/60">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground/60">
               {t('footer.quickLinks')}
             </h3>
             <ul className="space-y-2.5">
@@ -89,7 +89,7 @@ export function Footer() {
                 <li key={link.key}>
                   <a
                     href={link.href}
-                    className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]"
+                    className="text-sm text-foreground/40 transition-colors hover:text-primary"
                   >
                     {t(link.key)}
                   </a>
@@ -100,40 +100,40 @@ export function Footer() {
 
           {/* Support Column */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/60">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground/60">
               {t('footer.support')}
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]">
+                <a href="#" className="text-sm text-foreground/40 transition-colors hover:text-primary">
                   {t('footer.terms')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]">
+                <a href="#" className="text-sm text-foreground/40 transition-colors hover:text-primary">
                   {t('footer.privacy')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]">
+                <a href="#" className="text-sm text-foreground/40 transition-colors hover:text-primary">
                   {t('footer.cancellation')}
                 </a>
               </li>
             </ul>
-            <Separator className="my-4 bg-white/3" />
-            <h4 className="mb-3 text-xs font-medium uppercase tracking-wider text-white/30">
+            <Separator className="my-4 bg-secondary" />
+            <h4 className="mb-3 text-xs font-medium uppercase tracking-wider text-foreground/30">
               {t('footer.contactUs')}
             </h4>
             <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-xs text-white/40">
+              <li className="flex items-center gap-2 text-xs text-foreground/40">
                 <MapPin className="size-3 shrink-0" />
                 {t('footer.address')}
               </li>
-              <li className="flex items-center gap-2 text-xs text-white/40">
+              <li className="flex items-center gap-2 text-xs text-foreground/40">
                 <Phone className="size-3 shrink-0" />
                 {t('nav.phone')}
               </li>
-              <li className="flex items-center gap-2 text-xs text-white/40">
+              <li className="flex items-center gap-2 text-xs text-foreground/40">
                 <Mail className="size-3 shrink-0" />
                 {t('nav.email')}
               </li>
@@ -142,27 +142,27 @@ export function Footer() {
 
           {/* Newsletter Column */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/60">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground/60">
               {t('footer.newsletter')}
             </h3>
-            <p className="mb-4 text-sm text-white/40">
+            <p className="mb-4 text-sm text-foreground/40">
               {t('footer.newsletterText')}
             </p>
             <form onSubmit={handleSubscribe} className="space-y-2">
               <div className="relative">
-                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/30" />
+                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-foreground/30" />
                 <Input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t('footer.emailPlaceholder')}
                   required
-                  className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/30 focus-visible:border-[#94A3B8]/30"
+                  className="border-border bg-secondary pl-10 text-foreground placeholder:text-foreground/30 focus-visible:border-primary/30"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3]"
+                className="w-full bg-primary text-primary-foreground font-medium hover:bg-primary/80"
                 size="sm"
               >
                 <Send className="mr-2 size-3" />
@@ -170,11 +170,11 @@ export function Footer() {
               </Button>
             </form>
 
-            <Separator className="my-4 bg-white/3" />
+            <Separator className="my-4 bg-secondary" />
 
             {/* Language selector */}
             <div>
-              <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/30">
+              <p className="mb-2 text-xs font-medium uppercase tracking-wider text-foreground/30">
                 {t('common.language')}
               </p>
               <div className="flex gap-2">
@@ -184,8 +184,8 @@ export function Footer() {
                     onClick={() => setLocale(loc)}
                     className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${
                       locale === loc
-                        ? 'bg-[#94A3B8]/10 text-[#94A3B8]'
-                        : 'bg-white/3 text-white/40 hover:bg-white/3 hover:text-white/70'
+                        ? 'bg-primary/10 text-primary'
+                        : 'bg-secondary text-foreground/40 hover:bg-secondary hover:text-foreground/70'
                     }`}
                   >
                     {localeFlags[loc]} {localeNames[loc]}
@@ -197,12 +197,12 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <Separator className="my-8 bg-white/3" />
+        <Separator className="my-8 bg-secondary" />
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-xs text-white/25">
+          <p className="text-xs text-foreground/25">
             &copy; {currentYear} Armenia Tours. {t('footer.rights')}
           </p>
-          <p className="flex items-center gap-1 text-xs text-white/25">
+          <p className="flex items-center gap-1 text-xs text-foreground/25">
             {t('footer.madeWith')}{' '}
             <span className="text-red-400">&#9829;</span>{' '}
             {t('footer.inArmenia')}

@@ -134,10 +134,10 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
       className="group relative"
     >
       {/* Subtle silver glow on hover */}
-      <div className="absolute -inset-px rounded-2xl bg-[#94A3B8]/0 opacity-0 blur-sm transition-opacity duration-500 group-hover:bg-[#94A3B8]/8 group-hover:opacity-100" />
+      <div className="absolute -inset-px rounded-2xl bg-primary/0 opacity-0 blur-sm transition-opacity duration-500 group-hover:bg-primary/8 group-hover:opacity-100" />
 
       <div
-        className="relative flex flex-col overflow-hidden rounded-2xl border border-white/6 bg-white/3 backdrop-blur-xl transition-all duration-500 group-hover:border-white/10"
+        className="relative flex flex-col overflow-hidden rounded-2xl border border-border bg-secondary backdrop-blur-xl transition-all duration-500 group-hover:border-border"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -168,7 +168,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
           </motion.div>
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 via-[#0a0a0a]/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent pointer-events-none" />
 
           {/* Navigation dots — visible on hover */}
           {images.length > 1 && (
@@ -186,7 +186,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
                   }}
                   className={`size-1 rounded-full transition-all duration-300 ${
                     idx === currentIndex
-                      ? 'scale-150 bg-[#94A3B8]'
+                      ? 'scale-150 bg-primary'
                       : 'bg-white/50 hover:bg-white/80'
                   }`}
                   aria-label={`Go to image ${idx + 1}`}
@@ -198,7 +198,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
           {/* Featured badge */}
           {tour.featured && (
             <div className="absolute top-3 left-3">
-              <Badge className="border-0 bg-[#94A3B8]/90 text-[#0a0a0a] shadow-lg backdrop-blur-sm">
+              <Badge className="border-0 bg-primary/90 text-primary-foreground shadow-lg backdrop-blur-sm">
                 <Star className="mr-1 size-3 fill-current" />
                 {t('tours.featured')}
               </Badge>
@@ -209,7 +209,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
           <div className="absolute top-3 right-3">
             <Badge
               variant="secondary"
-              className="border-white/6 bg-[#0a0a0a]/60 text-white/70 backdrop-blur-sm"
+              className="border-border bg-background/60 text-foreground/70 backdrop-blur-sm"
             >
               <Clock className="mr-1 size-3" />
               {durationLabel}
@@ -220,14 +220,14 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
           <div className="absolute bottom-3 left-3">
             <Badge
               variant="outline"
-              className="border-white/8 bg-[#0a0a0a]/50 text-white/60 backdrop-blur-sm"
+              className="border-border bg-background/50 text-foreground/60 backdrop-blur-sm"
             >
               {getCategoryTranslation(tour.category)}
             </Badge>
           </div>
 
           {/* Region */}
-          <div className="absolute bottom-3 right-3 flex items-center gap-1 text-xs text-white/45">
+          <div className="absolute bottom-3 right-3 flex items-center gap-1 text-xs text-muted-foreground">
             <MapPin className="size-3" />
             {getRegionTranslation(tour.region)}
           </div>
@@ -237,32 +237,32 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
         <div className="flex flex-1 flex-col p-4 sm:p-5">
           {/* Tour name */}
           <h3
-            className="mb-1.5 line-clamp-2 cursor-pointer text-base font-semibold text-white transition-colors hover:text-[#94A3B8] sm:text-lg"
+            className="mb-1.5 line-clamp-2 cursor-pointer text-base font-semibold text-foreground transition-colors hover:text-primary sm:text-lg"
             onClick={() => onSelect?.(tour)}
           >
             {name}
           </h3>
 
           {/* Short description */}
-          <p className="mb-4 line-clamp-2 text-sm text-white/35">
+          <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
             {shortDesc}
           </p>
 
           {/* Prices */}
           <div className="mb-4 flex flex-col gap-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-white/35">
+              <span className="text-xs text-muted-foreground">
                 {t('tours.armenianGuide')}
               </span>
-              <span className="text-sm font-semibold text-[#94A3B8]">
+              <span className="text-sm font-semibold text-primary">
                 {t('common.from')} {formatPrice(priceEUR)}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-white/35">
+              <span className="text-xs text-muted-foreground">
                 {t('tours.englishGuide')}
               </span>
-              <span className="text-sm font-semibold text-white/60">
+              <span className="text-sm font-semibold text-foreground/60">
                 {t('common.from')} {formatPrice(priceForeignEUR)}
               </span>
             </div>
@@ -274,7 +274,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
               e.stopPropagation()
               onBookNow?.(tour)
             }}
-            className="mt-auto w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#7E8FA3] hover:shadow-[#94A3B8]/10 rounded-xl"
+            className="mt-auto w-full bg-primary text-primary-foreground font-medium shadow-lg transition-all duration-300 hover:bg-primary/80 hover:shadow-primary/10 rounded-xl"
           >
             {t('booking.reserveNow')}
           </Button>
