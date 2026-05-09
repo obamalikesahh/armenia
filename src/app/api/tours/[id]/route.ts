@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { tours, convertAMDtoEUR } from '@/lib/tours-data'
+import { tours } from '@/lib/tours-data'
 
 export async function GET(
   request: NextRequest,
@@ -12,9 +12,5 @@ export async function GET(
     return NextResponse.json({ error: 'Tour not found' }, { status: 404 })
   }
 
-  return NextResponse.json({
-    ...tour,
-    priceEUR: convertAMDtoEUR(tour.priceAMD),
-    priceForeignEUR: convertAMDtoEUR(tour.priceForeignAMD),
-  })
+  return NextResponse.json(tour)
 }

@@ -38,7 +38,7 @@ const NAV_LINKS = [
   { key: 'nav.contact', href: '#contact' },
 ] as const
 
-type Currency = 'EUR' | 'AMD'
+
 
 export function Navbar({
   onLoginClick,
@@ -50,16 +50,6 @@ export function Navbar({
   const { locale, setLocale, t } = useLocale()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [currency, setCurrency] = useState<Currency>(() => {
-    if (typeof window === 'undefined') return 'EUR'
-    try {
-      const stored = localStorage.getItem('armenian-tours-currency')
-      if (stored === 'EUR' || stored === 'AMD') return stored
-    } catch {
-      // localStorage unavailable
-    }
-    return 'EUR'
-  })
   const [activeLink, setActiveLink] = useState<string>('nav.home')
 
   useEffect(() => {
@@ -70,14 +60,7 @@ export function Navbar({
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Store currency preference
-  useEffect(() => {
-    try {
-      localStorage.setItem('armenian-tours-currency', currency)
-    } catch {
-      // localStorage unavailable
-    }
-  }, [currency])
+  // Store currency preference (EUR only)
 
   const currentFlag = localeFlags[locale]
   const currentLocaleName = localeNames[locale]
@@ -154,41 +137,6 @@ export function Navbar({
                   {localeNames[loc]}
                 </DropdownMenuItem>
               ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Currency switcher */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="gap-1 text-white/35 hover:bg-white/3 hover:text-white/35"
-              >
-                <span className="text-xs font-medium">{currency}</span>
-                <ChevronDown className="size-3" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="border-white/6 bg-[#111] text-white"
-            >
-              <DropdownMenuItem
-                onClick={() => setCurrency('EUR')}
-                className={`cursor-pointer hover:bg-white/3 ${
-                  currency === 'EUR' ? 'bg-white/3 text-[#c9a84c]' : ''
-                }`}
-              >
-                {t('nav.currencyEUR')}
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setCurrency('AMD')}
-                className={`cursor-pointer hover:bg-white/3 ${
-                  currency === 'AMD' ? 'bg-white/3 text-[#c9a84c]' : ''
-                }`}
-              >
-                {t('nav.currencyAMD')}
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -305,28 +253,6 @@ export function Navbar({
                           }`}
                         >
                           {localeFlags[loc]} {localeNames[loc]}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Currency selection */}
-                  <div>
-                    <p className="mb-2 px-4 text-xs font-medium uppercase tracking-wider text-white/30">
-                      {t('common.currency')}
-                    </p>
-                    <div className="flex gap-2 px-4">
-                      {(['EUR', 'AMD'] as const).map((cur) => (
-                        <button
-                          key={cur}
-                          onClick={() => setCurrency(cur)}
-                          className={`rounded-lg px-3 py-2 text-xs font-medium transition-all ${
-                            currency === cur
-                              ? 'bg-[#c9a84c]/10 text-[#c9a84c]'
-                              : 'bg-white/3 text-white/35 hover:bg-white/3 hover:text-white/45'
-                          }`}
-                        >
-                          {cur}
                         </button>
                       ))}
                     </div>

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { convertAMDtoEUR } from '@/lib/tours-data'
 import { sendConfirmationEmails, DISCOUNT_CODE } from '@/lib/email'
 import { verifyToken } from '@/lib/auth'
 
@@ -14,7 +13,7 @@ export async function POST(request: NextRequest) {
       guideLanguage,
       adults,
       children,
-      totalPriceAMD,
+      totalPriceEUR,
       userId,
       lang = 'en',
     } = body
@@ -54,8 +53,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const totalPriceEUR = convertAMDtoEUR(totalPriceAMD)
-
     // Create booking with confirmed status (no payment needed)
     const booking = await db.booking.create({
       data: {
@@ -65,7 +62,7 @@ export async function POST(request: NextRequest) {
         guideLanguage,
         adults,
         children,
-        totalPriceAMD,
+        totalPriceAMD: 0, // Legacy field, not used
         totalPriceEUR,
         status: 'confirmed',
         discountCode: DISCOUNT_CODE,
@@ -88,7 +85,7 @@ export async function POST(request: NextRequest) {
         guideLanguage,
         adults,
         children,
-        totalPriceAMD,
+        totalPriceAMD: 0, // Legacy
         totalPriceEUR,
         userFirstName: user.firstName,
         userLastName: user.lastName,

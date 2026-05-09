@@ -26,8 +26,6 @@ export const nextAuthOptions: NextAuthOptions = {
     signIn: '/',
     error: '/',
   },
-  // Trust the proxy headers so NextAuth can determine the correct URL
-  // This is critical when running behind Caddy/gateway
   debug: false,
   callbacks: {
     async signIn({ user, account }) {
@@ -107,7 +105,15 @@ export const nextAuthOptions: NextAuthOptions = {
       // Allows relative callback URLs
       if (url.startsWith('/')) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url
+      try {
+        if (new URL(url).origin === baseUrl) return url
+      } catch {
+        // Invalid URL, fall through
+      }
+      // If the URL is from the same host but different protocol/port (behind proxy)
+      if (url.includes('localhost:3000') || url.includes('127.0.0.1:3000')) {
+        return baseUrl
+      }
       return baseUrl
     },
   },

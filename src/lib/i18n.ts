@@ -86,9 +86,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.locations': 'Locations',
     'nav.menu': 'Navigation Menu',
     'nav.phone': '+374 XX XXX XXX',
-    'nav.email': 'info@armeniatours.com',
+    'nav.email': 'thebeautyofarmenia@gmail.com',
     'nav.currencyEUR': 'EUR - Euro',
-    'nav.currencyAMD': 'AMD - Armenian Dram',
 
     // Categories
     'categories.all': 'All Categories',
@@ -126,7 +125,6 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Currency
     'currency.euro': 'Euro',
-    'currency.armenianDram': 'Armenian Dram',
 
     // Booking
     'booking.title': 'Reserve Your Tour',
@@ -278,7 +276,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     'common.search': 'Search',
     'common.language': 'Language',
     'common.currency': 'Currency',
-    'common.amd': 'AMD',
     'common.eur': 'EUR',
     'common.from': 'From',
     'common.to': 'To',
@@ -362,9 +359,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.locations': 'Места',
     'nav.menu': 'Меню навигации',
     'nav.phone': '+374 XX XXX XXX',
-    'nav.email': 'info@armeniatours.com',
+    'nav.email': 'thebeautyofarmenia@gmail.com',
     'nav.currencyEUR': 'EUR - Евро',
-    'nav.currencyAMD': 'AMD - Армянский драм',
 
     // Категории
     'categories.all': 'Все категории',
@@ -402,7 +398,6 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Валюта
     'currency.euro': 'Евро',
-    'currency.armenianDram': 'Армянский драм',
 
     // Бронирование
     'booking.title': 'Забронировать экскурсию',
@@ -554,7 +549,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     'common.search': 'Поиск',
     'common.language': 'Язык',
     'common.currency': 'Валюта',
-    'common.amd': 'драм',
     'common.eur': 'евро',
     'common.from': 'От',
     'common.to': 'До',
@@ -638,9 +632,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.locations': 'Orte',
     'nav.menu': 'Navigationsmenü',
     'nav.phone': '+374 XX XXX XXX',
-    'nav.email': 'info@armeniatours.com',
+    'nav.email': 'thebeautyofarmenia@gmail.com',
     'nav.currencyEUR': 'EUR - Euro',
-    'nav.currencyAMD': 'AMD - Armenischer Dram',
 
     // Kategorien
     'categories.all': 'Alle Kategorien',
@@ -678,7 +671,6 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Währung
     'currency.euro': 'Euro',
-    'currency.armenianDram': 'Armenischer Dram',
 
     // Buchung
     'booking.title': 'Tour reservieren',
@@ -830,7 +822,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     'common.search': 'Suchen',
     'common.language': 'Sprache',
     'common.currency': 'Währung',
-    'common.amd': 'AMD',
     'common.eur': 'EUR',
     'common.from': 'Von',
     'common.to': 'Bis',

@@ -20,7 +20,6 @@ import { Switch } from '@/components/ui/switch'
 import { Separator } from '@/components/ui/separator'
 import {
   type Tour,
-  convertAMDtoEUR,
   formatPrice,
 } from '@/lib/tours-data'
 import { useLocale } from '@/hooks/use-locale'
@@ -36,11 +35,10 @@ export interface BookingFormData {
   adults: number
   children: number
   hotelPickup: boolean
-  totalPriceAMD: number
   totalPriceEUR: number
 }
 
-const HOTEL_PICKUP_AMD = 3000
+const HOTEL_PICKUP_EUR = 8
 
 export function BookingForm({ tour, onSubmit }: BookingFormProps) {
   const { t } = useLocale()
@@ -51,19 +49,18 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
   const [hotelPickup, setHotelPickup] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
 
-  const pricePerPersonAMD = useMemo(
-    () => (guideLanguage === 'armenian' ? tour.priceAMD : tour.priceForeignAMD),
+  const pricePerPersonEUR = useMemo(
+    () => (guideLanguage === 'armenian' ? tour.priceEUR : tour.priceForeignEUR),
     [tour, guideLanguage]
   )
 
   const breakdown = useMemo(() => {
-    const adultTotal = pricePerPersonAMD * adults
-    const childTotal = Math.round(pricePerPersonAMD * 0.5) * children
-    const pickupFee = hotelPickup ? HOTEL_PICKUP_AMD : 0
-    const totalAMD = adultTotal + childTotal + pickupFee
-    const totalEUR = convertAMDtoEUR(totalAMD)
-    return { adultTotal, childTotal, pickupFee, totalAMD, totalEUR }
-  }, [pricePerPersonAMD, adults, children, hotelPickup])
+    const adultTotal = pricePerPersonEUR * adults
+    const childTotal = Math.round(pricePerPersonEUR * 0.5) * children
+    const pickupFee = hotelPickup ? HOTEL_PICKUP_EUR : 0
+    const totalEUR = adultTotal + childTotal + pickupFee
+    return { adultTotal, childTotal, pickupFee, totalEUR }
+  }, [pricePerPersonEUR, adults, children, hotelPickup])
 
   const handleSubmit = async () => {
     if (!date) return
@@ -75,7 +72,6 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
         adults,
         children,
         hotelPickup,
-        totalPriceAMD: breakdown.totalAMD,
         totalPriceEUR: breakdown.totalEUR,
       })
     } finally {
@@ -133,7 +129,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
             <Label htmlFor="bf-armenian" className="cursor-pointer flex-1">
               <p className="font-medium text-white">{t('booking.armenianSpeaker')}</p>
               <p className="text-sm text-white/50">
-                {tour.priceAMD.toLocaleString()} AMD / {formatPrice(convertAMDtoEUR(tour.priceAMD))} {t('tours.perPerson')}
+                {formatPrice(tour.priceEUR)} {t('tours.perPerson')}
               </p>
             </Label>
           </div>
@@ -148,7 +144,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
             <Label htmlFor="bf-english-russian" className="cursor-pointer flex-1">
               <p className="font-medium text-white">{t('booking.englishRussianSpeaker')}</p>
               <p className="text-sm text-white/50">
-                {tour.priceForeignAMD.toLocaleString()} AMD / {formatPrice(convertAMDtoEUR(tour.priceForeignAMD))} {t('tours.perPerson')}
+                {formatPrice(tour.priceForeignEUR)} {t('tours.perPerson')}
               </p>
             </Label>
           </div>
@@ -205,7 +201,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
           <div>
             <p className="font-medium text-white">Hotel Pickup</p>
             <p className="text-xs text-white/40">
-              +{HOTEL_PICKUP_AMD.toLocaleString()} AMD / {formatPrice(convertAMDtoEUR(HOTEL_PICKUP_AMD))}
+              +{formatPrice(HOTEL_PICKUP_EUR)}
             </p>
           </div>
         </div>
@@ -223,7 +219,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
               {adults} x {t('booking.adults')}
             </span>
             <span className="text-white">
-              {breakdown.adultTotal.toLocaleString()} AMD
+              {formatPrice(breakdown.adultTotal)}
             </span>
           </div>
           {children > 0 && (
@@ -232,7 +228,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
                 {children} x {t('booking.children')} (50%)
               </span>
               <span className="text-white">
-                {breakdown.childTotal.toLocaleString()} AMD
+                {formatPrice(breakdown.childTotal)}
               </span>
             </div>
           )}
@@ -240,7 +236,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
             <div className="flex justify-between text-sm">
               <span className="text-white/60">Hotel Pickup</span>
               <span className="text-white">
-                {breakdown.pickupFee.toLocaleString()} AMD
+                {formatPrice(breakdown.pickupFee)}
               </span>
             </div>
           )}
@@ -249,7 +245,6 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
             <span className="font-semibold text-white">{t('booking.total')}</span>
             <div className="text-right">
               <p className="font-bold text-amber-400">{formatPrice(breakdown.totalEUR)}</p>
-              <p className="text-xs text-white/40">{breakdown.totalAMD.toLocaleString()} AMD</p>
             </div>
           </div>
         </div>

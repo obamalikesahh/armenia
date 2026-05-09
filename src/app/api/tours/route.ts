@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { tours, convertAMDtoEUR } from '@/lib/tours-data'
+import { tours } from '@/lib/tours-data'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -35,12 +35,5 @@ export async function GET(request: NextRequest) {
     filteredTours = filteredTours.filter(t => t.featured)
   }
 
-  // Add EUR prices
-  const toursWithEUR = filteredTours.map(t => ({
-    ...t,
-    priceEUR: convertAMDtoEUR(t.priceAMD),
-    priceForeignEUR: convertAMDtoEUR(t.priceForeignAMD),
-  }))
-
-  return NextResponse.json({ tours: toursWithEUR, total: toursWithEUR.length })
+  return NextResponse.json({ tours: filteredTours, total: filteredTours.length })
 }

@@ -33,8 +33,8 @@ export interface Tour {
   endTime: string;
   startEndPoint: string;
   language: string[];
-  priceAMD: number;
-  priceForeignAMD: number;
+  priceEUR: number;
+  priceForeignEUR: number;
   category: string;
   region: string;
   route: RouteStop[];
@@ -48,13 +48,7 @@ export interface Tour {
   streetViewLocations: StreetViewLocation[];
 }
 
-// Conversion utilities
-export const AMD_TO_EUR_RATE = 0.0024;
-
-export function convertAMDtoEUR(amd: number): number {
-  return Math.ceil(amd * AMD_TO_EUR_RATE);
-}
-
+// Price formatting
 export function formatPrice(eur: number): string {
   return `€${eur}`;
 }
@@ -118,8 +112,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 6000,
-    priceForeignAMD: 10000,
+    priceEUR: 20,
+    priceForeignEUR: 31,
     category: 'Nature',
     region: 'Gegharkunik',
     route: [
@@ -177,8 +171,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 6000,
-    priceForeignAMD: 10000,
+    priceEUR: 20,
+    priceForeignEUR: 31,
     category: 'Historical',
     region: 'Ararat',
     route: [
@@ -188,7 +182,7 @@ export const tours: Tour[] = [
       { name: 'Areni Winery', description: 'Taste locally produced wines in the village that gives its name to Armenia\'s premier wine region' },
     ],
     included: ['Guide service', 'Transportation', 'Wine tasting'],
-    excluded: ['Birds Cave entrance fee — 1500 AMD'],
+    excluded: ['Birds Cave entrance fee — €4'],
     availableDays: ['Sunday'],
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
@@ -234,8 +228,8 @@ export const tours: Tour[] = [
     endTime: '15:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 4000,
-    priceForeignAMD: 8000,
+    priceEUR: 13,
+    priceForeignEUR: 26,
     category: 'Historical',
     region: 'Kotayk',
     route: [
@@ -287,8 +281,8 @@ export const tours: Tour[] = [
     endTime: '20:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 9500,
-    priceForeignAMD: 17500,
+    priceEUR: 30,
+    priceForeignEUR: 55,
     category: 'Historical',
     region: 'Syunik',
     route: [
@@ -342,8 +336,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 8000,
-    priceForeignAMD: 13500,
+    priceEUR: 26,
+    priceForeignEUR: 43,
     category: 'Historical',
     region: 'Lori',
     route: [
@@ -397,8 +391,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 6500,
-    priceForeignAMD: 10500,
+    priceEUR: 21,
+    priceForeignEUR: 34,
     category: 'Wine',
     region: 'Gegharkunik',
     route: [
@@ -454,8 +448,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 6000,
-    priceForeignAMD: 10000,
+    priceEUR: 20,
+    priceForeignEUR: 31,
     category: 'Nature',
     region: 'Lori',
     route: [
@@ -508,8 +502,8 @@ export const tours: Tour[] = [
     endTime: '22:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 25000,
-    priceForeignAMD: 33000,
+    priceEUR: 78,
+    priceForeignEUR: 104,
     category: 'Cultural',
     region: 'Georgia',
     route: [
@@ -562,8 +556,8 @@ export const tours: Tour[] = [
     endTime: '22:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 28000,
-    priceForeignAMD: 39000,
+    priceEUR: 88,
+    priceForeignEUR: 122,
     category: 'Cultural',
     region: 'Georgia',
     route: [
@@ -616,8 +610,8 @@ export const tours: Tour[] = [
     endTime: '22:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 60000,
-    priceForeignAMD: 89000,
+    priceEUR: 187,
+    priceForeignEUR: 278,
     category: 'Multi-day',
     region: 'Georgia',
     route: [
@@ -671,8 +665,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 7500,
-    priceForeignAMD: 11500,
+    priceEUR: 23,
+    priceForeignEUR: 36,
     category: 'Adventure',
     region: 'Kotayk',
     route: [
@@ -724,8 +718,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 19500,
-    priceForeignAMD: 28000,
+    priceEUR: 61,
+    priceForeignEUR: 88,
     category: 'Adventure',
     region: 'Vayots Dzor',
     route: [
@@ -775,8 +769,8 @@ export const tours: Tour[] = [
     endTime: '14:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 5000,
-    priceForeignAMD: 8000,
+    priceEUR: 16,
+    priceForeignEUR: 26,
     category: 'Cultural',
     region: 'Yerevan',
     route: [
@@ -832,8 +826,8 @@ export const tours: Tour[] = [
     endTime: '15:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 5000,
-    priceForeignAMD: 9000,
+    priceEUR: 16,
+    priceForeignEUR: 29,
     category: 'Historical',
     region: 'Armavir',
     route: [
@@ -888,8 +882,8 @@ export const tours: Tour[] = [
     endTime: '15:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 5500,
-    priceForeignAMD: 9000,
+    priceEUR: 18,
+    priceForeignEUR: 29,
     category: 'Historical',
     region: 'Aragatsotn',
     route: [
@@ -942,8 +936,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 6000,
-    priceForeignAMD: 10000,
+    priceEUR: 20,
+    priceForeignEUR: 31,
     category: 'Nature',
     region: 'Kotayk',
     route: [
@@ -996,8 +990,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 7000,
-    priceForeignAMD: 12000,
+    priceEUR: 22,
+    priceForeignEUR: 38,
     category: 'Cultural',
     region: 'Shirak',
     route: [
@@ -1051,8 +1045,8 @@ export const tours: Tour[] = [
     endTime: '15:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 5500,
-    priceForeignAMD: 9500,
+    priceEUR: 18,
+    priceForeignEUR: 30,
     category: 'Historical',
     region: 'Aragatsotn',
     route: [
@@ -1104,8 +1098,8 @@ export const tours: Tour[] = [
     endTime: '15:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 4500,
-    priceForeignAMD: 7500,
+    priceEUR: 14,
+    priceForeignEUR: 23,
     category: 'Historical',
     region: 'Gegharkunik',
     route: [
@@ -1157,8 +1151,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 8000,
-    priceForeignAMD: 13000,
+    priceEUR: 26,
+    priceForeignEUR: 42,
     category: 'Wellness',
     region: 'Vayots Dzor',
     route: [
@@ -1212,8 +1206,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 7000,
-    priceForeignAMD: 11000,
+    priceEUR: 22,
+    priceForeignEUR: 35,
     category: 'Nature',
     region: 'Tavush',
     route: [
@@ -1266,8 +1260,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 5500,
-    priceForeignAMD: 9500,
+    priceEUR: 18,
+    priceForeignEUR: 30,
     category: 'Historical',
     region: 'Tavush',
     route: [
@@ -1319,8 +1313,8 @@ export const tours: Tour[] = [
     endTime: '15:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 5000,
-    priceForeignAMD: 8500,
+    priceEUR: 16,
+    priceForeignEUR: 27,
     category: 'Nature',
     region: 'Aragatsotn',
     route: [
@@ -1372,8 +1366,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 7500,
-    priceForeignAMD: 12000,
+    priceEUR: 23,
+    priceForeignEUR: 38,
     category: 'Historical',
     region: 'Tavush',
     route: [
@@ -1426,8 +1420,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 8000,
-    priceForeignAMD: 13000,
+    priceEUR: 26,
+    priceForeignEUR: 42,
     category: 'Wine',
     region: 'Ararat',
     route: [
@@ -1482,8 +1476,8 @@ export const tours: Tour[] = [
     endTime: '21:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 129000,
-    priceForeignAMD: 165000,
+    priceEUR: 403,
+    priceForeignEUR: 515,
     category: 'Multi-day',
     region: 'Syunik',
     route: [
@@ -1537,8 +1531,8 @@ export const tours: Tour[] = [
     endTime: '21:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 85000,
-    priceForeignAMD: 120000,
+    priceEUR: 265,
+    priceForeignEUR: 374,
     category: 'Multi-day',
     region: 'Kotayk',
     route: [
@@ -1598,8 +1592,8 @@ export const tours: Tour[] = [
     endTime: '19:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 15000,
-    priceForeignAMD: 22000,
+    priceEUR: 47,
+    priceForeignEUR: 69,
     category: 'Adventure',
     region: 'Aragatsotn',
     route: [
@@ -1650,8 +1644,8 @@ export const tours: Tour[] = [
     endTime: '18:00',
     startEndPoint: 'Yerevan',
     language: ['Armenian', 'English', 'Russian'],
-    priceAMD: 6000,
-    priceForeignAMD: 10000,
+    priceEUR: 20,
+    priceForeignEUR: 31,
     category: 'Adventure',
     region: 'Tavush',
     route: [

@@ -39,7 +39,6 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import {
   type Tour,
-  convertAMDtoEUR,
   formatPrice,
 } from '@/lib/tours-data'
 import { useLocale } from '@/hooks/use-locale'
@@ -134,18 +133,16 @@ export function TourDetailModal({
   const name = tour?.name[locale] || tour?.name.en || ''
   const description = tour?.description[locale] || tour?.description.en || ''
 
-  const pricePerPersonAMD = useMemo(() => {
+  const pricePerPersonEUR = useMemo(() => {
     if (!tour) return 0
-    return guideLanguage === 'armenian' ? tour.priceAMD : tour.priceForeignAMD
+    return guideLanguage === 'armenian' ? tour.priceEUR : tour.priceForeignEUR
   }, [tour, guideLanguage])
 
-  const totalPriceAMD = useMemo(() => {
-    const adultPrice = pricePerPersonAMD * adults
-    const childPrice = pricePerPersonAMD * 0.5 * children
+  const totalPriceEUR = useMemo(() => {
+    const adultPrice = pricePerPersonEUR * adults
+    const childPrice = pricePerPersonEUR * 0.5 * children
     return Math.round(adultPrice + childPrice)
-  }, [pricePerPersonAMD, adults, children])
-
-  const totalPriceEUR = useMemo(() => convertAMDtoEUR(totalPriceAMD), [totalPriceAMD])
+  }, [pricePerPersonEUR, adults, children])
 
   const durationLabel = useMemo(() => {
     if (!tour) return ''
@@ -284,7 +281,7 @@ export function TourDetailModal({
           guideLanguage,
           adults,
           children,
-          totalPriceAMD,
+          totalPriceEUR,
           lang: locale,
         }),
       })
@@ -664,7 +661,7 @@ export function TourDetailModal({
                             <Label htmlFor="armenian" className="cursor-pointer flex-1">
                               <p className="font-medium text-white">{t('booking.armenianSpeaker')}</p>
                               <p className="text-sm text-white/35">
-                                {formatPrice(convertAMDtoEUR(tour.priceAMD))} / {t('tours.perPerson')}
+                                {formatPrice(tour.priceEUR)} / {t('tours.perPerson')}
                               </p>
                             </Label>
                           </div>
@@ -677,7 +674,7 @@ export function TourDetailModal({
                             <Label htmlFor="english-russian" className="cursor-pointer flex-1">
                               <p className="font-medium text-white">{t('booking.englishRussianSpeaker')}</p>
                               <p className="text-sm text-white/35">
-                                {formatPrice(convertAMDtoEUR(tour.priceForeignAMD))} / {t('tours.perPerson')}
+                                {formatPrice(tour.priceForeignEUR)} / {t('tours.perPerson')}
                               </p>
                             </Label>
                           </div>
@@ -723,10 +720,10 @@ export function TourDetailModal({
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
                             <span className="text-white/45">
-                              {adults} x {t('booking.adults')} ({formatPrice(convertAMDtoEUR(pricePerPersonAMD))})
+                              {adults} x {t('booking.adults')} ({formatPrice(pricePerPersonEUR)})
                             </span>
                             <span className="text-white/70">
-                              {formatPrice(convertAMDtoEUR(pricePerPersonAMD * adults))}
+                              {formatPrice(pricePerPersonEUR * adults)}
                             </span>
                           </div>
                           {children > 0 && (
@@ -735,7 +732,7 @@ export function TourDetailModal({
                                 {children} x {t('booking.children')} ({t('booking.childrenDiscount')})
                               </span>
                               <span className="text-white/70">
-                                {formatPrice(convertAMDtoEUR(Math.round(pricePerPersonAMD * 0.5 * children)))}
+                                {formatPrice(Math.round(pricePerPersonEUR * 0.5 * children))}
                               </span>
                             </div>
                           )}
@@ -744,9 +741,7 @@ export function TourDetailModal({
                             <span className="font-semibold text-white">{t('booking.total')}</span>
                             <div className="text-right">
                               <p className="font-bold text-[#c9a84c]">{formatPrice(totalPriceEUR)}</p>
-                              <p className="text-xs text-white/30">
-                                {totalPriceAMD.toLocaleString()} {t('common.amd')}
-                              </p>
+                              <p className="text-xs text-white/30">{t('common.eur')}</p>
                             </div>
                           </div>
                         </div>

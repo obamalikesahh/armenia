@@ -7,7 +7,6 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   type Tour,
-  convertAMDtoEUR,
   formatPrice,
 } from '@/lib/tours-data'
 import { useLocale } from '@/hooks/use-locale'
@@ -60,8 +59,8 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
 
   const name = tour.name[locale] || tour.name.en
   const shortDesc = tour.shortDescription[locale] || tour.shortDescription.en
-  const priceEUR = convertAMDtoEUR(tour.priceAMD)
-  const priceForeignEUR = convertAMDtoEUR(tour.priceForeignAMD)
+  const priceEUR = tour.priceEUR
+  const priceForeignEUR = tour.priceForeignEUR
 
   const durationLabel = (() => {
     switch (tour.duration) {
