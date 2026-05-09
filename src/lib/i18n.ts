@@ -38,6 +38,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'hero.stat2': 'Destinations',
     'hero.stat3': 'Happy Travelers',
     'hero.stat4': 'Years Experience',
+    'hero.discoverArmenia': 'Discover Armenia',
+    'hero.scrollDown': 'Scroll',
 
     // Tours
     'tours.title': 'Our Tours',
@@ -72,6 +74,21 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.bestPeriod': 'Best Period',
     'tours.groupSize': 'Group Size',
     'tours.startEndPoint': 'Start / End Point',
+    'tours.wantPrivate': 'Want a private tour?',
+    'tours.bookPrivately': 'Book Privately',
+    'tours.streetView': 'Street View',
+    'tours.exploreLocation': 'Explore this location',
+    'tours.tabDetails': 'Details',
+    'tours.tabRoute': 'Route',
+    'tours.tabStreetView': 'Street View',
+    'tours.selectLocation': 'Select a location to explore',
+    'tours.openInMaps': 'Open in Maps',
+    'tours.locations': 'Locations',
+    'nav.menu': 'Navigation Menu',
+    'nav.phone': '+374 XX XXX XXX',
+    'nav.email': 'info@armeniatours.com',
+    'nav.currencyEUR': 'EUR - Euro',
+    'nav.currencyAMD': 'AMD - Armenian Dram',
 
     // Categories
     'categories.all': 'All Categories',
@@ -81,6 +98,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'categories.cultural': 'Cultural',
     'categories.wine': 'Wine & Gastronomy',
     'categories.multiDay': 'Multi-Day',
+    'categories.wellness': 'Wellness',
 
     // Regions
     'regions.all': 'All Regions',
@@ -96,6 +114,19 @@ export const translations: Record<Locale, Record<string, string>> = {
     'regions.ararat': 'Ararat',
     'regions.shirak': 'Shirak',
     'regions.georgia': 'Georgia',
+
+    // Days of the week
+    'days.monday': 'Monday',
+    'days.tuesday': 'Tuesday',
+    'days.wednesday': 'Wednesday',
+    'days.thursday': 'Thursday',
+    'days.friday': 'Friday',
+    'days.saturday': 'Saturday',
+    'days.sunday': 'Sunday',
+
+    // Currency
+    'currency.euro': 'Euro',
+    'currency.armenianDram': 'Armenian Dram',
 
     // Booking
     'booking.title': 'Book Your Tour',
@@ -119,6 +150,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'booking.checkout': 'Checkout',
     'booking.payWithCard': 'Pay with Card',
     'booking.payWithTransfer': 'Pay with Bank Transfer',
+    'booking.hotelPickup': 'Hotel Pickup',
+    'booking.childrenDiscount': '50% off',
 
     // Auth
     'auth.login': 'Log In',
@@ -136,6 +169,46 @@ export const translations: Record<Locale, Record<string, string>> = {
     'auth.orContinueWith': 'Or continue with',
     'auth.google': 'Google',
     'auth.facebook': 'Facebook',
+    'auth.fillFields': 'Please fill in all fields',
+    'auth.fillRequiredFields': 'Please fill in all required fields',
+    'auth.passwordsNoMatch': 'Passwords do not match',
+    'auth.acceptTerms': 'Please accept the terms and conditions',
+    'auth.registrationSuccess': 'Registration Successful!',
+    'auth.switchingToLogin': 'Switching to login...',
+    'auth.iAgreeTo': 'I agree to the',
+    'auth.termsOfService': 'Terms of Service',
+    'auth.and': 'and',
+    'auth.privacyPolicy': 'Privacy Policy',
+    'auth.signInDescription': 'Sign in to your account',
+    'auth.createAccountDescription': 'Create a new account',
+    'auth.invalidCredentials': 'Invalid email or password',
+    'auth.loginFailed': 'Login failed',
+    'auth.registrationFailed': 'Registration failed. Please try again.',
+    'auth.emailPlaceholder': 'your@email.com',
+
+    // Why Choose Us
+    'whyChoose.title': 'Why Choose Us',
+    'whyChoose.subtitle': 'Experience the best of Armenia with our trusted tour platform',
+    'whyChoose.guides.title': 'Expert Local Guides',
+    'whyChoose.guides.description': 'Our certified Armenian guides bring history to life with personal stories and deep cultural knowledge.',
+    'whyChoose.price.title': 'Best Price Guarantee',
+    'whyChoose.price.description': "We offer the most competitive prices with no hidden fees. Found it cheaper? We'll match it.",
+    'whyChoose.booking.title': 'Flexible Booking',
+    'whyChoose.booking.description': 'Free cancellation up to 24 hours before. Easy date changes. Book now, decide later.',
+
+    // About
+    'about.title': 'About Armenia',
+    'about.p1': 'Armenia — one of the world\'s oldest civilizations — is a land of dramatic mountain landscapes, ancient monasteries carved into cliffs, and warm hospitality that has welcomed travelers for millennia.',
+    'about.p2': 'From the crystal waters of Lake Sevan to the awe-inspiring Wings of Tatev, from the sacred halls of Geghard to the vibrant streets of Yerevan, every corner of Armenia tells a story spanning thousands of years.',
+    'about.p3': 'Our expert local guides bring these stories to life, offering authentic experiences that go far beyond typical tourism. Whether you seek adventure, spiritual discovery, or culinary delights — Armenia has it all.',
+    'about.exploreTours': 'Explore Tours',
+
+    // Newsletter
+    'newsletter.title': 'Stay Updated',
+    'newsletter.subtitle': 'Get the latest tour deals, travel tips, and exclusive offers delivered to your inbox.',
+    'newsletter.subscribed': '✓ Subscribed!',
+    'newsletter.subscribe': 'Subscribe',
+    'newsletter.placeholder': 'your@email.com',
 
     // Footer
     'footer.description': 'Your trusted partner for unforgettable Armenian travel experiences. We offer curated tours led by expert local guides through the most beautiful and historic sites of Armenia.',
@@ -148,9 +221,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.newsletter': 'Newsletter',
     'footer.newsletterText': 'Subscribe to receive the latest tour updates and exclusive offers.',
     'footer.subscribe': 'Subscribe',
+    'footer.subscribed': '✓ Subscribed!',
     'footer.rights': 'All rights reserved.',
     'footer.contactUs': 'Contact Us',
     'footer.followUs': 'Follow Us',
+    'footer.address': 'Yerevan, Armenia',
+    'footer.madeWith': 'Made with',
+    'footer.inArmenia': 'in Armenia',
+    'footer.emailPlaceholder': 'your@email.com',
 
     // Common
     'common.loading': 'Loading...',
@@ -203,6 +281,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'hero.stat2': 'Направлений',
     'hero.stat3': 'Довольных туристов',
     'hero.stat4': 'Лет опыта',
+    'hero.discoverArmenia': 'Откройте Армению',
+    'hero.scrollDown': 'Прокрутить',
 
     // Экскурсии
     'tours.title': 'Наши экскурсии',
@@ -237,6 +317,21 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.bestPeriod': 'Лучший период',
     'tours.groupSize': 'Размер группы',
     'tours.startEndPoint': 'Точка отправления / прибытия',
+    'tours.wantPrivate': 'Хотите индивидуальную экскурсию?',
+    'tours.bookPrivately': 'Забронировать лично',
+    'tours.streetView': 'Панорама улиц',
+    'tours.exploreLocation': 'Исследуйте это место',
+    'tours.tabDetails': 'Подробности',
+    'tours.tabRoute': 'Маршрут',
+    'tours.tabStreetView': 'Панорама',
+    'tours.selectLocation': 'Выберите место для просмотра',
+    'tours.openInMaps': 'Открыть на карте',
+    'tours.locations': 'Места',
+    'nav.menu': 'Меню навигации',
+    'nav.phone': '+374 XX XXX XXX',
+    'nav.email': 'info@armeniatours.com',
+    'nav.currencyEUR': 'EUR - Евро',
+    'nav.currencyAMD': 'AMD - Армянский драм',
 
     // Категории
     'categories.all': 'Все категории',
@@ -246,6 +341,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'categories.cultural': 'Культурные',
     'categories.wine': 'Вино и гастрономия',
     'categories.multiDay': 'Многодневные',
+    'categories.wellness': 'Велнес',
 
     // Регионы
     'regions.all': 'Все регионы',
@@ -261,6 +357,19 @@ export const translations: Record<Locale, Record<string, string>> = {
     'regions.ararat': 'Арарат',
     'regions.shirak': 'Ширак',
     'regions.georgia': 'Грузия',
+
+    // Дни недели
+    'days.monday': 'Понедельник',
+    'days.tuesday': 'Вторник',
+    'days.wednesday': 'Среда',
+    'days.thursday': 'Четверг',
+    'days.friday': 'Пятница',
+    'days.saturday': 'Суббота',
+    'days.sunday': 'Воскресенье',
+
+    // Валюта
+    'currency.euro': 'Евро',
+    'currency.armenianDram': 'Армянский драм',
 
     // Бронирование
     'booking.title': 'Забронировать экскурсию',
@@ -284,6 +393,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'booking.checkout': 'Оформление заказа',
     'booking.payWithCard': 'Оплатить картой',
     'booking.payWithTransfer': 'Оплатить банковским переводом',
+    'booking.hotelPickup': 'Трансфер из отеля',
+    'booking.childrenDiscount': 'Скидка 50%',
 
     // Авторизация
     'auth.login': 'Войти',
@@ -301,6 +412,46 @@ export const translations: Record<Locale, Record<string, string>> = {
     'auth.orContinueWith': 'Или войти через',
     'auth.google': 'Google',
     'auth.facebook': 'Facebook',
+    'auth.fillFields': 'Пожалуйста, заполните все поля',
+    'auth.fillRequiredFields': 'Пожалуйста, заполните все обязательные поля',
+    'auth.passwordsNoMatch': 'Пароли не совпадают',
+    'auth.acceptTerms': 'Пожалуйста, примите условия использования',
+    'auth.registrationSuccess': 'Регистрация успешна!',
+    'auth.switchingToLogin': 'Перенаправление на вход...',
+    'auth.iAgreeTo': 'Я принимаю',
+    'auth.termsOfService': 'Условия использования',
+    'auth.and': 'и',
+    'auth.privacyPolicy': 'Политику конфиденциальности',
+    'auth.signInDescription': 'Войдите в свой аккаунт',
+    'auth.createAccountDescription': 'Создайте новый аккаунт',
+    'auth.invalidCredentials': 'Неверный email или пароль',
+    'auth.loginFailed': 'Ошибка входа',
+    'auth.registrationFailed': 'Ошибка регистрации. Пожалуйста, попробуйте снова.',
+    'auth.emailPlaceholder': 'your@email.com',
+
+    // Почему мы
+    'whyChoose.title': 'Почему мы',
+    'whyChoose.subtitle': 'Откройте лучшее в Армении с нашей надёжной туристической платформой',
+    'whyChoose.guides.title': 'Опытные местные гиды',
+    'whyChoose.guides.description': 'Наши сертифицированные армянские гиды оживляют историю личными историями и глубокими знаниями культуры.',
+    'whyChoose.price.title': 'Лучшая цена',
+    'whyChoose.price.description': 'Мы предлагаем самые конкурентные цены без скрытых платежей. Нашли дешевле? Мы согласуем цену.',
+    'whyChoose.booking.title': 'Гибкое бронирование',
+    'whyChoose.booking.description': 'Бесплатная отмена за 24 часа до начала. Лёгкая смена даты. Бронируйте сейчас, решайте позже.',
+
+    // Об Армении
+    'about.title': 'Об Армении',
+    'about.p1': 'Армения — одна из древнейших цивилизаций мира — это край захватывающих горных пейзажей, древних монастырей, высеченных в скалах, и тёплого гостеприимства, принимающего путешественников тысячелетиями.',
+    'about.p2': 'От кристальных вод Севана до вдохновляющих «Крыльев Татева», от священных залов Гехарда до оживлённых улиц Еревана — каждый уголок Армении рассказывает историю, охватывающую тысячелетия.',
+    'about.p3': 'Наши опытные местные гиды оживляют эти истории, предлагая аутентичные впечатления, выходящие далеко за рамки типичного туризма. Ищете ли вы приключения, духовное открытие или кулинарные наслаждения — Армения имеет всё.',
+    'about.exploreTours': 'Экскурсии',
+
+    // Рассылка
+    'newsletter.title': 'Будьте в курсе',
+    'newsletter.subtitle': 'Получайте лучшие предложения по экскурсиям, советы для путешественников и эксклюзивные скидки на вашу почту.',
+    'newsletter.subscribed': '✓ Подписаны!',
+    'newsletter.subscribe': 'Подписаться',
+    'newsletter.placeholder': 'your@email.com',
 
     // Подвал
     'footer.description': 'Ваш надёжный партнёр в сфере туризма по Армении. Мы предлагаем авторские экскурсии с опытными местными гидами по красивейшим и историческим местам Армении.',
@@ -313,9 +464,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.newsletter': 'Рассылка',
     'footer.newsletterText': 'Подпишитесь, чтобы получать обновления об экскурсиях и эксклюзивные предложения.',
     'footer.subscribe': 'Подписаться',
+    'footer.subscribed': '✓ Подписаны!',
     'footer.rights': 'Все права защищены.',
     'footer.contactUs': 'Связаться с нами',
     'footer.followUs': 'Мы в соцсетях',
+    'footer.address': 'Ереван, Армения',
+    'footer.madeWith': 'Сделано с',
+    'footer.inArmenia': 'в Армении',
+    'footer.emailPlaceholder': 'your@email.com',
 
     // Общие
     'common.loading': 'Загрузка...',
@@ -368,6 +524,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'hero.stat2': 'Reiseziele',
     'hero.stat3': 'Zufriedene Reisende',
     'hero.stat4': 'Jahre Erfahrung',
+    'hero.discoverArmenia': 'Entdecken Sie Armenien',
+    'hero.scrollDown': 'Scrollen',
 
     // Touren
     'tours.title': 'Unsere Touren',
@@ -402,6 +560,21 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.bestPeriod': 'Beste Reisezeit',
     'tours.groupSize': 'Gruppengröße',
     'tours.startEndPoint': 'Start- / Endpunkt',
+    'tours.wantPrivate': 'Möchten Sie eine Privattour?',
+    'tours.bookPrivately': 'Privat buchen',
+    'tours.streetView': 'Street View',
+    'tours.exploreLocation': 'Diesen Ort erkunden',
+    'tours.tabDetails': 'Details',
+    'tours.tabRoute': 'Route',
+    'tours.tabStreetView': 'Street View',
+    'tours.selectLocation': 'Wählen Sie einen Ort zum Erkunden',
+    'tours.openInMaps': 'In Maps öffnen',
+    'tours.locations': 'Orte',
+    'nav.menu': 'Navigationsmenü',
+    'nav.phone': '+374 XX XXX XXX',
+    'nav.email': 'info@armeniatours.com',
+    'nav.currencyEUR': 'EUR - Euro',
+    'nav.currencyAMD': 'AMD - Armenischer Dram',
 
     // Kategorien
     'categories.all': 'Alle Kategorien',
@@ -411,6 +584,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'categories.cultural': 'Kulturell',
     'categories.wine': 'Wein & Gastronomie',
     'categories.multiDay': 'Mehrtägig',
+    'categories.wellness': 'Wellness',
 
     // Regionen
     'regions.all': 'Alle Regionen',
@@ -426,6 +600,19 @@ export const translations: Record<Locale, Record<string, string>> = {
     'regions.ararat': 'Ararat',
     'regions.shirak': 'Schirak',
     'regions.georgia': 'Georgien',
+
+    // Wochentage
+    'days.monday': 'Montag',
+    'days.tuesday': 'Dienstag',
+    'days.wednesday': 'Mittwoch',
+    'days.thursday': 'Donnerstag',
+    'days.friday': 'Freitag',
+    'days.saturday': 'Samstag',
+    'days.sunday': 'Sonntag',
+
+    // Währung
+    'currency.euro': 'Euro',
+    'currency.armenianDram': 'Armenischer Dram',
 
     // Buchung
     'booking.title': 'Tour buchen',
@@ -449,6 +636,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'booking.checkout': 'Bestellung abschließen',
     'booking.payWithCard': 'Mit Karte bezahlen',
     'booking.payWithTransfer': 'Per Banküberweisung bezahlen',
+    'booking.hotelPickup': 'Hotelabholung',
+    'booking.childrenDiscount': '50% Rabatt',
 
     // Authentifizierung
     'auth.login': 'Anmelden',
@@ -466,6 +655,46 @@ export const translations: Record<Locale, Record<string, string>> = {
     'auth.orContinueWith': 'Oder weiter mit',
     'auth.google': 'Google',
     'auth.facebook': 'Facebook',
+    'auth.fillFields': 'Bitte füllen Sie alle Felder aus',
+    'auth.fillRequiredFields': 'Bitte füllen Sie alle Pflichtfelder aus',
+    'auth.passwordsNoMatch': 'Passwörter stimmen nicht überein',
+    'auth.acceptTerms': 'Bitte akzeptieren Sie die Nutzungsbedingungen',
+    'auth.registrationSuccess': 'Registrierung erfolgreich!',
+    'auth.switchingToLogin': 'Weiterleitung zur Anmeldung...',
+    'auth.iAgreeTo': 'Ich stimme den',
+    'auth.termsOfService': 'Nutzungsbedingungen',
+    'auth.and': 'und',
+    'auth.privacyPolicy': 'Datenschutzrichtlinie',
+    'auth.signInDescription': 'Melden Sie sich bei Ihrem Konto an',
+    'auth.createAccountDescription': 'Erstellen Sie ein neues Konto',
+    'auth.invalidCredentials': 'Ungültige E-Mail oder Passwort',
+    'auth.loginFailed': 'Anmeldung fehlgeschlagen',
+    'auth.registrationFailed': 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.',
+    'auth.emailPlaceholder': 'your@email.com',
+
+    // Warum wir
+    'whyChoose.title': 'Warum wir',
+    'whyChoose.subtitle': 'Erleben Sie das Beste aus Armenien mit unserer vertrauenswürdigen Tourplattform',
+    'whyChoose.guides.title': 'Erfahrene lokale Guides',
+    'whyChoose.guides.description': 'Unsere zertifizierten armenischen Guides erwecken die Geschichte mit persönlichen Geschichten und tiefem kulturellem Wissen zum Leben.',
+    'whyChoose.price.title': 'Bestpreisgarantie',
+    'whyChoose.price.description': 'Wir bieten die wettbewerbsfähigsten Preise ohne versteckte Gebühren. Woanders günstiger gefunden? Wir passen den Preis an.',
+    'whyChoose.booking.title': 'Flexible Buchung',
+    'whyChoose.booking.description': 'Kostenlose Stornierung bis 24 Stunden vorher. Einfache Datumänderung. Jetzt buchen, später entscheiden.',
+
+    // Über Armenien
+    'about.title': 'Über Armenien',
+    'about.p1': 'Armenien — eine der ältesten Zivilisationen der Welt — ist ein Land dramatischer Berglandschaften, antiker Klöster, die in Fels gehauen wurden, und herzlicher Gastfreundschaft, die Reisende seit Jahrtausenden willkommen heißt.',
+    'about.p2': 'Von den kristallklaren Gewässern des Sewansees bis zu den überwältigenden Flügeln von Tatev, von den heiligen Hallen von Geghard bis zu den lebhaften Straßen von Eriwan — jede Ecke Armeniens erzählt eine Geschichte, die Jahrtausende umspannt.',
+    'about.p3': 'Unsere erfahrenen lokalen Guides erwecken diese Geschichten zum Leben und bieten authentische Erlebnisse, die weit über den typischen Tourismus hinausgehen. Ob Sie Abenteuer, spirituelle Entdeckung oder kulinarische Genüsse suchen — Armenien hat alles.',
+    'about.exploreTours': 'Touren entdecken',
+
+    // Newsletter
+    'newsletter.title': 'Bleiben Sie informiert',
+    'newsletter.subtitle': 'Erhalten Sie die neuesten Tour-Angebote, Reisetipps und exklusive Angebote direkt in Ihr Postfach.',
+    'newsletter.subscribed': '✓ Abonniert!',
+    'newsletter.subscribe': 'Abonnieren',
+    'newsletter.placeholder': 'your@email.com',
 
     // Fußzeile
     'footer.description': 'Ihr vertrauenswürdiger Partner für unvergessliche Reisen nach Armenien. Wir bieten handverlesene Touren mit erfahrenen lokalen Guides zu den schönsten und historisch bedeutsamsten Orten Armeniens.',
@@ -478,9 +707,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.newsletter': 'Newsletter',
     'footer.newsletterText': 'Abonnieren Sie unseren Newsletter für die neuesten Tour-Updates und exklusive Angebote.',
     'footer.subscribe': 'Abonnieren',
+    'footer.subscribed': '✓ Abonniert!',
     'footer.rights': 'Alle Rechte vorbehalten.',
     'footer.contactUs': 'Kontaktieren Sie uns',
     'footer.followUs': 'Folgen Sie uns',
+    'footer.address': 'Eriwan, Armenien',
+    'footer.madeWith': 'Gemacht mit',
+    'footer.inArmenia': 'in Armenien',
+    'footer.emailPlaceholder': 'your@email.com',
 
     // Allgemein
     'common.loading': 'Laden...',

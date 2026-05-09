@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { db } from '@/lib/db'
 import { convertAMDtoEUR } from '@/lib/tours-data'
 
 export async function POST(request: NextRequest) {
@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const {
       tourId,
+      tourName,
       tourDate,
       guideLanguage,
       adults,
@@ -17,27 +18,22 @@ export async function POST(request: NextRequest) {
 
     const totalPriceEUR = convertAMDtoEUR(totalPriceAMD)
 
-    const { data, error } = await supabase
-      .from('bookings')
-      .insert({
-        tour_id: tourId,
-        user_id: userId,
-        tour_date: tourDate,
-        guide_language: guideLanguage,
-        num_adults: adults,
-        num_children: children,
-        total_price_amd: totalPriceAMD,
-        total_price_eur: totalPriceEUR,
+    const booking = await db.booking.create({
+      data: {
+        tourId,
+        tourName: tourName || '',
+        tourDate,
+        guideLanguage,
+        adults,
+        children,
+        totalPriceAMD,
+        totalPriceEUR,
         status: 'pending',
-      })
-      .select()
-      .single()
+        userId,
+      },
+    })
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 })
-    }
-
-    return NextResponse.json({ booking: data })
+    return NextResponse.json({ booking }, { status: 201 })
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json({ error: message }, { status: 500 })
@@ -56,17 +52,12 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const { data, error } = await supabase
-      .from('bookings')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
+    const bookings = await db.booking.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    })
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 })
-    }
-
-    return NextResponse.json({ bookings: data })
+    return NextResponse.json({ bookings })
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json({ error: message }, { status: 500 })

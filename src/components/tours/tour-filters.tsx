@@ -87,25 +87,21 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl sm:p-6"
-      style={{
-        backgroundImage:
-          'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
-      }}
+    <div className="rounded-2xl border border-white/6 bg-white/3 p-4 backdrop-blur-xl sm:p-6"
     >
       {/* Search bar */}
       <div className="relative mb-4">
-        <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
+        <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/30" />
         <Input
           placeholder={t('tours.search')}
           value={filters.search}
           onChange={(e) => updateFilter('search', e.target.value)}
-          className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-white/30 focus-visible:border-amber-500/50 focus-visible:ring-amber-500/20"
+          className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30 focus-visible:ring-[#c9a84c]/10"
         />
         {filters.search && (
           <button
             onClick={() => updateFilter('search', '')}
-            className="absolute top-1/2 right-3 -translate-y-1/2 text-white/40 transition-colors hover:text-white"
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-white/35 transition-colors hover:text-white/60"
           >
             <X className="size-4" />
           </button>
@@ -114,7 +110,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
 
       {/* Category pills */}
       <div className="mb-4">
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/40">
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/30">
           {t('tours.category')}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -126,8 +122,8 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
                 onClick={() => updateFilter('category', cat)}
                 className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/25'
-                    : 'border border-white/10 bg-white/5 text-white/60 hover:border-white/20 hover:bg-white/10 hover:text-white'
+                    ? 'bg-[#c9a84c] text-[#0a0a0a] shadow-lg shadow-[#c9a84c]/10'
+                    : 'border border-white/6 bg-white/3 text-white/45 hover:border-white/6 hover:bg-white/3 hover:text-white/60'
                 }`}
               >
                 {getCategoryLabel(cat)}
@@ -139,7 +135,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
 
       {/* Duration pills */}
       <div className="mb-4">
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/40">
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/30">
           {t('tours.duration')}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -151,8 +147,8 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
                 onClick={() => updateFilter('duration', dur)}
                 className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/25'
-                    : 'border border-white/10 bg-white/5 text-white/60 hover:border-white/20 hover:bg-white/10 hover:text-white'
+                    ? 'bg-[#c9a84c] text-[#0a0a0a] shadow-lg shadow-[#c9a84c]/10'
+                    : 'border border-white/6 bg-white/3 text-white/45 hover:border-white/6 hover:bg-white/3 hover:text-white/60'
                 }`}
               >
                 {getDurationLabel(dur)}
@@ -165,14 +161,14 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
       {/* Region filter and clear button row */}
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex-1 sm:min-w-[200px]">
-          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/40">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-white/30">
             {t('tours.region')}
           </p>
           <Select
             value={filters.region}
             onValueChange={(value) => updateFilter('region', value)}
           >
-            <SelectTrigger className="w-full border-white/10 bg-white/5 text-white">
+            <SelectTrigger className="w-full border-white/6 bg-white/3 text-white">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -191,7 +187,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
             variant="ghost"
             size="sm"
             onClick={clearAll}
-            className="mt-5 text-white/50 hover:bg-white/10 hover:text-white"
+            className="mt-5 text-white/35 hover:bg-white/3 hover:text-white/60"
           >
             <X className="mr-1 size-3" />
             {t('tours.clearFilters')}
@@ -205,7 +201,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
           {filters.category !== 'all' && (
             <Badge
               variant="secondary"
-              className="cursor-pointer border-white/10 bg-white/10 text-white/70 hover:bg-white/20"
+              className="cursor-pointer border-white/6 bg-white/3 text-white/50 hover:bg-white/8"
               onClick={() => updateFilter('category', 'all')}
             >
               {getCategoryLabel(filters.category)}
@@ -215,7 +211,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
           {filters.region !== 'all' && (
             <Badge
               variant="secondary"
-              className="cursor-pointer border-white/10 bg-white/10 text-white/70 hover:bg-white/20"
+              className="cursor-pointer border-white/6 bg-white/3 text-white/50 hover:bg-white/8"
               onClick={() => updateFilter('region', 'all')}
             >
               {t(getRegionKey(filters.region))}
@@ -225,7 +221,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
           {filters.duration !== 'all' && (
             <Badge
               variant="secondary"
-              className="cursor-pointer border-white/10 bg-white/10 text-white/70 hover:bg-white/20"
+              className="cursor-pointer border-white/6 bg-white/3 text-white/50 hover:bg-white/8"
               onClick={() => updateFilter('duration', 'all')}
             >
               {getDurationLabel(filters.duration)}
@@ -235,7 +231,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
           {filters.search && (
             <Badge
               variant="secondary"
-              className="cursor-pointer border-white/10 bg-white/10 text-white/70 hover:bg-white/20"
+              className="cursor-pointer border-white/6 bg-white/3 text-white/50 hover:bg-white/8"
               onClick={() => updateFilter('search', '')}
             >
               &quot;{filters.search}&quot;

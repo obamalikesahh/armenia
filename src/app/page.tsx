@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import {
   Mountain,
   Play,
@@ -13,6 +14,7 @@ import {
   Map as MapIcon,
   Mail,
   ArrowRight,
+  ChevronDown,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -29,38 +31,41 @@ import {
 } from '@/lib/tours-data'
 import { useLocale } from '@/hooks/use-locale'
 
-// Dynamic imports for heavy 3D components (no SSR)
-const HeroScene = dynamic(() => import('@/components/3d/hero-scene'), { ssr: false })
-const TourGlobe = dynamic(() => import('@/components/3d/tour-globe'), { ssr: false })
-const BackgroundParticles = dynamic(() => import('@/components/3d/background-particles'), { ssr: false })
+// Dynamic imports (no SSR)
+const MagneticCursor = dynamic(() => import('@/components/animations/magnetic-cursor').then(m => ({ default: m.MagneticCursor })), { ssr: false })
+const MouseSpotlight = dynamic(() => import('@/components/animations/mouse-spotlight').then(m => ({ default: m.MouseSpotlight })), { ssr: false })
+const HeroScene = dynamic(() => import('@/components/3d/hero-scene').then(m => ({ default: m.HeroScene })), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 z-0 bg-[#0a0a0a] flex items-center justify-center">
+      <div className="size-6 animate-pulse rounded-full bg-white/5" />
+    </div>
+  ),
+})
 
-/* ──────────────────────────────────────────────
-   Animation helpers
-   ────────────────────────────────────────────── */
+/* ─── Animation helpers ─── */
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
   },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' as const } },
 }
 
 const fadeIn = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.5 } },
+  visible: { opacity: 1, transition: { duration: 0.6 } },
 }
 
-/* ──────────────────────────────────────────────
-   Section wrapper with InView detection
-   ────────────────────────────────────────────── */
+/* ─── Section wrapper ─── */
 function AnimatedSection({ children, className = '', id = '' }: { children: React.ReactNode; className?: string; id?: string }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
     <motion.section
@@ -76,11 +81,26 @@ function AnimatedSection({ children, className = '', id = '' }: { children: Reac
   )
 }
 
-/* ──────────────────────────────────────────────
-   Main Page
-   ────────────────────────────────────────────── */
+/* ─── Main Page ─── */
 export default function Home() {
   const { t } = useLocale()
+
+  // --- Auth state ---
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    if (typeof window === 'undefined') return false
+    try { return !!localStorage.getItem('auth_token') } catch { return false }
+  })
+  const [userName, setUserName] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    try {
+      const userInfo = localStorage.getItem('user_info')
+      if (userInfo) {
+        const user = JSON.parse(userInfo)
+        return `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email || ''
+      }
+    } catch { /* ignore */ }
+    return ''
+  })
 
   // --- State ---
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
@@ -113,7 +133,7 @@ export default function Home() {
       } else {
         el.scrollBy({ left: 320, behavior: 'smooth' })
       }
-    }, 3500)
+    }, 4000)
     return () => clearInterval(interval)
   }, [isPaused])
 
@@ -177,9 +197,7 @@ export default function Home() {
       if (session.url) {
         window.location.href = session.url
       }
-    } catch {
-      // Fallback: just close the modal
-    }
+    } catch { /* fallback */ }
     setIsDetailModalOpen(false)
   }, [])
 
@@ -191,6 +209,18 @@ export default function Home() {
   const handleRegisterClick = useCallback(() => {
     setAuthTab('register')
     setIsAuthModalOpen(true)
+  }, [])
+
+  const handleLoginSuccess = useCallback((user: { id: string; email: string; firstName: string; lastName: string; token: string }) => {
+    setIsLoggedIn(true)
+    setUserName(`${user.firstName} ${user.lastName}`.trim() || user.email)
+  }, [])
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('auth_token')
+    localStorage.removeItem('user_info')
+    setIsLoggedIn(false)
+    setUserName('')
   }, [])
 
   const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
@@ -212,60 +242,71 @@ export default function Home() {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }, [])
 
-  // Combined filter handler that also resets display count
   const setFilters = useCallback((newFilters: TourFiltersState) => {
     setFiltersRaw(newFilters)
     setDisplayCount(9)
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+      {/* Global mouse effects */}
+      <MagneticCursor />
+      <MouseSpotlight />
+
       {/* ─── Navbar ─── */}
       <Navbar
         onLoginClick={handleLoginClick}
         onRegisterClick={handleRegisterClick}
+        isLoggedIn={isLoggedIn}
+        userName={userName}
+        onLogout={handleLogout}
       />
 
       {/* ═══════════════════════════════════════════
-          SECTION 1: HERO
+          SECTION 1: HERO — clean, dramatic, minimal
           ═══════════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* 3D Background */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+        {/* Image-based Parallax Hero */}
         <HeroScene />
 
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/30 via-transparent to-[#0a0a0f] z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-[#0a0a0a] z-[3]" />
 
-        {/* Content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        {/* Content — clean, centered, minimal */}
+        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
             className="flex flex-col items-center"
           >
-            {/* Main heading */}
+            {/* Thin line above heading */}
+            <motion.div variants={fadeUp} className="mb-8 h-px w-16 bg-white/15 sm:w-20" />
+
+            {/* Main heading — large, clean, white */}
             <motion.h1
               variants={fadeUp}
-              className="mb-4 text-4xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
+              className="mb-5 text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-[7rem]"
             >
-              <span className="gradient-text">{t('hero.title')}</span>
+              ARMENIA
+              <br />
+              <span className="gradient-text animate-gradient-shift" style={{ backgroundSize: '200% 200%' }}>TOURS</span>
             </motion.h1>
 
-            {/* Subheading */}
+            {/* Subheading — clean, light */}
             <motion.p
               variants={fadeUp}
-              className="mb-8 max-w-2xl text-base text-white/60 sm:text-lg lg:text-xl"
+              className="mb-12 max-w-xl text-sm font-light leading-relaxed text-white/40 sm:text-base"
             >
               {t('hero.subtitle')}
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div variants={fadeUp} className="flex flex-col gap-4 sm:flex-row">
+            {/* CTA Buttons — minimal style */}
+            <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button
                 onClick={() => scrollToSection('tours')}
                 size="lg"
-                className="bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-amber-500/20 transition-all duration-300 hover:from-orange-600 hover:to-amber-600 hover:shadow-amber-500/30 hover:scale-105"
+                className="bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] transition-all duration-300 rounded-full px-8"
               >
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 size-4" />
@@ -273,27 +314,27 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="glass border-white/20 text-white transition-all duration-300 hover:bg-white/10 hover:scale-105"
+                className="border-white/10 text-white/60 bg-transparent hover:bg-white/5 hover:text-white/80 transition-all duration-300 rounded-full px-8"
               >
                 <Play className="mr-2 size-4" />
                 {t('hero.secondaryCta')}
               </Button>
             </motion.div>
 
-            {/* Stats bar */}
+            {/* Stats bar — minimal */}
             <motion.div
               variants={fadeUp}
-              className="mt-16 grid w-full max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8"
+              className="mt-20 grid w-full max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
             >
               {[
                 { value: '29+', label: t('hero.stat1') },
                 { value: '12+', label: t('hero.stat2') },
-                { value: '5000+', label: t('hero.stat3') },
+                { value: '5K+', label: t('hero.stat3') },
                 { value: '15+', label: t('hero.stat4') },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="text-2xl font-bold text-amber-400 sm:text-3xl">{stat.value}</p>
-                  <p className="text-xs text-white/40 sm:text-sm">{stat.label}</p>
+                  <p className="text-2xl font-semibold text-white sm:text-3xl">{stat.value}</p>
+                  <p className="mt-1 text-[11px] font-light uppercase tracking-[0.15em] text-white/25">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -304,16 +345,18 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ delay: 2.5 }}
           className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             className="flex flex-col items-center gap-2"
           >
-            <span className="text-xs text-white/30">Scroll</span>
-            <div className="size-5 rounded-full border border-white/20" />
+            <span className="text-[9px] font-light uppercase tracking-[0.25em] text-white/20">
+              {t('hero.scrollDown')}
+            </span>
+            <ChevronDown className="size-3 text-white/15" />
           </motion.div>
         </motion.div>
       </section>
@@ -321,68 +364,59 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           SECTION 2: FEATURED TOURS CAROUSEL
           ═══════════════════════════════════════════ */}
-      <AnimatedSection className="relative py-20 overflow-hidden" id="featured">
-        {/* Subtle particle background */}
-        <BackgroundParticles />
-
+      <AnimatedSection className="relative py-24 overflow-hidden" id="featured">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section header */}
-          <motion.div variants={fadeUp} className="mb-10 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
-              {t('tours.featured')}{' '}
-              <span className="gradient-text">{t('tours.title')}</span>
+          <motion.div variants={fadeUp} className="mb-12 text-center">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+              {t('tours.featured')}
+            </p>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t('tours.title')}
             </h2>
-            <div className="mx-auto mt-3 h-1 w-24 rounded-full bg-gradient-to-r from-amber-500 via-pink-500 to-violet-500" />
+            <div className="mx-auto mt-4 h-px w-12 bg-[#c9a84c]/30" />
           </motion.div>
 
           {/* Carousel */}
           <motion.div variants={fadeIn} className="relative">
-            {/* Left arrow */}
             <button
               onClick={() => scrollCarousel('left')}
-              className="absolute -left-3 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-10 items-center justify-center rounded-full border border-white/10 bg-gray-950/80 text-white/60 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white lg:-left-5"
+              className="absolute -left-2 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-9 items-center justify-center rounded-full border border-white/8 bg-[#0a0a0a]/80 text-white/40 backdrop-blur-sm transition-all hover:bg-white/5 hover:text-white/60 lg:-left-4"
               aria-label="Scroll left"
             >
-              <ChevronLeft className="size-5" />
+              <ChevronLeft className="size-4" />
             </button>
-
-            {/* Right arrow */}
             <button
               onClick={() => scrollCarousel('right')}
-              className="absolute -right-3 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-10 items-center justify-center rounded-full border border-white/10 bg-gray-950/80 text-white/60 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white lg:-right-5"
+              className="absolute -right-2 top-1/2 z-20 -translate-y-1/2 hidden sm:flex size-9 items-center justify-center rounded-full border border-white/8 bg-[#0a0a0a]/80 text-white/40 backdrop-blur-sm transition-all hover:bg-white/5 hover:text-white/60 lg:-right-4"
               aria-label="Scroll right"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight className="size-4" />
             </button>
 
-            {/* Cards container */}
             <div
               ref={carouselRef}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="flex gap-6 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-5 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {featuredTours.map((tour) => (
                 <div key={tour.id} className="w-[300px] shrink-0 sm:w-[340px]">
-                  <TourCard
-                    tour={tour}
-                    onBookNow={handleBookNow}
-                    onSelect={handleSelectTour}
-                  />
+                  <TourCard tour={tour} onBookNow={handleBookNow} onSelect={handleSelectTour} />
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* View all button */}
-          <motion.div variants={fadeUp} className="mt-8 text-center">
+          {/* View all */}
+          <motion.div variants={fadeUp} className="mt-10 text-center">
             <Button
               onClick={() => scrollToSection('tours')}
               variant="outline"
-              className="border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+              className="border-white/8 bg-transparent text-white/40 hover:bg-white/5 hover:text-white/60 rounded-full px-6"
             >
               {t('common.seeAll')} {t('tours.title')}
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className="ml-2 size-3.5" />
             </Button>
           </motion.div>
         </div>
@@ -393,50 +427,48 @@ export default function Home() {
           ═══════════════════════════════════════════ */}
       <AnimatedSection className="relative py-20" id="tours">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
-          <motion.div variants={fadeUp} className="mb-8 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
+          <motion.div variants={fadeUp} className="mb-10 text-center">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t('tours.allTours')}
             </h2>
-            <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-gradient-to-r from-amber-500 to-violet-500" />
+            <div className="mx-auto mt-4 h-px w-10 bg-[#c9a84c]/30" />
           </motion.div>
 
-          {/* Filters */}
           <motion.div variants={fadeUp} className="mb-8">
             <TourFilters filters={filters} onFiltersChange={setFilters} />
           </motion.div>
 
-          {/* Tours grid */}
           {filteredTours.length === 0 ? (
             <motion.div variants={fadeIn} className="py-20 text-center">
-              <Mountain className="mx-auto mb-4 size-12 text-white/20" />
-              <p className="text-lg text-white/40">{t('tours.noResults')}</p>
+              <Mountain className="mx-auto mb-4 size-10 text-white/10" />
+              <p className="text-sm text-white/30">{t('tours.noResults')}</p>
             </motion.div>
           ) : (
             <motion.div
               variants={staggerContainer}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              initial="hidden"
+              animate="visible"
+              className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             >
-              {displayedTours.map((tour) => (
-                <motion.div key={tour.id} variants={fadeUp}>
-                  <TourCard
-                    tour={tour}
-                    onBookNow={handleBookNow}
-                    onSelect={handleSelectTour}
-                  />
+              {displayedTours.map((tour, i) => (
+                <motion.div
+                  key={tour.id}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  <TourCard tour={tour} onBookNow={handleBookNow} onSelect={handleSelectTour} />
                 </motion.div>
               ))}
             </motion.div>
           )}
 
-          {/* Load more */}
           {filteredTours.length > displayCount && (
             <motion.div variants={fadeUp} className="mt-10 text-center">
               <Button
                 onClick={() => setDisplayCount((prev) => prev + 6)}
                 variant="outline"
                 size="lg"
-                className="border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                className="border-white/8 bg-transparent text-white/40 hover:bg-white/5 hover:text-white/60 rounded-full px-6"
               >
                 {t('common.more')} {t('tours.title')}
               </Button>
@@ -448,109 +480,93 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           SECTION 4: WHY CHOOSE US
           ═══════════════════════════════════════════ */}
-      <AnimatedSection className="relative py-20">
+      <AnimatedSection className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="mb-12 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
-              Why <span className="gradient-text">Choose Us</span>
-            </h2>
-            <p className="mx-auto max-w-xl text-white/50">
-              Experience the best of Armenia with our trusted tour platform
+          <motion.div variants={fadeUp} className="mb-14 text-center">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+              {t('whyChoose.title')}
             </p>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t('whyChoose.subtitle')}
+            </h2>
+            <div className="mx-auto mt-4 h-px w-12 bg-[#c9a84c]/30" />
           </motion.div>
 
-          <motion.div
-            variants={staggerContainer}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 icon: MapIcon,
-                title: 'Expert Local Guides',
-                description: 'Our certified Armenian guides bring history to life with personal stories and deep cultural knowledge.',
-                glow: 'glow-amber',
-                color: 'text-amber-400',
-                bg: 'bg-amber-500/10',
+                title: t('whyChoose.guides.title'),
+                description: t('whyChoose.guides.description'),
                 delay: 0,
               },
               {
                 icon: Award,
-                title: 'Best Price Guarantee',
-                description: 'We offer the most competitive prices with no hidden fees. Found it cheaper? We\'ll match it.',
-                glow: 'glow-violet',
-                color: 'text-violet-400',
-                bg: 'bg-violet-500/10',
-                delay: 1,
+                title: t('whyChoose.price.title'),
+                description: t('whyChoose.price.description'),
+                delay: 0.1,
               },
               {
                 icon: CalendarCheck,
-                title: 'Flexible Booking',
-                description: 'Free cancellation up to 24 hours before. Easy date changes. Book now, decide later.',
-                glow: 'glow-amber',
-                color: 'text-pink-400',
-                bg: 'bg-pink-500/10',
-                delay: 2,
+                title: t('whyChoose.booking.title'),
+                description: t('whyChoose.booking.description'),
+                delay: 0.2,
               },
             ].map((feature) => (
               <motion.div
                 key={feature.title}
                 variants={fadeUp}
-                className="group"
+                transition={{ delay: feature.delay }}
+                className="group glass-card rounded-2xl p-6 transition-all duration-300 hover:border-white/10 sm:p-8"
               >
-                <div className="glass-card animate-float rounded-2xl p-6 transition-all duration-500 hover:bg-white/10 sm:p-8" style={{ animationDelay: `${feature.delay}s` }}>
-                  <div className={`mb-4 flex size-12 items-center justify-center rounded-xl ${feature.bg} ${feature.color}`}>
-                    <feature.icon className="size-6" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">{feature.title}</h3>
-                  <p className="text-sm leading-relaxed text-white/50">{feature.description}</p>
+                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-[#c9a84c]/8 text-[#c9a84c]">
+                  <feature.icon className="size-5" />
                 </div>
+                <h3 className="mb-2 text-base font-semibold text-white">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-white/35">{feature.description}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </AnimatedSection>
 
       {/* ═══════════════════════════════════════════
-          SECTION 5: ABOUT / GLOBE
+          SECTION 5: ABOUT — clean image + text
           ═══════════════════════════════════════════ */}
-      <AnimatedSection className="relative py-20" id="about">
+      <AnimatedSection className="relative py-24" id="about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="grid items-center gap-16 lg:grid-cols-2">
             {/* Text side */}
             <motion.div variants={fadeUp}>
-              <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
-                About <span className="gradient-text">Armenia</span>
-              </h2>
-              <div className="space-y-4 text-white/60">
-                <p>
-                  Armenia — one of the world&apos;s oldest civilizations — is a land of dramatic mountain landscapes,
-                  ancient monasteries carved into cliffs, and warm hospitality that has welcomed travelers for millennia.
-                </p>
-                <p>
-                  From the crystal waters of Lake Sevan to the awe-inspiring Wings of Tatev, from the sacred
-                  halls of Geghard to the vibrant streets of Yerevan, every corner of Armenia tells a story
-                  spanning thousands of years.
-                </p>
-                <p>
-                  Our expert local guides bring these stories to life, offering authentic experiences that go
-                  far beyond typical tourism. Whether you seek adventure, spiritual discovery, or culinary
-                  delights — Armenia has it all.
-                </p>
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+                {t('about.title')}
+              </p>
+              <div className="space-y-4 text-white/40 text-sm leading-relaxed">
+                <p>{t('about.p1')}</p>
+                <p>{t('about.p2')}</p>
+                <p>{t('about.p3')}</p>
               </div>
               <Button
                 onClick={() => scrollToSection('tours')}
-                className="mt-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-amber-500/20 transition-all hover:from-orange-600 hover:to-amber-600 hover:shadow-amber-500/30"
+                className="mt-8 bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] transition-all duration-300 rounded-full px-6"
               >
-                Explore Tours
+                {t('about.exploreTours')}
                 <ArrowRight className="ml-2 size-4" />
               </Button>
             </motion.div>
 
-            {/* Globe side */}
-            <motion.div variants={fadeIn} className="relative h-[400px] sm:h-[500px]">
-              <TourGlobe className="h-full w-full" />
-              {/* Glow behind globe */}
-              <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.15),transparent_70%)]" />
+            {/* Image side */}
+            <motion.div variants={fadeUp} transition={{ delay: 0.15 }}>
+              <div className="relative h-[350px] overflow-hidden rounded-2xl sm:h-[450px]">
+                <Image
+                  src="/images/about-armenia.png"
+                  alt="Armenian Monastery"
+                  fill
+                  className="object-cover"
+                  style={{ filter: 'brightness(0.7) saturate(0.7)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/20" />
+              </div>
             </motion.div>
           </div>
         </div>
@@ -559,38 +575,35 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           SECTION 6: NEWSLETTER
           ═══════════════════════════════════════════ */}
-      <AnimatedSection className="relative py-20" id="contact">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <AnimatedSection className="relative py-24" id="contact">
+        <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeUp}
-            className="glass-strong rounded-3xl p-8 text-center sm:p-12"
+            className="glass-strong rounded-2xl p-8 text-center sm:p-10"
           >
-            <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-2xl bg-amber-500/10">
-              <Mail className="size-7 text-amber-400" />
-            </div>
-            <h2 className="mb-2 text-2xl font-bold text-white sm:text-3xl">
-              Stay Updated
+            <h2 className="mb-2 text-xl font-bold text-white sm:text-2xl">
+              {t('newsletter.title')}
             </h2>
-            <p className="mb-8 text-white/50">
-              Get the latest tour deals, travel tips, and exclusive offers delivered to your inbox.
+            <p className="mb-6 text-sm text-white/30">
+              {t('newsletter.subtitle')}
             </p>
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
-                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/30" />
+                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/20" />
                 <Input
                   type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={t('newsletter.placeholder')}
                   required
-                  className="border-white/10 bg-white/5 py-3 pl-10 text-white placeholder:text-white/30 focus-visible:border-amber-500/50 focus-visible:ring-amber-500/20"
+                  className="border-white/8 bg-white/3 py-2.5 pl-10 text-sm text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30 focus-visible:ring-[#c9a84c]/10 rounded-full"
                 />
               </div>
               <Button
                 type="submit"
-                className="bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-amber-500/20 transition-all hover:from-orange-600 hover:to-amber-600 hover:shadow-amber-500/30"
+                className="bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] transition-all duration-300 rounded-full px-6"
               >
-                {newsletterSubscribed ? '✓ Subscribed!' : 'Subscribe'}
+                {newsletterSubscribed ? t('newsletter.subscribed') : t('newsletter.subscribe')}
               </Button>
             </form>
           </motion.div>
@@ -612,6 +625,7 @@ export default function Home() {
         open={isAuthModalOpen}
         onOpenChange={setIsAuthModalOpen}
         defaultTab={authTab}
+        onLoginSuccess={handleLoginSuccess}
       />
     </div>
   )

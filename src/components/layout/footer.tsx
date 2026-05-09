@@ -25,15 +25,15 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="mt-auto border-t border-white/5 bg-gradient-to-b from-gray-950 to-black">
+    <footer className="mt-auto border-t border-white/5 bg-gradient-to-b from-[#0a0a0a] to-[#050505]">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* About Column */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <Mountain className="size-6 text-amber-400" />
+              <Mountain className="size-6 text-[#c9a84c]" />
               <span className="text-lg font-bold text-white">
-                ARMENIA <span className="text-amber-400">TOURS</span>
+                ARMENIA <span className="text-[#c9a84c]">TOURS</span>
               </span>
             </div>
             <p className="mb-4 text-sm leading-relaxed text-white/40">
@@ -45,7 +45,7 @@ export function Footer() {
                 <a
                   key={social}
                   href="#"
-                  className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/40 transition-all hover:border-white/20 hover:bg-white/10 hover:text-white"
+                  className="flex size-9 items-center justify-center rounded-lg border border-white/6 bg-white/3 text-white/40 transition-all hover:border-white/20 hover:bg-white/3 hover:text-white"
                   aria-label={social}
                 >
                   {social === 'facebook' && (
@@ -89,7 +89,7 @@ export function Footer() {
                 <li key={link.key}>
                   <a
                     href={link.href}
-                    className="text-sm text-white/40 transition-colors hover:text-amber-400"
+                    className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]"
                   >
                     {t(link.key)}
                   </a>
@@ -105,37 +105,37 @@ export function Footer() {
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-amber-400">
+                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]">
                   {t('footer.terms')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-amber-400">
+                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]">
                   {t('footer.privacy')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-amber-400">
+                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]">
                   {t('footer.cancellation')}
                 </a>
               </li>
             </ul>
-            <Separator className="my-4 bg-white/5" />
+            <Separator className="my-4 bg-white/3" />
             <h4 className="mb-3 text-xs font-medium uppercase tracking-wider text-white/30">
               {t('footer.contactUs')}
             </h4>
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-xs text-white/40">
                 <MapPin className="size-3 shrink-0" />
-                Yerevan, Armenia
+                {t('footer.address')}
               </li>
               <li className="flex items-center gap-2 text-xs text-white/40">
                 <Phone className="size-3 shrink-0" />
-                +374 XX XXX XXX
+                {t('nav.phone')}
               </li>
               <li className="flex items-center gap-2 text-xs text-white/40">
                 <Mail className="size-3 shrink-0" />
-                info@armeniatours.com
+                {t('nav.email')}
               </li>
             </ul>
           </div>
@@ -155,22 +155,22 @@ export function Footer() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={t('footer.emailPlaceholder')}
                   required
-                  className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-white/30 focus-visible:border-amber-500/50"
+                  className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/30 focus-visible:border-[#c9a84c]/30"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:from-orange-600 hover:to-amber-600"
+                className="w-full bg-gradient-to-r bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e]"
                 size="sm"
               >
                 <Send className="mr-2 size-3" />
-                {subscribed ? '✓ Subscribed!' : t('footer.subscribe')}
+                {subscribed ? t('footer.subscribed') : t('footer.subscribe')}
               </Button>
             </form>
 
-            <Separator className="my-4 bg-white/5" />
+            <Separator className="my-4 bg-white/3" />
 
             {/* Language selector */}
             <div>
@@ -184,8 +184,8 @@ export function Footer() {
                     onClick={() => setLocale(loc)}
                     className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${
                       locale === loc
-                        ? 'bg-amber-500/20 text-amber-400'
-                        : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
+                        ? 'bg-[#c9a84c]/10 text-[#c9a84c]'
+                        : 'bg-white/3 text-white/40 hover:bg-white/3 hover:text-white/70'
                     }`}
                   >
                     {localeFlags[loc]} {localeNames[loc]}
@@ -197,15 +197,15 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <Separator className="my-8 bg-white/5" />
+        <Separator className="my-8 bg-white/3" />
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-xs text-white/25">
             &copy; {currentYear} Armenia Tours. {t('footer.rights')}
           </p>
           <p className="flex items-center gap-1 text-xs text-white/25">
-            Made with{' '}
+            {t('footer.madeWith')}{' '}
             <span className="text-red-400">&#9829;</span>{' '}
-            in Armenia
+            {t('footer.inArmenia')}
           </p>
         </div>
       </div>

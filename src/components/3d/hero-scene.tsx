@@ -1,414 +1,170 @@
 'use client'
 
-import { useRef, useMemo, useCallback } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, Environment } from '@react-three/drei'
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
-import * as THREE from 'three'
+import { useRef, useEffect, useState, useCallback } from 'react'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 
 /* ──────────────────────────────────────────────
-   Color palette
+   Minimal Hero Scene — clean, dark, sophisticated
+   Single accent color (warm gold), no busy effects
    ────────────────────────────────────────────── */
-const COLORS = {
-  violet: new THREE.Color('#8B5CF6'),
-  pink: new THREE.Color('#EC4899'),
-  amber: new THREE.Color('#F59E0B'),
-  bg: '#0a0a0f',
-}
 
-/* ──────────────────────────────────────────────
-   Glass Mountains
-   ────────────────────────────────────────────── */
-function GlassMountain({
-  position,
-  scale,
-  rotation,
-  phaseOffset = 0,
-}: {
-  position: [number, number, number]
-  scale: [number, number, number]
-  rotation?: [number, number, number]
-  phaseOffset?: number
-}) {
-  const meshRef = useRef<THREE.Mesh>(null!)
+export function HeroScene({ className = '' }: { className?: string }) {
+  const imageRef = useRef<HTMLDivElement>(null)
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  const geometry = useMemo(() => {
-    const geo = new THREE.ConeGeometry(1, 2, 6, 1)
-    geo.translate(0, 1, 0)
-    return geo
+  const smoothedMouse = useRef({ x: 0, y: 0 })
+  const rafRef = useRef<number>(0)
+
+  // Check mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check, { passive: true })
+    return () => window.removeEventListener('resize', check)
   }, [])
 
-  useFrame(({ clock }) => {
-    if (!meshRef.current) return
-    const t = clock.getElapsedTime()
-    meshRef.current.position.y =
-      position[1] + Math.sin(t * 0.4 + phaseOffset) * 0.25
-    meshRef.current.rotation.y = (rotation?.[1] ?? 0) + Math.sin(t * 0.15 + phaseOffset) * 0.08
-    meshRef.current.rotation.z = (rotation?.[2] ?? 0) + Math.cos(t * 0.2 + phaseOffset) * 0.04
-  })
+  // Scroll listener for parallax
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Mouse listener for parallax
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1
+      const y = (e.clientY / window.innerHeight) * 2 - 1
+      setMousePos({ x, y })
+    }
+    const onLeave = () => setMousePos({ x: 0, y: 0 })
+    window.addEventListener('mousemove', onMove, { passive: true })
+    window.addEventListener('mouseleave', onLeave)
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseleave', onLeave)
+    }
+  }, [])
+
+  // Smooth mouse interpolation loop
+  useEffect(() => {
+    const animate = () => {
+      smoothedMouse.current.x += (mousePos.x - smoothedMouse.current.x) * 0.03
+      smoothedMouse.current.y += (mousePos.y - smoothedMouse.current.y) * 0.03
+
+      if (imageRef.current) {
+        const mx = smoothedMouse.current.x
+        const my = smoothedMouse.current.y
+        imageRef.current.style.transform = `translate(${mx * -12}px, ${my * -8 + scrollY * 0.12}px) scale(1.08)`
+      }
+
+      rafRef.current = requestAnimationFrame(animate)
+    }
+    rafRef.current = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [mousePos, scrollY])
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true)
+  }, [])
 
   return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      scale={scale}
-      rotation={rotation}
-      geometry={geometry}
+    <div
+      className={`${className} absolute inset-0 z-0 overflow-hidden`}
+      style={{ background: '#0a0a0a' }}
     >
-      <meshPhysicalMaterial
-        transmission={0.95}
-        roughness={0.05}
-        thickness={1.5}
-        ior={1.5}
-        envMapIntensity={1.2}
-        color="#ffffff"
-        transparent
-        opacity={0.6}
-        side={THREE.DoubleSide}
-        depthWrite={false}
-      />
-    </mesh>
-  )
-}
-
-/* ──────────────────────────────────────────────
-   Fluid Particle System (Aurora-like)
-   ────────────────────────────────────────────── */
-const PARTICLE_COUNT = 4000
-
-function FluidParticles() {
-  const pointsRef = useRef<THREE.Points>(null!)
-
-  const { positions, colors, sizes, speeds, offsets } = useMemo(() => {
-    const positions = new Float32Array(PARTICLE_COUNT * 3)
-    const colors = new Float32Array(PARTICLE_COUNT * 3)
-    const sizes = new Float32Array(PARTICLE_COUNT)
-    const speeds = new Float32Array(PARTICLE_COUNT)
-    const offsets = new Float32Array(PARTICLE_COUNT)
-
-    const colorPalette = [COLORS.violet, COLORS.pink, COLORS.amber]
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3
-      // Spread particles in a wide volume
-      positions[i3] = (Math.random() - 0.5) * 30
-      positions[i3 + 1] = (Math.random() - 0.5) * 16
-      positions[i3 + 2] = (Math.random() - 0.5) * 20 - 4
-
-      // Pick color from palette with blending
-      const color = colorPalette[Math.floor(Math.random() * colorPalette.length)]
-      const blendColor = colorPalette[(Math.floor(Math.random() * colorPalette.length) + 1) % 3]
-      const mixFactor = Math.random()
-      colors[i3] = color.r * (1 - mixFactor) + blendColor.r * mixFactor
-      colors[i3 + 1] = color.g * (1 - mixFactor) + blendColor.g * mixFactor
-      colors[i3 + 2] = color.b * (1 - mixFactor) + blendColor.b * mixFactor
-
-      sizes[i] = Math.random() * 0.04 + 0.01
-      speeds[i] = Math.random() * 0.5 + 0.2
-      offsets[i] = Math.random() * Math.PI * 2
-    }
-
-    return { positions, colors, sizes, speeds, offsets }
-  }, [])
-
-  useFrame(({ clock }) => {
-    if (!pointsRef.current) return
-    const posArr = pointsRef.current.geometry.attributes.position
-      .array as Float32Array
-    const t = clock.getElapsedTime()
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3
-      const speed = speeds[i]
-      const offset = offsets[i]
-
-      // Fluid aurora-like motion
-      posArr[i3] += Math.sin(t * speed * 0.3 + offset) * 0.003
-      posArr[i3 + 1] +=
-        Math.sin(t * speed * 0.5 + offset) * 0.004 +
-        Math.cos(t * speed * 0.2 + offset * 2) * 0.002
-      posArr[i3 + 2] += Math.cos(t * speed * 0.15 + offset) * 0.002
-
-      // Wrap around boundaries
-      if (posArr[i3] > 15) posArr[i3] = -15
-      if (posArr[i3] < -15) posArr[i3] = 15
-      if (posArr[i3 + 1] > 8) posArr[i3 + 1] = -8
-      if (posArr[i3 + 1] < -8) posArr[i3 + 1] = 8
-    }
-
-    pointsRef.current.geometry.attributes.position.needsUpdate = true
-  })
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={PARTICLE_COUNT}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={PARTICLE_COUNT}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.04}
-        vertexColors
-        transparent
-        opacity={0.7}
-        blending={THREE.AdditiveBlending}
-        depthWrite={false}
-        sizeAttenuation
-      />
-    </points>
-  )
-}
-
-/* ──────────────────────────────────────────────
-   Glass Spheres
-   ────────────────────────────────────────────── */
-function GlassSphere({
-  position,
-  scale = 1,
-  phaseOffset = 0,
-  color = '#ffffff',
-}: {
-  position: [number, number, number]
-  scale?: number
-  phaseOffset?: number
-  color?: string
-}) {
-  const meshRef = useRef<THREE.Mesh>(null!)
-
-  useFrame(({ clock }) => {
-    if (!meshRef.current) return
-    const t = clock.getElapsedTime()
-    meshRef.current.position.y =
-      position[1] + Math.sin(t * 0.6 + phaseOffset) * 0.4
-    meshRef.current.position.x =
-      position[0] + Math.cos(t * 0.3 + phaseOffset) * 0.15
-    meshRef.current.rotation.x = t * 0.1 + phaseOffset
-    meshRef.current.rotation.y = t * 0.15 + phaseOffset
-  })
-
-  return (
-    <mesh ref={meshRef} position={position} scale={scale}>
-      <sphereGeometry args={[1, 32, 32]} />
-      <meshPhysicalMaterial
-        transmission={0.97}
-        roughness={0.02}
-        thickness={0.5}
-        ior={1.45}
-        envMapIntensity={1.5}
-        color={color}
-        transparent
-        opacity={0.5}
-        depthWrite={false}
-      />
-    </mesh>
-  )
-}
-
-/* ──────────────────────────────────────────────
-   Animated Light Rays
-   ────────────────────────────────────────────── */
-function LightRays() {
-  const groupRef = useRef<THREE.Group>(null!)
-
-  const rays = useMemo(() => {
-    return Array.from({ length: 5 }, (_, i) => ({
-      position: [
-        (Math.random() - 0.5) * 12,
-        Math.random() * 4 + 2,
-        (Math.random() - 0.5) * 8 - 3,
-      ] as [number, number, number],
-      rotation: [
-        Math.random() * 0.3 - 0.15,
-        Math.random() * Math.PI * 2,
-        0,
-      ] as [number, number, number],
-      scale: [0.02, Math.random() * 3 + 2, 0.02] as [number, number, number],
-      phaseOffset: Math.random() * Math.PI * 2,
-      color:
-        i % 3 === 0
-          ? '#8B5CF6'
-          : i % 3 === 1
-            ? '#EC4899'
-            : '#F59E0B',
-    }))
-  }, [])
-
-  useFrame(({ clock }) => {
-    if (!groupRef.current) return
-    const t = clock.getElapsedTime()
-    groupRef.current.children.forEach((child, i) => {
-      const ray = rays[i]
-      if (!ray) return
-      ;(child as THREE.Mesh).material = (
-        child as THREE.Mesh
-      ).material as THREE.MeshBasicMaterial
-      const mat = (child as THREE.Mesh).material as THREE.MeshBasicMaterial
-      mat.opacity = 0.15 + Math.sin(t * 0.8 + ray.phaseOffset) * 0.1
-    })
-  })
-
-  return (
-    <group ref={groupRef}>
-      {rays.map((ray, i) => (
-        <mesh
-          key={i}
-          position={ray.position}
-          rotation={ray.rotation}
-          scale={ray.scale}
-        >
-          <cylinderGeometry args={[0.3, 0.05, 1, 8, 1]} />
-          <meshBasicMaterial
-            color={ray.color}
-            transparent
-            opacity={0.15}
-            blending={THREE.AdditiveBlending}
-            depthWrite={false}
-          />
-        </mesh>
-      ))}
-    </group>
-  )
-}
-
-/* ──────────────────────────────────────────────
-   Camera Controller (subtle orbit)
-   ────────────────────────────────────────────── */
-function CameraController() {
-  const initialPos = useRef<THREE.Vector3 | null>(null)
-
-  useFrame(({ camera, clock }) => {
-    if (!initialPos.current) {
-      initialPos.current = camera.position.clone()
-    }
-    const t = clock.getElapsedTime()
-    const orbitRadius = 1.5
-    camera.position.x = initialPos.current.x + Math.sin(t * 0.12) * orbitRadius
-    camera.position.y = initialPos.current.y + Math.cos(t * 0.08) * 0.5
-    camera.lookAt(0, 0, 0)
-  })
-
-  return null
-}
-
-/* ──────────────────────────────────────────────
-   Scene Content (inside Canvas)
-   ────────────────────────────────────────────── */
-function SceneContent() {
-  return (
-    <>
-      {/* Lighting */}
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 8, 5]} intensity={0.6} color="#F59E0B" />
-      <pointLight position={[-4, 3, 2]} intensity={0.8} color="#8B5CF6" />
-      <pointLight position={[4, 2, -2]} intensity={0.6} color="#EC4899" />
-      <pointLight position={[0, -3, 4]} intensity={0.4} color="#F59E0B" />
-
-      {/* Environment for reflections */}
-      <Environment preset="night" />
-
-      {/* Glass Mountains */}
-      <GlassMountain
-        position={[-4, -2.5, -3]}
-        scale={[2.2, 2.8, 2.2]}
-        rotation={[0, 0.5, 0.1]}
-        phaseOffset={0}
-      />
-      <GlassMountain
-        position={[0, -3, -5]}
-        scale={[3, 4, 3]}
-        rotation={[0, -0.3, -0.05]}
-        phaseOffset={1.2}
-      />
-      <GlassMountain
-        position={[5, -2.8, -2]}
-        scale={[1.8, 2.5, 1.8]}
-        rotation={[0, 0.8, 0.08]}
-        phaseOffset={2.4}
-      />
-      <GlassMountain
-        position={[-2, -3.2, -6]}
-        scale={[2.5, 3.5, 2.5]}
-        rotation={[0, 1.2, -0.06]}
-        phaseOffset={3.6}
-      />
-      <GlassMountain
-        position={[3, -3, -7]}
-        scale={[2, 3, 2]}
-        rotation={[0, -0.7, 0.04]}
-        phaseOffset={4.8}
-      />
-
-      {/* Glass Spheres */}
-      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
-        <GlassSphere position={[-3, 1.5, -1]} scale={0.5} phaseOffset={0} color="#d8b4fe" />
-      </Float>
-      <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.4}>
-        <GlassSphere position={[3.5, 2, -2]} scale={0.35} phaseOffset={1.5} color="#f9a8d4" />
-      </Float>
-      <Float speed={1.8} rotationIntensity={0.25} floatIntensity={0.6}>
-        <GlassSphere position={[1, 3, -4]} scale={0.6} phaseOffset={3} color="#fcd34d" />
-      </Float>
-      <Float speed={1} rotationIntensity={0.15} floatIntensity={0.3}>
-        <GlassSphere position={[-5, 0.5, -5]} scale={0.4} phaseOffset={4.5} />
-      </Float>
-      <Float speed={1.4} rotationIntensity={0.2} floatIntensity={0.45}>
-        <GlassSphere position={[5.5, -0.5, -6]} scale={0.55} phaseOffset={2.2} color="#c4b5fd" />
-      </Float>
-
-      {/* Fluid Particles */}
-      <FluidParticles />
-
-      {/* Light Rays */}
-      <LightRays />
-
-      {/* Camera Controller */}
-      <CameraController />
-
-      {/* Post-processing */}
-      <EffectComposer>
-        <Bloom
-          intensity={0.8}
-          luminanceThreshold={0.2}
-          luminanceSmoothing={0.9}
-          mipmapBlur
-        />
-        <Vignette eskil={false} offset={0.1} darkness={0.8} />
-      </EffectComposer>
-    </>
-  )
-}
-
-/* ──────────────────────────────────────────────
-   HeroScene – exported wrapper
-   ────────────────────────────────────────────── */
-export default function HeroScene() {
-  const onCreated = useCallback(({ gl }: { gl: THREE.WebGLRenderer }) => {
-    gl.setClearColor(COLORS.bg, 1)
-  }, [])
-
-  return (
-    <div className="absolute inset-0 -z-10">
-      <Canvas
-        camera={{ position: [0, 0, 12], fov: 45 }}
-        dpr={[1, 2]}
-        gl={{
-          antialias: true,
-          alpha: false,
-          powerPreference: 'high-performance',
-        }}
-        onCreated={onCreated}
+      {/* ── Taraz Dress Image (centerpiece) ── */}
+      <div
+        ref={imageRef}
+        className="absolute inset-0 z-[1] flex items-center justify-center will-change-transform"
+        style={{ transform: 'scale(1.08)' }}
       >
-        <SceneContent />
-      </Canvas>
+        {/* Portrait (mobile) */}
+        <div className="relative h-full w-full md:hidden">
+          <Image
+            src="/images/taraz-clean.png"
+            alt="Traditional Armenian Taraz"
+            fill
+            priority
+            quality={95}
+            onLoad={handleImageLoad}
+            className="object-cover object-center"
+            style={{
+              opacity: imageLoaded ? 0.55 : 0,
+              transition: 'opacity 1.5s ease-out',
+              filter: 'brightness(0.65) contrast(1.1) saturate(0.8)',
+            }}
+          />
+        </div>
+        {/* Landscape (desktop) */}
+        <div className="relative hidden h-full w-full md:block">
+          <Image
+            src="/images/hero-minimal.png"
+            alt="Armenian Monastery"
+            fill
+            priority
+            quality={95}
+            onLoad={handleImageLoad}
+            className="object-cover object-center"
+            style={{
+              opacity: imageLoaded ? 0.5 : 0,
+              transition: 'opacity 1.5s ease-out',
+              filter: 'brightness(0.6) contrast(1.15) saturate(0.7)',
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ── Loading state ── */}
+      <AnimatePresence>
+        {!imageLoaded && (
+          <motion.div
+            className="absolute inset-0 z-[10] flex items-center justify-center"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="size-8 animate-pulse rounded-full bg-white/10" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Bottom gradient fade ── */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[50%]"
+        style={{
+          background: 'linear-gradient(to top, #0a0a0a 0%, rgba(10, 10, 10, 0.5) 50%, transparent 100%)',
+        }}
+      />
+
+      {/* ── Top gradient fade ── */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-[30%]"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(10, 10, 10, 0.6) 0%, transparent 100%)',
+        }}
+      />
+
+      {/* ── Subtle vignette ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[2]"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(10, 10, 10, 0.6) 100%)',
+        }}
+      />
+
+      {/* ── Very subtle warm glow in center ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[2] opacity-[0.07]"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 1) 0%, transparent 50%)',
+        }}
+      />
     </div>
   )
 }
+
+export default HeroScene

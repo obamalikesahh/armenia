@@ -89,16 +89,16 @@ export function Navbar({
       transition={{ type: 'spring', stiffness: 200, damping: 25 }}
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'border-b border-white/10 bg-gray-950/80 shadow-lg shadow-black/20 backdrop-blur-xl'
+          ? 'border-b border-white/6 bg-[#0a0a0a]/80 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <Mountain className="size-7 text-amber-400" />
-          <span className="text-lg font-bold tracking-wide text-white">
-            ARMENIA <span className="text-amber-400">TOURS</span>
+          <Mountain className="size-5 text-[#c9a84c]" />
+          <span className="text-sm font-semibold tracking-[0.15em] text-white">
+            ARMENIA <span className="text-[#c9a84c]">TOURS</span>
           </span>
         </a>
 
@@ -109,13 +109,13 @@ export function Navbar({
               key={link.key}
               href={link.href}
               onClick={() => setActiveLink(link.key)}
-              className="relative px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
+              className="relative px-3 py-2 text-[13px] font-medium text-white/40 transition-colors hover:text-white/45"
             >
               {t(link.key)}
               {activeLink === link.key && (
                 <motion.div
                   layoutId="activeNav"
-                  className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-amber-400"
+                  className="absolute bottom-0 left-3 right-3 h-px rounded-full bg-[#c9a84c]/50"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
@@ -131,7 +131,7 @@ export function Navbar({
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-1.5 text-white/60 hover:bg-white/10 hover:text-white"
+                className="gap-1.5 text-white/35 hover:bg-white/3 hover:text-white/35"
               >
                 <Globe className="size-4" />
                 <span className="hidden text-xs sm:inline">{currentFlag}</span>
@@ -140,14 +140,14 @@ export function Navbar({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="border-white/10 bg-gray-900 text-white"
+              className="border-white/6 bg-[#111] text-white"
             >
               {locales.map((loc) => (
                 <DropdownMenuItem
                   key={loc}
                   onClick={() => setLocale(loc)}
-                  className={`cursor-pointer hover:bg-white/10 ${
-                    locale === loc ? 'bg-white/5 text-amber-400' : ''
+                  className={`cursor-pointer hover:bg-white/3 ${
+                    locale === loc ? 'bg-white/3 text-[#c9a84c]' : ''
                   }`}
                 >
                   <span className="mr-2">{localeFlags[loc]}</span>
@@ -163,7 +163,7 @@ export function Navbar({
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-1 text-white/60 hover:bg-white/10 hover:text-white"
+                className="gap-1 text-white/35 hover:bg-white/3 hover:text-white/35"
               >
                 <span className="text-xs font-medium">{currency}</span>
                 <ChevronDown className="size-3" />
@@ -171,23 +171,23 @@ export function Navbar({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="border-white/10 bg-gray-900 text-white"
+              className="border-white/6 bg-[#111] text-white"
             >
               <DropdownMenuItem
                 onClick={() => setCurrency('EUR')}
-                className={`cursor-pointer hover:bg-white/10 ${
-                  currency === 'EUR' ? 'bg-white/5 text-amber-400' : ''
+                className={`cursor-pointer hover:bg-white/3 ${
+                  currency === 'EUR' ? 'bg-white/3 text-[#c9a84c]' : ''
                 }`}
               >
-                EUR - Euro
+                {t('nav.currencyEUR')}
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setCurrency('AMD')}
-                className={`cursor-pointer hover:bg-white/10 ${
-                  currency === 'AMD' ? 'bg-white/5 text-amber-400' : ''
+                className={`cursor-pointer hover:bg-white/3 ${
+                  currency === 'AMD' ? 'bg-white/3 text-[#c9a84c]' : ''
                 }`}
               >
-                AMD - Armenian Dram
+                {t('nav.currencyAMD')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -200,9 +200,9 @@ export function Navbar({
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="gap-2 text-white/70 hover:bg-white/10 hover:text-white"
+                    className="gap-2 text-white/45 hover:bg-white/3 hover:text-white/45"
                   >
-                    <div className="flex size-7 items-center justify-center rounded-full bg-amber-500/20 text-amber-400">
+                    <div className="flex size-7 items-center justify-center rounded-full bg-[#c9a84c]/10 text-[#c9a84c]">
                       <User className="size-4" />
                     </div>
                     <span className="max-w-[100px] truncate text-xs">{userName}</span>
@@ -210,18 +210,18 @@ export function Navbar({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="border-white/10 bg-gray-900 text-white"
+                  className="border-white/6 bg-[#111] text-white"
                 >
-                  <DropdownMenuItem className="cursor-pointer hover:bg-white/10">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-white/3">
                     {t('nav.profile')}
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-white/10">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-white/3">
                     {t('nav.myBookings')}
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuSeparator className="bg-white/3" />
                   <DropdownMenuItem
                     onClick={onLogout}
-                    className="cursor-pointer text-red-400 hover:bg-white/10"
+                    className="cursor-pointer text-red-400 hover:bg-white/3"
                   >
                     <LogOut className="mr-2 size-4" />
                     {t('nav.logout')}
@@ -234,14 +234,14 @@ export function Navbar({
                   variant="ghost"
                   size="sm"
                   onClick={onLoginClick}
-                  className="text-white/70 hover:bg-white/10 hover:text-white"
+                  className="text-white/45 hover:bg-white/3 hover:text-white/45"
                 >
                   {t('nav.login')}
                 </Button>
                 <Button
                   size="sm"
                   onClick={onRegisterClick}
-                  className="bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:from-orange-600 hover:to-amber-600"
+                  className="bg-gradient-to-r bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e]"
                 >
                   {t('nav.register')}
                 </Button>
@@ -256,16 +256,16 @@ export function Navbar({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-white/70 hover:bg-white/10 hover:text-white"
+                  className="text-white/45 hover:bg-white/3 hover:text-white/45"
                 >
                   <Menu className="size-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="border-white/10 bg-gray-950/95 text-white backdrop-blur-xl"
+                className="border-white/6 bg-[#0a0a0a]/95 text-white backdrop-blur-xl"
               >
-                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                <SheetTitle className="sr-only">{t('nav.menu')}</SheetTitle>
                 <div className="flex flex-col gap-6 pt-8">
                   {/* Nav links */}
                   <div className="flex flex-col gap-1">
@@ -279,8 +279,8 @@ export function Navbar({
                         }}
                         className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                           activeLink === link.key
-                            ? 'bg-amber-500/10 text-amber-400'
-                            : 'text-white/60 hover:bg-white/5 hover:text-white'
+                            ? 'bg-[#c9a84c]/8 text-[#c9a84c]'
+                            : 'text-white/35 hover:bg-white/3 hover:text-white'
                         }`}
                       >
                         {t(link.key)}
@@ -300,8 +300,8 @@ export function Navbar({
                           onClick={() => setLocale(loc)}
                           className={`rounded-lg px-3 py-2 text-xs font-medium transition-all ${
                             locale === loc
-                              ? 'bg-amber-500/20 text-amber-400'
-                              : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white'
+                              ? 'bg-[#c9a84c]/10 text-[#c9a84c]'
+                              : 'bg-white/3 text-white/35 hover:bg-white/3 hover:text-white/45'
                           }`}
                         >
                           {localeFlags[loc]} {localeNames[loc]}
@@ -322,8 +322,8 @@ export function Navbar({
                           onClick={() => setCurrency(cur)}
                           className={`rounded-lg px-3 py-2 text-xs font-medium transition-all ${
                             currency === cur
-                              ? 'bg-amber-500/20 text-amber-400'
-                              : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white'
+                              ? 'bg-[#c9a84c]/10 text-[#c9a84c]'
+                              : 'bg-white/3 text-white/35 hover:bg-white/3 hover:text-white/45'
                           }`}
                         >
                           {cur}
@@ -338,7 +338,7 @@ export function Navbar({
                       <>
                         <Button
                           variant="outline"
-                          className="w-full border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                          className="w-full border-white/6 bg-white/3 text-white/45 hover:bg-white/3 hover:text-white/45"
                         >
                           <User className="mr-2 size-4" />
                           {t('nav.profile')}
@@ -360,7 +360,7 @@ export function Navbar({
                             setMobileOpen(false)
                             onLoginClick?.()
                           }}
-                          className="w-full border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                          className="w-full border-white/6 bg-white/3 text-white/45 hover:bg-white/3 hover:text-white/45"
                         >
                           {t('nav.login')}
                         </Button>
@@ -369,7 +369,7 @@ export function Navbar({
                             setMobileOpen(false)
                             onRegisterClick?.()
                           }}
-                          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:from-orange-600 hover:to-amber-600"
+                          className="w-full bg-gradient-to-r bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e]"
                         >
                           {t('nav.register')}
                         </Button>

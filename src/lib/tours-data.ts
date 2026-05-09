@@ -12,6 +12,14 @@ export interface RouteStop {
   description: string;
 }
 
+export interface StreetViewLocation {
+  name: string;
+  lat: number;
+  lng: number;
+  heading?: number;
+  pitch?: number;
+}
+
 export interface Tour {
   id: number;
   slug: string;
@@ -19,6 +27,7 @@ export interface Tour {
   description: Translation;
   shortDescription: Translation;
   image: string;
+  images: string[];
   duration: string;
   startTime: string;
   endTime: string;
@@ -35,6 +44,8 @@ export interface Tour {
   bestPeriod: string;
   groupSize: string;
   featured: boolean;
+  streetViewUrl: string;
+  streetViewLocations: StreetViewLocation[];
 }
 
 // Conversion utilities
@@ -93,7 +104,15 @@ export const tours: Tour[] = [
       ru: 'Исследуйте озеро Севан, средневековые монастыри и очаровательное озеро Парз за один невероятный день.',
       de: 'Erkunden Sie den Sewansee, mittelalterliche Klöster und den zauberhaften Parz-See an einem unglaublichen Tag.',
     },
-    image: 'https://images.unsplash.com/photo-1580182345337-4a7c8d2b6c5d?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69cb896fa10cb-image-590x500-2026-03-31t124423430.jpg',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69cb896fa10cb-image-590x500-2026-03-31t124423430.jpg',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749ba2d28b9a-old-dilijan3.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672dc8807b86d-66e41ce5756b7-sevan2-672dc7dceee0b-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b431fc-dil1.png',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -117,6 +136,14 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.3495,45.3315&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Lake Sevan', lat: 40.3495, lng: 45.3315, heading: 90, pitch: 10 },
+      { name: 'Dilijan', lat: 40.7403, lng: 44.8615, heading: 45, pitch: 5 },
+      { name: 'Haghartsin Monastery', lat: 40.7767, lng: 44.8792, heading: 180, pitch: 15 },
+      { name: 'Goshavank Monastery', lat: 40.7233, lng: 44.8717, heading: 120, pitch: 10 },
+      { name: 'Lake Parz', lat: 40.7567, lng: 44.8450, heading: 270, pitch: 5 },
+    ],
   },
 
   // 2. Khor Virap, Noravank, Areni, Birds Cave
@@ -138,7 +165,13 @@ export const tours: Tour[] = [
       ru: 'От колыбели армянского христианства до древних пещер и дегустации мирового класса.',
       de: 'Von der Wiege des armenischen Christentums bis zu antiken Höhlen und erstklassiger Weinverkostung.',
     },
-    image: 'https://images.unsplash.com/photo-1596426859822-292ae670e5e9?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae5abd5384-bird3.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -160,6 +193,13 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=39.8842,44.5767&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Khor Virap Monastery', lat: 39.8842, lng: 44.5767, heading: 340, pitch: 10 },
+      { name: 'Noravank', lat: 39.6850, lng: 45.2317, heading: 180, pitch: 15 },
+      { name: 'Areni', lat: 39.7228, lng: 45.1817, heading: 90, pitch: 5 },
+      { name: 'Birds Cave', lat: 39.7183, lng: 45.1833, heading: 45, pitch: 10 },
+    ],
   },
 
   // 3. Garni, Geghard
@@ -181,7 +221,14 @@ export const tours: Tour[] = [
       ru: 'Посетите знаменитый языческий храм Армении и вырубленный в скале монастырь Гегард из списка ЮНЕСКО.',
       de: 'Besuchen Sie Armeniens ikonischen heidnischen Tempel und das in Fels gehauene Geghard-Kloster (UNESCO).',
     },
-    image: 'https://images.unsplash.com/photo-1548834925-e48f8a27ae93?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672dcadfa2afa-66deb0ade3dfc-gar3-672dca4cd43e1-1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672dcadfa2afa-66deb0ade3dfc-gar3-672dca4cd43e1-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a5da73d8e-gar5.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672dcadf98a1d-66e41caf5c745-gar9-672dca4d803a9-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68a821577bd9a-gar10.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6853c44fec07a-giqor.webp',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '15:00',
@@ -201,6 +248,11 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.1150,44.7250&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Garni Temple', lat: 40.1150, lng: 44.7250, heading: 180, pitch: 10 },
+      { name: 'Geghard Monastery', lat: 40.1417, lng: 44.7975, heading: 90, pitch: 15 },
+    ],
   },
 
   // 4. Tatev Monastery, Wings of Tatev
@@ -222,7 +274,14 @@ export const tours: Tour[] = [
       ru: 'Прокатитесь на самой длинной канатной дороге мира к величественному монастырю Татев на краю ущелья.',
       de: 'Fahren Sie mit der längsten Seilbahn der Welt zum majestätischen Tatew-Kloster über einer dramatischen Schlucht.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/sightseeing/images/68904f008900f-tatev1.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/sightseeing/images/68904f008900f-tatev1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/sightseeing/images/68904f0093afd-tatev2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/sightseeing/images/68904f10003ec-tatev3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69fa427abbfb8-tatev-base-jump-2.jpg',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69fa426b31056-khndzoresk-swinging-bridge.jpg',
+    ],
     duration: 'full day',
     startTime: '08:00',
     endTime: '20:00',
@@ -243,6 +302,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=39.3928,46.2475&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Tatev Monastery', lat: 39.3928, lng: 46.2475, heading: 180, pitch: 15 },
+      { name: 'Wings of Tatev', lat: 39.3850, lng: 46.2317, heading: 270, pitch: 20 },
+      { name: "Devil's Bridge", lat: 39.4050, lng: 46.2733, heading: 90, pitch: 10 },
+    ],
   },
 
   // 5. Haghpat, Sanahin, Akhtala
@@ -264,7 +329,14 @@ export const tours: Tour[] = [
       ru: 'Два объекта ЮНЕСКО и потрясающие фрески — лучшее из средневековых монастырей Лори.',
       de: 'Zwei UNESCO-Stätten und atemberaubende Fresken — das Beste aus Loris mittelalterlichen Klöstern.',
     },
-    image: 'https://images.unsplash.com/photo-1596426859822-292ae670e5e9?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8caa29d8-sanahin4.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8cb317ee-sanahin3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8ee46465-haghpat2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8ee5f553-haghpat.png',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -285,6 +357,12 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=41.0947,44.7217&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Haghpat Monastery', lat: 41.0947, lng: 44.7217, heading: 135, pitch: 10 },
+      { name: 'Sanahin Monastery', lat: 41.0917, lng: 44.6750, heading: 90, pitch: 10 },
+      { name: 'Akhtala Monastery', lat: 41.1533, lng: 44.7817, heading: 200, pitch: 15 },
+    ],
   },
 
   // 6. Sevan, Haghartsin, Goshavank, Ijevan Winery
@@ -306,7 +384,14 @@ export const tours: Tour[] = [
       ru: 'Монастыри, горные пейзажи и дегустация вин в зелёном севере Армении.',
       de: 'Klöster, Berglandschaften und Weinverkostung in Armeniens grünem Norden.',
     },
-    image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b9176cc?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69c77f764a854-image-590x500-2026-03-28t110736415.jpg',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69c77f764a854-image-590x500-2026-03-28t110736415.jpg',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69c77f7695d58-image-590x500-2026-03-28t110707131.jpg',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69c77f7608fca-image-590x500-2026-03-28t110439090.jpg',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69c77f76b978c-image-590x500-2026-03-28t110613951.jpg',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69c77f7674030-image-590x500-2026-03-28t110431361.jpg',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -329,6 +414,13 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.3495,45.3315&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Lake Sevan', lat: 40.3495, lng: 45.3315, heading: 90, pitch: 10 },
+      { name: 'Haghartsin', lat: 40.7767, lng: 44.8792, heading: 180, pitch: 15 },
+      { name: 'Goshavank', lat: 40.7233, lng: 44.8717, heading: 120, pitch: 10 },
+      { name: 'Ijevan Winery', lat: 40.9300, lng: 45.1467, heading: 45, pitch: 5 },
+    ],
   },
 
   // 7. Dendropark, Lori Fortress, Hovhannavank
@@ -350,7 +442,13 @@ export const tours: Tour[] = [
       ru: 'Ботанические сады, руины средневековой крепости и монастырь над ущельем за один живописный день.',
       de: 'Botanische Gärten, mittelalterliche Festungsruinen und ein Schluchten-Kloster an einem malerischen Tag.',
     },
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/66e3f9e235428_Դենդրոպարկ.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/66e3f9e235428_Դենդրոպարկ.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/66e3f9e728440_Լոռի բերդ2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/66e3f9ec99f1b_Դենդրոպարկ2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69f4b2d09de73-image-590x500-2026-05-01t180135947.jpg',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -371,6 +469,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=41.0150,44.3717&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Dendropark', lat: 41.0150, lng: 44.3717, heading: 90, pitch: 5 },
+      { name: 'Lori Fortress', lat: 41.0133, lng: 44.6283, heading: 180, pitch: 15 },
+      { name: 'Hovhannavank Monastery', lat: 40.3617, lng: 44.3317, heading: 135, pitch: 10 },
+    ],
   },
 
   // 8. Tbilisi, Jvari, Mtskheta (Georgia)
@@ -392,7 +496,13 @@ export const tours: Tour[] = [
       ru: 'Приграничное приключение в яркую столицу Грузии и её древнее духовное сердце.',
       de: 'Ein grenzüberschreitendes Abenteuer in Georgiens lebendige Hauptstadt und sein antikes spirituelles Herz.',
     },
-    image: 'https://images.unsplash.com/photo-1568322503122-d740e1050c66?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8aec700-66e133f769eb9-thbilisi4-672dd31e37062-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8b05bd6-66e133fe17bc1-thbilisi2-672dd31d314eb-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67a0a41009772-38.jpg',
+    ],
     duration: 'full day',
     startTime: '07:00',
     endTime: '22:00',
@@ -413,6 +523,12 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=41.6938,44.8014&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Tbilisi', lat: 41.6938, lng: 44.8014, heading: 180, pitch: 10 },
+      { name: 'Jvari Monastery', lat: 41.8386, lng: 44.7269, heading: 270, pitch: 15 },
+      { name: 'Mtskheta', lat: 41.8436, lng: 44.7078, heading: 90, pitch: 10 },
+    ],
   },
 
   // 9. 1 Day in Georgia
@@ -434,7 +550,13 @@ export const tours: Tour[] = [
       ru: 'Откройте старый город Тбилиси, древнюю крепость и живую культуру за один незабываемый день.',
       de: 'Entdecken Sie Tiflis\' Altstadt, antike Festung und lebendige Kultur an einem unvergesslichen Tag.',
     },
-    image: 'https://images.unsplash.com/photo-1568322503122-d740e1050c66?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0da234173-6728b72ceeef3-tbilisi1-672e0d6643aa6-1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0da234173-6728b72ceeef3-tbilisi1-672e0d6643aa6-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0dc0d6967-66e133fe17bc1-thbilisi2-672dd31d314eb-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0da22eaa8-6728b741b88e1-tbilisi3-672e0d6643af7-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0dc0d3a55-66e133f769eb9-thbilisi4-672dd31e37062-1.webp',
+    ],
     duration: 'full day',
     startTime: '07:00',
     endTime: '22:00',
@@ -455,6 +577,11 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=41.6938,44.8014&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Tbilisi', lat: 41.6938, lng: 44.8014, heading: 180, pitch: 10 },
+      { name: 'Narikala Fortress', lat: 41.6883, lng: 44.8094, heading: 270, pitch: 15 },
+    ],
   },
 
   // 10. Two Days Javakhk, Borjomi, Rabat, Vardzia
@@ -476,7 +603,14 @@ export const tours: Tour[] = [
       ru: 'Двухдневное путешествие по югу Грузии — от курортов до древнего пещерного города.',
       de: 'Eine zweitägige Reise durch Südgeorgien — von Kurorten bis zur antiken Höhlenstadt.',
     },
-    image: 'https://images.unsplash.com/photo-1568322503122-d740e1050c66?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69ca37c65f8bd-jv2.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69ca37c65f8bd-jv2.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69ca37c629670-jv4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69ca37c64e33a-jv6.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69ca37c648bbd-jv8.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/69ca37c64288d-jv7.webp',
+    ],
     duration: '2 days',
     startTime: '07:00',
     endTime: '22:00',
@@ -498,6 +632,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=41.8425,43.3864&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Borjomi', lat: 41.8425, lng: 43.3864, heading: 90, pitch: 10 },
+      { name: 'Rabat Fortress', lat: 41.6381, lng: 42.9714, heading: 180, pitch: 15 },
+      { name: 'Vardzia Cave City', lat: 41.3758, lng: 43.2831, heading: 45, pitch: 10 },
+    ],
   },
 
   // 11. Three Hawks Trail
@@ -519,7 +659,13 @@ export const tours: Tour[] = [
       ru: 'Захватывающий горный поход с руинами монастыря и панорамными видами на водохранилище.',
       de: 'Ein aufregender Bergwanderausflug mit Klosterruinen und Panoramablicken auf den Stausee.',
     },
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb3a9b71-3-hawksss.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6713605a42460-hovq.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6713605e9a808-3-hawkss.png',
+    ],
     duration: 'full day',
     startTime: '08:00',
     endTime: '18:00',
@@ -540,6 +686,11 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 15 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.1450,44.8050&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Azat Reservoir', lat: 40.1450, lng: 44.8050, heading: 180, pitch: 15 },
+      { name: 'Havuts Tar Monastery', lat: 40.1383, lng: 44.8150, heading: 270, pitch: 10 },
+    ],
   },
 
   // 12. Horseriding in Dimats
@@ -561,7 +712,13 @@ export const tours: Tour[] = [
       ru: 'Прокатитесь верхом через потрясающие горные долины Армении — приключение для любого уровня.',
       de: 'Reiten Sie durch Armeniens atemberaubende Bergtäler — Abenteuer für alle Stufen.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d57003ec-dimats2.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6802414e81197-horse2.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d5700647-dimats1.webp',
+    ],
     duration: 'full day',
     startTime: '08:00',
     endTime: '18:00',
@@ -581,6 +738,11 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 10 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=39.8800,45.3200&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Dimats Valley', lat: 39.8800, lng: 45.3200, heading: 90, pitch: 10 },
+      { name: 'Mountain trails', lat: 39.8700, lng: 45.3350, heading: 180, pitch: 15 },
+    ],
   },
 
   // 13. Yerevan City Tour
@@ -602,7 +764,12 @@ export const tours: Tour[] = [
       ru: 'Откройте розовый город — от величественных площадей до древних рукописей и видов на Арарат.',
       de: 'Entdecken Sie die rosafarbene Stadt — von grandiosen Plätzen bis zu antiken Manuskripten und Ararat-Blicken.',
     },
-    image: 'https://images.unsplash.com/photo-1571935441008-517afe892734?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b431fc-dil1.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b431fc-dil1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '14:00',
@@ -625,6 +792,14 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.1792,44.4991&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Republic Square', lat: 40.1792, lng: 44.4991, heading: 180, pitch: 10 },
+      { name: 'Cascade Complex', lat: 40.1792, lng: 44.5083, heading: 270, pitch: 15 },
+      { name: 'Matenadaran', lat: 40.1933, lng: 44.5233, heading: 90, pitch: 10 },
+      { name: 'Opera House', lat: 40.1883, lng: 44.5100, heading: 180, pitch: 5 },
+      { name: 'Victory Park', lat: 40.1983, lng: 44.5250, heading: 270, pitch: 10 },
+    ],
   },
 
   // 14. Echmiadzin, Zvartnots
@@ -646,7 +821,12 @@ export const tours: Tour[] = [
       ru: 'Ватикан Армении — самый старый собор в мире и храм из списка ЮНЕСКО.',
       de: 'Das Vatikan Armeniens — die älteste Kathedrale der Welt und ein UNESCO-Tempel.',
     },
-    image: 'https://images.unsplash.com/photo-1548834925-e48f8a27ae93?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '15:00',
@@ -668,6 +848,13 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.1653,44.3417&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Echmiadzin Cathedral', lat: 40.1653, lng: 44.3417, heading: 180, pitch: 10 },
+      { name: 'St. Gayane Church', lat: 40.1617, lng: 44.3433, heading: 90, pitch: 5 },
+      { name: 'St. Hripsime Church', lat: 40.1692, lng: 44.3453, heading: 135, pitch: 10 },
+      { name: 'Zvartnots Temple', lat: 40.1633, lng: 44.3300, heading: 270, pitch: 15 },
+    ],
   },
 
   // 15. Amberd Fortress
@@ -689,7 +876,13 @@ export const tours: Tour[] = [
       ru: 'Горная крепость VII века на высоте 2300 м с захватывающими альпийскими пейзажами.',
       de: 'Eine Bergfestung aus dem 7. Jahrhundert auf 2.300 m mit atemberaubender Alpenlandschaft.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '15:00',
@@ -710,6 +903,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.3875,44.2583&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Amberd Fortress', lat: 40.3875, lng: 44.2583, heading: 180, pitch: 15 },
+      { name: 'Mount Aragats', lat: 40.4167, lng: 44.2167, heading: 270, pitch: 10 },
+      { name: 'Byurakan Observatory', lat: 40.3383, lng: 44.2633, heading: 90, pitch: 5 },
+    ],
   },
 
   // 16. Tsaghkadzor, Kecharis
@@ -731,7 +930,13 @@ export const tours: Tour[] = [
       ru: '«Долина Цветов» Армении — монастырь, горы иoptionalная поездка на канатной дороге.',
       de: 'Armeniens „Tal der Blumen" — Kloster, Berge und optionale Seilbahnfahrt.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '18:00',
@@ -753,6 +958,12 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.5317,44.7017&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Tsaghkadzor', lat: 40.5317, lng: 44.7017, heading: 180, pitch: 10 },
+      { name: 'Kecharis Monastery', lat: 40.5333, lng: 44.7033, heading: 90, pitch: 15 },
+      { name: 'Tsaghkadzor Ropeway', lat: 40.5267, lng: 44.6950, heading: 270, pitch: 10 },
+    ],
   },
 
   // 17. Gyumri City Tour
@@ -774,7 +985,12 @@ export const tours: Tour[] = [
       ru: 'Исследуйте культурную столицу Армении — архитектуру из чёрного камня и живые традиции.',
       de: 'Erkunden Sie Armeniens Kulturhauptstadt — schwarze Steinarchitektur und lebendige Traditionen.',
     },
-    image: 'https://images.unsplash.com/photo-1548834925-e48f8a27ae93?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '18:00',
@@ -796,6 +1012,12 @@ export const tours: Tour[] = [
     bestPeriod: 'Year round',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.7925,43.8450&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Gyumri Old Town', lat: 40.7925, lng: 43.8450, heading: 180, pitch: 10 },
+      { name: 'Mother Armenia', lat: 40.7950, lng: 43.8483, heading: 270, pitch: 15 },
+      { name: 'Seven Wounds Church', lat: 40.7883, lng: 43.8417, heading: 90, pitch: 10 },
+    ],
   },
 
   // 18. Saghmosavank, Amberd
@@ -817,7 +1039,13 @@ export const tours: Tour[] = [
       ru: 'Монастырь над ущельем и горная крепость — два сокровища Арагацотна за одну поездку.',
       de: 'Ein Schluchten-Kloster und eine Bergfestung — zwei Aragazotn-Juwelen in einer Reise.',
     },
-    image: 'https://images.unsplash.com/photo-1596426859822-292ae670e5e9?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '15:00',
@@ -838,6 +1066,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.3450,44.3967&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Saghmosavank Monastery', lat: 40.3450, lng: 44.3967, heading: 180, pitch: 15 },
+      { name: 'Amberd Fortress', lat: 40.3875, lng: 44.2583, heading: 90, pitch: 10 },
+      { name: 'Kasakh Gorge', lat: 40.3433, lng: 44.3933, heading: 270, pitch: 15 },
+    ],
   },
 
   // 19. Sevanavank, Hayravank
@@ -859,7 +1093,12 @@ export const tours: Tour[] = [
       ru: 'Два прибрежных монастыря и бескрайняя синева озера Севан за расслабляющий полдня.',
       de: 'Zwei Seenklöster und das endlose Blau des Sewansees an einem entspannten halben Tag.',
     },
-    image: 'https://images.unsplash.com/photo-1580182345337-4a7c8d2b6c5d?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '15:00',
@@ -880,6 +1119,12 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.3400,45.0500&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Sevanavank Monastery', lat: 40.3400, lng: 45.0500, heading: 180, pitch: 10 },
+      { name: 'Hayravank Monastery', lat: 40.3233, lng: 45.1083, heading: 90, pitch: 15 },
+      { name: 'Lake Sevan', lat: 40.3495, lng: 45.3315, heading: 270, pitch: 5 },
+    ],
   },
 
   // 20. Jermuk, Waterfall
@@ -901,7 +1146,12 @@ export const tours: Tour[] = [
       ru: 'Минеральные источники, 72-метровый водопад и горные панорамы в курортной столице Армении.',
       de: 'Mineralquellen, ein 72m-Wasserfall und Bergpanoramen in Armeniens Kurhauptstadt.',
     },
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -923,6 +1173,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=39.8383,45.6717&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Jermuk Town', lat: 39.8383, lng: 45.6717, heading: 180, pitch: 10 },
+      { name: 'Jermuk Waterfall', lat: 39.8417, lng: 45.6633, heading: 90, pitch: 15 },
+      { name: 'Mineral Springs', lat: 39.8350, lng: 45.6683, heading: 270, pitch: 5 },
+    ],
   },
 
   // 21. Lake Parz, Dendropark
@@ -944,7 +1200,13 @@ export const tours: Tour[] = [
       ru: 'Лесное озеро и ботанический сад — природа северной Армении во всей красе.',
       de: 'Ein Waldsee und Botanischer Garten — Nordarmeniens Natur vom Feinsten.',
     },
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -965,6 +1227,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.7567,44.8450&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Lake Parz', lat: 40.7567, lng: 44.8450, heading: 180, pitch: 10 },
+      { name: 'Dendropark Stepanavan', lat: 41.0150, lng: 44.3717, heading: 90, pitch: 5 },
+      { name: 'Stepanavan', lat: 41.0100, lng: 44.3750, heading: 270, pitch: 10 },
+    ],
   },
 
   // 22. Goshavank, Haghartsin, Dilijan
@@ -986,7 +1254,13 @@ export const tours: Tour[] = [
       ru: 'Лесные монастыри и очарование старого города в пышном Тавушском регионе Армении.',
       de: 'Waldklöster und Altstadt-Charme in Armeniens üppiger Tawusch-Region.',
     },
-    image: 'https://images.unsplash.com/photo-1596426859822-292ae670e5e9?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '18:00',
@@ -1007,6 +1281,12 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.7233,44.8717&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Goshavank Monastery', lat: 40.7233, lng: 44.8717, heading: 120, pitch: 10 },
+      { name: 'Haghartsin Monastery', lat: 40.7767, lng: 44.8792, heading: 180, pitch: 15 },
+      { name: 'Old Dilijan Complex', lat: 40.7403, lng: 44.8615, heading: 90, pitch: 5 },
+    ],
   },
 
   // 23. Byurakan, Amberd
@@ -1028,7 +1308,12 @@ export const tours: Tour[] = [
       ru: 'Сельское обаяние и горная крепость на склонах высочайшей вершины Армении.',
       de: 'Dorf-Charme und Bergfestung an den Hängen von Armeniens höchstem Gipfel.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+    ],
     duration: 'half day',
     startTime: '10:00',
     endTime: '15:00',
@@ -1049,6 +1334,12 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.3383,44.2633&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Byurakan Village', lat: 40.3383, lng: 44.2633, heading: 90, pitch: 5 },
+      { name: 'Amberd Fortress', lat: 40.3875, lng: 44.2583, heading: 180, pitch: 15 },
+      { name: 'Mount Aragats Slopes', lat: 40.4167, lng: 44.2167, heading: 270, pitch: 10 },
+    ],
   },
 
   // 24. Makaravank, Aghnavank
@@ -1070,7 +1361,12 @@ export const tours: Tour[] = [
       ru: 'Скрытые средневековые жемчужины в лесистых холмах Тавуша — вдали от проторённых дорог.',
       de: 'Verborgene mittelalterliche Juwelen in den bewaldeten Hügeln von Tawusch — abseits der Touristenpfade.',
     },
-    image: 'https://images.unsplash.com/photo-1596426859822-292ae670e5e9?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '18:00',
@@ -1091,6 +1387,12 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.7417,44.8850&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Makaravank Monastery', lat: 40.7417, lng: 44.8850, heading: 180, pitch: 10 },
+      { name: 'Aghnavank Monastery', lat: 40.7400, lng: 44.9000, heading: 90, pitch: 15 },
+      { name: 'Dilijan National Park', lat: 40.7500, lng: 44.8700, heading: 270, pitch: 5 },
+    ],
   },
 
   // 25. Khor Virap, Areni, Noravank (with lunch)
@@ -1112,7 +1414,13 @@ export const tours: Tour[] = [
       ru: 'Виды на Арарат, дегустация вина, монастырь в красных скалах и обед — наша премиальная южная экскурсия.',
       de: 'Ararat-Blicke, Weinverkostung, Rotklippen-Kloster und Mittagessen — unsere Premium-Südtour.',
     },
-    image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b9176cc?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '19:00',
@@ -1134,6 +1442,13 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 20 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=39.8842,44.5767&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Khor Virap', lat: 39.8842, lng: 44.5767, heading: 340, pitch: 10 },
+      { name: 'Areni Winery', lat: 39.7228, lng: 45.1817, heading: 90, pitch: 5 },
+      { name: 'Noravank', lat: 39.6850, lng: 45.2317, heading: 180, pitch: 15 },
+      { name: 'Mozrov Cave', lat: 39.7150, lng: 45.1900, heading: 45, pitch: 10 },
+    ],
   },
 
   // 26. Tatev, Karahunj, Noravank (2 days)
@@ -1155,7 +1470,13 @@ export const tours: Tour[] = [
       ru: 'Армянский Стоунхендж, Крылья Татева и Нораванк за два эпических дня.',
       de: 'Armeniens Stonehenge, die Flügel von Tatew und Rotklippen-Norawank an zwei epischen Tagen.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+    ],
     duration: '2 days',
     startTime: '08:00',
     endTime: '21:00',
@@ -1177,6 +1498,13 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 16 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=39.5800,46.3500&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Karahunj (Stonehenge)', lat: 39.5800, lng: 46.3500, heading: 180, pitch: 10 },
+      { name: 'Tatev Monastery', lat: 39.3928, lng: 46.2475, heading: 90, pitch: 15 },
+      { name: 'Noravank', lat: 39.6850, lng: 45.2317, heading: 270, pitch: 15 },
+      { name: 'Areni', lat: 39.7228, lng: 45.1817, heading: 45, pitch: 5 },
+    ],
   },
 
   // 27. Armenia Discovery (3 days)
@@ -1198,7 +1526,12 @@ export const tours: Tour[] = [
       ru: 'Три дня, три региона, все главные хиты Армении — незабываемый тур-открытие.',
       de: 'Drei Tage, drei Regionen, alle Highlights Armeniens — die ultimative Entdeckungstour.',
     },
-    image: 'https://images.unsplash.com/photo-1580182345337-4a7c8d2b6c5d?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+    ],
     duration: '3 days',
     startTime: '08:00',
     endTime: '21:00',
@@ -1223,6 +1556,15 @@ export const tours: Tour[] = [
     bestPeriod: 'May - October',
     groupSize: 'Up to 16 people',
     featured: true,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.1150,44.7250&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Garni Temple', lat: 40.1150, lng: 44.7250, heading: 180, pitch: 10 },
+      { name: 'Geghard Monastery', lat: 40.1417, lng: 44.7975, heading: 90, pitch: 15 },
+      { name: 'Lake Sevan', lat: 40.3495, lng: 45.3315, heading: 270, pitch: 5 },
+      { name: 'Tatev Monastery', lat: 39.3928, lng: 46.2475, heading: 180, pitch: 15 },
+      { name: 'Khor Virap', lat: 39.8842, lng: 44.5767, heading: 340, pitch: 10 },
+      { name: 'Noravank', lat: 39.6850, lng: 45.2317, heading: 180, pitch: 15 },
+    ],
   },
 
   // 28. Mount Aragats Climbing
@@ -1244,7 +1586,13 @@ export const tours: Tour[] = [
       ru: 'Взойдите на высочайшую вершину Армении на высоте 3 887 м — сложное, но достижимое горное приключение.',
       de: 'Erklimmen Sie Armeniens höchsten Gipfel auf 3.887m — ein herausforderndes aber erreichbares Bergabenteuer.',
     },
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67135eb4460eb-3-hawks.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b14687-dil3.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
+    ],
     duration: 'full day',
     startTime: '06:00',
     endTime: '19:00',
@@ -1264,6 +1612,11 @@ export const tours: Tour[] = [
     bestPeriod: 'June - September',
     groupSize: 'Up to 12 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.4167,44.2167&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Mount Aragats Southern Summit', lat: 40.4167, lng: 44.2167, heading: 180, pitch: 15 },
+      { name: 'Kari Lake', lat: 40.4633, lng: 44.1833, heading: 270, pitch: 10 },
+    ],
   },
 
   // 29. Parz Lake to Goshavank Trail
@@ -1285,7 +1638,13 @@ export const tours: Tour[] = [
       ru: 'Лесная тропа от горного озера до средневекового монастыря — поход в лучшем виде.',
       de: 'Ein Waldweg vom Bergsee zum mittelalterlichen Kloster — Wandern vom Feinsten.',
     },
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+    images: [
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae25564851-khorvirap4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/68511d6043e30-dimats4.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/672e0b8ad8fdb-66e41e2a52537-mckhetha2-672dd31d07282-1.webp',
+      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674ae267a1d2d-areni1.webp',
+    ],
     duration: 'full day',
     startTime: '09:00',
     endTime: '18:00',
@@ -1306,6 +1665,11 @@ export const tours: Tour[] = [
     bestPeriod: 'April - October',
     groupSize: 'Up to 15 people',
     featured: false,
+    streetViewUrl: 'https://maps.google.com/maps?q=40.7567,44.8450&t=k&z=15&ie=UTF8&iwloc=&output=embed',
+    streetViewLocations: [
+      { name: 'Parz Lake', lat: 40.7567, lng: 44.8450, heading: 180, pitch: 10 },
+      { name: 'Goshavank Monastery', lat: 40.7233, lng: 44.8717, heading: 120, pitch: 15 },
+    ],
   },
 ];
 
