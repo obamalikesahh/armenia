@@ -34,7 +34,6 @@ import {
 import { useLocale } from '@/hooks/use-locale'
 
 // Dynamic imports (no SSR)
-const MagneticCursor = dynamic(() => import('@/components/animations/magnetic-cursor').then(m => ({ default: m.MagneticCursor })), { ssr: false })
 const MouseSpotlight = dynamic(() => import('@/components/animations/mouse-spotlight').then(m => ({ default: m.MouseSpotlight })), { ssr: false })
 const HeroScene = dynamic(() => import('@/components/3d/hero-scene').then(m => ({ default: m.HeroScene })), {
   ssr: false,
@@ -47,9 +46,6 @@ const HeroScene = dynamic(() => import('@/components/3d/hero-scene').then(m => (
 const TourRouteFluid = dynamic(() => import('@/components/3d/tour-route-fluid').then(m => ({ default: m.TourRouteFluid })), {
   ssr: false,
   loading: () => <div className="h-[200px] bg-transparent" />,
-})
-const FloatingGlassScene = dynamic(() => import('@/components/3d/floating-glass-scene').then(m => ({ default: m.FloatingGlassScene })), {
-  ssr: false,
 })
 
 /* ─── Animation helpers ─── */
@@ -258,11 +254,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {/* Global 3D glass sphere overlay — covers entire page */}
-      <FloatingGlassScene />
-
       {/* Global mouse effects */}
-      <MagneticCursor />
       <MouseSpotlight />
 
       {/* ─── Navbar ─── */}
@@ -281,7 +273,7 @@ export default function Home() {
         <HeroScene />
 
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background z-[3]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/60 z-[3]" />
 
         {/* Content — clean, centered, minimal */}
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">

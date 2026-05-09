@@ -1,0 +1,14 @@
+{
+  "created": 1778415719,
+  "id": "202605102021588be39b42c38b4a62",
+  "request_id": "202605102021588be39b42c38b4a62",
+  "text": "Ich möchte, dass das Design in einem perfekten drei D Modell mit einem glasigen Hintergrund einer glasigen so dass es transparent und durchsichtig ist. Egal ob man zwischen hell oder dunkelmodus wechselt, ich würde gerne eine durchgehende Transparenz und eine Textur von einem Glas, welches ich dir in ein Foto schicken werde, dass du genau diese Textur anwendest.",
+  "usage": {
+    "completion_tokens": 93,
+    "prompt_tokens": 437,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 530
+  }
+}

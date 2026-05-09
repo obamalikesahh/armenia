@@ -266,16 +266,6 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Hide default cursor for magnetic cursor
-   ═══════════════════════════════════════════════════════════════ */
-@media (pointer: fine) {
-  a, button, [role='button'], input, select, textarea { cursor: none !important; }
-}
-@media (pointer: coarse) {
-  * { cursor: auto !important; }
-}
-
-/* ═══════════════════════════════════════════════════════════════
    Backward-compatible aliases — updated for dual theme
    ═══════════════════════════════════════════════════════════════ */
 .space-glow { }

@@ -265,3 +265,41 @@ Stage Summary:
 - Image overlay text (tour name in modal gallery, gallery nav buttons) preserved as `text-white` for contrast
 - Image overlay navigation dots in tour-card preserved as `bg-white/50 hover:bg-white/80` for contrast
 - All components will now respond to light/dark mode via CSS variables
+
+---
+Task ID: 5
+Agent: redesign-fix
+Task: Fix broken buttons and redesign 3D scene
+
+Work Log:
+- Removed MagneticCursor dynamic import and component usage from page.tsx (was breaking click events by hiding system cursor and applying magnetic transforms)
+- Removed FloatingGlassScene dynamic import and component usage from page.tsx (random floating glass spheres looked bad)
+- Removed cursor-hiding CSS from globals.css (`cursor: none !important` on all interactive elements)
+- Kept MouseSpotlight component (already had `pointer-events-none` class, doesn't interfere with clicks)
+- Completely rewrote hero-scene.tsx with a single iridescent glass sphere:
+  - Custom GLSL vertex + fragment shaders for thin-film iridescent interference effect
+  - Fresnel-Schlick approximation for edge reflectivity
+  - GGX specular distribution for studio-light highlights
+  - Two bright specular highlights (oval studio reflections)
+  - Animated iridescence: rainbow colors shift with viewing angle and time
+  - Very slow, barely-noticeable floating animation (0.08 amplitude, 0.2 speed)
+  - Extremely slow rotation (0.03 speed) to catch light differently
+  - Sphere scale 2.8, 128-segment geometry for smooth surface
+  - Removed all orbiting spheres, sparkle particles, orbit rings
+  - Changed Environment preset from "night" to "city" for better reflections
+  - Added warm accent light for subtle color variation
+- Changed hero scene background from hardcoded `#0a0a0a` to transparent (no inline background style)
+- Updated hero section gradient overlay: `from-background/40 via-transparent to-background` → `from-background/20 via-transparent to-background/60` (lighter/more transparent for bright design)
+- Removed hardcoded gradient overlays (bottom/top gradients and vignette) from hero scene that used `#0a0a0a`
+- Canvas already had `pointerEvents: 'none'` style (preserved)
+- Lint check passes with no errors
+- Dev server compiles successfully
+
+Stage Summary:
+- Buttons now work: MagneticCursor removed, cursor hiding CSS removed, system cursor restored
+- Floating glass spheres removed from page (FloatingGlassScene deleted from page.tsx)
+- Hero 3D scene completely redesigned: single large iridescent glass sphere with rainbow thin-film interference
+- Custom GLSL shader creates photorealistic soap bubble / crystal ball effect
+- Scene is minimalist and Apple-style: just the sphere with studio lighting
+- Hero scene background is now transparent (works in both light and dark mode)
+- Gradient overlays lightened for better transparency
