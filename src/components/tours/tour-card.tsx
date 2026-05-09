@@ -133,8 +133,8 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className="group relative"
     >
-      {/* Subtle gold glow on hover */}
-      <div className="absolute -inset-px rounded-2xl bg-[#c9a84c]/0 opacity-0 blur-sm transition-opacity duration-500 group-hover:bg-[#c9a84c]/8 group-hover:opacity-100" />
+      {/* Subtle silver glow on hover */}
+      <div className="absolute -inset-px rounded-2xl bg-[#94A3B8]/0 opacity-0 blur-sm transition-opacity duration-500 group-hover:bg-[#94A3B8]/8 group-hover:opacity-100" />
 
       <div
         className="relative flex flex-col overflow-hidden rounded-2xl border border-white/6 bg-white/3 backdrop-blur-xl transition-all duration-500 group-hover:border-white/10"
@@ -186,7 +186,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
                   }}
                   className={`size-1 rounded-full transition-all duration-300 ${
                     idx === currentIndex
-                      ? 'scale-150 bg-[#c9a84c]'
+                      ? 'scale-150 bg-[#94A3B8]'
                       : 'bg-white/50 hover:bg-white/80'
                   }`}
                   aria-label={`Go to image ${idx + 1}`}
@@ -198,7 +198,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
           {/* Featured badge */}
           {tour.featured && (
             <div className="absolute top-3 left-3">
-              <Badge className="border-0 bg-[#c9a84c]/90 text-[#0a0a0a] shadow-lg backdrop-blur-sm">
+              <Badge className="border-0 bg-[#94A3B8]/90 text-[#0a0a0a] shadow-lg backdrop-blur-sm">
                 <Star className="mr-1 size-3 fill-current" />
                 {t('tours.featured')}
               </Badge>
@@ -237,7 +237,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
         <div className="flex flex-1 flex-col p-4 sm:p-5">
           {/* Tour name */}
           <h3
-            className="mb-1.5 line-clamp-2 cursor-pointer text-base font-semibold text-white transition-colors hover:text-[#c9a84c] sm:text-lg"
+            className="mb-1.5 line-clamp-2 cursor-pointer text-base font-semibold text-white transition-colors hover:text-[#94A3B8] sm:text-lg"
             onClick={() => onSelect?.(tour)}
           >
             {name}
@@ -254,7 +254,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
               <span className="text-xs text-white/35">
                 {t('tours.armenianGuide')}
               </span>
-              <span className="text-sm font-semibold text-[#c9a84c]">
+              <span className="text-sm font-semibold text-[#94A3B8]">
                 {t('common.from')} {formatPrice(priceEUR)}
               </span>
             </div>
@@ -274,7 +274,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
               e.stopPropagation()
               onBookNow?.(tour)
             }}
-            className="mt-auto w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#b8973e] hover:shadow-[#c9a84c]/10 rounded-xl"
+            className="mt-auto w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#7E8FA3] hover:shadow-[#94A3B8]/10 rounded-xl"
           >
             {t('booking.reserveNow')}
           </Button>

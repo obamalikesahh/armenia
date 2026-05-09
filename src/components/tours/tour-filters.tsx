@@ -96,7 +96,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
           placeholder={t('tours.search')}
           value={filters.search}
           onChange={(e) => updateFilter('search', e.target.value)}
-          className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30 focus-visible:ring-[#c9a84c]/10"
+          className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30 focus-visible:ring-[#94A3B8]/10"
         />
         {filters.search && (
           <button
@@ -122,7 +122,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
                 onClick={() => updateFilter('category', cat)}
                 className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-[#c9a84c] text-[#0a0a0a] shadow-lg shadow-[#c9a84c]/10'
+                    ? 'bg-[#94A3B8] text-[#0a0a0a] shadow-lg shadow-[#94A3B8]/10'
                     : 'border border-white/6 bg-white/3 text-white/45 hover:border-white/6 hover:bg-white/3 hover:text-white/60'
                 }`}
               >
@@ -147,7 +147,7 @@ export function TourFilters({ filters, onFiltersChange }: TourFiltersProps) {
                 onClick={() => updateFilter('duration', dur)}
                 className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-[#c9a84c] text-[#0a0a0a] shadow-lg shadow-[#c9a84c]/10'
+                    ? 'bg-[#94A3B8] text-[#0a0a0a] shadow-lg shadow-[#94A3B8]/10'
                     : 'border border-white/6 bg-white/3 text-white/45 hover:border-white/6 hover:bg-white/3 hover:text-white/60'
                 }`}
               >

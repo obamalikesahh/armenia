@@ -311,7 +311,7 @@ export default function Home() {
               <Button
                 onClick={() => scrollToSection('tours')}
                 size="lg"
-                className="bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] transition-all duration-300 rounded-full px-8"
+                className="bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] transition-all duration-300 rounded-full px-8"
               >
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 size-4" />
@@ -372,13 +372,13 @@ export default function Home() {
       <AnimatedSection className="relative py-24 overflow-hidden" id="featured">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-12 text-center">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
               {t('tours.featured')}
             </p>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t('tours.title')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-12 bg-[#c9a84c]/30" />
+            <div className="mx-auto mt-4 h-px w-12 bg-[#94A3B8]/30" />
           </motion.div>
 
           <motion.div variants={fadeIn} className="relative">
@@ -433,7 +433,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t('tours.allTours')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-10 bg-[#c9a84c]/30" />
+            <div className="mx-auto mt-4 h-px w-10 bg-[#94A3B8]/30" />
           </motion.div>
 
           <motion.div variants={fadeUp} className="mb-8">
@@ -485,7 +485,7 @@ export default function Home() {
       <AnimatedSection className="relative py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-8 text-center">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
               {t('tours.route')}
             </p>
             <h2 className="text-2xl font-bold text-white sm:text-3xl">
@@ -504,13 +504,13 @@ export default function Home() {
       <AnimatedSection className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-14 text-center">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
               {t('whyChoose.title')}
             </p>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t('whyChoose.subtitle')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-12 bg-[#c9a84c]/30" />
+            <div className="mx-auto mt-4 h-px w-12 bg-[#94A3B8]/30" />
           </motion.div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -540,7 +540,7 @@ export default function Home() {
                 transition={{ delay: feature.delay }}
                 className="group glass-card rounded-2xl p-6 transition-all duration-300 hover:border-white/10 sm:p-8"
               >
-                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-[#c9a84c]/8 text-[#c9a84c]">
+                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-[#94A3B8]/8 text-[#94A3B8]">
                   <feature.icon className="size-5" />
                 </div>
                 <h3 className="mb-2 text-base font-semibold text-white">{feature.title}</h3>
@@ -558,7 +558,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <motion.div variants={fadeUp}>
-              <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#94A3B8]/60">
                 {t('about.title')}
               </p>
               <div className="space-y-4 text-white/40 text-sm leading-relaxed">
@@ -568,7 +568,7 @@ export default function Home() {
               </div>
               <Button
                 onClick={() => scrollToSection('tours')}
-                className="mt-8 bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] transition-all duration-300 rounded-full px-6"
+                className="mt-8 bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] transition-all duration-300 rounded-full px-6"
               >
                 {t('about.exploreTours')}
                 <ArrowRight className="ml-2 size-4" />
@@ -615,12 +615,12 @@ export default function Home() {
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder={t('newsletter.placeholder')}
                   required
-                  className="border-white/8 bg-white/3 py-2.5 pl-10 text-sm text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30 focus-visible:ring-[#c9a84c]/10 rounded-full"
+                  className="border-white/8 bg-white/3 py-2.5 pl-10 text-sm text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30 focus-visible:ring-[#94A3B8]/10 rounded-full"
                 />
               </div>
               <Button
                 type="submit"
-                className="bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] transition-all duration-300 rounded-full px-6"
+                className="bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] transition-all duration-300 rounded-full px-6"
               >
                 {newsletterSubscribed ? t('newsletter.subscribed') : t('newsletter.subscribe')}
               </Button>

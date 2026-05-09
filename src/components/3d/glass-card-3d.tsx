@@ -53,7 +53,7 @@ export function GlassCard3D({
   height = 2.2,
   depth = 0.08,
   radius = 0.1,
-  color = '#F59E0B',
+  color = '#94A3B8',
   emissiveColor,
   emissiveIntensity = 0.1,
   label,

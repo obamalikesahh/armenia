@@ -349,9 +349,9 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
           <div
             className={`flex size-8 items-center justify-center rounded-full text-xs font-semibold transition-all ${
               regStep === step
-                ? 'bg-[#c9a84c] text-[#0a0a0a]'
+                ? 'bg-[#94A3B8] text-[#0a0a0a]'
                 : regStep > step
-                  ? 'bg-[#c9a84c]/20 text-[#c9a84c]'
+                  ? 'bg-[#94A3B8]/20 text-[#94A3B8]'
                   : 'bg-white/6 text-white/25'
             }`}
           >
@@ -364,7 +364,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
           {step < 3 && (
             <div
               className={`h-px w-8 transition-all ${
-                regStep > step ? 'bg-[#c9a84c]/40' : 'bg-white/6'
+                regStep > step ? 'bg-[#94A3B8]/40' : 'bg-white/6'
               }`}
             />
           )}
@@ -417,13 +417,13 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
             <TabsList className="h-10 w-full bg-white/3">
               <TabsTrigger
                 value="login"
-                className="flex-1 data-[state=active]:bg-[#c9a84c]/10 data-[state=active]:text-[#c9a84c]"
+                className="flex-1 data-[state=active]:bg-[#94A3B8]/10 data-[state=active]:text-[#94A3B8]"
               >
                 {t('auth.login')}
               </TabsTrigger>
               <TabsTrigger
                 value="register"
-                className="flex-1 data-[state=active]:bg-[#c9a84c]/10 data-[state=active]:text-[#c9a84c]"
+                className="flex-1 data-[state=active]:bg-[#94A3B8]/10 data-[state=active]:text-[#94A3B8]"
               >
                 {t('auth.register')}
               </TabsTrigger>
@@ -458,7 +458,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                         type="email"
                         value={loginEmail}
                         onChange={(e) => setLoginEmail(e.target.value)}
-                        className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                        className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                         placeholder={t('auth.emailPlaceholder')}
                       />
                     </div>
@@ -471,7 +471,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                       </Label>
                       <button
                         type="button"
-                        className="text-xs text-[#c9a84c]/70 transition-colors hover:text-[#c9a84c]"
+                        className="text-xs text-[#94A3B8]/70 transition-colors hover:text-[#94A3B8]"
                       >
                         {t('auth.forgotPassword')}
                       </button>
@@ -483,7 +483,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                         type={showLoginPassword ? 'text' : 'password'}
                         value={loginPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
-                        className="border-white/6 bg-white/3 pl-10 pr-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                        className="border-white/6 bg-white/3 pl-10 pr-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                         placeholder="••••••••"
                       />
                       <button
@@ -499,7 +499,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                   <Button
                     type="submit"
                     disabled={loginLoading}
-                    className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                    className="w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#7E8FA3] disabled:opacity-50"
                     size="lg"
                   >
                     {loginLoading ? (
@@ -547,7 +547,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                   {t('auth.noAccount')}{' '}
                   <button
                     onClick={() => setActiveTab('register')}
-                    className="text-[#c9a84c]/70 underline underline-offset-2 transition-colors hover:text-[#c9a84c]"
+                    className="text-[#94A3B8]/70 underline underline-offset-2 transition-colors hover:text-[#94A3B8]"
                   >
                     {t('auth.register')}
                   </button>
@@ -567,7 +567,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                   exit={{ opacity: 0, scale: 0.9 }}
                   className="flex flex-col items-center justify-center py-8"
                 >
-                  <CheckCircle2 className="mb-3 size-12 text-[#c9a84c]" />
+                  <CheckCircle2 className="mb-3 size-12 text-[#94A3B8]" />
                   <h3 className="mb-1 text-lg font-semibold text-white">{t('auth.registrationSuccess')}</h3>
                   <p className="text-sm text-white/35">{t('auth.switchingToLogin')}</p>
                 </motion.div>
@@ -610,7 +610,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                             type="email"
                             value={regEmail}
                             onChange={(e) => setRegEmail(e.target.value)}
-                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                             placeholder={t('auth.emailPlaceholder')}
                             autoFocus
                           />
@@ -620,7 +620,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                       <Button
                         type="submit"
                         disabled={sendCodeLoading}
-                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                        className="w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#7E8FA3] disabled:opacity-50"
                         size="lg"
                       >
                         {sendCodeLoading ? (
@@ -668,7 +668,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                         {t('auth.hasAccount')}{' '}
                         <button
                           onClick={() => setActiveTab('login')}
-                          className="text-[#c9a84c]/70 underline underline-offset-2 transition-colors hover:text-[#c9a84c]"
+                          className="text-[#94A3B8]/70 underline underline-offset-2 transition-colors hover:text-[#94A3B8]"
                         >
                           {t('auth.login')}
                         </button>
@@ -686,7 +686,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                       )}
 
                       {regInfoMessage && (
-                        <div className="rounded-lg border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-3 text-sm text-[#c9a84c]">
+                        <div className="rounded-lg border border-[#94A3B8]/20 bg-[#94A3B8]/5 p-3 text-sm text-[#94A3B8]">
                           {regInfoMessage}
                         </div>
                       )}
@@ -698,7 +698,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                         <p className="text-sm text-white/35">
                           {t('auth.step2Description')}
                         </p>
-                        <p className="mt-1 text-sm text-[#c9a84c]/70">
+                        <p className="mt-1 text-sm text-[#94A3B8]/70">
                           {regEmail}
                         </p>
                       </div>
@@ -713,30 +713,30 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                           <InputOTPGroup>
                             <InputOTPSlot
                               index={0}
-                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#94A3B8]/40 data-[active=true]:ring-[#94A3B8]/20 first:rounded-l-lg last:rounded-r-lg"
                             />
                             <InputOTPSlot
                               index={1}
-                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#94A3B8]/40 data-[active=true]:ring-[#94A3B8]/20 first:rounded-l-lg last:rounded-r-lg"
                             />
                             <InputOTPSlot
                               index={2}
-                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#94A3B8]/40 data-[active=true]:ring-[#94A3B8]/20 first:rounded-l-lg last:rounded-r-lg"
                             />
                           </InputOTPGroup>
                           <InputOTPSeparator className="text-white/20" />
                           <InputOTPGroup>
                             <InputOTPSlot
                               index={3}
-                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#94A3B8]/40 data-[active=true]:ring-[#94A3B8]/20 first:rounded-l-lg last:rounded-r-lg"
                             />
                             <InputOTPSlot
                               index={4}
-                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#94A3B8]/40 data-[active=true]:ring-[#94A3B8]/20 first:rounded-l-lg last:rounded-r-lg"
                             />
                             <InputOTPSlot
                               index={5}
-                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#94A3B8]/40 data-[active=true]:ring-[#94A3B8]/20 first:rounded-l-lg last:rounded-r-lg"
                             />
                           </InputOTPGroup>
                         </InputOTP>
@@ -753,7 +753,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                             type="button"
                             onClick={handleResendCode}
                             disabled={sendCodeLoading}
-                            className="text-[#c9a84c]/70 transition-colors hover:text-[#c9a84c] disabled:opacity-50"
+                            className="text-[#94A3B8]/70 transition-colors hover:text-[#94A3B8] disabled:opacity-50"
                           >
                             {sendCodeLoading ? t('common.loading') : t('auth.resendCode')}
                           </button>
@@ -764,7 +764,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                       <Button
                         type="submit"
                         disabled={verifyCodeLoading || otpValue.length !== 6}
-                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                        className="w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#7E8FA3] disabled:opacity-50"
                         size="lg"
                       >
                         {verifyCodeLoading ? (
@@ -805,7 +805,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                         </div>
                       )}
 
-                      <div className="rounded-lg border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-3 text-center text-sm text-[#c9a84c]">
+                      <div className="rounded-lg border border-[#94A3B8]/20 bg-[#94A3B8]/5 p-3 text-center text-sm text-[#94A3B8]">
                         {t('auth.emailVerified')}
                       </div>
 
@@ -829,7 +829,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                               id="reg-first"
                               value={regFirstName}
                               onChange={(e) => setRegFirstName(e.target.value)}
-                              className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                              className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                             />
                           </div>
                         </div>
@@ -843,7 +843,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                               id="reg-last"
                               value={regLastName}
                               onChange={(e) => setRegLastName(e.target.value)}
-                              className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                              className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                             />
                           </div>
                         </div>
@@ -851,7 +851,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
 
                       <div className="space-y-2">
                         <Label htmlFor="reg-phone" className="text-white/45">
-                          {t('auth.phone')} <span className="text-[#c9a84c]/60">*</span>
+                          {t('auth.phone')} <span className="text-[#94A3B8]/60">*</span>
                         </Label>
                         <div className="relative">
                           <Phone className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
@@ -860,7 +860,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                             type="tel"
                             value={regPhone}
                             onChange={(e) => setRegPhone(e.target.value)}
-                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                             placeholder="+374 XX XXX XXX"
                             required
                           />
@@ -878,7 +878,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                             type={showRegPassword ? 'text' : 'password'}
                             value={regPassword}
                             onChange={(e) => setRegPassword(e.target.value)}
-                            className="border-white/6 bg-white/3 pl-10 pr-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            className="border-white/6 bg-white/3 pl-10 pr-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                             placeholder="••••••••"
                           />
                           <button
@@ -902,7 +902,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                             type="password"
                             value={regConfirmPassword}
                             onChange={(e) => setRegConfirmPassword(e.target.value)}
-                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#94A3B8]/30"
                             placeholder="••••••••"
                           />
                         </div>
@@ -913,23 +913,23 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                           id="reg-terms"
                           checked={regTerms}
                           onCheckedChange={(checked) => setRegTerms(checked === true)}
-                          className="mt-0.5 border-white/15 data-[state=checked]:bg-[#c9a84c] data-[state=checked]:border-[#c9a84c]"
+                          className="mt-0.5 border-white/15 data-[state=checked]:bg-[#94A3B8] data-[state=checked]:border-[#94A3B8]"
                         />
                         <Label
                           htmlFor="reg-terms"
                           className="cursor-pointer text-xs leading-relaxed text-white/40"
                         >
                           {t('auth.iAgreeTo')}{' '}
-                          <span className="text-[#c9a84c]/70 underline">{t('auth.termsOfService')}</span>{' '}
+                          <span className="text-[#94A3B8]/70 underline">{t('auth.termsOfService')}</span>{' '}
                           {t('auth.and')}{' '}
-                          <span className="text-[#c9a84c]/70 underline">{t('auth.privacyPolicy')}</span>
+                          <span className="text-[#94A3B8]/70 underline">{t('auth.privacyPolicy')}</span>
                         </Label>
                       </div>
 
                       <Button
                         type="submit"
                         disabled={regLoading}
-                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                        className="w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#7E8FA3] disabled:opacity-50"
                         size="lg"
                       >
                         {regLoading ? (

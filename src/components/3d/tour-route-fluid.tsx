@@ -7,7 +7,7 @@ import * as THREE from 'three'
 /* ──────────────────────────────────────────────
    Tour Route Fluid — abstract flowing lines
    representing the paths between Armenian tour sites
-   Minimal: warm gold + dark palette
+   Minimal: cool silver + dark palette
    ────────────────────────────────────────────── */
 
 function FluidLine({ points, color, speed, offset }: {
@@ -58,7 +58,7 @@ function FlowingParticle({ curve, speed, offset }: {
   return (
     <mesh ref={ref}>
       <sphereGeometry args={[0.03, 8, 8]} />
-      <meshBasicMaterial color="#c9a84c" transparent opacity={0.8} />
+      <meshBasicMaterial color="#94A3B8" transparent opacity={0.8} />
     </mesh>
   )
 }
@@ -93,7 +93,7 @@ function Scene() {
         <FluidLine
           key={`line-${i}`}
           points={pts}
-          color={i % 2 === 0 ? '#c9a84c' : '#8a7535'}
+          color={i % 2 === 0 ? '#94A3B8' : '#64748B'}
           speed={0.3 + i * 0.1}
           offset={i * 0.5}
         />
@@ -129,7 +129,7 @@ function Scene() {
       {[[-3, 0, 0], [0, 1, 0], [0, -0.8, 0.3], [0, 0.5, -0.1], [0, -0.6, -0.2], [3, 0, 0]].map((pos, i) => (
         <mesh key={`node-${i}`} position={pos as [number, number, number]}>
           <sphereGeometry args={[0.06, 16, 16]} />
-          <meshBasicMaterial color="#c9a84c" transparent opacity={0.6} />
+          <meshBasicMaterial color="#94A3B8" transparent opacity={0.6} />
         </mesh>
       ))}
     </>

@@ -54,14 +54,14 @@ export function MagneticCursor() {
         ringRef.current.style.height = `${ringSize}px`
         ringRef.current.style.opacity = `${0.4 + state.hoverScale * 0.4}`
         ringRef.current.style.borderColor = state.isHovering
-          ? `rgba(245, 158, 11, ${0.6 + state.hoverScale * 0.3})`
+          ? `rgba(148, 163, 184, ${0.6 + state.hoverScale * 0.3})`
           : `rgba(255, 255, 255, ${0.3 + state.hoverScale * 0.2})`
         ringRef.current.style.background = state.isHovering
-          ? `rgba(245, 158, 11, ${0.08 + state.hoverScale * 0.07})`
+          ? `rgba(148, 163, 184, ${0.08 + state.hoverScale * 0.07})`
           : 'transparent'
         ringRef.current.style.boxShadow = state.isHovering
-          ? `0 0 20px rgba(245, 158, 11, 0.2), 0 0 40px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(245, 158, 11, 0.05)`
-          : `0 0 15px rgba(139, 92, 246, 0.15), 0 0 30px rgba(245, 158, 11, 0.08)`
+          ? `0 0 20px rgba(148, 163, 184, 0.2), 0 0 40px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(148, 163, 184, 0.05)`
+          : `0 0 15px rgba(139, 92, 246, 0.15), 0 0 30px rgba(148, 163, 184, 0.08)`
       }
 
       rafRef.current = requestAnimationFrame(animate)
@@ -158,8 +158,8 @@ export function MagneticCursor() {
         style={{
           width: 8,
           height: 8,
-          background: 'linear-gradient(135deg, #F59E0B, #ffffff)',
-          boxShadow: '0 0 6px rgba(245, 158, 11, 0.6), 0 0 12px rgba(245, 158, 11, 0.3)',
+          background: 'linear-gradient(135deg, #94A3B8, #ffffff)',
+          boxShadow: '0 0 6px rgba(148, 163, 184, 0.6), 0 0 12px rgba(148, 163, 184, 0.3)',
           willChange: 'transform',
         }}
       />

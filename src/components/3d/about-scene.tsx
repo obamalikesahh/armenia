@@ -19,7 +19,7 @@ function GlassGlobe() {
     return { originalPositions: origPos }
   }, [geometry])
 
-  const colorA = useMemo(() => new THREE.Color('#F59E0B'), [])
+  const colorA = useMemo(() => new THREE.Color('#94A3B8'), [])
   const colorB = useMemo(() => new THREE.Color('#8B5CF6'), [])
   const blendedColor = useMemo(() => new THREE.Color(), [])
 
@@ -73,7 +73,7 @@ function GlassGlobe() {
         envMapIntensity={1.8}
         clearcoat={1}
         clearcoatRoughness={0.05}
-        attenuationColor={new THREE.Color('#F59E0B')}
+        attenuationColor={new THREE.Color('#94A3B8')}
         attenuationDistance={2}
         transparent
         side={THREE.DoubleSide}
@@ -198,7 +198,7 @@ export function AboutScene({ className = '' }: { className?: string }) {
         style={{ pointerEvents: 'none' }}
       >
         <ambientLight intensity={0.4} />
-        <pointLight position={[5, 5, 5]} intensity={1.5} color="#F59E0B" />
+        <pointLight position={[5, 5, 5]} intensity={1.5} color="#94A3B8" />
         <pointLight position={[-5, 3, -3]} intensity={1} color="#8B5CF6" />
         <pointLight position={[0, -5, 3]} intensity={0.8} color="#EC4899" />
         <Environment preset="night" />
@@ -207,15 +207,15 @@ export function AboutScene({ className = '' }: { className?: string }) {
         <GlassGlobe />
 
         {/* Orbiting rings */}
-        <OrbitRing radius={2.0} tilt={Math.PI * 0.3} speed={0.12} color="#F59E0B" />
+        <OrbitRing radius={2.0} tilt={Math.PI * 0.3} speed={0.12} color="#94A3B8" />
         <OrbitRing radius={2.3} tilt={Math.PI * 0.5} speed={-0.08} color="#8B5CF6" />
         <OrbitRing radius={2.6} tilt={Math.PI * 0.15} speed={0.06} color="#EC4899" />
 
         {/* Floating shapes */}
-        <GlassShape position={[-2.5, 1.5, -1]} scale={0.2} color="#F59E0B" shape="icosa" />
+        <GlassShape position={[-2.5, 1.5, -1]} scale={0.2} color="#94A3B8" shape="icosa" />
         <GlassShape position={[2.3, -1.2, -0.5]} scale={0.18} color="#8B5CF6" shape="octa" />
         <GlassShape position={[-1.8, -1.8, 0.5]} scale={0.15} color="#EC4899" shape="tetra" />
-        <GlassShape position={[1.5, 2, -1.5]} scale={0.17} color="#FBBF24" shape="icosa" />
+        <GlassShape position={[1.5, 2, -1.5]} scale={0.17} color="#CBD5E1" shape="icosa" />
 
         {/* Post-processing */}
         <EffectComposer>

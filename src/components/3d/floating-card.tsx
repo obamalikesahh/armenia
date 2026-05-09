@@ -97,8 +97,8 @@ export default function FloatingCard({
         className="absolute -inset-[1px] rounded-2xl"
         style={{
           background: isHovered
-            ? `linear-gradient(135deg, ${glowColor}, rgba(236,72,153,0.3), rgba(245,158,11,0.3))`
-            : 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(236,72,153,0.1), rgba(245,158,11,0.1))',
+            ? `linear-gradient(135deg, ${glowColor}, rgba(236,72,153,0.3), rgba(148,163,184,0.3))`
+            : 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(236,72,153,0.1), rgba(148,163,184,0.1))',
           opacity: isHovered ? 1 : 0.5,
           transition: 'opacity 0.4s ease',
         }}
@@ -109,7 +109,7 @@ export default function FloatingCard({
         className="absolute -inset-4 rounded-3xl blur-xl"
         style={{
           background: isHovered
-            ? `linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.15), rgba(245,158,11,0.15))`
+            ? `linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.15), rgba(148,163,184,0.15))`
             : 'transparent',
           transition: 'background 0.4s ease',
         }}

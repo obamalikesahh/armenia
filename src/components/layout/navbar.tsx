@@ -79,9 +79,9 @@ export function Navbar({
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <Mountain className="size-5 text-[#c9a84c]" />
+          <Mountain className="size-5 text-[#94A3B8]" />
           <span className="text-sm font-semibold tracking-[0.15em] text-white">
-            ARMENIA <span className="text-[#c9a84c]">TOURS</span>
+            ARMENIA <span className="text-[#94A3B8]">TOURS</span>
           </span>
         </a>
 
@@ -98,7 +98,7 @@ export function Navbar({
               {activeLink === link.key && (
                 <motion.div
                   layoutId="activeNav"
-                  className="absolute bottom-0 left-3 right-3 h-px rounded-full bg-[#c9a84c]/50"
+                  className="absolute bottom-0 left-3 right-3 h-px rounded-full bg-[#94A3B8]/50"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
@@ -130,7 +130,7 @@ export function Navbar({
                   key={loc}
                   onClick={() => setLocale(loc)}
                   className={`cursor-pointer hover:bg-white/3 ${
-                    locale === loc ? 'bg-white/3 text-[#c9a84c]' : ''
+                    locale === loc ? 'bg-white/3 text-[#94A3B8]' : ''
                   }`}
                 >
                   <span className="mr-2">{localeFlags[loc]}</span>
@@ -150,7 +150,7 @@ export function Navbar({
                     size="sm"
                     className="gap-2 text-white/45 hover:bg-white/3 hover:text-white/45"
                   >
-                    <div className="flex size-7 items-center justify-center rounded-full bg-[#c9a84c]/10 text-[#c9a84c]">
+                    <div className="flex size-7 items-center justify-center rounded-full bg-[#94A3B8]/10 text-[#94A3B8]">
                       <User className="size-4" />
                     </div>
                     <span className="max-w-[100px] truncate text-xs">{userName}</span>
@@ -189,7 +189,7 @@ export function Navbar({
                 <Button
                   size="sm"
                   onClick={onRegisterClick}
-                  className="bg-gradient-to-r bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e]"
+                  className="bg-gradient-to-r bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3]"
                 >
                   {t('nav.register')}
                 </Button>
@@ -227,7 +227,7 @@ export function Navbar({
                         }}
                         className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                           activeLink === link.key
-                            ? 'bg-[#c9a84c]/8 text-[#c9a84c]'
+                            ? 'bg-[#94A3B8]/8 text-[#94A3B8]'
                             : 'text-white/35 hover:bg-white/3 hover:text-white'
                         }`}
                       >
@@ -248,7 +248,7 @@ export function Navbar({
                           onClick={() => setLocale(loc)}
                           className={`rounded-lg px-3 py-2 text-xs font-medium transition-all ${
                             locale === loc
-                              ? 'bg-[#c9a84c]/10 text-[#c9a84c]'
+                              ? 'bg-[#94A3B8]/10 text-[#94A3B8]'
                               : 'bg-white/3 text-white/35 hover:bg-white/3 hover:text-white/45'
                           }`}
                         >
@@ -295,7 +295,7 @@ export function Navbar({
                             setMobileOpen(false)
                             onRegisterClick?.()
                           }}
-                          className="w-full bg-gradient-to-r bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e]"
+                          className="w-full bg-gradient-to-r bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3]"
                         >
                           {t('nav.register')}
                         </Button>

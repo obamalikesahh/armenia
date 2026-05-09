@@ -57,13 +57,13 @@ const VERIFICATION_TEMPLATES: Record<string, { subject: string; body: (code: str
   en: {
     subject: 'Your Verification Code — The Beauty of Armenia',
     body: (code) => `
-      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
         <div style="padding: 32px 28px; text-align: center;">
-          <h1 style="color: #c9a84c; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">THE BEAUTY OF ARMENIA</h1>
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">THE BEAUTY OF ARMENIA</h1>
           <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 0 0 28px;">Email Verification</p>
           <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin: 0 0 24px;">Enter this code to verify your email address:</p>
-          <div style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 18px 32px; display: inline-block; margin-bottom: 24px;">
-            <span style="color: #c9a84c; font-size: 36px; font-weight: 700; letter-spacing: 0.3em; font-family: 'Courier New', monospace;">${code}</span>
+          <div style="background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 18px 32px; display: inline-block; margin-bottom: 24px;">
+            <span style="color: #94A3B8; font-size: 36px; font-weight: 700; letter-spacing: 0.3em; font-family: 'Courier New', monospace;">${code}</span>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">This code expires in 10 minutes. If you didn't request this, ignore this email.</p>
         </div>
@@ -73,13 +73,13 @@ const VERIFICATION_TEMPLATES: Record<string, { subject: string; body: (code: str
   ru: {
     subject: 'Ваш код подтверждения — Красота Армении',
     body: (code) => `
-      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
         <div style="padding: 32px 28px; text-align: center;">
-          <h1 style="color: #c9a84c; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">КРАСОТА АРМЕНИИ</h1>
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">КРАСОТА АРМЕНИИ</h1>
           <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 0 0 28px;">Подтверждение email</p>
           <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin: 0 0 24px;">Введите этот код для подтверждения вашего email:</p>
-          <div style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 18px 32px; display: inline-block; margin-bottom: 24px;">
-            <span style="color: #c9a84c; font-size: 36px; font-weight: 700; letter-spacing: 0.3em; font-family: 'Courier New', monospace;">${code}</span>
+          <div style="background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 18px 32px; display: inline-block; margin-bottom: 24px;">
+            <span style="color: #94A3B8; font-size: 36px; font-weight: 700; letter-spacing: 0.3em; font-family: 'Courier New', monospace;">${code}</span>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Код действителен 10 минут. Если вы не запрашивали код, проигнорируйте это письмо.</p>
         </div>
@@ -89,13 +89,13 @@ const VERIFICATION_TEMPLATES: Record<string, { subject: string; body: (code: str
   de: {
     subject: 'Ihr Bestätigungscode — Die Schönheit Armeniens',
     body: (code) => `
-      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
         <div style="padding: 32px 28px; text-align: center;">
-          <h1 style="color: #c9a84c; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">DIE SCHÖNHEIT ARMENIENS</h1>
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">DIE SCHÖNHEIT ARMENIENS</h1>
           <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 0 0 28px;">E-Mail-Bestätigung</p>
           <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin: 0 0 24px;">Geben Sie diesen Code ein, um Ihre E-Mail-Adresse zu bestätigen:</p>
-          <div style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 18px 32px; display: inline-block; margin-bottom: 24px;">
-            <span style="color: #c9a84c; font-size: 36px; font-weight: 700; letter-spacing: 0.3em; font-family: 'Courier New', monospace;">${code}</span>
+          <div style="background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 18px 32px; display: inline-block; margin-bottom: 24px;">
+            <span style="color: #94A3B8; font-size: 36px; font-weight: 700; letter-spacing: 0.3em; font-family: 'Courier New', monospace;">${code}</span>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Dieser Code läuft in 10 Minuten ab. Wenn Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail.</p>
         </div>
@@ -134,9 +134,9 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
   en: {
     subject: (tour) => `Reservation Confirmed — ${tour}`,
     body: (d) => `
-      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
         <div style="padding: 32px 28px; text-align: center;">
-          <h1 style="color: #c9a84c; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">THE BEAUTY OF ARMENIA</h1>
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">THE BEAUTY OF ARMENIA</h1>
           <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 0 0 28px;">Reservation Confirmed</p>
           <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin: 0 0 6px;">${d.tourName}</p>
           <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin: 0 0 24px;">${d.tourDate}</p>
@@ -146,11 +146,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Guest:</strong> ${d.userFirstName} ${d.userLastName}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Guide Language:</strong> ${d.guideLanguage === 'armenian' ? 'Armenian' : 'English/Russian'}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Adults:</strong> ${d.adults}${d.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.7);">Children:</strong> ${d.children}` : ''}</p>
-            <p style="color: #c9a84c; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Total: €${d.totalPriceEUR}</p>
+            <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Total: €${d.totalPriceEUR}</p>
           </div>
-          <div style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
-            <p style="color: rgba(201,168,76,0.7); font-size: 12px; margin: 0 0 6px;">YOUR DISCOUNT CODE</p>
-            <p style="color: #c9a84c; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
+          <div style="background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
+            <p style="color: rgba(148,163,184,0.7); font-size: 12px; margin: 0 0 6px;">YOUR DISCOUNT CODE</p>
+            <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">5% off when you pay in person at the office</p>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Pay in person at the OneWay Tour office in Yerevan. Show this email to get your discount. Free cancellation within 24 hours.</p>
@@ -161,9 +161,9 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
   ru: {
     subject: (tour) => `Бронирование подтверждено — ${tour}`,
     body: (d) => `
-      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
         <div style="padding: 32px 28px; text-align: center;">
-          <h1 style="color: #c9a84c; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">КРАСОТА АРМЕНИИ</h1>
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">КРАСОТА АРМЕНИИ</h1>
           <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 0 0 28px;">Бронирование подтверждено</p>
           <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin: 0 0 6px;">${d.tourName}</p>
           <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin: 0 0 24px;">${d.tourDate}</p>
@@ -173,11 +173,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Гость:</strong> ${d.userFirstName} ${d.userLastName}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Язык гида:</strong> ${d.guideLanguage === 'armenian' ? 'Армянский' : 'Английский/Русский'}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Взрослые:</strong> ${d.adults}${d.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.7);">Дети:</strong> ${d.children}` : ''}</p>
-            <p style="color: #c9a84c; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Итого: €${d.totalPriceEUR}</p>
+            <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Итого: €${d.totalPriceEUR}</p>
           </div>
-          <div style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
-            <p style="color: rgba(201,168,76,0.7); font-size: 12px; margin: 0 0 6px;">ВАШ СКИДОЧНЫЙ КОД</p>
-            <p style="color: #c9a84c; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
+          <div style="background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
+            <p style="color: rgba(148,163,184,0.7); font-size: 12px; margin: 0 0 6px;">ВАШ СКИДОЧНЫЙ КОД</p>
+            <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">Скидка 5% при оплате в офисе</p>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Оплата наличными в офисе OneWay Tour в Ереване. Покажите это письмо для получения скидки. Бесплатная отмена в течение 24 часов.</p>
@@ -188,9 +188,9 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
   de: {
     subject: (tour) => `Reservierung bestätigt — ${tour}`,
     body: (d) => `
-      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
         <div style="padding: 32px 28px; text-align: center;">
-          <h1 style="color: #c9a84c; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">DIE SCHÖNHEIT ARMENIENS</h1>
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 6px; letter-spacing: 0.05em;">DIE SCHÖNHEIT ARMENIENS</h1>
           <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 0 0 28px;">Reservierung bestätigt</p>
           <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin: 0 0 6px;">${d.tourName}</p>
           <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin: 0 0 24px;">${d.tourDate}</p>
@@ -200,11 +200,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Gast:</strong> ${d.userFirstName} ${d.userLastName}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Guidesprache:</strong> ${d.guideLanguage === 'armenian' ? 'Armenisch' : 'Englisch/Russisch'}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Erwachsene:</strong> ${d.adults}${d.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.7);">Kinder:</strong> ${d.children}` : ''}</p>
-            <p style="color: #c9a84c; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Gesamt: €${d.totalPriceEUR}</p>
+            <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Gesamt: €${d.totalPriceEUR}</p>
           </div>
-          <div style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
-            <p style="color: rgba(201,168,76,0.7); font-size: 12px; margin: 0 0 6px;">IHR RABATTCODE</p>
-            <p style="color: #c9a84c; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
+          <div style="background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
+            <p style="color: rgba(148,163,184,0.7); font-size: 12px; margin: 0 0 6px;">IHR RABATTCODE</p>
+            <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">5% Rabatt bei Zahlung im Büro</p>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Zahlung vor Ort im OneWay Tour-Büro in Eriwan. Zeigen Sie diese E-Mail für den Rabatt. Kostenlose Stornierung innerhalb von 24 Stunden.</p>
@@ -227,9 +227,9 @@ export async function sendConfirmationEmails(
   // Send copy to admin
   const adminSubject = `[New Reservation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`
   const adminHtml = `
-    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.15);">
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
       <div style="padding: 32px 28px;">
-        <h2 style="color: #c9a84c; font-size: 18px; margin: 0 0 16px;">New Tour Reservation</h2>
+        <h2 style="color: #94A3B8; font-size: 18px; margin: 0 0 16px;">New Tour Reservation</h2>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Tour:</strong> ${data.tourName}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Date:</strong> ${data.tourDate}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Guest:</strong> ${data.userFirstName} ${data.userLastName}</p>
@@ -237,7 +237,7 @@ export async function sendConfirmationEmails(
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Phone:</strong> ${data.userPhone || 'N/A'}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Guide:</strong> ${data.guideLanguage}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Adults:</strong> ${data.adults}${data.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.8);">Children:</strong> ${data.children}` : ''}</p>
-        <p style="color: #c9a84c; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Total: €${data.totalPriceEUR}</p>
+        <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Total: €${data.totalPriceEUR}</p>
         <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 8px 0 0;">Booking ID: ${data.bookingId}</p>
       </div>
     </div>

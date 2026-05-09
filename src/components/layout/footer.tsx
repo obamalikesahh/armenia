@@ -31,9 +31,9 @@ export function Footer() {
           {/* About Column */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <Mountain className="size-6 text-[#c9a84c]" />
+              <Mountain className="size-6 text-[#94A3B8]" />
               <span className="text-lg font-bold text-white">
-                ARMENIA <span className="text-[#c9a84c]">TOURS</span>
+                ARMENIA <span className="text-[#94A3B8]">TOURS</span>
               </span>
             </div>
             <p className="mb-4 text-sm leading-relaxed text-white/40">
@@ -89,7 +89,7 @@ export function Footer() {
                 <li key={link.key}>
                   <a
                     href={link.href}
-                    className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]"
+                    className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]"
                   >
                     {t(link.key)}
                   </a>
@@ -105,17 +105,17 @@ export function Footer() {
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]">
+                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]">
                   {t('footer.terms')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]">
+                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]">
                   {t('footer.privacy')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#c9a84c]">
+                <a href="#" className="text-sm text-white/40 transition-colors hover:text-[#94A3B8]">
                   {t('footer.cancellation')}
                 </a>
               </li>
@@ -157,12 +157,12 @@ export function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t('footer.emailPlaceholder')}
                   required
-                  className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/30 focus-visible:border-[#c9a84c]/30"
+                  className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/30 focus-visible:border-[#94A3B8]/30"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e]"
+                className="w-full bg-gradient-to-r bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3]"
                 size="sm"
               >
                 <Send className="mr-2 size-3" />
@@ -184,7 +184,7 @@ export function Footer() {
                     onClick={() => setLocale(loc)}
                     className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${
                       locale === loc
-                        ? 'bg-[#c9a84c]/10 text-[#c9a84c]'
+                        ? 'bg-[#94A3B8]/10 text-[#94A3B8]'
                         : 'bg-white/3 text-white/40 hover:bg-white/3 hover:text-white/70'
                     }`}
                   >

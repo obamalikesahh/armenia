@@ -23,9 +23,9 @@ function BackgroundParticlesContent() {
     const palette = [
       new THREE.Color('#8B5CF6'),
       new THREE.Color('#EC4899'),
-      new THREE.Color('#F59E0B'),
+      new THREE.Color('#94A3B8'),
       new THREE.Color('#a78bfa'), // lighter violet
-      new THREE.Color('#fbbf24'), // lighter amber
+      new THREE.Color('#CBD5E1'), // lighter silver
     ]
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -36,7 +36,7 @@ function BackgroundParticlesContent() {
       positions[i3 + 1] = (Math.random() - 0.5) * 16
       positions[i3 + 2] = (Math.random() - 0.5) * 10 - 2
 
-      // Warm color mix
+      // Cool color mix
       const c = palette[Math.floor(Math.random() * palette.length)]
       colors[i3] = c.r
       colors[i3 + 1] = c.g

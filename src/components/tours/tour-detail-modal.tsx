@@ -320,19 +320,19 @@ export function TourDetailModal({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-              className="mb-6 flex size-20 items-center justify-center rounded-full bg-[#c9a84c]/10"
+              className="mb-6 flex size-20 items-center justify-center rounded-full bg-[#94A3B8]/10"
             >
-              <Check className="size-10 text-[#c9a84c]" />
+              <Check className="size-10 text-[#94A3B8]" />
             </motion.div>
             <h2 className="mb-2 text-2xl font-bold text-white">{t('booking.reservationConfirmed')}</h2>
             <p className="mb-6 text-sm text-white/40">{t('booking.confirmationEmailSent')}</p>
             
-            <div className="mb-6 w-full rounded-xl border border-[#c9a84c]/15 bg-[#c9a84c]/5 p-4">
+            <div className="mb-6 w-full rounded-xl border border-[#94A3B8]/15 bg-[#94A3B8]/5 p-4">
               <div className="mb-2 flex items-center justify-center gap-2">
-                <Ticket className="size-5 text-[#c9a84c]" />
-                <span className="text-sm font-semibold text-[#c9a84c]">{t('booking.discountCode')}</span>
+                <Ticket className="size-5 text-[#94A3B8]" />
+                <span className="text-sm font-semibold text-[#94A3B8]">{t('booking.discountCode')}</span>
               </div>
-              <p className="text-center text-3xl font-bold tracking-widest text-[#c9a84c]">Armen5</p>
+              <p className="text-center text-3xl font-bold tracking-widest text-[#94A3B8]">Armen5</p>
               <p className="mt-1 text-center text-xs text-white/30">{t('booking.discountDescription')}</p>
             </div>
 
@@ -340,7 +340,7 @@ export function TourDetailModal({
 
             <Button
               onClick={() => handleClose(false)}
-              className="bg-[#c9a84c] text-[#0a0a0a] font-medium hover:bg-[#b8973e] rounded-full px-8"
+              className="bg-[#94A3B8] text-[#0a0a0a] font-medium hover:bg-[#7E8FA3] rounded-full px-8"
             >
               {t('common.close')}
             </Button>
@@ -428,7 +428,7 @@ export function TourDetailModal({
 
                 {tour.featured && (
                   <div className="absolute top-4 left-4 z-10">
-                    <Badge className="border-0 bg-[#c9a84c]/90 text-[#0a0a0a] shadow-lg backdrop-blur-sm">
+                    <Badge className="border-0 bg-[#94A3B8]/90 text-[#0a0a0a] shadow-lg backdrop-blur-sm">
                       <Star className="mr-1 size-3 fill-current" />
                       {t('tours.featured')}
                     </Badge>
@@ -462,7 +462,7 @@ export function TourDetailModal({
                       onClick={() => goToImage(idx)}
                       className={`relative shrink-0 overflow-hidden rounded-lg transition-all duration-300 ${
                         idx === currentImageIndex
-                          ? 'ring-2 ring-[#c9a84c] ring-offset-1 ring-offset-[#0a0a0a]'
+                          ? 'ring-2 ring-[#94A3B8] ring-offset-1 ring-offset-[#0a0a0a]'
                           : 'ring-1 ring-white/6 opacity-50 hover:opacity-80'
                       }`}
                       aria-label={`View image ${idx + 1}`}
@@ -487,7 +487,7 @@ export function TourDetailModal({
                     onClick={() => setActiveTab(tab.id)}
                     className={`relative flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === tab.id
-                        ? 'text-[#c9a84c]'
+                        ? 'text-[#94A3B8]'
                         : 'text-white/35 hover:text-white/60'
                     }`}
                   >
@@ -496,7 +496,7 @@ export function TourDetailModal({
                     {activeTab === tab.id && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 left-0 right-0 h-px bg-[#c9a84c]"
+                        className="absolute bottom-0 left-0 right-0 h-px bg-[#94A3B8]"
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       />
                     )}
@@ -527,7 +527,7 @@ export function TourDetailModal({
                           <ul className="space-y-2">
                             {tour.included.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-sm">
-                                <Check className="mt-0.5 size-4 shrink-0 text-[#c9a84c]/70" />
+                                <Check className="mt-0.5 size-4 shrink-0 text-[#94A3B8]/70" />
                                 <span className="text-white/50">{item}</span>
                               </li>
                             ))}
@@ -588,7 +588,7 @@ export function TourDetailModal({
                         <h3 className="text-lg font-semibold text-white">
                           {t('booking.reserveTitle')}
                         </h3>
-                        <Badge className="border-[#c9a84c]/20 bg-[#c9a84c]/8 text-[#c9a84c]">
+                        <Badge className="border-[#94A3B8]/20 bg-[#94A3B8]/8 text-[#94A3B8]">
                           <Shield className="mr-1 size-3" />
                           {t('booking.payAtOffice')}
                         </Badge>
@@ -654,7 +654,7 @@ export function TourDetailModal({
                         >
                           <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
                             guideLanguage === 'armenian'
-                              ? 'border-[#c9a84c]/30 bg-[#c9a84c]/8'
+                              ? 'border-[#94A3B8]/30 bg-[#94A3B8]/8'
                               : 'border-white/6 bg-white/3 hover:border-white/10'
                           }`}>
                             <RadioGroupItem value="armenian" id="armenian" />
@@ -667,7 +667,7 @@ export function TourDetailModal({
                           </div>
                           <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
                             guideLanguage === 'english-russian'
-                              ? 'border-[#c9a84c]/30 bg-[#c9a84c]/8'
+                              ? 'border-[#94A3B8]/30 bg-[#94A3B8]/8'
                               : 'border-white/6 bg-white/3 hover:border-white/10'
                           }`}>
                             <RadioGroupItem value="english-russian" id="english-russian" />
@@ -713,8 +713,8 @@ export function TourDetailModal({
                       </div>
 
                       {/* Price breakdown */}
-                      <div className="rounded-xl border border-[#c9a84c]/15 bg-[#c9a84c]/3 p-4">
-                        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#c9a84c]/70">
+                      <div className="rounded-xl border border-[#94A3B8]/15 bg-[#94A3B8]/3 p-4">
+                        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#94A3B8]/70">
                           {t('booking.priceBreakdown')}
                         </h4>
                         <div className="space-y-2">
@@ -740,16 +740,16 @@ export function TourDetailModal({
                           <div className="flex justify-between">
                             <span className="font-semibold text-white">{t('booking.total')}</span>
                             <div className="text-right">
-                              <p className="font-bold text-[#c9a84c]">{formatPrice(totalPriceEUR)}</p>
+                              <p className="font-bold text-[#94A3B8]">{formatPrice(totalPriceEUR)}</p>
                               <p className="text-xs text-white/30">{t('common.eur')}</p>
                             </div>
                           </div>
                         </div>
 
                         {/* Discount notice */}
-                        <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#c9a84c]/5 px-3 py-2">
-                          <Ticket className="size-4 shrink-0 text-[#c9a84c]/60" />
-                          <p className="text-xs text-[#c9a84c]/60">
+                        <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#94A3B8]/5 px-3 py-2">
+                          <Ticket className="size-4 shrink-0 text-[#94A3B8]/60" />
+                          <p className="text-xs text-[#94A3B8]/60">
                             {t('booking.discountNotice')}
                           </p>
                         </div>
@@ -767,7 +767,7 @@ export function TourDetailModal({
                       <Button
                         onClick={handleReserve}
                         disabled={!date || !hasEnoughSeats || reservationStatus === 'loading'}
-                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#b8973e] hover:shadow-[#c9a84c]/10 disabled:opacity-50"
+                        className="w-full bg-[#94A3B8] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#7E8FA3] hover:shadow-[#94A3B8]/10 disabled:opacity-50"
                         size="lg"
                       >
                         {reservationStatus === 'loading' ? (
@@ -809,9 +809,9 @@ export function TourDetailModal({
                           {tour.route.map((stop, idx) => (
                             <div key={idx} className="relative flex gap-4 pb-6 last:pb-0">
                               {idx < tour.route.length - 1 && (
-                                <div className="absolute top-6 left-[15px] h-full w-px bg-gradient-to-b from-[#c9a84c]/30 to-[#c9a84c]/5" />
+                                <div className="absolute top-6 left-[15px] h-full w-px bg-gradient-to-b from-[#94A3B8]/30 to-[#94A3B8]/5" />
                               )}
-                              <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#c9a84c]/20 bg-[#c9a84c]/8 text-xs font-bold text-[#c9a84c]">
+                              <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#94A3B8]/20 bg-[#94A3B8]/8 text-xs font-bold text-[#94A3B8]">
                                 {idx + 1}
                               </div>
                               <div className="flex-1">
@@ -841,7 +841,7 @@ export function TourDetailModal({
                     transition={{ duration: 0.2 }}
                   >
                     <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
-                      <Eye className="size-5 text-[#c9a84c]/70" />
+                      <Eye className="size-5 text-[#94A3B8]/70" />
                       {t('tours.tabStreetView')}
                     </h3>
 
@@ -852,7 +852,7 @@ export function TourDetailModal({
                           onClick={() => setSelectedLocationIdx(idx)}
                           className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                             selectedLocationIdx === idx
-                              ? 'bg-[#c9a84c]/10 text-[#c9a84c] ring-1 ring-[#c9a84c]/20'
+                              ? 'bg-[#94A3B8]/10 text-[#94A3B8] ring-1 ring-[#94A3B8]/20'
                               : 'border border-white/6 bg-white/3 text-white/45 hover:border-white/10 hover:bg-white/5 hover:text-white/60'
                           }`}
                         >
@@ -876,14 +876,14 @@ export function TourDetailModal({
                         </div>
                         <div className="flex items-center justify-between gap-2 border-t border-white/6 bg-white/3 p-3">
                           <div className="flex items-center gap-2 min-w-0">
-                            <MapPin className="size-4 shrink-0 text-[#c9a84c]/70" />
+                            <MapPin className="size-4 shrink-0 text-[#94A3B8]/70" />
                             <span className="truncate text-sm font-medium text-white/60">{selectedLocation.name}</span>
                           </div>
                           <a
                             href={`https://www.google.com/maps/@${selectedLocation.lat},${selectedLocation.lng},15z`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex shrink-0 items-center gap-1 rounded-lg border border-white/6 bg-white/3 px-3 py-1.5 text-xs font-medium text-[#c9a84c]/70 transition-all duration-200 hover:border-[#c9a84c]/20 hover:bg-[#c9a84c]/5 hover:text-[#c9a84c]"
+                            className="flex shrink-0 items-center gap-1 rounded-lg border border-white/6 bg-white/3 px-3 py-1.5 text-xs font-medium text-[#94A3B8]/70 transition-all duration-200 hover:border-[#94A3B8]/20 hover:bg-[#94A3B8]/5 hover:text-[#94A3B8]"
                           >
                             {t('tours.openInMaps')}
                             <ExternalLink className="size-3" />
@@ -902,7 +902,7 @@ export function TourDetailModal({
                               <button
                                 key={idx}
                                 onClick={() => setSelectedLocationIdx(originalIdx)}
-                                className="group overflow-hidden rounded-xl border border-white/6 bg-white/3 transition-all duration-200 hover:border-[#c9a84c]/15 hover:bg-white/[0.04]"
+                                className="group overflow-hidden rounded-xl border border-white/6 bg-white/3 transition-all duration-200 hover:border-[#94A3B8]/15 hover:bg-white/[0.04]"
                               >
                                 <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                                   <iframe
@@ -915,7 +915,7 @@ export function TourDetailModal({
                                   />
                                 </div>
                                 <div className="flex items-center gap-1.5 px-2.5 py-2">
-                                  <MapPin className="size-3 shrink-0 text-[#c9a84c]/50" />
+                                  <MapPin className="size-3 shrink-0 text-[#94A3B8]/50" />
                                   <span className="truncate text-xs font-medium text-white/40 group-hover:text-white/55">
                                     {location.name}
                                   </span>

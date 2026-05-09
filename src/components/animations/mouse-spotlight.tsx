@@ -5,8 +5,8 @@ import { useEffect, useRef } from 'react'
 interface SpotlightProps {
   /** Radius of the spotlight in pixels, default 400 */
   radius?: number
-  /** Color of the spotlight glow, default amber */
-  color?: 'amber' | 'violet' | 'mixed'
+  /** Color of the spotlight glow, default silver */
+  color?: 'silver' | 'violet' | 'mixed'
   /** Opacity of the spotlight, default 0.07 */
   opacity?: number
 }
@@ -24,13 +24,13 @@ export function MouseSpotlight({
     const getGradient = () => {
       const r = radius
       switch (color) {
-        case 'amber':
-          return `radial-gradient(${r}px circle at var(--mouse-x) var(--mouse-y), rgba(245, 158, 11, ${opacity}), rgba(245, 158, 11, ${opacity * 0.3}) 40%, transparent 70%)`
+        case 'silver':
+          return `radial-gradient(${r}px circle at var(--mouse-x) var(--mouse-y), rgba(148, 163, 184, ${opacity}), rgba(148, 163, 184, ${opacity * 0.3}) 40%, transparent 70%)`
         case 'violet':
           return `radial-gradient(${r}px circle at var(--mouse-x) var(--mouse-y), rgba(139, 92, 246, ${opacity}), rgba(139, 92, 246, ${opacity * 0.3}) 40%, transparent 70%)`
         case 'mixed':
         default:
-          return `radial-gradient(${r}px circle at var(--mouse-x) var(--mouse-y), rgba(245, 158, 11, ${opacity}), rgba(139, 92, 246, ${opacity * 0.5}) 30%, rgba(236, 72, 153, ${opacity * 0.3}) 50%, transparent 70%)`
+          return `radial-gradient(${r}px circle at var(--mouse-x) var(--mouse-y), rgba(148, 163, 184, ${opacity}), rgba(139, 92, 246, ${opacity * 0.5}) 30%, rgba(236, 72, 153, ${opacity * 0.3}) 50%, transparent 70%)`
       }
     }
 

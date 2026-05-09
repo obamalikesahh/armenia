@@ -107,7 +107,7 @@ function LocationMarkers() {
   )
 
   const markerColors = useMemo(() => {
-    const palette = ['#8B5CF6', '#EC4899', '#F59E0B']
+    const palette = ['#8B5CF6', '#EC4899', '#94A3B8']
     return TOUR_LOCATIONS.map((_, i) => new THREE.Color(palette[i % palette.length]))
   }, [])
 
@@ -194,7 +194,7 @@ function ParticleTrails() {
     const trailSpeeds = new Float32Array(trailCount)
     const trailOffsets = new Float32Array(trailCount)
     const trailColors = new Float32Array(trailCount * 3)
-    const palette = [new THREE.Color('#8B5CF6'), new THREE.Color('#EC4899'), new THREE.Color('#F59E0B')]
+    const palette = [new THREE.Color('#8B5CF6'), new THREE.Color('#EC4899'), new THREE.Color('#94A3B8')]
 
     for (let i = 0; i < trailCount; i++) {
       const i3 = i * 3
@@ -283,7 +283,7 @@ function GlobeSceneContent() {
       <ambientLight intensity={0.4} />
       <pointLight position={[3, 3, 3]} intensity={0.8} color="#8B5CF6" />
       <pointLight position={[-3, 2, -2]} intensity={0.6} color="#EC4899" />
-      <pointLight position={[0, -3, 2]} intensity={0.4} color="#F59E0B" />
+      <pointLight position={[0, -3, 2]} intensity={0.4} color="#94A3B8" />
 
       <Float speed={1.2} rotationIntensity={0.1} floatIntensity={0.3}>
         <group>

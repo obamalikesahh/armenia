@@ -16,11 +16,11 @@ interface Particle {
 }
 
 const COLORS = [
-  '#F59E0B', // amber
+  '#94A3B8', // silver
   '#8B5CF6', // violet
   '#EC4899', // pink
   '#ffffff', // white
-  '#FBBF24', // amber-400
+  '#CBD5E1', // silver-400
   '#A78BFA', // violet-400
   '#F472B6', // pink-400
 ]
@@ -165,7 +165,7 @@ export function HeroParticles() {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(245, 158, 11, ${alpha})`
+            ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`
             ctx.stroke()
           }
         }
@@ -177,7 +177,7 @@ export function HeroParticles() {
           mouse.x, mouse.y, 0,
           mouse.x, mouse.y, MOUSE_RADIUS
         )
-        mouseGradient.addColorStop(0, 'rgba(245, 158, 11, 0.03)')
+        mouseGradient.addColorStop(0, 'rgba(148, 163, 184, 0.03)')
         mouseGradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.015)')
         mouseGradient.addColorStop(1, 'transparent')
         ctx.fillStyle = mouseGradient

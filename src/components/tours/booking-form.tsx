@@ -121,7 +121,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
           <div
             className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
               guideLanguage === 'armenian'
-                ? 'border-amber-500/50 bg-amber-500/10'
+                ? 'border-slate-400/50 bg-slate-400/10'
                 : 'border-white/10 bg-white/5 hover:border-white/20'
             }`}
           >
@@ -136,7 +136,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
           <div
             className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
               guideLanguage === 'english-russian'
-                ? 'border-amber-500/50 bg-amber-500/10'
+                ? 'border-slate-400/50 bg-slate-400/10'
                 : 'border-white/10 bg-white/5 hover:border-white/20'
             }`}
           >
@@ -209,8 +209,8 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
       </div>
 
       {/* Price breakdown */}
-      <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
-        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-amber-400">
+      <div className="rounded-xl border border-slate-400/20 bg-slate-400/5 p-4">
+        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">
           {t('booking.priceBreakdown')}
         </h4>
         <div className="space-y-2">
@@ -244,7 +244,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
           <div className="flex justify-between">
             <span className="font-semibold text-white">{t('booking.total')}</span>
             <div className="text-right">
-              <p className="font-bold text-amber-400">{formatPrice(breakdown.totalEUR)}</p>
+              <p className="font-bold text-slate-300">{formatPrice(breakdown.totalEUR)}</p>
             </div>
           </div>
         </div>
@@ -255,7 +255,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
         <Button
           onClick={handleSubmit}
           disabled={!isValid || isProcessing}
-          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg transition-all duration-300 hover:from-orange-600 hover:to-amber-600 hover:shadow-orange-500/25 disabled:opacity-50"
+          className="w-full bg-gradient-to-r from-slate-500 to-slate-400 text-white shadow-lg transition-all duration-300 hover:from-slate-600 hover:to-slate-600 hover:shadow-slate-500/25 disabled:opacity-50"
           size="lg"
         >
           {isProcessing ? (

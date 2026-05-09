@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 /* ──────────────────────────────────────────────
    Minimal Hero Scene — clean, dark, sophisticated
-   Single accent color (warm gold), no busy effects
+   Single accent color (cool silver), no busy effects
    ────────────────────────────────────────────── */
 
 export function HeroScene({ className = '' }: { className?: string }) {
@@ -156,11 +156,11 @@ export function HeroScene({ className = '' }: { className?: string }) {
         }}
       />
 
-      {/* ── Very subtle warm glow in center ── */}
+      {/* ── Very subtle cool glow in center ── */}
       <div
         className="pointer-events-none absolute inset-0 z-[2] opacity-[0.07]"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 1) 0%, transparent 50%)',
+          background: 'radial-gradient(circle at 50% 50%, rgba(148, 163, 184, 1) 0%, transparent 50%)',
         }}
       />
     </div>

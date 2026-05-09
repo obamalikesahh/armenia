@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     // Check availability
     const totalPeople = adults + children
     let availability = await db.tourAvailability.findUnique({
-      where: { tourId_date: { tourId, tourDate } },
+      where: { tourId_tourDate: { tourId, tourDate } },
     })
 
     if (!availability) {
