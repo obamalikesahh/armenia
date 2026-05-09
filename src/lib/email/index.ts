@@ -1,16 +1,26 @@
 import nodemailer from 'nodemailer'
 
-// Create reusable transporter
+// Create reusable transporter (with connection pooling for performance)
+let cachedTransporter: nodemailer.Transporter | null = null
+
 const getTransporter = () => {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  if (cachedTransporter) return cachedTransporter
+
+  cachedTransporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.web.de',
     port: Number(process.env.SMTP_PORT) || 587,
     secure: false,
     auth: {
       user: process.env.SMTP_USER || '',
       pass: process.env.SMTP_PASS || '',
     },
+    // Connection pooling for better performance
+    pool: true,
+    maxConnections: 5,
+    maxMessages: 100,
   })
+
+  return cachedTransporter
 }
 
 const OWNER_EMAIL = 'armen.arakelyan@web.de'
@@ -434,3 +444,91 @@ export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' 
 }
 
 export { DISCOUNT_CODE, DISCOUNT_PERCENT, OWNER_EMAIL }
+
+// ─── Email Verification Code ───
+export async function sendVerificationCodeEmail(email: string, code: string, lang: 'en' | 'ru' | 'de' = 'en') {
+  const templates = {
+    en: {
+      subject: 'Your Verification Code — OneWay Tour',
+      title: 'Verify Your Email',
+      greeting: 'Hello,',
+      message: 'To complete your registration, please enter the following 6-digit verification code:',
+      codeLabel: 'VERIFICATION CODE',
+      expiry: 'This code expires in 10 minutes.',
+      ignore: 'If you did not request this code, please ignore this email.',
+      regards: 'Best regards,<br/>OneWay Tour Team',
+    },
+    ru: {
+      subject: 'Ваш код подтверждения — OneWay Tour',
+      title: 'Подтвердите ваш email',
+      greeting: 'Здравствуйте,',
+      message: 'Для завершения регистрации введите следующий 6-значный код подтверждения:',
+      codeLabel: 'КОД ПОДТВЕРЖДЕНИЯ',
+      expiry: 'Код действителен 10 минут.',
+      ignore: 'Если вы не запрашивали этот код, проигнорируйте это письмо.',
+      regards: 'С уважением,<br/>Команда OneWay Tour',
+    },
+    de: {
+      subject: 'Ihr Bestätigungscode — OneWay Tour',
+      title: 'Bestätigen Sie Ihre E-Mail',
+      greeting: 'Hallo,',
+      message: 'Geben Sie den folgenden 6-stelligen Bestätigungscode ein, um Ihre Registrierung abzuschließen:',
+      codeLabel: 'BESTÄTIGUNGSCODE',
+      expiry: 'Dieser Code ist 10 Minuten gültig.',
+      ignore: 'Wenn Sie diesen Code nicht angefordert haben, ignorieren Sie diese E-Mail.',
+      regards: 'Mit freundlichen Grüßen,<br/>Ihr OneWay Tour-Team',
+    },
+  }
+
+  const t = templates[lang]
+
+  const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,Helvetica,sans-serif;color:#e8e8e8;">
+  <div style="max-width:600px;margin:0 auto;padding:20px;">
+    <!-- Header -->
+    <div style="text-align:center;padding:30px 0 20px;border-bottom:1px solid rgba(201,168,76,0.2);">
+      <h1 style="margin:0;font-size:28px;color:#c9a84c;letter-spacing:2px;">ONEWAY TOUR</h1>
+      <p style="margin:5px 0 0;font-size:12px;color:#888;letter-spacing:3px;">ARMENIA</p>
+    </div>
+
+    <!-- Title -->
+    <div style="padding:30px 0 20px;text-align:center;">
+      <h2 style="margin:0;font-size:22px;color:#e8e8e8;">${t.title}</h2>
+    </div>
+
+    <!-- Greeting -->
+    <p style="font-size:15px;line-height:1.6;color:#ccc;">${t.greeting}</p>
+    <p style="font-size:14px;line-height:1.6;color:#999;">${t.message}</p>
+
+    <!-- Code Box -->
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:24px;margin:24px 0;text-align:center;">
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:2px;color:#c9a84c/60;text-transform:uppercase;">${t.codeLabel}</p>
+      <p style="margin:0;font-size:36px;font-weight:bold;letter-spacing:12px;color:#c9a84c;font-family:'Courier New',monospace;">${code}</p>
+    </div>
+
+    <!-- Expiry -->
+    <p style="font-size:13px;line-height:1.5;color:#666;text-align:center;">${t.expiry}</p>
+
+    <!-- Ignore notice -->
+    <div style="padding:15px 0;border-top:1px solid rgba(255,255,255,0.04);font-size:12px;color:#555;line-height:1.5;text-align:center;">
+      ${t.ignore}
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:20px 0;border-top:1px solid rgba(201,168,76,0.1);font-size:13px;color:#888;">
+      ${t.regards}
+    </div>
+  </div>
+</body>
+</html>`
+
+  const transporter = getTransporter()
+  await transporter.sendMail({
+    from: `"OneWay Tour Armenia" <${process.env.SMTP_USER || 'noreply@onewaytour.com'}>`,
+    to: email,
+    subject: t.subject,
+    html,
+  })
+}

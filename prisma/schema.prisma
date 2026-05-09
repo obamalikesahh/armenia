@@ -48,3 +48,14 @@ model TourAvailability {
 
   @@unique([tourId, tourDate])
 }
+
+model EmailVerification {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  verified  Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, code])
+}

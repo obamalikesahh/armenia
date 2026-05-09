@@ -4,7 +4,7 @@ import { hashPassword } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password, firstName, lastName, phone } =
+    const { email, password, firstName, lastName, phone, emailVerified } =
       await request.json()
 
     // Validate required fields (phone is now required)
@@ -15,9 +15,36 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check that emailVerified flag is provided
+    if (emailVerified !== true) {
+      return NextResponse.json(
+        { error: 'Email verification required' },
+        { status: 400 }
+      )
+    }
+
+    // Normalize email
+    const normalizedEmail = email.toLowerCase().trim()
+
+    // Verify that email has been verified via EmailVerification system
+    const verification = await db.emailVerification.findFirst({
+      where: {
+        email: normalizedEmail,
+        verified: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    })
+
+    if (!verification) {
+      return NextResponse.json(
+        { error: 'Email not verified. Please verify your email first.' },
+        { status: 400 }
+      )
+    }
+
     // Check if user already exists
     const existingUser = await db.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     })
 
     if (existingUser) {
@@ -33,12 +60,17 @@ export async function POST(request: NextRequest) {
     // Create user in DB
     const user = await db.user.create({
       data: {
-        email,
+        email: normalizedEmail,
         firstName,
         lastName,
         phone,
         passwordHash,
       },
+    })
+
+    // Clean up email verification records after successful registration
+    await db.emailVerification.deleteMany({
+      where: { email: normalizedEmail },
     })
 
     return NextResponse.json(

@@ -201,3 +201,36 @@ Stage Summary:
 - Phone number now required for registration
 - 3D fluid route animation on homepage
 - All translations updated in EN/RU/DE
+
+---
+Task ID: 2-8
+Agent: Main Agent
+Task: Implement email verification for signup (6-digit code), configure SMTP with web.de
+
+Work Log:
+- Updated .env with SMTP credentials for web.de (smtp.web.de:587, armen.arakelyan@web.de)
+- Updated email transporter to use smtp.web.de with connection pooling for performance
+- Added EmailVerification model to Prisma schema (email, code, verified, expiresAt)
+- Ran prisma db:push to sync schema changes
+- Created API route POST /api/auth/verify-send: generates 6-digit code, saves to DB (10min expiry), sends verification email
+- Created API route POST /api/auth/verify-check: validates code against DB, marks email as verified
+- Added sendVerificationCodeEmail() function to email service: styled dark-themed verification email in 3 languages (EN/RU/DE)
+- Updated auth-modal.tsx with 3-step registration flow:
+  - Step 1: Enter email → sends 6-digit code via API
+  - Step 2: Enter code via InputOTP (6 slots) with countdown timer, resend capability
+  - Step 3: Complete profile (name, phone, password) with emailVerified=true flag
+  - Added step indicator (3 circles with connecting lines)
+  - Added back navigation between steps
+  - Added info/error message banners
+- Updated register API route to require emailVerified=true flag and verify against EmailVerification DB
+- Added 19 new i18n translation keys in all 3 languages for verification flow
+- Added missing auth.invalidEmail and auth.sendCodeFailed keys in EN/RU/DE
+- Lint passes clean, dev server returns HTTP 200
+
+Stage Summary:
+- Email verification system fully implemented for signup
+- SMTP configured for web.de (armen.arakelyan@web.de)
+- 3-step signup flow: email → verify code → complete profile
+- Verification emails sent in user's selected language (EN/RU/DE)
+- Register API enforces email verification before account creation
+- All translations added for EN/RU/DE

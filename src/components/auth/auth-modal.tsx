@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mail, Lock, User, Phone, Eye, EyeOff, CheckCircle2 } from 'lucide-react'
+import { Mail, Lock, User, Phone, Eye, EyeOff, CheckCircle2, ArrowLeft } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from '@/components/ui/input-otp'
 import { useLocale } from '@/hooks/use-locale'
 
 interface UserInfo {
@@ -33,8 +34,10 @@ interface AuthModalProps {
   onLoginSuccess?: (user: UserInfo) => void
 }
 
+const COUNTDOWN_SECONDS = 600 // 10 minutes
+
 export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuccess }: AuthModalProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   // Login state
   const [loginEmail, setLoginEmail] = useState('')
@@ -56,12 +59,48 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
   const [regError, setRegError] = useState('')
   const [regSuccess, setRegSuccess] = useState(false)
 
+  // Register step flow
+  const [regStep, setRegStep] = useState(1) // 1: email, 2: verify code, 3: profile
+  const [otpValue, setOtpValue] = useState('')
+  const [sendCodeLoading, setSendCodeLoading] = useState(false)
+  const [verifyCodeLoading, setVerifyCodeLoading] = useState(false)
+  const [countdown, setCountdown] = useState(0)
+  const [codeSentAt, setCodeSentAt] = useState<number | null>(null)
+  const [regInfoMessage, setRegInfoMessage] = useState('')
+
   const [activeTab, setActiveTab] = useState(defaultTab)
 
   // Sync activeTab when defaultTab changes (e.g., clicking "Register" in navbar)
   useEffect(() => {
     setActiveTab(defaultTab)
   }, [defaultTab])
+
+  // Countdown timer for verification code expiry
+  useEffect(() => {
+    if (!codeSentAt) return
+
+    const tick = () => {
+      const elapsed = Math.floor((Date.now() - codeSentAt) / 1000)
+      const remaining = COUNTDOWN_SECONDS - elapsed
+      if (remaining <= 0) {
+        setCountdown(0)
+        setCodeSentAt(null)
+      } else {
+        setCountdown(remaining)
+      }
+    }
+
+    tick() // initial tick
+    const interval = setInterval(tick, 1000)
+    return () => clearInterval(interval)
+  }, [codeSentAt])
+
+  // Format countdown as MM:SS
+  const formatCountdown = useCallback((seconds: number) => {
+    const m = Math.floor(seconds / 60)
+    const s = seconds % 60
+    return `${m}:${s.toString().padStart(2, '0')}`
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -112,10 +151,113 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
     }
   }
 
+  // Step 1: Send verification code
+  const handleSendCode = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setRegError('')
+    setRegInfoMessage('')
+
+    if (!regEmail) {
+      setRegError(t('auth.fillFields'))
+      return
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(regEmail)) {
+      setRegError(t('auth.invalidEmail'))
+      return
+    }
+
+    setSendCodeLoading(true)
+    try {
+      const res = await fetch('/api/auth/verify-send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: regEmail, lang: locale }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || t('auth.sendCodeFailed'))
+      }
+
+      // Start countdown and move to step 2
+      setCodeSentAt(Date.now())
+      setCountdown(COUNTDOWN_SECONDS)
+      setOtpValue('')
+      setRegInfoMessage(t('auth.codeSent'))
+      setRegStep(2)
+    } catch (err) {
+      setRegError(err instanceof Error ? err.message : t('auth.sendCodeFailed'))
+    } finally {
+      setSendCodeLoading(false)
+    }
+  }
+
+  // Step 2: Verify the code
+  const handleVerifyCode = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setRegError('')
+    setRegInfoMessage('')
+
+    if (otpValue.length !== 6) {
+      setRegError(t('auth.invalidCode'))
+      return
+    }
+
+    setVerifyCodeLoading(true)
+    try {
+      const res = await fetch('/api/auth/verify-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: regEmail, code: otpValue }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || t('auth.invalidCode'))
+      }
+
+      // Move to step 3
+      setRegStep(3)
+    } catch (err) {
+      setRegError(err instanceof Error ? err.message : t('auth.invalidCode'))
+    } finally {
+      setVerifyCodeLoading(false)
+    }
+  }
+
+  // Resend verification code
+  const handleResendCode = async () => {
+    setRegError('')
+    setRegInfoMessage('')
+    setSendCodeLoading(true)
+    try {
+      const res = await fetch('/api/auth/verify-send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: regEmail, lang: locale }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || t('auth.sendCodeFailed'))
+      }
+
+      setCodeSentAt(Date.now())
+      setCountdown(COUNTDOWN_SECONDS)
+      setOtpValue('')
+      setRegInfoMessage(t('auth.codeSent'))
+    } catch (err) {
+      setRegError(err instanceof Error ? err.message : t('auth.sendCodeFailed'))
+    } finally {
+      setSendCodeLoading(false)
+    }
+  }
+
+  // Step 3: Complete profile & register
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
     setRegError('')
-    if (!regFirstName || !regLastName || !regEmail || !regPhone || !regPassword) {
+    if (!regFirstName || !regLastName || !regPhone || !regPassword) {
       setRegError(t('auth.fillRequiredFields'))
       return
     }
@@ -138,6 +280,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
           firstName: regFirstName,
           lastName: regLastName,
           phone: regPhone,
+          emailVerified: true,
         }),
       })
       const data = await res.json()
@@ -177,6 +320,13 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
     setRegTerms(false)
     setRegError('')
     setRegSuccess(false)
+    setRegStep(1)
+    setOtpValue('')
+    setSendCodeLoading(false)
+    setVerifyCodeLoading(false)
+    setCountdown(0)
+    setCodeSentAt(null)
+    setRegInfoMessage('')
     setActiveTab(defaultTab)
   }
 
@@ -184,6 +334,38 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
     if (!open) resetForm()
     onOpenChange(open)
   }
+
+  // Step indicator component
+  const StepIndicator = () => (
+    <div className="mb-6 flex items-center justify-center gap-2">
+      {[1, 2, 3].map((step) => (
+        <div key={step} className="flex items-center gap-2">
+          <div
+            className={`flex size-8 items-center justify-center rounded-full text-xs font-semibold transition-all ${
+              regStep === step
+                ? 'bg-[#c9a84c] text-[#0a0a0a]'
+                : regStep > step
+                  ? 'bg-[#c9a84c]/20 text-[#c9a84c]'
+                  : 'bg-white/6 text-white/25'
+            }`}
+          >
+            {regStep > step ? (
+              <CheckCircle2 className="size-4" />
+            ) : (
+              step
+            )}
+          </div>
+          {step < 3 && (
+            <div
+              className={`h-px w-8 transition-all ${
+                regStep > step ? 'bg-[#c9a84c]/40' : 'bg-white/6'
+              }`}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  )
 
   const SocialDivider = () => (
     <div className="relative my-4">
@@ -211,7 +393,18 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
 
         <Tabs
           value={activeTab}
-          onValueChange={(val) => setActiveTab(val as 'login' | 'register')}
+          onValueChange={(val) => {
+            setActiveTab(val as 'login' | 'register')
+            // Reset step when switching to register tab
+            if (val === 'register') {
+              setRegStep(1)
+              setOtpValue('')
+              setRegError('')
+              setRegInfoMessage('')
+              setCodeSentAt(null)
+              setCountdown(0)
+            }
+          }}
           className="w-full"
         >
           <div className="border-b border-white/6 px-6 pt-6">
@@ -386,160 +579,350 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                 </motion.div>
               ) : (
                 <motion.div
-                  key="register"
+                  key={`register-step-${regStep}`}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <form onSubmit={handleRegister} className="space-y-4">
-                    {regError && (
-                      <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-sm text-red-400">
-                        {regError}
-                      </div>
-                    )}
+                  <StepIndicator />
 
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-2">
-                        <Label htmlFor="reg-first" className="text-white/45">
-                          {t('auth.firstName')}
-                        </Label>
-                        <div className="relative">
-                          <User className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
-                          <Input
-                            id="reg-first"
-                            value={regFirstName}
-                            onChange={(e) => setRegFirstName(e.target.value)}
-                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
-                          />
+                  {/* Step 1: Enter Email */}
+                  {regStep === 1 && (
+                    <form onSubmit={handleSendCode} className="space-y-4">
+                      {regError && (
+                        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-sm text-red-400">
+                          {regError}
                         </div>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="reg-last" className="text-white/45">
-                          {t('auth.lastName')}
-                        </Label>
-                        <div className="relative">
-                          <User className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
-                          <Input
-                            id="reg-last"
-                            value={regLastName}
-                            onChange={(e) => setRegLastName(e.target.value)}
-                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="reg-email" className="text-white/45">
-                        {t('auth.email')}
-                      </Label>
-                      <div className="relative">
-                        <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
-                        <Input
-                          id="reg-email"
-                          type="email"
-                          value={regEmail}
-                          onChange={(e) => setRegEmail(e.target.value)}
-                          className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
-                          placeholder={t('auth.emailPlaceholder')}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="reg-phone" className="text-white/45">
-                        {t('auth.phone')} <span className="text-[#c9a84c]/60">*</span>
-                      </Label>
-                      <div className="relative">
-                        <Phone className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
-                        <Input
-                          id="reg-phone"
-                          type="tel"
-                          value={regPhone}
-                          onChange={(e) => setRegPhone(e.target.value)}
-                          className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
-                          placeholder="+374 XX XXX XXX"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="reg-password" className="text-white/45">
-                        {t('auth.password')}
-                      </Label>
-                      <div className="relative">
-                        <Lock className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
-                        <Input
-                          id="reg-password"
-                          type={showRegPassword ? 'text' : 'password'}
-                          value={regPassword}
-                          onChange={(e) => setRegPassword(e.target.value)}
-                          className="border-white/6 bg-white/3 pl-10 pr-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
-                          placeholder="••••••••"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowRegPassword(!showRegPassword)}
-                          className="absolute top-1/2 right-3 -translate-y-1/2 text-white/25 transition-colors hover:text-white/60"
-                        >
-                          {showRegPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="reg-confirm" className="text-white/45">
-                        {t('auth.confirmPassword')}
-                      </Label>
-                      <div className="relative">
-                        <Lock className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
-                        <Input
-                          id="reg-confirm"
-                          type="password"
-                          value={regConfirmPassword}
-                          onChange={(e) => setRegConfirmPassword(e.target.value)}
-                          className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
-                          placeholder="••••••••"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="reg-terms"
-                        checked={regTerms}
-                        onCheckedChange={(checked) => setRegTerms(checked === true)}
-                        className="mt-0.5 border-white/15 data-[state=checked]:bg-[#c9a84c] data-[state=checked]:border-[#c9a84c]"
-                      />
-                      <Label
-                        htmlFor="reg-terms"
-                        className="cursor-pointer text-xs leading-relaxed text-white/40"
-                      >
-                        {t('auth.iAgreeTo')}{' '}
-                        <span className="text-[#c9a84c]/70 underline">{t('auth.termsOfService')}</span>{' '}
-                        {t('auth.and')}{' '}
-                        <span className="text-[#c9a84c]/70 underline">{t('auth.privacyPolicy')}</span>
-                      </Label>
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={regLoading}
-                      className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
-                      size="lg"
-                    >
-                      {regLoading ? (
-                        <span className="flex items-center gap-2">
-                          <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-[#0a0a0a]" />
-                          {t('common.loading')}
-                        </span>
-                      ) : (
-                        t('auth.register')
                       )}
-                    </Button>
-                  </form>
+
+                      <div className="text-center">
+                        <h3 className="mb-1 text-lg font-semibold text-white">
+                          {t('auth.step1Title')}
+                        </h3>
+                        <p className="text-sm text-white/35">
+                          {t('auth.step1Description')}
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="reg-email" className="text-white/45">
+                          {t('auth.email')}
+                        </Label>
+                        <div className="relative">
+                          <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
+                          <Input
+                            id="reg-email"
+                            type="email"
+                            value={regEmail}
+                            onChange={(e) => setRegEmail(e.target.value)}
+                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            placeholder={t('auth.emailPlaceholder')}
+                            autoFocus
+                          />
+                        </div>
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={sendCodeLoading}
+                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                        size="lg"
+                      >
+                        {sendCodeLoading ? (
+                          <span className="flex items-center gap-2">
+                            <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-[#0a0a0a]" />
+                            {t('common.loading')}
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-2">
+                            <Mail className="size-4" />
+                            {t('auth.sendCode')}
+                          </span>
+                        )}
+                      </Button>
+                    </form>
+                  )}
+
+                  {/* Step 2: Enter Verification Code */}
+                  {regStep === 2 && (
+                    <form onSubmit={handleVerifyCode} className="space-y-4">
+                      {regError && (
+                        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-sm text-red-400">
+                          {regError}
+                        </div>
+                      )}
+
+                      {regInfoMessage && (
+                        <div className="rounded-lg border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-3 text-sm text-[#c9a84c]">
+                          {regInfoMessage}
+                        </div>
+                      )}
+
+                      <div className="text-center">
+                        <h3 className="mb-1 text-lg font-semibold text-white">
+                          {t('auth.step2Title')}
+                        </h3>
+                        <p className="text-sm text-white/35">
+                          {t('auth.step2Description')}
+                        </p>
+                        <p className="mt-1 text-sm text-[#c9a84c]/70">
+                          {regEmail}
+                        </p>
+                      </div>
+
+                      <div className="flex justify-center py-2">
+                        <InputOTP
+                          maxLength={6}
+                          value={otpValue}
+                          onChange={setOtpValue}
+                          containerClassName="gap-2"
+                        >
+                          <InputOTPGroup>
+                            <InputOTPSlot
+                              index={0}
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                            />
+                            <InputOTPSlot
+                              index={1}
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                            />
+                            <InputOTPSlot
+                              index={2}
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                            />
+                          </InputOTPGroup>
+                          <InputOTPSeparator className="text-white/20" />
+                          <InputOTPGroup>
+                            <InputOTPSlot
+                              index={3}
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                            />
+                            <InputOTPSlot
+                              index={4}
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                            />
+                            <InputOTPSlot
+                              index={5}
+                              className="border-white/15 bg-white/3 size-12 text-base text-white data-[active=true]:border-[#c9a84c]/40 data-[active=true]:ring-[#c9a84c]/20 first:rounded-l-lg last:rounded-r-lg"
+                            />
+                          </InputOTPGroup>
+                        </InputOTP>
+                      </div>
+
+                      {/* Countdown timer */}
+                      {countdown > 0 ? (
+                        <p className="text-center text-sm text-white/30">
+                          {t('auth.resendIn')} {formatCountdown(countdown)}
+                        </p>
+                      ) : (
+                        <p className="text-center text-sm">
+                          <button
+                            type="button"
+                            onClick={handleResendCode}
+                            disabled={sendCodeLoading}
+                            className="text-[#c9a84c]/70 transition-colors hover:text-[#c9a84c] disabled:opacity-50"
+                          >
+                            {sendCodeLoading ? t('common.loading') : t('auth.resendCode')}
+                          </button>
+                          <span className="ml-1 text-white/25">{t('auth.codeExpired')}</span>
+                        </p>
+                      )}
+
+                      <Button
+                        type="submit"
+                        disabled={verifyCodeLoading || otpValue.length !== 6}
+                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                        size="lg"
+                      >
+                        {verifyCodeLoading ? (
+                          <span className="flex items-center gap-2">
+                            <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-[#0a0a0a]" />
+                            {t('common.loading')}
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-2">
+                            <CheckCircle2 className="size-4" />
+                            {t('auth.verifyCode')}
+                          </span>
+                        )}
+                      </Button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setRegStep(1)
+                          setRegError('')
+                          setRegInfoMessage('')
+                          setOtpValue('')
+                        }}
+                        className="flex w-full items-center justify-center gap-1 text-sm text-white/30 transition-colors hover:text-white/50"
+                      >
+                        <ArrowLeft className="size-3" />
+                        {t('auth.step1Title')}
+                      </button>
+                    </form>
+                  )}
+
+                  {/* Step 3: Complete Profile */}
+                  {regStep === 3 && (
+                    <form onSubmit={handleRegister} className="space-y-4">
+                      {regError && (
+                        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-sm text-red-400">
+                          {regError}
+                        </div>
+                      )}
+
+                      <div className="rounded-lg border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-3 text-center text-sm text-[#c9a84c]">
+                        {t('auth.emailVerified')}
+                      </div>
+
+                      <div className="text-center">
+                        <h3 className="mb-1 text-lg font-semibold text-white">
+                          {t('auth.step3Title')}
+                        </h3>
+                        <p className="text-sm text-white/35">
+                          {t('auth.step3Description')}
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="reg-first" className="text-white/45">
+                            {t('auth.firstName')}
+                          </Label>
+                          <div className="relative">
+                            <User className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
+                            <Input
+                              id="reg-first"
+                              value={regFirstName}
+                              onChange={(e) => setRegFirstName(e.target.value)}
+                              className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="reg-last" className="text-white/45">
+                            {t('auth.lastName')}
+                          </Label>
+                          <div className="relative">
+                            <User className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
+                            <Input
+                              id="reg-last"
+                              value={regLastName}
+                              onChange={(e) => setRegLastName(e.target.value)}
+                              className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="reg-phone" className="text-white/45">
+                          {t('auth.phone')} <span className="text-[#c9a84c]/60">*</span>
+                        </Label>
+                        <div className="relative">
+                          <Phone className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
+                          <Input
+                            id="reg-phone"
+                            type="tel"
+                            value={regPhone}
+                            onChange={(e) => setRegPhone(e.target.value)}
+                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            placeholder="+374 XX XXX XXX"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="reg-password" className="text-white/45">
+                          {t('auth.password')}
+                        </Label>
+                        <div className="relative">
+                          <Lock className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
+                          <Input
+                            id="reg-password"
+                            type={showRegPassword ? 'text' : 'password'}
+                            value={regPassword}
+                            onChange={(e) => setRegPassword(e.target.value)}
+                            className="border-white/6 bg-white/3 pl-10 pr-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            placeholder="••••••••"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowRegPassword(!showRegPassword)}
+                            className="absolute top-1/2 right-3 -translate-y-1/2 text-white/25 transition-colors hover:text-white/60"
+                          >
+                            {showRegPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="reg-confirm" className="text-white/45">
+                          {t('auth.confirmPassword')}
+                        </Label>
+                        <div className="relative">
+                          <Lock className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
+                          <Input
+                            id="reg-confirm"
+                            type="password"
+                            value={regConfirmPassword}
+                            onChange={(e) => setRegConfirmPassword(e.target.value)}
+                            className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
+                            placeholder="••••••••"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2">
+                        <Checkbox
+                          id="reg-terms"
+                          checked={regTerms}
+                          onCheckedChange={(checked) => setRegTerms(checked === true)}
+                          className="mt-0.5 border-white/15 data-[state=checked]:bg-[#c9a84c] data-[state=checked]:border-[#c9a84c]"
+                        />
+                        <Label
+                          htmlFor="reg-terms"
+                          className="cursor-pointer text-xs leading-relaxed text-white/40"
+                        >
+                          {t('auth.iAgreeTo')}{' '}
+                          <span className="text-[#c9a84c]/70 underline">{t('auth.termsOfService')}</span>{' '}
+                          {t('auth.and')}{' '}
+                          <span className="text-[#c9a84c]/70 underline">{t('auth.privacyPolicy')}</span>
+                        </Label>
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={regLoading}
+                        className="w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg hover:bg-[#b8973e] disabled:opacity-50"
+                        size="lg"
+                      >
+                        {regLoading ? (
+                          <span className="flex items-center gap-2">
+                            <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-[#0a0a0a]" />
+                            {t('common.loading')}
+                          </span>
+                        ) : (
+                          t('auth.register')
+                        )}
+                      </Button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setRegStep(2)
+                          setRegError('')
+                        }}
+                        className="flex w-full items-center justify-center gap-1 text-sm text-white/30 transition-colors hover:text-white/50"
+                      >
+                        <ArrowLeft className="size-3" />
+                        {t('auth.step2Title')}
+                      </button>
+                    </form>
+                  )}
 
                   <SocialDivider />
 
