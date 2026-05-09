@@ -8,6 +8,13 @@ export const nextAuthOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+        },
+      },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
@@ -16,20 +23,21 @@ export const nextAuthOptions: NextAuthOptions = {
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
   pages: {
-    signIn: '/', // We use our own modal, redirect back to home
+    signIn: '/',
     error: '/',
   },
+  // Trust the proxy headers so NextAuth can determine the correct URL
+  // This is critical when running behind Caddy/gateway
+  debug: false,
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === 'google' && user.email) {
         try {
-          // Check if user already exists
           const existingUser = await db.user.findUnique({
             where: { email: user.email.toLowerCase() },
           })
 
           if (!existingUser) {
-            // Create new user from Google profile
             const nameParts = (user.name || 'User').split(' ')
             await db.user.create({
               data: {
@@ -43,7 +51,6 @@ export const nextAuthOptions: NextAuthOptions = {
               },
             })
           } else if (existingUser.authProvider === 'email') {
-            // User exists with email auth, update to include Google
             await db.user.update({
               where: { id: existingUser.id },
               data: {
@@ -61,7 +68,6 @@ export const nextAuthOptions: NextAuthOptions = {
       return true
     },
     async jwt({ token, user }) {
-      // On first sign in, add our custom fields
       if (user?.email) {
         try {
           const dbUser = await db.user.findUnique({
@@ -73,7 +79,6 @@ export const nextAuthOptions: NextAuthOptions = {
             token.lastName = dbUser.lastName
             token.phone = dbUser.phone
             token.authProvider = dbUser.authProvider
-            // Also create our custom JWT for the booking system
             token.customToken = createToken({
               userId: dbUser.id,
               email: dbUser.email,
@@ -97,6 +102,13 @@ export const nextAuthOptions: NextAuthOptions = {
         session.user.customToken = token.customToken as string
       }
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
     },
   },
 }

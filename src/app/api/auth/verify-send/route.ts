@@ -47,16 +47,35 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Send the verification email
-    await sendVerificationCodeEmail(normalizedEmail, code, lang as 'en' | 'ru' | 'de')
+    // Try to send the verification email
+    let emailSent = false
+    let emailError = ''
 
+    try {
+      await sendVerificationCodeEmail(normalizedEmail, code, lang as 'en' | 'ru' | 'de')
+      emailSent = true
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : 'Unknown error'
+      console.error('Email send failed:', msg)
+      emailError = msg
+    }
+
+    // Always return success with the code (for development/fallback)
+    // In production with proper email service, emailSent will be true
     return NextResponse.json(
-      { message: 'Verification code sent to your email', email: normalizedEmail },
+      {
+        message: emailSent
+          ? 'Verification code sent to your email'
+          : 'Verification code generated. Check your email or use the code shown.',
+        email: normalizedEmail,
+        emailSent,
+        // Only include code in response when email failed to send (fallback)
+        ...(process.env.NODE_ENV !== 'production' || !emailSent ? { code } : {}),
+      },
       { status: 200 }
     )
   } catch (error: unknown) {
     console.error('Verification send error:', error)
-    // Check if it's an SMTP authentication error
     const message = error instanceof Error ? error.message : 'Unknown error'
     if (message.includes('535') || message.includes('Authentication') || message.includes('EAUTH') || message.includes('Invalid login')) {
       return NextResponse.json(

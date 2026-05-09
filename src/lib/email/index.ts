@@ -1,6 +1,17 @@
 import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
-// Create reusable transporter (with connection pooling for performance)
+const OWNER_EMAIL = 'caxkal22@gmail.com'
+const DISCOUNT_CODE = 'Armen5'
+const DISCOUNT_PERCENT = 5
+const FROM_EMAIL = 'OneWay Tour Armenia <onewaytour@resend.dev>'
+
+// Resend client (API-based, no SMTP needed)
+const getResend = () => {
+  return new Resend(process.env.RESEND_API_KEY)
+}
+
+// SMTP fallback (for when Resend isn't configured)
 let cachedTransporter: nodemailer.Transporter | null = null
 
 const getTransporter = () => {
@@ -14,7 +25,6 @@ const getTransporter = () => {
       user: process.env.SMTP_USER || '',
       pass: process.env.SMTP_PASS || '',
     },
-    // Connection pooling for better performance
     pool: true,
     maxConnections: 5,
     maxMessages: 100,
@@ -23,9 +33,51 @@ const getTransporter = () => {
   return cachedTransporter
 }
 
-const OWNER_EMAIL = 'caxkal22@gmail.com'
-const DISCOUNT_CODE = 'Armen5'
-const DISCOUNT_PERCENT = 5
+// Unified email sending — tries Resend first, falls back to SMTP
+async function sendEmail({ to, subject, html, from }: { to: string; subject: string; html: string; from?: string }) {
+  const fromAddress = from || FROM_EMAIL
+
+  // Try Resend API first
+  if (process.env.RESEND_API_KEY && !process.env.RESEND_API_KEY.startsWith('REPLACE')) {
+    try {
+      const resend = getResend()
+      const result = await resend.emails.send({
+        from: fromAddress,
+        to,
+        subject,
+        html,
+      })
+      if (result.error) {
+        console.error('Resend error:', result.error)
+        // Fall through to SMTP
+      } else {
+        return
+      }
+    } catch (error) {
+      console.error('Resend send failed, falling back to SMTP:', error)
+    }
+  }
+
+  // Fallback to SMTP
+  if (process.env.SMTP_USER && process.env.SMTP_PASS && process.env.SMTP_PASS !== 'REPLACE_WITH_YOUR_GMAIL_APP_PASSWORD') {
+    try {
+      const transporter = getTransporter()
+      await transporter.sendMail({
+        from: `"OneWay Tour Armenia" <${process.env.SMTP_USER}>`,
+        to,
+        subject,
+        html,
+      })
+      return
+    } catch (error) {
+      console.error('SMTP send failed:', error)
+      throw new Error('Email delivery failed. Please try again later.')
+    }
+  }
+
+  // No email service configured
+  throw new Error('Email service not configured. Please set RESEND_API_KEY or SMTP credentials.')
+}
 
 interface EmailBookingData {
   bookingId: string
@@ -403,19 +455,15 @@ function getOwnerCancellationHTML(data: EmailBookingData): string {
 
 // ─── Send Confirmation Emails ───
 export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
-  const transporter = getTransporter()
-
   // Send to customer
-  await transporter.sendMail({
-    from: `"OneWay Tour Armenia" <${process.env.SMTP_USER || 'noreply@onewaytour.com'}>`,
+  await sendEmail({
     to: data.userEmail,
-    subject: getCustomerConfirmationHTML(data, lang).match(/<title>(.*?)<\/title>/)?.[1] || `Reservation Confirmed — ${data.tourName}`,
+    subject: `Reservation Confirmed — ${data.tourName}`,
     html: getCustomerConfirmationHTML(data, lang),
   })
 
   // Send to owner
-  await transporter.sendMail({
-    from: `"OneWay Tour Booking" <${process.env.SMTP_USER || 'noreply@onewaytour.com'}>`,
+  await sendEmail({
     to: OWNER_EMAIL,
     subject: `[NEW RESERVATION] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`,
     html: getOwnerConfirmationHTML(data),
@@ -424,19 +472,15 @@ export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' 
 
 // ─── Send Cancellation Emails ───
 export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
-  const transporter = getTransporter()
-
   // Send to customer
-  await transporter.sendMail({
-    from: `"OneWay Tour Armenia" <${process.env.SMTP_USER || 'noreply@onewaytour.com'}>`,
+  await sendEmail({
     to: data.userEmail,
     subject: `Reservation Cancelled — ${data.tourName}`,
     html: getCustomerCancellationHTML(data, lang),
   })
 
   // Send to owner
-  await transporter.sendMail({
-    from: `"OneWay Tour Booking" <${process.env.SMTP_USER || 'noreply@onewaytour.com'}>`,
+  await sendEmail({
     to: OWNER_EMAIL,
     subject: `[CANCELLED] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`,
     html: getOwnerCancellationHTML(data),
@@ -524,9 +568,7 @@ export async function sendVerificationCodeEmail(email: string, code: string, lan
 </body>
 </html>`
 
-  const transporter = getTransporter()
-  await transporter.sendMail({
-    from: `"OneWay Tour Armenia" <${process.env.SMTP_USER || 'noreply@onewaytour.com'}>`,
+  await sendEmail({
     to: email,
     subject: t.subject,
     html,
