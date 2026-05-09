@@ -7,10 +7,10 @@ export async function POST(request: NextRequest) {
     const { email, password, firstName, lastName, phone } =
       await request.json()
 
-    // Validate required fields
-    if (!email || !password || !firstName || !lastName) {
+    // Validate required fields (phone is now required)
+    if (!email || !password || !firstName || !lastName || !phone) {
       return NextResponse.json(
-        { error: 'Email, password, firstName, and lastName are required' },
+        { error: 'Email, password, firstName, lastName, and phone are required' },
         { status: 400 }
       )
     }
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
         email,
         firstName,
         lastName,
-        phone: phone || null,
+        phone,
         passwordHash,
       },
     })
@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          phone: user.phone,
         },
         message: 'Registration successful',
       },

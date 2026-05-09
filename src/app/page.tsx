@@ -42,6 +42,10 @@ const HeroScene = dynamic(() => import('@/components/3d/hero-scene').then(m => (
     </div>
   ),
 })
+const TourRouteFluid = dynamic(() => import('@/components/3d/tour-route-fluid').then(m => ({ default: m.TourRouteFluid })), {
+  ssr: false,
+  loading: () => <div className="h-[200px] bg-transparent" />,
+})
 
 /* ─── Animation helpers ─── */
 const staggerContainer = {
@@ -172,33 +176,9 @@ export default function Home() {
     setIsDetailModalOpen(true)
   }, [])
 
-  const handleBookingProceed = useCallback(async (tour: Tour, data: BookingData) => {
-    try {
-      const totalAMD = (() => {
-        const pricePerPerson = data.guideLanguage === 'armenian' ? tour.priceAMD : tour.priceForeignAMD
-        return Math.round(pricePerPerson * data.adults + pricePerPerson * 0.5 * data.children)
-      })()
-      const totalEUR = Math.ceil(totalAMD * 0.0024)
-
-      const res = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tourName: tour.name.en,
-          tourDate: data.date?.toISOString().split('T')[0] || '',
-          guideLanguage: data.guideLanguage,
-          adults: data.adults,
-          children: data.children,
-          totalAmountEUR: totalEUR,
-          totalAmountAMD: totalAMD,
-        }),
-      })
-      const session = await res.json()
-      if (session.url) {
-        window.location.href = session.url
-      }
-    } catch { /* fallback */ }
-    setIsDetailModalOpen(false)
+  // The reservation is now handled inside TourDetailModal
+  const handleBookingProceed = useCallback(async (_tour: Tour, _data: BookingData) => {
+    // No-op: reservation handled within the modal
   }, [])
 
   const handleLoginClick = useCallback(() => {
@@ -266,7 +246,6 @@ export default function Home() {
           SECTION 1: HERO — clean, dramatic, minimal
           ═══════════════════════════════════════════ */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
-        {/* Image-based Parallax Hero */}
         <HeroScene />
 
         {/* Gradient overlay for text readability */}
@@ -366,7 +345,6 @@ export default function Home() {
           ═══════════════════════════════════════════ */}
       <AnimatedSection className="relative py-24 overflow-hidden" id="featured">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
           <motion.div variants={fadeUp} className="mb-12 text-center">
             <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
               {t('tours.featured')}
@@ -377,7 +355,6 @@ export default function Home() {
             <div className="mx-auto mt-4 h-px w-12 bg-[#c9a84c]/30" />
           </motion.div>
 
-          {/* Carousel */}
           <motion.div variants={fadeIn} className="relative">
             <button
               onClick={() => scrollCarousel('left')}
@@ -408,7 +385,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* View all */}
           <motion.div variants={fadeUp} className="mt-10 text-center">
             <Button
               onClick={() => scrollToSection('tours')}
@@ -478,6 +454,25 @@ export default function Home() {
       </AnimatedSection>
 
       {/* ═══════════════════════════════════════════
+          SECTION: FLUID ROUTE ANIMATION
+          ═══════════════════════════════════════════ */}
+      <AnimatedSection className="relative py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.div variants={fadeUp} className="mb-8 text-center">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
+              {t('tours.route')}
+            </p>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">
+              Explore the Paths of Armenia
+            </h2>
+          </motion.div>
+          <motion.div variants={fadeIn} className="overflow-hidden rounded-2xl border border-white/6">
+            <TourRouteFluid />
+          </motion.div>
+        </div>
+      </AnimatedSection>
+
+      {/* ═══════════════════════════════════════════
           SECTION 4: WHY CHOOSE US
           ═══════════════════════════════════════════ */}
       <AnimatedSection className="relative py-24">
@@ -536,7 +531,6 @@ export default function Home() {
       <AnimatedSection className="relative py-24" id="about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Text side */}
             <motion.div variants={fadeUp}>
               <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-[#c9a84c]/60">
                 {t('about.title')}
@@ -555,7 +549,6 @@ export default function Home() {
               </Button>
             </motion.div>
 
-            {/* Image side */}
             <motion.div variants={fadeUp} transition={{ delay: 0.15 }}>
               <div className="relative h-[350px] overflow-hidden rounded-2xl sm:h-[450px]">
                 <Image
@@ -618,7 +611,9 @@ export default function Home() {
         tour={selectedTour}
         open={isDetailModalOpen}
         onOpenChange={setIsDetailModalOpen}
-        onBookNow={handleBookingProceed}
+        onReserve={handleBookingProceed}
+        isLoggedIn={isLoggedIn}
+        onLoginClick={handleLoginClick}
       />
 
       <AuthModal

@@ -12,7 +12,7 @@ model User {
   email        String    @unique
   firstName    String
   lastName     String
-  phone        String?
+  phone        String
   passwordHash String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -30,8 +30,21 @@ model Booking {
   children        Int
   totalPriceAMD   Int
   totalPriceEUR   Float
-  status          String   @default("pending")
-  stripeSessionId String?
+  status          String   @default("confirmed")
+  discountCode    String?
+  cancelledAt     DateTime?
   createdAt       DateTime @default(now())
   user            User     @relation(fields: [userId], references: [id])
+}
+
+model TourAvailability {
+  id          String   @id @default(cuid())
+  tourId      String
+  tourDate    String
+  maxSeats    Int      @default(20)
+  reservedSeats Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([tourId, tourDate])
 }

@@ -115,7 +115,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
     setRegError('')
-    if (!regFirstName || !regLastName || !regEmail || !regPassword) {
+    if (!regFirstName || !regLastName || !regEmail || !regPhone || !regPassword) {
       setRegError(t('auth.fillRequiredFields'))
       return
     }
@@ -449,7 +449,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
 
                     <div className="space-y-2">
                       <Label htmlFor="reg-phone" className="text-white/45">
-                        {t('auth.phone')}
+                        {t('auth.phone')} <span className="text-[#c9a84c]/60">*</span>
                       </Label>
                       <div className="relative">
                         <Phone className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/25" />
@@ -460,6 +460,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
                           onChange={(e) => setRegPhone(e.target.value)}
                           className="border-white/6 bg-white/3 pl-10 text-white placeholder:text-white/20 focus-visible:border-[#c9a84c]/30"
                           placeholder="+374 XX XXX XXX"
+                          required
                         />
                       </div>
                     </div>

@@ -269,15 +269,15 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
             </div>
           </div>
 
-          {/* Book Now button */}
+          {/* Reserve Now button */}
           <Button
             onClick={(e) => {
               e.stopPropagation()
               onBookNow?.(tour)
             }}
-            className="mt-auto w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#b8973e] hover:shadow-[#c9a84c]/10"
+            className="mt-auto w-full bg-[#c9a84c] text-[#0a0a0a] font-medium shadow-lg transition-all duration-300 hover:bg-[#b8973e] hover:shadow-[#c9a84c]/10 rounded-xl"
           >
-            {t('tours.bookNow')}
+            {t('booking.reserveNow')}
           </Button>
         </div>
       </div>

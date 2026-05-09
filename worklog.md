@@ -160,3 +160,44 @@ Stage Summary:
 - Clean typography, minimal decorative elements
 - All components updated for consistency
 - Lint passes clean, no errors
+
+---
+Task ID: 1-14
+Agent: Main Agent
+Task: Implement reservation system (no payment), email system, cancellation, availability, 3D fluid animations
+
+Work Log:
+- Updated Prisma schema: phone now required, added discountCode/cancelledAt to Booking, added TourAvailability model for real-time seat tracking
+- Installed nodemailer + @types/nodemailer for email support
+- Created comprehensive email system (src/lib/email/index.ts):
+  - Customer confirmation email in 3 languages (EN/RU/DE) with Armen5 discount code
+  - Owner notification email to armen.arakelyan@web.de with full booking details
+  - Customer cancellation email in 3 languages
+  - Owner cancellation notification email
+  - All emails styled with dark theme HTML matching the site
+- Built reservation API (POST /api/bookings): creates booking, checks availability, updates seats, sends confirmation emails
+- Built cancellation API (POST /api/bookings/cancel): validates 24h window, releases seats, sends cancellation emails
+- Built availability API (GET /api/availability): returns seat counts for a tour+date
+- Updated auth registration to require phone number
+- Completely rewrote tour-detail-modal.tsx:
+  - "Reserve Now — Pay at Office" instead of "Proceed to Checkout"
+  - Real-time seat availability display
+  - Discount code Armen5 prominently shown in price breakdown
+  - Success confirmation with discount code display
+  - No payment forms, no Stripe integration
+- Updated page.tsx: removed Stripe flow, integrated reservation system
+- Added 3D fluid animation component (tour-route-fluid.tsx): abstract flowing lines with particles representing tour routes
+- Updated i18n with 12 new booking/reservation translation keys in all 3 languages
+- Updated tour-card.tsx: button now says "Reserve Now — Pay at Office"
+- Disabled Stripe checkout API endpoint
+- All lint checks pass, page loads with HTTP 200
+
+Stage Summary:
+- Complete reservation system replacing payment system: users reserve, pay in person
+- Email system sends multilingual (EN/RU/DE) confirmation/cancellation emails to both customer and owner
+- Discount code Armen5 for 5% off when paying in person, shown in confirmation email
+- 24-hour cancellation window with automated seat release and notification emails
+- Real-time availability tracking with seat limits per tour date
+- Phone number now required for registration
+- 3D fluid route animation on homepage
+- All translations updated in EN/RU/DE

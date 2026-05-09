@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { convertAMDtoEUR } from '@/lib/tours-data'
+import { sendConfirmationEmails, DISCOUNT_CODE } from '@/lib/email'
+import { verifyToken } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,10 +16,47 @@ export async function POST(request: NextRequest) {
       children,
       totalPriceAMD,
       userId,
+      lang = 'en',
     } = body
+
+    // Verify user is authenticated
+    const authHeader = request.headers.get('authorization')
+    const token = authHeader?.replace('Bearer ', '') || ''
+    const payload = verifyToken(token)
+    if (!payload) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Get user info
+    const user = await db.user.findUnique({ where: { id: userId || payload.userId } })
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
+    // Check availability
+    const totalPeople = adults + children
+    let availability = await db.tourAvailability.findUnique({
+      where: { tourId_date: { tourId, tourDate } },
+    })
+
+    if (!availability) {
+      // Create availability record if not exists (default max 20)
+      availability = await db.tourAvailability.create({
+        data: { tourId, tourDate, maxSeats: 20, reservedSeats: 0 },
+      })
+    }
+
+    const remainingSeats = availability.maxSeats - availability.reservedSeats
+    if (totalPeople > remainingSeats) {
+      return NextResponse.json(
+        { error: `Not enough seats available. Only ${remainingSeats} seats left.` },
+        { status: 400 }
+      )
+    }
 
     const totalPriceEUR = convertAMDtoEUR(totalPriceAMD)
 
+    // Create booking with confirmed status (no payment needed)
     const booking = await db.booking.create({
       data: {
         tourId,
@@ -28,28 +67,56 @@ export async function POST(request: NextRequest) {
         children,
         totalPriceAMD,
         totalPriceEUR,
-        status: 'pending',
-        userId,
+        status: 'confirmed',
+        discountCode: DISCOUNT_CODE,
+        userId: user.id,
       },
     })
 
-    return NextResponse.json({ booking }, { status: 201 })
+    // Update availability (reserve seats)
+    await db.tourAvailability.update({
+      where: { id: availability.id },
+      data: { reservedSeats: availability.reservedSeats + totalPeople },
+    })
+
+    // Send confirmation emails (don't await to avoid blocking response)
+    sendConfirmationEmails(
+      {
+        bookingId: booking.id,
+        tourName,
+        tourDate,
+        guideLanguage,
+        adults,
+        children,
+        totalPriceAMD,
+        totalPriceEUR,
+        userFirstName: user.firstName,
+        userLastName: user.lastName,
+        userEmail: user.email,
+        userPhone: user.phone,
+        discountCode: DISCOUNT_CODE,
+      },
+      lang as 'en' | 'ru' | 'de'
+    ).catch((err) => {
+      console.error('Failed to send confirmation emails:', err)
+    })
+
+    return NextResponse.json({ booking, message: 'Reservation confirmed! Check your email for details.' }, { status: 201 })
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Reservation error:', message)
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
+// Get user's bookings
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
 
     if (!userId) {
-      return NextResponse.json(
-        { error: 'userId is required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'userId is required' }, { status: 400 })
     }
 
     const bookings = await db.booking.findMany({
