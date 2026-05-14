@@ -37,14 +37,7 @@ import { useLocale } from '@/hooks/use-locale'
 
 // Dynamic imports (no SSR)
 const MouseSpotlight = dynamic(() => import('@/components/animations/mouse-spotlight').then(m => ({ default: m.MouseSpotlight })), { ssr: false })
-const HeroScene = dynamic(() => import('@/components/3d/hero-scene').then(m => ({ default: m.HeroScene })), {
-  ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 z-0 bg-background flex items-center justify-center">
-      <div className="size-6 animate-pulse rounded-full bg-foreground/5" />
-    </div>
-  ),
-})
+
 const TourRouteFluid = dynamic(() => import('@/components/3d/tour-route-fluid').then(m => ({ default: m.TourRouteFluid })), {
   ssr: false,
   loading: () => <div className="h-[200px] bg-transparent" />,
@@ -299,8 +292,6 @@ export default function Home() {
             quality={90}
           />
         </div>
-
-        <HeroScene />
 
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/80 z-[3]" />

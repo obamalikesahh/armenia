@@ -8,7 +8,7 @@ const SMTP_USER = process.env.SMTP_USER || 'thebeautyofarmenia@gmail.com'
 const SMTP_PASS = process.env.SMTP_PASS || ''
 
 const FROM_EMAIL = `"The Beauty of Armenia" <${SMTP_USER}>`
-const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com']
+const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'incoming@onewaytour.com']
 
 export const DISCOUNT_CODE = 'Armen5'
 
