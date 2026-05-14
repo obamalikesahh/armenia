@@ -200,3 +200,24 @@ Stage Summary:
 - Single supplement section uses nested object (price4Star/price3Star) instead of flat properties
 - Old 7-day/8-day luxury tour data removed from tours-data.ts
 - Luxury tour "Book Now" shows coming soon modal with email contact option
+
+---
+Task ID: 8
+Agent: Main Agent
+Task: Migrate project for Vercel deployment with Supabase PostgreSQL
+
+Work Log:
+- Changed prisma/schema.prisma provider from sqlite to postgresql
+- Removed output: "standalone" from next.config.ts (Vercel handles builds automatically)
+- Added "postinstall": "prisma generate" to package.json for Vercel auto-generate
+- Created .env.example with all required variables documented
+- Updated .gitignore: added !.env.example exception, db files, uploads, agent-ctx, mini-services
+- Regenerated Prisma client for PostgreSQL provider
+- Committed all changes to git
+
+Stage Summary:
+- Project is now configured for Vercel deployment
+- Database provider switched from SQLite to PostgreSQL (for Supabase)
+- next.config.ts no longer has standalone output (Vercel's own build system)
+- .env.example provides template for required environment variables
+- postinstall hook ensures Prisma client is generated on Vercel
