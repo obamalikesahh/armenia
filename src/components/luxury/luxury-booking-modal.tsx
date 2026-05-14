@@ -152,6 +152,15 @@ export function LuxuryBookingModal({
 
     try {
       const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
+      // Get userId from localStorage for reliable user lookup (especially for Google OAuth users)
+      let userId: string | undefined
+      try {
+        const userInfo = typeof window !== 'undefined' ? localStorage.getItem('user_info') : null
+        if (userInfo) {
+          const parsed = JSON.parse(userInfo)
+          userId = parsed.id
+        }
+      } catch { /* ignore */ }
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: {
@@ -166,6 +175,7 @@ export function LuxuryBookingModal({
           adults: persons,
           children: 0,
           totalPriceEUR,
+          userId,
           lang: locale,
           hotelCategory,
           singleSupplement,
