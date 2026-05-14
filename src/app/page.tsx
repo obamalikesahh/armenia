@@ -33,6 +33,7 @@ import {
   getFeaturedTours,
   type Tour,
 } from '@/lib/tours-data'
+import { luxuryTours as luxuryToursData, type LuxuryTour } from '@/lib/luxury-tours-data'
 import { useLocale } from '@/hooks/use-locale'
 
 // Dynamic imports (no SSR)
@@ -139,10 +140,10 @@ export default function Home() {
   const [displayCount, setDisplayCount] = useState(9)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false)
-  const [selectedLuxuryTour, setSelectedLuxuryTour] = useState<Tour | null>(null)
+  const [selectedLuxuryTour, setSelectedLuxuryTour] = useState<LuxuryTour | null>(null)
 
-  // Luxury tours data
-  const luxuryTours = useMemo(() => tours.filter(tour => tour.category === 'Luxury'), [])
+  // Luxury tours data — from luxury-tours-data.ts (14-day Caucasus + 10-day Armenia)
+  const luxuryTours = luxuryToursData
 
   // Featured tours carousel
   const carouselRef = useRef<HTMLDivElement>(null)
@@ -228,7 +229,10 @@ export default function Home() {
     signOut({ redirect: false })
   }, [])
 
-  const handleLuxuryBookNow = useCallback((tour: Tour) => {
+  const handleLuxuryBookNow = useCallback((tour: LuxuryTour) => {
+    // For now, just log and show a coming soon message
+    // The TourDetailModal expects Tour type; luxury booking will be handled separately
+    console.log('Luxury tour booking requested:', tour.id, tour.title)
     setSelectedLuxuryTour(tour)
     setIsDetailModalOpen(true)
   }, [])
@@ -666,20 +670,46 @@ export default function Home() {
 
       {/* ─── Modals ─── */}
       <TourDetailModal
-        tour={selectedLuxuryTour || selectedTour}
-        open={isDetailModalOpen}
+        tour={selectedTour}
+        open={isDetailModalOpen && selectedTour !== null}
         onOpenChange={(open) => {
-          setIsDetailModalOpen(open)
           if (!open) {
-            // Clear both tour selections when modal closes
+            setIsDetailModalOpen(false)
             setSelectedTour(null)
-            setSelectedLuxuryTour(null)
           }
         }}
         onReserve={handleBookingProceed}
         isLoggedIn={isLoggedIn}
         onLoginClick={handleLoginClick}
       />
+
+      {/* Luxury tour booking modal — coming soon */}
+      {selectedLuxuryTour && isDetailModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => { setIsDetailModalOpen(false); setSelectedLuxuryTour(null) }}>
+          <div className="mx-4 max-w-md rounded-2xl border border-border bg-background p-8 text-center shadow-2xl" onClick={e => e.stopPropagation()}>
+            <Crown className="mx-auto mb-4 size-10 text-primary" />
+            <h3 className="mb-2 text-lg font-bold text-foreground">{selectedLuxuryTour.title}</h3>
+            <p className="mb-4 text-sm text-muted-foreground">{selectedLuxuryTour.duration} &bull; {selectedLuxuryTour.countries.join(' & ')}</p>
+            <p className="mb-6 text-sm text-muted-foreground">Online booking for luxury tours is coming soon. Please contact us directly to reserve your spot.</p>
+            <div className="flex gap-3 justify-center">
+              <Button
+                variant="outline"
+                onClick={() => { setIsDetailModalOpen(false); setSelectedLuxuryTour(null) }}
+              >
+                Close
+              </Button>
+              <Button
+                onClick={() => {
+                  window.location.href = 'mailto:thebeautyofarmenia@gmail.com?subject=Luxury Tour Booking: ' + encodeURIComponent(selectedLuxuryTour.title)
+                }}
+              >
+                <Mail className="mr-2 size-4" />
+                Contact Us
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <AuthModal
         open={isAuthModalOpen}

@@ -161,3 +161,42 @@ Stage Summary:
 - All 3-language translations (EN/RU/DE) are natural and grammatically correct
 - Comprehensive included/excluded lists
 - Each itinerary day has detailed descriptions with morning/afternoon/evening activities, specific restaurants/hotels, driving times
+
+---
+Task ID: 7
+Agent: Main Agent
+Task: Switch luxury tours from old Tour type (7d/8d) to LuxuryTour type (14d/10d) from luxury-tours-data.ts
+
+Work Log:
+- Rewrote luxury-tours-section.tsx to use LuxuryTour type instead of Tour type
+  - Imported getLocalized/getLocalizedArray from luxury-tours-data.ts instead of inline getLocalized
+  - Mapped tour.titleLocalized → name, tour.descriptionLocalized → description
+  - Mapped tour.days → itinerary, tour.pricing → price tiers (price4Star/price3Star instead of superior/standard)
+  - Mapped tour.singleSupplement.price4Star/price3Star instead of singleSupplementSuperior/Standard
+  - Mapped tour.images[0] instead of tour.image
+  - Derived groupSize from pricing tiers (e.g. "2-7 pax"), region from countries.join(' & ')
+  - Used getLocalizedArray for included/excluded with localized variants
+  - Displayed paymentPolicy and cancellationPolicy from LuxuryTour data with localized variants
+  - Used LuxuryTourPriceTier with price4Star/price3Star in pricing table
+- Updated page.tsx:
+  - Imported luxuryTours as luxuryToursData + LuxuryTour type from luxury-tours-data
+  - Changed selectedLuxuryTour state to LuxuryTour | null
+  - Changed handleLuxuryBookNow to accept LuxuryTour type
+  - Added "coming soon" modal for luxury tour bookings (since TourDetailModal expects Tour type)
+  - Separated TourDetailModal (for regular tours) from luxury booking modal
+  - Luxury booking shows contact info with mailto link
+- Removed old luxury tours from tours-data.ts:
+  - Deleted Tour id 16 (armenia-georgia-luxury-tour-7d) — 7-day data
+  - Deleted Tour id 17 (armenia-luxury-discovery-tour-8d) — 8-day data
+  - File reduced from 2055 to 1728 lines
+- Fixed runtime error: tour.countries could be undefined during SSR, added safety check
+- Verified: page loads with HTTP 200, lint passes cleanly
+
+Stage Summary:
+- Luxury tours section now displays 14-day Caucasus tour and 10-day Armenia tour from luxury-tours-data.ts
+- All field mappings correctly bridge LuxuryTour type to the existing UI
+- Localized fields (titleLocalized, descriptionLocalized, etc.) are properly used via getLocalized/getLocalizedArray
+- Pricing table shows price4Star/price3Star tiers from LuxuryTourPriceTier
+- Single supplement section uses nested object (price4Star/price3Star) instead of flat properties
+- Old 7-day/8-day luxury tour data removed from tours-data.ts
+- Luxury tour "Book Now" shows coming soon modal with email contact option

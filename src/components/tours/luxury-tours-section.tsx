@@ -25,17 +25,20 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { formatPrice } from '@/lib/tours-data'
 import {
-  type Tour,
-  formatPrice,
-  type LuxuryItineraryDay,
-  type PriceTier,
-} from '@/lib/tours-data'
+  type LuxuryTour,
+  type LuxuryTourDay,
+  type LuxuryTourPriceTier,
+  getLocalized,
+  getLocalizedArray,
+  type LocaleKey,
+} from '@/lib/luxury-tours-data'
 import { useLocale } from '@/hooks/use-locale'
 
 interface LuxuryToursSectionProps {
-  tours: Tour[]
-  onBookNow: (tour: Tour) => void
+  tours: LuxuryTour[]
+  onBookNow: (tour: LuxuryTour) => void
 }
 
 type LuxuryTab = 'overview' | 'itinerary' | 'pricing'
@@ -55,16 +58,19 @@ function MealIcon({ meal }: { meal: string }) {
 
 export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps) {
   const { t, locale } = useLocale()
+  // Map i18n Locale ('en'|'ru'|'de') to LocaleKey ('en'|'ru'|'de') — they are the same type
+  const loc = locale as LocaleKey
+
   const [selectedTourIdx, setSelectedTourIdx] = useState(0)
   const [activeTab, setActiveTab] = useState<LuxuryTab>('overview')
   const [expandedDay, setExpandedDay] = useState<number>(1)
 
   const tour = tours[selectedTourIdx]
-  const itinerary = tour?.luxuryItinerary || []
-  const priceTiers = tour?.priceTiers || []
+  const itinerary = tour?.days || []
+  const pricing = tour?.pricing || []
 
-  const name = tour?.name[locale] || tour?.name.en || ''
-  const description = tour?.description[locale] || tour?.description.en || ''
+  const name = tour ? getLocalized(tour.titleLocalized, loc, tour.title) : ''
+  const description = tour ? getLocalized(tour.descriptionLocalized, loc, tour.description) : ''
 
   const nights = useMemo(() => {
     if (!tour) return 0
@@ -73,11 +79,28 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
     return Math.max(0, days - 1)
   }, [tour])
 
+  const groupSize = useMemo(() => {
+    if (!tour || pricing.length === 0) return ''
+    const minPax = pricing[0].pax
+    const maxPax = pricing[pricing.length - 1].pax
+    return `${minPax}-${maxPax} pax`
+  }, [tour, pricing])
+
+  const region = useMemo(() => {
+    if (!tour?.countries?.length) return ''
+    return tour.countries.join(' & ')
+  }, [tour])
+
   const bestValueIdx = useMemo(() => {
-    if (priceTiers.length === 0) return -1
+    if (pricing.length === 0) return -1
     // Best value = largest group with best per-person rate
-    return priceTiers.length - 1
-  }, [priceTiers])
+    return pricing.length - 1
+  }, [pricing])
+
+  const fromPrice = useMemo(() => {
+    if (pricing.length === 0) return 0
+    return pricing[pricing.length - 1].price4Star
+  }, [pricing])
 
   const handleTourSwitch = (idx: number) => {
     if (idx !== selectedTourIdx) {
@@ -85,11 +108,6 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
       setActiveTab('overview')
       setExpandedDay(1)
     }
-  }
-
-  const getLocalized = (val: { en: string; ru: string; de: string } | undefined, fallback: string): string => {
-    if (!val) return fallback
-    return val[locale] || val.en || fallback
   }
 
   if (!tour) return null
@@ -104,39 +122,48 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       {/* Tour selector tabs */}
       <div className="mb-8 flex flex-col gap-3 sm:flex-row">
-        {tours.map((luxTour, idx) => (
-          <button
-            key={luxTour.id}
-            onClick={() => handleTourSwitch(idx)}
-            className={`flex items-center gap-3 rounded-xl border px-5 py-4 text-left transition-all duration-300 ${
-              selectedTourIdx === idx
-                ? 'border-primary/30 bg-primary/8 shadow-lg shadow-primary/5'
-                : 'border-border bg-secondary hover:border-primary/15 hover:bg-secondary'
-            }`}
-          >
-            <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${
-              selectedTourIdx === idx ? 'bg-primary/15 text-primary' : 'bg-foreground/5 text-muted-foreground'
-            }`}>
-              <Crown className="size-5" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className={`text-sm font-semibold truncate ${
-                selectedTourIdx === idx ? 'text-foreground' : 'text-muted-foreground'
+        {tours.map((luxTour, idx) => {
+          const luxName = getLocalized(luxTour.titleLocalized, loc, luxTour.title)
+          const luxFromPrice = luxTour.pricing.length > 0
+            ? luxTour.pricing[luxTour.pricing.length - 1].price4Star
+            : 0
+          const luxGroupSize = luxTour.pricing.length > 0
+            ? `${luxTour.pricing[0].pax}-${luxTour.pricing[luxTour.pricing.length - 1].pax} pax`
+            : ''
+          return (
+            <button
+              key={luxTour.id}
+              onClick={() => handleTourSwitch(idx)}
+              className={`flex items-center gap-3 rounded-xl border px-5 py-4 text-left transition-all duration-300 ${
+                selectedTourIdx === idx
+                  ? 'border-primary/30 bg-primary/8 shadow-lg shadow-primary/5'
+                  : 'border-border bg-secondary hover:border-primary/15 hover:bg-secondary'
+              }`}
+            >
+              <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${
+                selectedTourIdx === idx ? 'bg-primary/15 text-primary' : 'bg-foreground/5 text-muted-foreground'
               }`}>
-                {luxTour.name[locale] || luxTour.name.en}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {luxTour.duration} &bull; {luxTour.groupSize}
-              </p>
-            </div>
-            <div className="text-right shrink-0">
-              <p className="text-sm font-bold text-primary">
-                {formatPrice(luxTour.priceTiers?.[luxTour.priceTiers.length - 1]?.superior || luxTour.priceEUR)}
-              </p>
-              <p className="text-[10px] text-muted-foreground">{t('luxury.from')}</p>
-            </div>
-          </button>
-        ))}
+                <Crown className="size-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-semibold truncate ${
+                  selectedTourIdx === idx ? 'text-foreground' : 'text-muted-foreground'
+                }`}>
+                  {luxName}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {luxTour.duration} &bull; {luxGroupSize}
+                </p>
+              </div>
+              <div className="text-right shrink-0">
+                <p className="text-sm font-bold text-primary">
+                  {formatPrice(luxFromPrice)}
+                </p>
+                <p className="text-[10px] text-muted-foreground">{t('luxury.from')}</p>
+              </div>
+            </button>
+          )
+        })}
       </div>
 
       {/* Main content card */}
@@ -152,7 +179,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
           {/* Hero image */}
           <div className="relative h-48 overflow-hidden sm:h-64">
             <img
-              src={tour.image}
+              src={tour.images[0] || '/images/hero-bg.jpg'}
               alt={name}
               className="h-full w-full object-cover"
             />
@@ -221,9 +248,9 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                   <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {[
                       { icon: Calendar, label: t('luxury.day'), value: tour.duration },
-                      { icon: Users, label: t('luxury.pax'), value: tour.groupSize },
+                      { icon: Users, label: t('luxury.pax'), value: groupSize },
                       { icon: Star, label: t('luxury.hotels'), value: '4\u2605/3\u2605' },
-                      { icon: MapPin, label: 'Region', value: tour.region },
+                      { icon: MapPin, label: 'Region', value: region },
                     ].map((stat) => (
                       <div key={stat.label} className="rounded-xl border border-border bg-background/50 p-3">
                         <stat.icon className="mb-1 size-4 text-primary/60" />
@@ -241,7 +268,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                           {t('tours.included')}
                         </h4>
                         <ul className="space-y-2 max-h-72 overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin' }}>
-                          {tour.included.map((item, idx) => (
+                          {getLocalizedArray(tour.includedLocalized, loc, tour.included).map((item, idx) => (
                             <li key={idx} className="flex items-start gap-2 text-sm">
                               <Check className="mt-0.5 size-4 shrink-0 text-primary/70" />
                               <span className="text-foreground/50">{item}</span>
@@ -255,8 +282,8 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                         <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground/30">
                           {t('tours.excluded')}
                         </h4>
-                        <ul className="space-y-2">
-                          {tour.excluded.map((item, idx) => (
+                        <ul className="space-y-2 max-h-72 overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin' }}>
+                          {getLocalizedArray(tour.excludedLocalized, loc, tour.excluded).map((item, idx) => (
                             <li key={idx} className="flex items-start gap-2 text-sm">
                               <X className="mt-0.5 size-4 shrink-0 text-red-400/60" />
                               <span className="text-foreground/50">{item}</span>
@@ -273,13 +300,28 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                       <Shield className="mr-1.5 inline size-4" />
                       {t('luxury.paymentTerms')}
                     </h4>
-                    <p className="mb-3 text-xs text-foreground/40">{t('luxury.depositRequired')}</p>
+                    {/* Payment policy */}
+                    {tour.paymentPolicy.length > 0 && (
+                      <ul className="mb-3 space-y-1 text-xs text-foreground/40">
+                        {getLocalizedArray(tour.paymentPolicyLocalized, loc, tour.paymentPolicy).map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
                     <h5 className="mb-1 text-xs font-medium text-foreground/30">{t('luxury.cancellationPolicy')}</h5>
-                    <ul className="space-y-1 text-xs text-foreground/40">
-                      <li>{t('luxury.cancel30days')}</li>
-                      <li>{t('luxury.cancel15to30')}</li>
-                      <li>{t('luxury.cancelLess15')}</li>
-                    </ul>
+                    {tour.cancellationPolicy.length > 0 ? (
+                      <ul className="space-y-1 text-xs text-foreground/40">
+                        {getLocalizedArray(tour.cancellationPolicyLocalized, loc, tour.cancellationPolicy).map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul className="space-y-1 text-xs text-foreground/40">
+                        <li>{t('luxury.cancel30days')}</li>
+                        <li>{t('luxury.cancel15to30')}</li>
+                        <li>{t('luxury.cancelLess15')}</li>
+                      </ul>
+                    )}
                   </div>
                 </motion.div>
               )}
@@ -294,11 +336,12 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                   transition={{ duration: 0.2 }}
                 >
                   <div className="max-h-[650px] overflow-y-auto space-y-2 pr-1" style={{ scrollbarWidth: 'thin' }}>
-                    {itinerary.map((day: LuxuryItineraryDay) => {
+                    {itinerary.map((day: LuxuryTourDay) => {
                       const isExpanded = expandedDay === day.day
-                      const dayTitle = getLocalized(day.title, '')
-                      const dayRoute = day.route ? getLocalized(day.route, '') : ''
-                      const dayDesc = getLocalized(day.description, '')
+                      const dayTitle = getLocalized(day.titleLocalized, loc, day.title)
+                      const dayRoute = day.route || ''
+                      const dayDesc = getLocalized(day.descriptionLocalized, loc, day.description)
+                      const dayHighlights = getLocalizedArray(day.highlightsLocalized, loc, day.highlights)
                       const mealLabels: Record<string, string> = {
                         Breakfast: t('luxury.breakfast'),
                         Lunch: t('luxury.lunch'),
@@ -360,9 +403,9 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                                   </p>
 
                                   {/* Highlights */}
-                                  {day.highlights.length > 0 && (
+                                  {dayHighlights.length > 0 && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
-                                      {day.highlights.map((h, i) => (
+                                      {dayHighlights.map((h, i) => (
                                         <Badge
                                           key={i}
                                           variant="outline"
@@ -445,7 +488,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                         </tr>
                       </thead>
                       <tbody>
-                        {priceTiers.map((tier: PriceTier, idx: number) => {
+                        {pricing.map((tier: LuxuryTourPriceTier, idx: number) => {
                           const isBestValue = idx === bestValueIdx
                           return (
                             <tr
@@ -472,12 +515,12 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                               <td className={`px-4 py-3 text-right text-sm font-semibold ${
                                 isBestValue ? 'text-primary' : 'text-primary'
                               }`}>
-                                {formatPrice(tier.superior)}
+                                {formatPrice(tier.price4Star)}
                               </td>
                               <td className={`px-4 py-3 text-right text-sm font-semibold ${
                                 isBestValue ? 'text-foreground/70' : 'text-foreground/60'
                               }`}>
-                                {formatPrice(tier.standard)}
+                                {formatPrice(tier.price3Star)}
                               </td>
                             </tr>
                           )
@@ -487,25 +530,25 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                   </div>
 
                   {/* Single supplement */}
-                  {(tour.singleSupplementSuperior || tour.singleSupplementStandard) && (
+                  {(tour.singleSupplement.price4Star || tour.singleSupplement.price3Star) && (
                     <div className="mb-6 rounded-xl border border-border bg-background/30 p-4">
                       <h4 className="mb-3 text-sm font-semibold text-foreground/60">
                         {t('luxury.singleSupplement')}
                       </h4>
                       <div className="flex gap-6">
-                        {tour.singleSupplementSuperior && (
+                        {tour.singleSupplement.price4Star > 0 && (
                           <div>
                             <p className="text-xs text-muted-foreground">4\u2605 {t('luxury.superior')}</p>
                             <p className="text-lg font-bold text-primary">
-                              {formatPrice(tour.singleSupplementSuperior)}
+                              {formatPrice(tour.singleSupplement.price4Star)}
                             </p>
                           </div>
                         )}
-                        {tour.singleSupplementStandard && (
+                        {tour.singleSupplement.price3Star > 0 && (
                           <div>
                             <p className="text-xs text-muted-foreground">3*/4\u2605 {t('luxury.standard')}</p>
                             <p className="text-lg font-bold text-foreground/60">
-                              {formatPrice(tour.singleSupplementStandard)}
+                              {formatPrice(tour.singleSupplement.price3Star)}
                             </p>
                           </div>
                         )}
@@ -549,7 +592,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
               <div>
                 <p className="text-xs text-muted-foreground">{t('luxury.priceTiers')}</p>
                 <p className="text-lg font-bold text-primary">
-                  {formatPrice(priceTiers[priceTiers.length - 1]?.superior || tour.priceEUR)}
+                  {formatPrice(fromPrice)}
                   <span className="ml-1 text-xs font-normal text-muted-foreground">{t('luxury.perPerson')}</span>
                 </p>
               </div>
