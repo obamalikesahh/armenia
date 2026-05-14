@@ -30,6 +30,7 @@ interface NavbarProps {
   isLoggedIn?: boolean
   userName?: string
   onLogout?: () => void
+  onProfileClick?: () => void
 }
 
 const NAV_LINKS = [
@@ -47,6 +48,7 @@ export function Navbar({
   isLoggedIn = false,
   userName,
   onLogout,
+  onProfileClick,
 }: NavbarProps) {
   const { locale, setLocale, t } = useLocale()
   const [scrolled, setScrolled] = useState(false)
@@ -164,10 +166,16 @@ export function Navbar({
                   align="end"
                   className="border-border bg-popover text-popover-foreground backdrop-blur-xl"
                 >
-                  <DropdownMenuItem className="cursor-pointer hover:bg-secondary">
+                  <DropdownMenuItem
+                    onClick={() => onProfileClick?.()}
+                    className="cursor-pointer hover:bg-secondary"
+                  >
                     {t('nav.profile')}
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-secondary">
+                  <DropdownMenuItem
+                    onClick={() => onProfileClick?.()}
+                    className="cursor-pointer hover:bg-secondary"
+                  >
                     {t('nav.myBookings')}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-border" />
@@ -268,6 +276,10 @@ export function Navbar({
                       <>
                         <Button
                           variant="outline"
+                          onClick={() => {
+                            setMobileOpen(false)
+                            onProfileClick?.()
+                          }}
                           className="w-full border-border bg-secondary text-muted-foreground hover:bg-secondary hover:text-foreground"
                         >
                           <User className="mr-2 size-4" />

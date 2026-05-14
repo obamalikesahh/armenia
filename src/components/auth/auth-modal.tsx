@@ -186,12 +186,9 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'login', onLoginSuc
       setCodeSentAt(Date.now())
       setCountdown(COUNTDOWN_SECONDS)
       setOtpValue('')
-      // If email wasn't sent but we got a code back (fallback), show it
-      if (!data.emailSent && data.code) {
-        setRegInfoMessage(`${t('auth.codeSent')} (Code: ${data.code})`)
-      } else {
-        setRegInfoMessage(t('auth.codeSent'))
-      }
+      // SECURITY: Never display the verification code on the website
+      // The code is sent ONLY to the user's email
+      setRegInfoMessage(t('auth.codeSent'))
       setRegStep(2)
     } catch (err) {
       setRegError(err instanceof Error ? err.message : t('auth.sendCodeFailed'))

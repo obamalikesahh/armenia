@@ -60,17 +60,21 @@ export async function POST(request: NextRequest) {
       emailError = msg
     }
 
-    // Always return success with the code (for development/fallback)
-    // In production with proper email service, emailSent will be true
+    // SECURITY: Never return the verification code in the API response.
+    // The code must ONLY be sent to the user's email address.
+    // If email fails to send, we return an error instead of exposing the code.
+    if (!emailSent) {
+      return NextResponse.json(
+        { error: 'Failed to send verification email. Please try again.' },
+        { status: 500 }
+      )
+    }
+
     return NextResponse.json(
       {
-        message: emailSent
-          ? 'Verification code sent to your email'
-          : 'Verification code generated. Check your email or use the code shown.',
+        message: 'Verification code sent to your email',
         email: normalizedEmail,
-        emailSent,
-        // Only include code in response when email failed to send (fallback)
-        ...(process.env.NODE_ENV !== 'production' || !emailSent ? { code } : {}),
+        emailSent: true,
       },
       { status: 200 }
     )

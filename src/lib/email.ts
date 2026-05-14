@@ -8,7 +8,7 @@ const SMTP_USER = process.env.SMTP_USER || 'thebeautyofarmenia@gmail.com'
 const SMTP_PASS = process.env.SMTP_PASS || ''
 
 const FROM_EMAIL = `"The Beauty of Armenia" <${SMTP_USER}>`
-const ADMIN_EMAIL = 'thebeautyofarmenia@gmail.com'
+const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com']
 
 export const DISCOUNT_CODE = 'Armen5'
 
@@ -214,7 +214,7 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
   },
 }
 
-// ─── Send Confirmation Emails (to customer + admin) ────────────
+// ─── Send Confirmation Emails (to customer + admins) ────────────
 export async function sendConfirmationEmails(
   data: BookingEmailData,
   lang: 'en' | 'ru' | 'de' = 'en'
@@ -224,7 +224,7 @@ export async function sendConfirmationEmails(
   // Send to customer
   await sendMail(data.userEmail, template.subject(data.tourName), template.body(data))
 
-  // Send copy to admin
+  // Send copy to ALL admin emails
   const adminSubject = `[New Reservation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`
   const adminHtml = `
     <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
@@ -242,7 +242,8 @@ export async function sendConfirmationEmails(
       </div>
     </div>
   `
-  await sendMail(ADMIN_EMAIL, adminSubject, adminHtml)
+  // Send to ALL admin email addresses
+  await Promise.all(ADMIN_EMAILS.map(adminEmail => sendMail(adminEmail, adminSubject, adminHtml)))
 }
 
 // ─── Cancellation Emails ───────────────────────────────────────
@@ -292,8 +293,9 @@ export async function sendCancellationEmails(
   // Send to customer
   await sendMail(data.userEmail, subject, html)
 
-  // Send notification to admin
-  await sendMail(ADMIN_EMAIL, `[Cancellation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`, `
+  // Send notification to ALL admin emails
+  await Promise.all(ADMIN_EMAILS.map(adminEmail => 
+    sendMail(adminEmail, `[Cancellation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`, `
     <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,80,80,0.15);">
       <div style="padding: 32px 28px;">
         <h2 style="color: #ff5050; font-size: 18px; margin: 0 0 16px;">Reservation Cancelled</h2>
@@ -304,4 +306,5 @@ export async function sendCancellationEmails(
       </div>
     </div>
   `)
+  ))
 }

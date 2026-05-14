@@ -26,10 +26,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Get user info
-    const user = await db.user.findUnique({ where: { id: userId || payload.userId } })
+    // Get user info — try multiple lookup strategies
+    let user = null
+    // 1. Try explicit userId from request body
+    if (userId) {
+      user = await db.user.findUnique({ where: { id: userId } })
+    }
+    // 2. Try userId from JWT token
+    if (!user && payload.userId) {
+      user = await db.user.findUnique({ where: { id: payload.userId } })
+    }
+    // 3. Try email from JWT token
+    if (!user && payload.email) {
+      user = await db.user.findUnique({ where: { email: payload.email } })
+    }
     if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+      return NextResponse.json({ error: 'User not found. Please log in again.' }, { status: 404 })
     }
 
     // Check availability

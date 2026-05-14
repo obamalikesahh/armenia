@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import {
   Mountain,
-  Play,
   ChevronLeft,
   ChevronRight,
   Award,
@@ -17,6 +16,7 @@ import {
   Mail,
   ArrowRight,
   ChevronDown,
+  Crown,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -26,6 +26,8 @@ import { TourCard } from '@/components/tours/tour-card'
 import { TourFilters, type TourFiltersState } from '@/components/tours/tour-filters'
 import { TourDetailModal, type BookingData } from '@/components/tours/tour-detail-modal'
 import { AuthModal } from '@/components/auth/auth-modal'
+import { ProfileModal } from '@/components/auth/profile-modal'
+import { LuxuryToursSection } from '@/components/tours/luxury-tours-section'
 import {
   tours,
   getFeaturedTours,
@@ -133,6 +135,7 @@ export default function Home() {
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
   const [authTab, setAuthTab] = useState<'login' | 'register'>('login')
   const [filters, setFiltersRaw] = useState<TourFiltersState>({
     category: 'all',
@@ -143,6 +146,10 @@ export default function Home() {
   const [displayCount, setDisplayCount] = useState(9)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false)
+  const [selectedLuxuryTour, setSelectedLuxuryTour] = useState<Tour | null>(null)
+
+  // Luxury tours data
+  const luxuryTours = useMemo(() => tours.filter(tour => tour.category === 'Luxury'), [])
 
   // Featured tours carousel
   const carouselRef = useRef<HTMLDivElement>(null)
@@ -228,6 +235,15 @@ export default function Home() {
     signOut({ redirect: false })
   }, [])
 
+  const handleLuxuryBookNow = useCallback((tour: Tour) => {
+    setSelectedLuxuryTour(tour)
+    setIsDetailModalOpen(true)
+  }, [])
+
+  const handleProfileClick = useCallback(() => {
+    setIsProfileModalOpen(true)
+  }, [])
+
   const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     if (!newsletterEmail) return
@@ -264,16 +280,30 @@ export default function Home() {
         isLoggedIn={isLoggedIn}
         userName={userName}
         onLogout={handleLogout}
+        onProfileClick={handleProfileClick}
       />
 
       {/* ═══════════════════════════════════════════
           SECTION 1: HERO — clean, dramatic, minimal
           ═══════════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-bg.jpg"
+            alt="Armenian Mountains"
+            fill
+            className="object-cover"
+            style={{ filter: 'brightness(0.3) saturate(0.6)' }}
+            priority
+            quality={90}
+          />
+        </div>
+
         <HeroScene />
 
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/60 z-[3]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/80 z-[3]" />
 
         {/* Content — clean, centered, minimal */}
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
@@ -313,14 +343,6 @@ export default function Home() {
               >
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 size-4" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-border text-foreground/60 bg-transparent hover:bg-secondary hover:text-foreground/80 transition-all duration-300 rounded-full px-8"
-              >
-                <Play className="mr-2 size-4" />
-                {t('hero.secondaryCta')}
               </Button>
             </motion.div>
 
@@ -478,6 +500,27 @@ export default function Home() {
       </AnimatedSection>
 
       {/* ═══════════════════════════════════════════
+          SECTION: LUXURY TOURS
+          ═══════════════════════════════════════════ */}
+      <AnimatedSection className="relative py-24" id="luxury">
+        <motion.div variants={fadeUp} className="mb-12 text-center">
+          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-primary/60">
+            <Crown className="mr-1.5 inline size-3.5" />
+            {t('luxury.title')}
+          </p>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
+            {t('luxury.title')}
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+            {t('luxury.subtitle')}
+          </p>
+          <div className="mx-auto mt-4 h-px w-12 bg-primary/30" />
+        </motion.div>
+
+        <LuxuryToursSection tours={luxuryTours} onBookNow={handleLuxuryBookNow} />
+      </AnimatedSection>
+
+      {/* ═══════════════════════════════════════════
           SECTION: FLUID ROUTE ANIMATION
           ═══════════════════════════════════════════ */}
       <AnimatedSection className="relative py-16">
@@ -632,9 +675,16 @@ export default function Home() {
 
       {/* ─── Modals ─── */}
       <TourDetailModal
-        tour={selectedTour}
+        tour={selectedLuxuryTour || selectedTour}
         open={isDetailModalOpen}
-        onOpenChange={setIsDetailModalOpen}
+        onOpenChange={(open) => {
+          setIsDetailModalOpen(open)
+          if (!open) {
+            // Clear both tour selections when modal closes
+            setSelectedTour(null)
+            setSelectedLuxuryTour(null)
+          }
+        }}
         onReserve={handleBookingProceed}
         isLoggedIn={isLoggedIn}
         onLoginClick={handleLoginClick}
@@ -645,6 +695,11 @@ export default function Home() {
         onOpenChange={setIsAuthModalOpen}
         defaultTab={authTab}
         onLoginSuccess={handleLoginSuccess}
+      />
+
+      <ProfileModal
+        open={isProfileModalOpen}
+        onOpenChange={setIsProfileModalOpen}
       />
     </div>
   )

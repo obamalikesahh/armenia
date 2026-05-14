@@ -268,6 +268,15 @@ export function TourDetailModal({
 
     try {
       const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
+      // Get userId from localStorage for reliable user lookup
+      let userId: string | undefined
+      try {
+        const userInfo = localStorage.getItem('user_info')
+        if (userInfo) {
+          const parsed = JSON.parse(userInfo)
+          userId = parsed.id
+        }
+      } catch { /* ignore */ }
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: {
@@ -282,6 +291,7 @@ export function TourDetailModal({
           adults,
           children,
           totalPriceEUR,
+          userId,
           lang: locale,
         }),
       })

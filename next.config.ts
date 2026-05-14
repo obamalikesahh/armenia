@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     '.space-z.ai',
   ],
   images: {
+    qualities: [75, 90],
     remotePatterns: [
       {
         protocol: 'https',
