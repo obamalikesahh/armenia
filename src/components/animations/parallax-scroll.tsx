@@ -53,7 +53,7 @@ interface RevealOnScrollProps {
   duration?: number
 }
 
-const variantConfigs: Record<RevealVariant, { hidden: object; visible: object }> = {
+const variantConfigs: Record<RevealVariant, { hidden: any; visible: any }> = {
   'fade-up': {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0 },

@@ -410,7 +410,7 @@ export function LuxuryBookingModal({
                   <RadioGroupItem value="4star" id="4star" />
                   <Label htmlFor="4star" className="cursor-pointer flex-1">
                     <div className="flex items-center gap-1.5">
-                      <p className="font-medium text-foreground">4★ Superior</p>
+                      <p className="font-medium text-foreground">4 Superior Hotel</p>
                     </div>
                     <p className="text-sm text-muted-foreground mt-0.5">
                       Premium accommodation throughout
@@ -435,7 +435,7 @@ export function LuxuryBookingModal({
                   <RadioGroupItem value="3star" id="3star" />
                   <Label htmlFor="3star" className="cursor-pointer flex-1">
                     <div className="flex items-center gap-1.5">
-                      <p className="font-medium text-foreground">3★ & 4★ Standard</p>
+                      <p className="font-medium text-foreground">3 and 4 Standard Hotel</p>
                     </div>
                     <p className="text-sm text-muted-foreground mt-0.5">
                       Comfortable mixed-category hotels
@@ -566,7 +566,7 @@ export function LuxuryBookingModal({
                 {/* Per-person line */}
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">
-                    {persons} × {t('booking.adults')} ({formatPrice(pricePerPerson)} / person, {hotelCategory === '4star' ? '4★' : '3★ & 4★'})
+                    {persons} × {t('booking.adults')} ({formatPrice(pricePerPerson)} / person, {hotelCategory === '4star' ? '4 Superior' : '3 & 4 Standard'})
                   </span>
                   <span className="text-foreground/70 font-medium">
                     {formatPrice(pricePerPerson * persons)}
@@ -577,7 +577,7 @@ export function LuxuryBookingModal({
                 {singleSupplement && (
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      Single supplement ({hotelCategory === '4star' ? '4★' : '3★ & 4★'})
+                      Single supplement ({hotelCategory === '4star' ? '4 Superior' : '3 & 4 Standard'})
                     </span>
                     <span className="text-foreground/70 font-medium">
                       {formatPrice(supplementPrice)}

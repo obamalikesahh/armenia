@@ -55,6 +55,8 @@ server.log
 # Database
 /db/*.db
 /db/*.db-journal
+/prisma/db/*.db
+/prisma/db/*.db-journal
 
 # Uploads
 /upload/
@@ -67,3 +69,10 @@ server.log
 
 # Mini services
 /mini-services/
+
+# Local Netlify folder
+.netlify/
+
+# Local backups and scratch scripts
+backup/
+scratch/

@@ -278,17 +278,17 @@ export const tours: Tour[] = [
     name: {
       en: 'Tatev Monastery & Wings of Tatev',
       ru: 'Монастырь Татев и Крылья Татева',
-      de: 'Tatwew-Kloster & Flügel von Tatew',
+      de: 'Tatev-Kloster & Flügel von Tatev',
     },
     description: {
       en: 'Soar above the dramatic Vorotan Gorge on the world\'s longest reversible aerial tramway — the Wings of Tatev — before arriving at the breathtaking 9th-century Tatev Monastery perched on the edge of a precipice. This tour offers one of Armenia\'s most spectacular visual experiences, combining adrenaline-pumping views with profound historical significance in the country\'s southernmost region.',
       ru: 'Пролетите над захватывающим ущельем Ворота на самой длинной в мире обратимой канатной дороге — Крыльях Татева — прежде чем прибыть к потрясающему монастырю Татев IX века, расположенному на краю обрыва. Эта экскурсия предлагает одно из самых зрелищных впечатлений Армении, сочетая захватывающие дух виды с глубокой исторической значимостью в самом южном регионе страны.',
-      de: 'Schweben Sie über der dramatischen Vorotan-Schlucht mit der längsten umkehrbaren Seilbahn der Welt — den Flügeln von Tatew — bevor Sie das atemberaubende Tatwew-Kloster aus dem 9. Jahrhundert erreichen, das am Rand einer Klippe thront. Diese Tour bietet eines der spektakulärsten visuellen Erlebnisse Armeniens und verbindet atemberaubende Ausblicke mit tiefgreifender historischer Bedeutung.',
+      de: 'Schweben Sie über der dramatischen Vorotan-Schlucht mit der längsten umkehrbaren Seilbahn der Welt — den Flügeln von Tatev — bevor Sie das atemberaubende Tatev-Kloster aus dem 9. Jahrhundert erreichen, das am Rand einer Klippe thront. Diese Tour bietet eines der spektakulärsten visuellen Erlebnisse Armeniens und verbindet atemberaubende Ausblicke mit tiefgreifender historischer Bedeutung.',
     },
     shortDescription: {
       en: 'Ride the world\'s longest ropeway to the majestic Tatev Monastery atop a dramatic gorge.',
       ru: 'Прокатитесь на самой длинной канатной дороге мира к величественному монастырю Татев на краю ущелья.',
-      de: 'Fahren Sie mit der längsten Seilbahn der Welt zum majestätischen Tatew-Kloster über einer dramatischen Schlucht.',
+      de: 'Fahren Sie mit der längsten Seilbahn der Welt zum majestätischen Tatev-Kloster über einer dramatischen Schlucht.',
     },
     image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/sightseeing/images/68904f008900f-tatev1.png',
     images: [
@@ -768,12 +768,12 @@ export const tours: Tour[] = [
     name: {
       en: 'Yerevan City Tour',
       ru: 'Обзорная экскурсия по Еревану',
-      de: 'Stadtrundfahrt Eriwan',
+      de: 'Stadtrundfahrt Jerevan',
     },
     description: {
       en: 'Get to know Armenia\'s vibrant capital on this comprehensive half-day tour. From the grand Republic Square and the monumental Cascade Complex to the ancient manuscripts of Matenadaran and the elegant Opera House, discover why Yerevan is one of the world\'s oldest continuously inhabited cities. Finish at Victory Park for sweeping views of Mount Ararat.',
       ru: 'Познакомьтесь с живой столицей Армении в этой подробной полудневной экскурсии. От величественной Площади Республики и монументального Каскада до древних рукописей Матенадарана и элегантного Театра Оперы — узнайте, почему Ереван является одним из старейших непрерывно населённых городов мира. Завершите экскурсию в Парке Победы с панорамными видами на гору Арарат.',
-      de: 'Lernen Sie Armeniens lebendige Hauptstadt auf dieser umfassenden Halbtagestour kennen. Von der großartigen Republikplatz und dem monumentalen Kaskadenkomplex bis zu den antiken Manuskripten des Matenadaran — entdecken Sie, warum Eriwan eine der ältesten durchgehend bewohnten Städte der Welt ist.',
+      de: 'Lernen Sie Armeniens lebendige Hauptstadt auf dieser umfassenden Halbtagestour kennen. Von der großartigen Republikplatz und dem monumentalen Kaskadenkomplex bis zu den antiken Manuskripten des Matenadaran — entdecken Sie, warum Jerevan eine der ältesten durchgehend bewohnten Städte der Welt ist.',
     },
     shortDescription: {
       en: 'Discover the pink city — from grand squares to ancient manuscripts and Ararat views.',
@@ -1474,17 +1474,17 @@ export const tours: Tour[] = [
     name: {
       en: 'Tatev, Karahunj & Noravank (2 Days)',
       ru: 'Татев, Караундж и Нораванк (2 дня)',
-      de: 'Tatew, Karahundsch & Norawank (2 Tage)',
+      de: 'Tatev, Karahundsch & Norawank (2 Tage)',
     },
     description: {
       en: 'An immersive two-day journey through southern Armenia\'s most spectacular sites. Day one takes you to the mysterious Karahunj — Armenia\'s Stonehenge — and the breathtaking Tatev Monastery via the Wings of Tatev ropeway. Day two reveals the red-cliff beauty of Noravank and the winemaking traditions of Areni. Includes hotel, breakfast, and ropeway tickets.',
       ru: 'Погружающее двухдневное путешествие по самым зрелищным местам южной Армении. В первый день вы посетите таинственный Караундж — армянский Стоунхендж — и потрясающий монастырь Татев через канатную дорогу Крылья Татева. Во второй день откроется красота Нораванка в красных скалах и винодельческие традиции Арени. Включает отель, завтрак и билеты на канатную дорогу.',
-      de: 'Eine intensive zweitägige Reise durch die spektakulärsten Stätten Südarmeniens. Tag eins bringt Sie zum mysteriösen Karahundsch — Armeniens Stonehenge — und zum atemberaubenden Tatew-Kloster. Tag zwei enthüllt die Rotklippen-Schönheit von Norawank und die Weinbautraditionen von Areni. Inklusive Hotel, Frühstück und Seilbahn-Tickets.',
+      de: 'Eine intensive zweitägige Reise durch die spektakulärsten Stätten Südarmeniens. Tag eins bringt Sie zum mysteriösen Karahundsch — Armeniens Stonehenge — und zum atemberaubenden Tatev-Kloster. Tag zwei enthüllt die Rotklippen-Schönheit von Norawank und die Weinbautraditionen von Areni. Inklusive Hotel, Frühstück und Seilbahn-Tickets.',
     },
     shortDescription: {
       en: 'Armenia\'s Stonehenge, the Wings of Tatev, and red-cliff Noravank over two epic days.',
       ru: 'Армянский Стоунхендж, Крылья Татева и Нораванк за два эпических дня.',
-      de: 'Armeniens Stonehenge, die Flügel von Tatew und Rotklippen-Norawank an zwei epischen Tagen.',
+      de: 'Armeniens Stonehenge, die Flügel von Tatev und Rotklippen-Norawank an zwei epischen Tagen.',
     },
     image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/683ff8b7b1df8-sanahin2.png',
     images: [
@@ -1535,7 +1535,7 @@ export const tours: Tour[] = [
     description: {
       en: 'The ultimate Armenian experience — three unforgettable days covering the country\'s most iconic destinations. Day one: the pagan temple of Garni, the rock-carved Geghard, and the blue expanse of Lake Sevan. Day two: the world\'s longest ropeway to Tatev Monastery. Day three: the biblical Khor Virap and the stunning Noravank. Includes hotels, breakfast, and entrance fees.',
       ru: 'Непревзойдённый армянский опыт — три незабываемых дня, охватывающие самые знаковые направления страны. День первый: языческий храм Гарни, высеченный в скале Гегард и голубые просторы озера Севан. День второй: самая длинная канатная дорога в мире к монастырю Татев. День третий: библейский Хор Вирап и потрясающий Нораванк. Включает отели, завтрак и входные билеты.',
-      de: 'Das ultimative Armenien-Erlebnis — drei unvergessliche Tage mit den ikonischsten Zielen des Landes. Tag eins: der heidnische Garni-Tempel, das in Fels gehauene Geghard und der blaue Sewansee. Tag zwei: die längste Seilbahn der Welt zum Tatew-Kloster. Tag drei: das biblische Chor Wirap und das atemberaubende Norawank. Inklusive Hotels, Frühstück und Eintrittsgelder.',
+      de: 'Das ultimative Armenien-Erlebnis — drei unvergessliche Tage mit den ikonischsten Zielen des Landes. Tag eins: der heidnische Garni-Tempel, das in Fels gehauene Geghard und der blaue Sewansee. Tag zwei: die längste Seilbahn der Welt zum Tatev-Kloster. Tag drei: das biblische Chor Wirap und das atemberaubende Norawank. Inklusive Hotels, Frühstück und Eintrittsgelder.',
     },
     shortDescription: {
       en: 'Three days, three regions, all of Armenia\'s greatest hits — the ultimate discovery tour.',

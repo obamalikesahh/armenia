@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Mountain,
@@ -23,6 +24,8 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/s
 import { Locale, locales, localeFlags, localeNames } from '@/lib/i18n'
 import { useLocale } from '@/hooks/use-locale'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
+
+import { ArmeniaToursLogo } from '@/components/ui/armenia-tours-logo'
 
 interface NavbarProps {
   onLoginClick?: () => void
@@ -51,9 +54,15 @@ export function Navbar({
   onProfileClick,
 }: NavbarProps) {
   const { locale, setLocale, t } = useLocale()
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeLink, setActiveLink] = useState<string>('nav.home')
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +71,8 @@ export function Navbar({
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const useContrast = scrolled || (mounted && theme === 'light')
 
   // Store currency preference (EUR only)
 
@@ -81,11 +92,8 @@ export function Navbar({
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <Mountain className="size-5 text-primary" />
-          <span className="text-sm font-semibold tracking-[0.15em] text-foreground">
-            ARMENIA <span className="text-primary">TOURS</span>
-          </span>
+        <a href="#home" className="flex items-center">
+          <ArmeniaToursLogo useContrast={useContrast} />
         </a>
 
         {/* Desktop nav links */}
@@ -95,7 +103,9 @@ export function Navbar({
               key={link.key}
               href={link.href}
               onClick={() => setActiveLink(link.key)}
-              className="relative px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className={`relative px-3 py-2 text-[13px] font-semibold transition-colors ${
+                useContrast ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'
+              }`}
             >
               {t(link.key)}
               {activeLink === link.key && (
@@ -120,7 +130,9 @@ export function Navbar({
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-1.5 text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
+                className={`gap-1.5 transition-colors ${
+                  useContrast ? 'text-foreground hover:bg-secondary hover:text-primary' : 'text-white/80 hover:bg-white/10 hover:text-white'
+                }`}
               >
                 <Globe className="size-4" />
                 <span className="hidden text-xs sm:inline">{currentFlag}</span>
@@ -154,7 +166,9 @@ export function Navbar({
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="gap-2 text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
+                    className={`gap-2 transition-colors ${
+                      useContrast ? 'text-foreground hover:bg-secondary hover:text-primary' : 'text-white/90 hover:bg-white/10 hover:text-white'
+                    }`}
                   >
                     <div className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <User className="size-4" />
@@ -194,7 +208,9 @@ export function Navbar({
                   variant="ghost"
                   size="sm"
                   onClick={onLoginClick}
-                  className="text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
+                  className={`transition-colors ${
+                    useContrast ? 'text-foreground hover:bg-secondary hover:text-primary' : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  }`}
                 >
                   {t('nav.login')}
                 </Button>
@@ -216,7 +232,9 @@ export function Navbar({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
+                  className={`transition-colors ${
+                    useContrast ? 'text-foreground hover:bg-secondary hover:text-primary' : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  }`}
                 >
                   <Menu className="size-5" />
                 </Button>

@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.git/
+.netlify/
+upload/
+db/
+dev.log
+*.zip
+*.log

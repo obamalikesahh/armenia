@@ -350,7 +350,7 @@ const caucasusTour: LuxuryTour = {
       titleLocalized: { en: 'Lake Sevan, Garni & Geghard', de: 'Sewan-See, Garni & Geghard', ru: 'Озеро Севан, Гарни и Гегард' },
       descriptionLocalized: {
         en: 'Drive to the shimmering expanse of Lake Sevan, one of the world\'s largest high-altitude freshwater lakes, sitting at 1,900 metres above sea level. A boat ride on the lake offers a unique perspective. Descend to visit the Geghard Monastery, a UNESCO World Heritage Site partly carved out of the adjacent mountain. In the village of Garni, participate in a Lavash-making masterclass and visit the Garni pagan temple, a remarkably preserved 1st-century AD Hellenistic temple. Arrive in Yerevan for dinner.',
-        de: 'Fahrt zum glitzernden Sewan-See, einem der größten hochgelegenen Süßwasserseen der Welt auf 1.900 Metern. Eine Bootsfahrt bietet einzigartige Perspektiven. Besuchen Sie das Geghard-Kloster, ein UNESCO-Weltkulturerbe, teilweise in den Berg gehauen. Im Dorf Garni nehmen Sie an einem Lawasch-Kochkurs teil und besuchen den heidnischen Tempel von Garni aus dem 1. Jahrhundert n. Chr. Ankunft in Eriwan zum Abendessen.',
+        de: 'Fahrt zum glitzernden Sewan-See, einem der größten hochgelegenen Süßwasserseen der Welt auf 1.900 Metern. Eine Bootsfahrt bietet einzigartige Perspektiven. Besuchen Sie das Geghard-Kloster, ein UNESCO-Weltkulturerbe, teilweise in den Berg gehauen. Im Dorf Garni nehmen Sie an einem Lawasch-Kochkurs teil und besuchen den heidnischen Tempel von Garni aus dem 1. Jahrhundert n. Chr. Ankunft in Jerevan zum Abendessen.',
         ru: 'Отправление к сверкающим водам озера Севан — одного из крупнейших высокогорных пресноводных озёр мира на высоте 1900 м. Катание на лодке откроет уникальную перспективу. Спуск к монастырю Гегард, объекту ЮНЕСКО, частично высеченному в скале. В деревне Гарни — мастер-класс по выпечке лаваша и посещение языческого храма Гарни I века н.э. Прибытие в Ереван к ужину.',
       },
       highlightsLocalized: {
@@ -370,7 +370,7 @@ const caucasusTour: LuxuryTour = {
       accommodation: 'ARARAT Opera Suite Hotel 4*',
       image: '/images/luxury/caucasus_day11.jpg',
       included: ['ARARAT brandy tasting', 'Welcome dinner with folk music'],
-      titleLocalized: { en: 'Yerevan City Tour & Welcome Dinner', de: 'Stadtrundfahrt Eriwan & Willkommensabendessen', ru: 'Обзорная экскурсия по Еревану и приветственный ужин' },
+      titleLocalized: { en: 'Yerevan City Tour & Welcome Dinner', de: 'Stadtrundfahrt Jerevan & Willkommensabendessen', ru: 'Обзорная экскурсия по Еревану и приветственный ужин' },
       descriptionLocalized: {
         en: 'Discover the Armenian capital in depth. Begin at Tsitsernakaberd, the powerful Armenian Genocide Memorial. Continue to the legendary ARARAT Brandy Factory for a guided tour and tasting. Stroll through Republic Square and explore the Cascade Complex. The evening culminates in a welcome dinner featuring live Armenian folk music.',
         de: 'Entdecken Sie die armenische Hauptstadt eingehend. Beginnen Sie am Zizernakaberd, dem eindrucksvollen Völkermord-Denkmal. Weiter zur legendären ARARAT-Brandy-Fabrik für eine Führung und Verkostung. Schlendern Sie über den Republikplatz und erkunden Sie die Kaskade. Der Abend gipfelt in einem Willkommensabendessen mit armenischer Volksmusik.',
@@ -418,7 +418,7 @@ const caucasusTour: LuxuryTour = {
       titleLocalized: { en: 'Etchmiadzin & Zvartnots', de: 'Etschmiadsin & Swartnoz', ru: 'Эчмиадзин и Звартноц' },
       descriptionLocalized: {
         en: 'Return toward Yerevan, stopping at two of Armenia\'s most important UNESCO World Heritage Sites. Etchmiadzin Cathedral is the oldest state-built Christian cathedral in the world. Conclude at Zvartnots Cathedral, a 7th-century architectural marvel. Return to Yerevan for your final evening.',
-        de: 'Rückfahrt nach Eriwan mit Stopps an zwei der wichtigsten UNESCO-Weltkulturerbestätten Armeniens. Die Etschmiadsin-Kathedrale ist die älteste staatlich erbaute christliche Kathedrale der Welt. Abschluss mit der Swartnoz-Kathedrale, einem architektonischen Wunder des 7. Jahrhunderts. Rückkehr nach Eriwan.',
+        de: 'Rückfahrt nach Jerevan mit Stopps an zwei der wichtigsten UNESCO-Weltkulturerbestätten Armeniens. Die Etschmiadsin-Kathedrale ist die älteste staatlich erbaute christliche Kathedrale der Welt. Abschluss mit der Swartnoz-Kathedrale, einem architektonischen Wunder des 7. Jahrhunderts. Rückkehr nach Jerevan.',
         ru: 'Возвращение в Ереван с остановками у двух важнейших объектов Всемирного наследия ЮНЕСКО в Армении. Собор Эчмиадзин — старейший в мире христианский кафедральный собор, построенный государством. Завершение у собора Звартноц — архитектурного чуда VII века. Возвращение в Ереван на последний вечер.',
       },
       highlightsLocalized: {
@@ -579,7 +579,7 @@ const armeniaTour: LuxuryTour = {
   },
   descriptionLocalized: {
     en: 'Delve deep into the soul of Armenia on this thoughtfully curated 10-day journey that goes far beyond sightseeing. This is a tour designed for travellers who want to understand a country through its people, its food, and its living traditions — not just its monuments. From the bustling heart of Yerevan to the rugged peaks of Mount Dimats, from the world\'s longest cable car ride at Tatev to a family farm visit in the Armenian highlands, every day offers an encounter that is genuine, unexpected, and memorable. You\'ll bake Lavash in a village tonir, craft Sujukh with a local family, grill fish at a chef\'s house, and taste wines from the birthplace of viticulture. With a German-speaking guide illuminating the history of one of the world\'s oldest civilisations, and hand-picked hotels offering comfort and character at every stop, this is Armenia as few visitors ever experience it.',
-    de: 'Tauchen Sie tief in die Seele Armeniens ein auf dieser durchdachten 10-tägigen Reise, die weit über Sightseeing hinausgeht. Diese Tour ist für Reisende gedacht, die ein Land durch seine Menschen, sein Essen und seine lebendigen Traditionen verstehen wollen — nicht nur durch seine Monumente. Vom geschäftigen Herzen Eriwans bis zu den rauen Gipfeln des Berges Dimaz, vom längsten Seilbahnritt der Welt in Tatew bis zum Besuch einer Familienfarm im armenischen Hochland — jeder Tag bietet eine Begegnung, die authentisch, unerwartet und unvergesslich ist. Sie werden Lawasch in einem Dorf-Tonir backen, Sudschnukh mit einer einheimischen Familie herstellen, Fisch im Haus eines Kochs grillen und Weine aus der Wiege des Weinbaus probieren. Mit einem deutschsprachigen Guide, der die Geschichte einer der ältesten Zivilisationen der Welt erleuchtet, ist dies Armenien, wie es wenige Besucher je erleben.',
+    de: 'Tauchen Sie tief in die Seele Armeniens ein auf dieser durchdachten 10-tägigen Reise, die weit über Sightseeing hinausgeht. Diese Tour ist für Reisende gedacht, die ein Land durch seine Menschen, sein Essen und seine lebendigen Traditionen verstehen wollen — nicht nur durch seine Monumente. Vom geschäftigen Herzen Jerevans bis zu den rauen Gipfeln des Berges Dimaz, vom längsten Seilbahnritt der Welt in Tatev bis zum Besuch einer Familienfarm im armenischen Hochland — jeder Tag bietet eine Begegnung, die authentisch, unerwartet und unvergesslich ist. Sie werden Lawasch in einem Dorf-Tonir backen, Sudschnukh mit einer einheimischen Familie herstellen, Fisch im Haus eines Kochs grillen und Weine aus der Wiege des Weinbaus probieren. Mit einem deutschsprachigen Guide, der die Geschichte einer der ältesten Zivilisationen der Welt erleuchtet, ist dies Armenien, wie es wenige Besucher je erleben.',
     ru: 'Погрузитесь в душу Армении в этом тщательно составленном 10-дневном путешествии, выходящем далеко за рамки обычного туризма. Этот тур для тех, кто хочет понять страну через её людей, кухню и живые традиции — а не только через памятники. От бурлящего сердца Еревана до суровых вершин горы Димац, от самой длинной канатной дороги мира в Татеве до визита на семейную ферму в армянском высокогорье — каждый день приносит подлинную, неожиданную и запоминающуюся встречу. Вы будете печь лаваш в деревенском тонире, готовить суджук с местной семьёй, жарить рыбу у шеф-повара и дегустировать вина из колыбели виноделия. С немецкоговорящим гидом, раскрывающим историю одной из древнейших цивилизаций мира, — это Армения, какой её редко видят.',
   },
   days: [
@@ -594,7 +594,7 @@ const armeniaTour: LuxuryTour = {
       accommodation: 'Yerevan',
       image: '/images/luxury/armenia_day1.jpg',
       included: ['Airport transfer', 'ARARAT brandy tasting', 'Welcome dinner with folk music'],
-      titleLocalized: { en: 'Arrival & Yerevan City Tour', de: 'Ankunft & Stadtrundfahrt Eriwan', ru: 'Прибытие и обзорная экскурсия по Еревану' },
+      titleLocalized: { en: 'Arrival & Yerevan City Tour', de: 'Ankunft & Stadtrundfahrt Jerevan', ru: 'Прибытие и обзорная экскурсия по Еревану' },
       descriptionLocalized: {
         en: 'Arrive at Zvartnots International Airport, where your guide and driver will be waiting to welcome you to Armenia. Transfer to your hotel, then set out to discover the Armenian capital. Begin at Tsitsernakaberd, the solemn Armenian Genocide Memorial. Continue to the ARARAT Brandy Factory for a tour and tasting. Stroll through Republic Square and explore the Cascade Complex. The evening culminates in a welcome dinner accompanied by live Armenian folk music.',
         de: 'Ankunft am Flughafen Swartnoz, wo Ihr Guide und Fahrer Sie in Armenien willkommen heißen. Transfer zum Hotel, dann entdecken Sie die armenische Hauptstadt. Beginn am Zizernakaberd, der feierlichen Gedenkstätte des Völkermords. Weiter zur ARARAT-Brandy-Fabrik für Führung und Verkostung. Schlendern Sie über den Republikplatz und erkunden Sie die Kaskade. Der Abend gipfelt in einem Willkommensabendessen mit armenischer Volksmusik.',
@@ -640,15 +640,15 @@ const armeniaTour: LuxuryTour = {
       accommodation: 'Goris',
       image: '/images/luxury/armenia_day3.jpg',
       included: ['Wings of Tatev cable car'],
-      titleLocalized: { en: 'Wings of Tatev & Carahunge', de: 'Flügel von Tatew & Karahundsch', ru: 'Крылья Татева и Караундж' },
+      titleLocalized: { en: 'Wings of Tatev & Carahunge', de: 'Flügel von Tatev & Karahundsch', ru: 'Крылья Татева и Караундж' },
       descriptionLocalized: {
         en: 'Take the Wings of Tatev, the world\'s longest reversible aerial tramway (5.7 km), which glides above the spectacular Vorotan River gorge. At the far end awaits the Tatev Monastery, a 9th-century fortress-like complex. Drive to Carahunge, the "Armenian Stonehenge" — a mysterious arrangement of over 200 basalt stones dating back 7,500 years.',
-        de: 'Nehmen Sie die Flügel von Tatew, die längste reversible Seilbahn der Welt (5,7 km), die über die spektakuläre Vorotan-Schlucht gleitet. Am anderen Ende erwartet Sie das Tatew-Kloster, eine festungsähnliche Anlage des 9. Jahrhunderts. Fahrt nach Karahundsch, dem „armenischen Stonehenge" — eine mysteriöse Anordnung von über 200 Basaltsteinen, die 7.500 Jahre alt sind.',
+        de: 'Nehmen Sie die Flügel von Tatev, die längste reversible Seilbahn der Welt (5,7 km), die über die spektakuläre Vorotan-Schlucht gleitet. Am anderen Ende erwartet Sie das Tatev-Kloster, eine festungsähnliche Anlage des 9. Jahrhunderts. Fahrt nach Karahundsch, dem „armenischen Stonehenge" — eine mysteriöse Anordnung von über 200 Basaltsteinen, die 7.500 Jahre alt sind.',
         ru: 'Прокатитесь на «Крыльях Татева» — самой длинной в мире обратимой канатной дороге (5,7 км), парящей над впечатляющим ущельем реки Воротан. На другом конце — монастырь Татев, комплекс IX века, похожий на крепость. Поездка к Караунджу — «армянскому Стоунхенджу», таинственному сооружению из более чем 200 базальтовых камней возрастом 7500 лет.',
       },
       highlightsLocalized: {
         en: ['Wings of Tatev — world\'s longest cable car (5.7 km)', 'Tatev Monastery — 9th-century scholarly centre', 'Carahunge — "Armenian Stonehenge" (7,500 years old)', 'Goris city walk'],
-        de: ['Flügel von Tatew — längste Seilbahn der Welt (5,7 km)', 'Tatew-Kloster — Gelehrtenzentrum des 9. Jh.', 'Karahundsch — „Armenisches Stonehenge" (7.500 Jahre alt)', 'Stadtrundgang Goris'],
+        de: ['Flügel von Tatev — längste Seilbahn der Welt (5,7 km)', 'Tatev-Kloster — Gelehrtenzentrum des 9. Jh.', 'Karahundsch — „Armenisches Stonehenge" (7.500 Jahre alt)', 'Stadtrundgang Goris'],
         ru: ['Крылья Татева — самая длинная канатная дорога мира (5,7 км)', 'Монастырь Татев — научный центр IX века', 'Караундж — «Армянский Стоунхендж» (7500 лет)', 'Прогулка по Горису'],
       },
     },
@@ -734,7 +734,7 @@ const armeniaTour: LuxuryTour = {
       titleLocalized: { en: 'Lake Sevan, Garni & Geghard', de: 'Sewan-See, Garni & Geghard', ru: 'Озеро Севан, Гарни и Гегард' },
       descriptionLocalized: {
         en: 'Drive to Lake Sevan, the "Jewel of Armenia." A boat ride offers breathtaking views. Visit the Geghard Monastery, a UNESCO World Heritage Site. In Garni, participate in a Lavash-making masterclass and visit the 1st-century pagan temple. Return to Yerevan.',
-        de: 'Fahrt zum Sewan-See, dem „Juwel Armeniens". Eine Bootsfahrt bietet atemberaubende Ausblicke. Besuch des Geghard-Klosters, eines UNESCO-Weltkulturerbes. In Garni nehmen Sie an einem Lawasch-Kochkurs teil und besuchen den heidnischen Tempel aus dem 1. Jahrhundert. Rückkehr nach Eriwan.',
+        de: 'Fahrt zum Sewan-See, dem „Juwel Armeniens\". Eine Bootsfahrt bietet atemberaubende Ausblicke. Besuch des Geghard-Klosters, eines UNESCO-Weltkulturerbes. In Garni nehmen Sie an einem Lawasch-Kochkurs teil und besuchen den heidnischen Tempel aus dem 1. Jahrhundert. Rückkehr nach Jerevan.',
         ru: 'Поездка к озеру Севан — «Жемчужине Армении». Катание на лодке открывает захватывающие виды. Посещение монастыря Гегард, объекта Всемирного наследия ЮНЕСКО. В Гарни — мастер-класс по выпечке лаваша и посещение языческого храма I века. Возвращение в Ереван.',
       },
       highlightsLocalized: {

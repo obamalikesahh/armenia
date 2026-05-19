@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { LocaleProvider } from "@/hooks/use-locale";
-import { NextAuthProvider } from "@/components/auth/auth-provider";
+import { BackgroundMusic } from "@/components/background-music";
+
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const inter = Inter({
@@ -27,12 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <NextAuthProvider>
             <LocaleProvider>
               {children}
+              <BackgroundMusic />
               <Toaster />
             </LocaleProvider>
-          </NextAuthProvider>
         </ThemeProvider>
       </body>
     </html>

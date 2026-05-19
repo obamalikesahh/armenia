@@ -85,8 +85,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.openInMaps': 'Open in Maps',
     'tours.locations': 'Locations',
     'nav.menu': 'Navigation Menu',
-    'nav.phone': '+374 XX XXX XXX',
-    'nav.email': 'thebeautyofarmenia@gmail.com',
+    'nav.phone': '+374 41 362 131',
+    'nav.email': 'incoming@onewaytour.com',
     'nav.currencyEUR': 'EUR - Euro',
 
     // Categories
@@ -258,7 +258,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.rights': 'All rights reserved.',
     'footer.contactUs': 'Contact Us',
     'footer.followUs': 'Follow Us',
-    'footer.address': 'Yerevan, Armenia',
+    'footer.address': '16 Parpetsi St, Yerevan, Armenia',
     'footer.madeWith': 'Made with',
     'footer.inArmenia': 'in Armenia',
     'footer.emailPlaceholder': 'your@email.com',
@@ -436,8 +436,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.openInMaps': 'Открыть на карте',
     'tours.locations': 'Места',
     'nav.menu': 'Меню навигации',
-    'nav.phone': '+374 XX XXX XXX',
-    'nav.email': 'thebeautyofarmenia@gmail.com',
+    'nav.phone': '+374 41 362 131',
+    'nav.email': 'incoming@onewaytour.com',
     'nav.currencyEUR': 'EUR - Евро',
 
     // Категории
@@ -609,7 +609,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.rights': 'Все права защищены.',
     'footer.contactUs': 'Связаться с нами',
     'footer.followUs': 'Мы в соцсетях',
-    'footer.address': 'Ереван, Армения',
+    'footer.address': 'ул. Парпеци 16, Ереван, Армения',
     'footer.madeWith': 'Сделано с',
     'footer.inArmenia': 'в Армении',
     'footer.emailPlaceholder': 'your@email.com',
@@ -787,8 +787,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'tours.openInMaps': 'In Maps öffnen',
     'tours.locations': 'Orte',
     'nav.menu': 'Navigationsmenü',
-    'nav.phone': '+374 XX XXX XXX',
-    'nav.email': 'thebeautyofarmenia@gmail.com',
+    'nav.phone': '+374 41 362 131',
+    'nav.email': 'incoming@onewaytour.com',
     'nav.currencyEUR': 'EUR - Euro',
 
     // Kategorien
@@ -804,7 +804,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Regionen
     'regions.all': 'Alle Regionen',
-    'regions.yerevan': 'Eriwan',
+    'regions.yerevan': 'Jerevan',
     'regions.gegharkunik': 'Gegharkunik',
     'regions.vayotsDzor': 'Vayots Dzor',
     'regions.tavush': 'Tavush',
@@ -862,7 +862,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'booking.discountCode': 'Ihr Rabattcode',
     'booking.discountNotice': 'Verwenden Sie den Code Armen5 für 5% Rabatt bei Zahlung im OneWay Tour-Büro.',
     'booking.discountDescription': '5% Rabatt bei Barzahlung vor Ort — zeigen Sie diese E-Mail im Büro vor',
-    'booking.payInPersonNotice': 'Sie zahlen vor Ort im OneWay Tour-Büro in Eriwan. Zeigen Sie Ihre Bestätigungs-E-Mail für den Rabatt.',
+    'booking.payInPersonNotice': 'Sie zahlen vor Ort im OneWay Tour-Büro in Jerevan. Zeigen Sie Ihre Bestätigungs-E-Mail für den Rabatt.',
     'booking.cancelWithin24h': 'Kostenlose Stornierung innerhalb von 24 Stunden nach Buchung',
     'booking.loginToReserve': 'Anmelden zum Reservieren',
     'booking.seatsAvailable': '{count} Plätze verfügbar',
@@ -934,7 +934,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Über Armenien
     'about.title': 'Über Armenien',
     'about.p1': 'Armenien — eine der ältesten Zivilisationen der Welt — ist ein Land dramatischer Berglandschaften, antiker Klöster, die in Fels gehauen wurden, und herzlicher Gastfreundschaft, die Reisende seit Jahrtausenden willkommen heißt.',
-    'about.p2': 'Von den kristallklaren Gewässern des Sewansees bis zu den überwältigenden Flügeln von Tatev, von den heiligen Hallen von Geghard bis zu den lebhaften Straßen von Eriwan — jede Ecke Armeniens erzählt eine Geschichte, die Jahrtausende umspannt.',
+    'about.p2': 'Von den kristallklaren Gewässern des Sewansees bis zu den überwältigenden Flügeln von Tatev, von den heiligen Hallen von Geghard bis zu den lebhaften Straßen von Jerevan — jede Ecke Armeniens erzählt eine Geschichte, die Jahrtausende umspannt.',
     'about.p3': 'Unsere erfahrenen lokalen Guides erwecken diese Geschichten zum Leben und bieten authentische Erlebnisse, die weit über den typischen Tourismus hinausgehen. Ob Sie Abenteuer, spirituelle Entdeckung oder kulinarische Genüsse suchen — Armenien hat alles.',
     'about.exploreTours': 'Touren entdecken',
 
@@ -960,7 +960,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.rights': 'Alle Rechte vorbehalten.',
     'footer.contactUs': 'Kontaktieren Sie uns',
     'footer.followUs': 'Folgen Sie uns',
-    'footer.address': 'Eriwan, Armenien',
+    'footer.address': 'Parpetsi 16, Jerevan, Armenien',
     'footer.madeWith': 'Gemacht mit',
     'footer.inArmenia': 'in Armenien',
     'footer.emailPlaceholder': 'your@email.com',

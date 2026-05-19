@@ -249,12 +249,14 @@ function ParticleTrails() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
+            args={[trailPositions, 3]}
             count={trailCount}
             array={trailPositions.slice()}
             itemSize={3}
           />
           <bufferAttribute
             attach="attributes-color"
+            args={[trailColors, 3]}
             count={trailCount}
             array={trailColors}
             itemSize={3}

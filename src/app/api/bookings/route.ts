@@ -16,6 +16,9 @@ export async function POST(request: NextRequest) {
       totalPriceEUR,
       userId,
       lang = 'en',
+      luxuryTour,
+      hotelCategory,
+      singleSupplement,
     } = body
 
     // Try to verify JWT token, but don't immediately reject if it fails
@@ -25,7 +28,7 @@ export async function POST(request: NextRequest) {
     const payload = verifyToken(token)
 
     // Get user info — try multiple lookup strategies
-    let user = null
+    let user: any = null
 
     // 1. Try explicit userId from request body (most reliable for Google OAuth users)
     if (userId) {
@@ -105,27 +108,32 @@ export async function POST(request: NextRequest) {
       data: { reservedSeats: availability.reservedSeats + totalPeople },
     })
 
-    // Send confirmation emails (don't await to avoid blocking response)
-    sendConfirmationEmails(
-      {
-        bookingId: booking.id,
-        tourName,
-        tourDate,
-        guideLanguage,
-        adults,
-        children,
-        totalPriceAMD: 0, // Legacy
-        totalPriceEUR,
-        userFirstName: user.firstName,
-        userLastName: user.lastName,
-        userEmail: user.email,
-        userPhone: user.phone,
-        discountCode: DISCOUNT_CODE,
-      },
-      lang as 'en' | 'ru' | 'de'
-    ).catch((err) => {
+    // Send confirmation emails (await to ensure they are sent in a serverless context)
+    try {
+      await sendConfirmationEmails(
+        {
+          bookingId: booking.id,
+          tourName,
+          tourDate,
+          guideLanguage,
+          adults,
+          children,
+          totalPriceAMD: 0, // Legacy
+          totalPriceEUR,
+          userFirstName: user.firstName,
+          userLastName: user.lastName,
+          userEmail: user.email,
+          userPhone: user.phone,
+          discountCode: DISCOUNT_CODE,
+          luxuryTour,
+          hotelCategory,
+          singleSupplement,
+        },
+        lang as 'en' | 'ru' | 'de'
+      )
+    } catch (err) {
       console.error('Failed to send confirmation emails:', err)
-    })
+    }
 
     return NextResponse.json({ booking, message: 'Reservation confirmed! Check your email for details.' }, { status: 201 })
   } catch (error: unknown) {

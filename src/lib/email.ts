@@ -8,7 +8,7 @@ const SMTP_USER = process.env.SMTP_USER || 'thebeautyofarmenia@gmail.com'
 const SMTP_PASS = process.env.SMTP_PASS || ''
 
 const FROM_EMAIL = `"The Beauty of Armenia" <${SMTP_USER}>`
-const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'incoming@onewaytour.com']
+const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'incoming@onewaytour.com', 'caxkal22@gmail.com']
 
 export const DISCOUNT_CODE = 'Armen5'
 
@@ -128,6 +128,9 @@ interface BookingEmailData {
   userEmail: string
   userPhone?: string | null
   discountCode: string
+  luxuryTour?: boolean
+  hotelCategory?: string
+  singleSupplement?: boolean
 }
 
 const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string; body: (d: BookingEmailData) => string }> = {
@@ -146,6 +149,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Guest:</strong> ${d.userFirstName} ${d.userLastName}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Guide Language:</strong> ${d.guideLanguage === 'armenian' ? 'Armenian' : 'English/Russian'}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Adults:</strong> ${d.adults}${d.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.7);">Children:</strong> ${d.children}` : ''}</p>
+            ${d.luxuryTour ? `
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: #c9a84c;">Tour Type:</strong> Luxury Tour (Premium)</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Hotel Category:</strong> ${d.hotelCategory === '4star' ? '4 Superior Hotel' : '3 and 4 Standard Hotel'}</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Single Supplement:</strong> ${d.singleSupplement ? 'Yes' : 'No'}</p>
+            ` : ''}
             <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Total: €${d.totalPriceEUR}</p>
           </div>
           <div style="background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
@@ -173,6 +181,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Гость:</strong> ${d.userFirstName} ${d.userLastName}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Язык гида:</strong> ${d.guideLanguage === 'armenian' ? 'Армянский' : 'Английский/Русский'}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Взрослые:</strong> ${d.adults}${d.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.7);">Дети:</strong> ${d.children}` : ''}</p>
+            ${d.luxuryTour ? `
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: #c9a84c;">Тип тура:</strong> Люкс-тур (Премиум)</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Категория отеля:</strong> ${d.hotelCategory === '4star' ? '4 Superior Hotel' : '3 and 4 Standard Hotel'}</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Одноместное размещение:</strong> ${d.singleSupplement ? 'Да' : 'Нет'}</p>
+            ` : ''}
             <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Итого: €${d.totalPriceEUR}</p>
           </div>
           <div style="background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
@@ -200,6 +213,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Gast:</strong> ${d.userFirstName} ${d.userLastName}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Guidesprache:</strong> ${d.guideLanguage === 'armenian' ? 'Armenisch' : 'Englisch/Russisch'}</p>
             <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Erwachsene:</strong> ${d.adults}${d.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.7);">Kinder:</strong> ${d.children}` : ''}</p>
+            ${d.luxuryTour ? `
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: #c9a84c;">Reisetyp:</strong> Luxusreise (Premium)</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Hotelkategorie:</strong> ${d.hotelCategory === '4star' ? '4 Superior Hotel' : '3 und 4 Standard Hotel'}</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.7);">Einzelzimmerzuschlag:</strong> ${d.singleSupplement ? 'Ja' : 'Nein'}</p>
+            ` : ''}
             <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Gesamt: €${d.totalPriceEUR}</p>
           </div>
           <div style="background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;">
@@ -207,7 +225,7 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">5% Rabatt bei Zahlung im Büro</p>
           </div>
-          <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Zahlung vor Ort im OneWay Tour-Büro in Eriwan. Zeigen Sie diese E-Mail für den Rabatt. Kostenlose Stornierung innerhalb von 24 Stunden.</p>
+          <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Zahlung vor Ort im OneWay Tour-Büro in Jerevan. Zeigen Sie diese E-Mail für den Rabatt. Kostenlose Stornierung innerhalb von 24 Stunden.</p>
         </div>
       </div>
     `,
@@ -237,13 +255,24 @@ export async function sendConfirmationEmails(
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Phone:</strong> ${data.userPhone || 'N/A'}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Guide:</strong> ${data.guideLanguage}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Adults:</strong> ${data.adults}${data.children > 0 ? ` | <strong style="color: rgba(255,255,255,0.8);">Children:</strong> ${data.children}` : ''}</p>
+        ${data.luxuryTour ? `
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: #c9a84c;">Tour Type:</strong> Luxury Tour (Premium)</p>
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Hotel Category:</strong> ${data.hotelCategory === '4star' ? '4 Superior Hotel' : '3 and 4 Standard Hotel'}</p>
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Single Supplement:</strong> ${data.singleSupplement ? 'Yes' : 'No'}</p>
+        ` : ''}
         <p style="color: #94A3B8; font-size: 16px; font-weight: 600; margin: 12px 0 0;">Total: €${data.totalPriceEUR}</p>
         <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 8px 0 0;">Booking ID: ${data.bookingId}</p>
       </div>
     </div>
   `
-  // Send to ALL admin email addresses
-  await Promise.all(ADMIN_EMAILS.map(adminEmail => sendMail(adminEmail, adminSubject, adminHtml)))
+  // Send to ALL admin email addresses robustly
+  await Promise.all(
+    ADMIN_EMAILS.map(adminEmail =>
+      sendMail(adminEmail, adminSubject, adminHtml).catch(err => {
+        console.error(`Failed to send confirmation copy to admin ${adminEmail}:`, err)
+      })
+    )
+  )
 }
 
 // ─── Cancellation Emails ───────────────────────────────────────
@@ -293,18 +322,125 @@ export async function sendCancellationEmails(
   // Send to customer
   await sendMail(data.userEmail, subject, html)
 
-  // Send notification to ALL admin emails
-  await Promise.all(ADMIN_EMAILS.map(adminEmail => 
-    sendMail(adminEmail, `[Cancellation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`, `
-    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,80,80,0.15);">
-      <div style="padding: 32px 28px;">
-        <h2 style="color: #ff5050; font-size: 18px; margin: 0 0 16px;">Reservation Cancelled</h2>
-        <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Tour:</strong> ${data.tourName}</p>
-        <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Date:</strong> ${data.tourDate}</p>
-        <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Guest:</strong> ${data.userFirstName} ${data.userLastName} (${data.userEmail})</p>
-        <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 8px 0 0;">Booking ID: ${data.bookingId}</p>
+  // Send notification to ALL admin emails robustly
+  await Promise.all(
+    ADMIN_EMAILS.map(adminEmail => 
+      sendMail(adminEmail, `[Cancellation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`, `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,80,80,0.15);">
+        <div style="padding: 32px 28px;">
+          <h2 style="color: #ff5050; font-size: 18px; margin: 0 0 16px;">Reservation Cancelled</h2>
+          <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Tour:</strong> ${data.tourName}</p>
+          <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Date:</strong> ${data.tourDate}</p>
+          <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Guest:</strong> ${data.userFirstName} ${data.userLastName} (${data.userEmail})</p>
+          <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 8px 0 0;">Booking ID: ${data.bookingId}</p>
+        </div>
       </div>
-    </div>
-  `)
+    `).catch(err => {
+      console.error(`Failed to send cancellation notice to admin ${adminEmail}:`, err)
+    })
   ))
 }
+
+// ─── Contact Form Emails ─────────────────────────────────────────
+export async function sendContactEmail(
+  name: string,
+  email: string,
+  phone: string,
+  subject: string,
+  message: string
+): Promise<boolean> {
+  const adminSubject = `[Contact Form] ${subject} — ${name}`
+  const adminHtml = `
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
+      <div style="padding: 32px 28px; background: #0c0c0c; border-bottom: 1px solid rgba(255,255,255,0.06); text-align: center;">
+        <h1 style="color: #94A3B8; font-size: 20px; margin: 0 0 4px; letter-spacing: 0.05em;">THE BEAUTY OF ARMENIA</h1>
+        <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 0;">New Message from Contact Form</p>
+      </div>
+      <div style="padding: 28px;">
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 10px;"><strong style="color: rgba(255,255,255,0.8);">Name:</strong> ${name}</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 10px;"><strong style="color: rgba(255,255,255,0.8);">Email:</strong> ${email}</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 10px;"><strong style="color: rgba(255,255,255,0.8);">Phone:</strong> ${phone || 'N/A'}</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;"><strong style="color: rgba(255,255,255,0.8);">Subject:</strong> ${subject}</p>
+        </div>
+        <div style="background: rgba(148,163,184,0.05); border: 1px solid rgba(148,163,184,0.15); border-radius: 12px; padding: 20px;">
+          <p style="color: rgba(148,163,184,0.7); font-size: 12px; margin: 0 0 8px; font-weight: 600; uppercase tracking-wider;">MESSAGE:</p>
+          <div style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${message}</div>
+        </div>
+      </div>
+    </div>
+  `
+
+  await Promise.all(
+    ADMIN_EMAILS.map(adminEmail =>
+      sendMail(adminEmail, adminSubject, adminHtml).catch(err => {
+        console.error(`Failed to send contact copy to admin ${adminEmail}:`, err)
+      })
+    )
+  )
+  return true
+}
+
+// ─── Newsletter Confirmation Email ─────────────────────────────
+export async function sendNewsletterSubscriptionEmail(
+  email: string,
+  lang: 'en' | 'ru' | 'de' = 'en'
+): Promise<boolean> {
+  const subjects: Record<string, string> = {
+    en: 'Thank you for subscribing! — Armenia Tours',
+    ru: 'Спасибо за подписку! — Armenia Tours',
+    de: 'Danke für Ihr Abonnement! — Armenia Tours',
+  }
+  
+  const bodies: Record<string, string> = {
+    en: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
+        <div style="padding: 32px 28px; text-align: center;">
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 12px; letter-spacing: 0.05em;">THE BEAUTY OF ARMENIA</h1>
+          <p style="color: rgba(255,255,255,0.8); font-size: 16px; margin: 0 0 16px;">Thank You for Subscribing!</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.6; margin: 0 0 24px;">
+            You have successfully subscribed to the Armenia Tours newsletter. You will now receive the latest tour updates, travel tips, and exclusive offers delivered directly to your inbox.
+          </p>
+          <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">
+            If you did not sign up for this newsletter, you can safely unsubscribe at any time.
+          </p>
+        </div>
+      </div>
+    `,
+    ru: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
+        <div style="padding: 32px 28px; text-align: center;">
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 12px; letter-spacing: 0.05em;">КРАСОТА АРМЕНИИ</h1>
+          <p style="color: rgba(255,255,255,0.8); font-size: 16px; margin: 0 0 16px;">Спасибо за подписку!</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.6; margin: 0 0 24px;">
+            Вы успешно подписались на рассылку новостей Armenia Tours. Теперь вы будете получать последние обновления туров, советы путешественникам и эксклюзивные предложения прямо на ваш почтовый ящик.
+          </p>
+          <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">
+            Если вы не подписывались на эту рассылку, вы можете отказаться от нее в любое время.
+          </p>
+        </div>
+      </div>
+    `,
+    de: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
+        <div style="padding: 32px 28px; text-align: center;">
+          <h1 style="color: #94A3B8; font-size: 22px; margin: 0 0 12px; letter-spacing: 0.05em;">DIE SCHÖNHEIT ARMENIENS</h1>
+          <p style="color: rgba(255,255,255,0.8); font-size: 16px; margin: 0 0 16px;">Vielen Dank für Ihr Abonnement!</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.6; margin: 0 0 24px;">
+            Sie haben den Armenia Tours-Newsletter erfolgreich abonniert. Sie erhalten ab sofort die neuesten Informationen zu unseren Touren, Reisetipps und exklusive Angebote direkt in Ihr Postfach.
+          </p>
+          <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">
+            Wenn Sie sich nicht für diesen Newsletter angemeldet haben, können Sie ihn jederzeit abbestellen.
+          </p>
+        </div>
+      </div>
+    `,
+  }
+  
+  const subject = subjects[lang] || subjects.en
+  const html = bodies[lang] || bodies.en
+  
+  await sendMail(email, subject, html)
+  return true
+}
+

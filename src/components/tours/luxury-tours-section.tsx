@@ -112,7 +112,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
 
   if (!tour) return null
 
-  const tabs: { id: LuxuryTab; label: string; icon: React.ElementType }[] = [
+  const tabs: { id: LuxuryTab; label: string; icon: React.ComponentType<any> }[] = [
     { id: 'overview', label: t('luxury.overview'), icon: Info },
     { id: 'itinerary', label: t('luxury.itinerary'), icon: MapPin },
     { id: 'pricing', label: t('luxury.pricing'), icon: Crown },
@@ -249,7 +249,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                     {[
                       { icon: Calendar, label: t('luxury.day'), value: tour.duration },
                       { icon: Users, label: t('luxury.pax'), value: groupSize },
-                      { icon: Star, label: t('luxury.hotels'), value: '4\u2605/3\u2605' },
+                      { icon: Star, label: t('luxury.hotels'), value: '4 Superior / 3 Standard' },
                       { icon: MapPin, label: 'Region', value: region },
                     ].map((stat) => (
                       <div key={stat.label} className="rounded-xl border border-border bg-background/50 p-3">
@@ -480,10 +480,10 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                             {t('luxury.pax')}
                           </th>
                           <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-primary/60">
-                            4\u2605 {t('luxury.superior')}
+                            4 Superior Hotel
                           </th>
                           <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-primary/60">
-                            3*/4\u2605 {t('luxury.standard')}
+                            3 and 4 Standard Hotel
                           </th>
                         </tr>
                       </thead>
@@ -538,7 +538,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                       <div className="flex gap-6">
                         {tour.singleSupplement.price4Star > 0 && (
                           <div>
-                            <p className="text-xs text-muted-foreground">4\u2605 {t('luxury.superior')}</p>
+                            <p className="text-xs text-muted-foreground">4 Superior Hotel</p>
                             <p className="text-lg font-bold text-primary">
                               {formatPrice(tour.singleSupplement.price4Star)}
                             </p>
@@ -546,7 +546,7 @@ export function LuxuryToursSection({ tours, onBookNow }: LuxuryToursSectionProps
                         )}
                         {tour.singleSupplement.price3Star > 0 && (
                           <div>
-                            <p className="text-xs text-muted-foreground">3*/4\u2605 {t('luxury.standard')}</p>
+                            <p className="text-xs text-muted-foreground">3 and 4 Standard Hotel</p>
                             <p className="text-lg font-bold text-foreground/60">
                               {formatPrice(tour.singleSupplement.price3Star)}
                             </p>

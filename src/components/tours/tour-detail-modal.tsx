@@ -37,6 +37,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
+import { Switch } from '@/components/ui/switch'
 import {
   type Tour,
   formatPrice,
@@ -117,8 +118,57 @@ export function TourDetailModal({
   const [availability, setAvailability] = useState<{ maxSeats: number; reservedSeats: number; availableSeats: number } | null>(null)
   const [reservationStatus, setReservationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [reservationError, setReservationError] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
   const autoAdvanceRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const prevTourIdRef = useRef<number | undefined>(undefined)
+
+  // Helpers to check tour names for scheduling rule tags
+  const isTatev = useMemo(() => {
+    if (!tour) return false
+    const nameLower = (tour.name.en + ' ' + tour.name.de + ' ' + tour.name.ru).toLowerCase()
+    return nameLower.includes('tatev')
+  }, [tour])
+
+  const isJermukEtc = useMemo(() => {
+    if (!tour) return false
+    const nameLower = (tour.name.en + ' ' + tour.name.de + ' ' + tour.name.ru).toLowerCase()
+    return nameLower.includes('jermuk') ||
+           nameLower.includes('garni') ||
+           nameLower.includes('geghard') ||
+           nameLower.includes('dilijan')
+  }, [tour])
+
+  // Custom calendar date disable logic
+  const isDateDisabled = useCallback((d: Date) => {
+    // 1. Past dates are always disabled
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    if (d < today) return true
+
+    // 2. Tatev tour: any day except Monday (index 1)
+    if (isTatev) {
+      return d.getDay() === 1
+    }
+
+    // 3. Jermuk, Garni, Geghard, Dilijan: any day
+    if (isJermukEtc) {
+      return false
+    }
+
+    // 4. All other tours: any day if private, Saturday/Sunday only if group
+    if (isPrivate) {
+      return false
+    } else {
+      return d.getDay() !== 0 && d.getDay() !== 6
+    }
+  }, [isTatev, isJermukEtc, isPrivate])
+
+  // Invalidate selected date if rules change and it is no longer allowed
+  useEffect(() => {
+    if (date && isDateDisabled(date)) {
+      setDate(undefined)
+    }
+  }, [isPrivate, date, isDateDisabled])
 
   const images = tour?.images?.length ? tour.images : tour?.image ? [tour.image] : []
 
@@ -128,6 +178,7 @@ export function TourDetailModal({
     if (currentImageIndex !== 0) {
       setCurrentImageIndex(0)
     }
+    setIsPrivate(false)
   }
 
   const name = tour?.name[locale] || tour?.name.en || ''
@@ -237,6 +288,7 @@ export function TourDetailModal({
     setAvailability(null)
     setReservationStatus('idle')
     setReservationError('')
+    setIsPrivate(false)
   }, [])
 
   const handleClose = useCallback((isOpen: boolean) => {
@@ -277,6 +329,13 @@ export function TourDetailModal({
           userId = parsed.id
         }
       } catch { /* ignore */ }
+      const getPrivateSuffix = () => {
+        if (locale === 'de') return ' (Privat)'
+        if (locale === 'ru') return ' (Индивидуальный)'
+        return ' (Private)'
+      }
+      const tourNamePayload = isPrivate ? `${tour.name.en}${getPrivateSuffix()}` : tour.name.en
+
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: {
@@ -285,7 +344,7 @@ export function TourDetailModal({
         },
         body: JSON.stringify({
           tourId: String(tour.id),
-          tourName: tour.name.en,
+          tourName: tourNamePayload,
           tourDate: date.toISOString().split('T')[0],
           guideLanguage,
           adults,
@@ -293,6 +352,7 @@ export function TourDetailModal({
           totalPriceEUR,
           userId,
           lang: locale,
+          isPrivate,
         }),
       })
 
@@ -604,6 +664,28 @@ export function TourDetailModal({
                         </Badge>
                       </div>
 
+                      {/* Private Tour Toggle Switch */}
+                      <div className="flex items-center justify-between rounded-xl border border-border bg-secondary p-4 transition-all hover:bg-secondary/80">
+                        <div className="space-y-0.5 pr-2">
+                          <Label htmlFor="private-tour-toggle" className="text-sm font-semibold cursor-pointer text-foreground">
+                            {t('tours.wantPrivate')}
+                          </Label>
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            {locale === 'de'
+                              ? 'Buchen Sie diese Tour als exklusive Privattour an jedem beliebigen Tag.'
+                              : locale === 'ru'
+                              ? 'Забронируйте эту экскурсию как индивидуальную в любой день.'
+                              : 'Book this tour as an exclusive private experience on any day of the week.'}
+                          </p>
+                        </div>
+                        <Switch
+                          id="private-tour-toggle"
+                          checked={isPrivate}
+                          onCheckedChange={setIsPrivate}
+                          className="data-[state=checked]:bg-primary shrink-0"
+                        />
+                      </div>
+
                       {/* Date picker */}
                       <div>
                         <Label className="mb-2 text-muted-foreground">
@@ -624,7 +706,7 @@ export function TourDetailModal({
                               mode="single"
                               selected={date}
                               onSelect={setDate}
-                              disabled={(d) => d < new Date()}
+                              disabled={isDateDisabled}
                               className="bg-transparent text-foreground"
                             />
                           </PopoverContent>

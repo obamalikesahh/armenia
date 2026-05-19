@@ -5,6 +5,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useEffect,
   type ReactNode,
 } from 'react'
 import { Locale, defaultLocale, translations } from '@/lib/i18n'
@@ -45,9 +46,16 @@ interface LocaleProviderProps {
 
 export function LocaleProvider({ children, initialLocale }: LocaleProviderProps) {
   // Initialize from prop or localStorage; lazy initializer avoids extra renders
-  const [locale, setLocaleState] = useState<Locale>(() =>
-    initialLocale ?? getStoredLocale()
-  )
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? defaultLocale)
+
+  useEffect(() => {
+    if (!initialLocale) {
+      const stored = getStoredLocale()
+      if (stored !== defaultLocale) {
+        setLocaleState(stored)
+      }
+    }
+  }, [initialLocale])
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)

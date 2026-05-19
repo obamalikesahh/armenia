@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
-import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
+
 import { motion, useInView } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -28,6 +28,9 @@ import { TourDetailModal, type BookingData } from '@/components/tours/tour-detai
 import { AuthModal } from '@/components/auth/auth-modal'
 import { ProfileModal } from '@/components/auth/profile-modal'
 import { LuxuryToursSection } from '@/components/tours/luxury-tours-section'
+import { LuxuryBookingModal } from '@/components/luxury/luxury-booking-modal'
+import { ContactForm } from '@/components/layout/contact-form'
+import { ScrollToTop } from '@/components/ui/scroll-to-top'
 import {
   tours,
   getFeaturedTours,
@@ -39,10 +42,12 @@ import { useLocale } from '@/hooks/use-locale'
 // Dynamic imports (no SSR)
 const MouseSpotlight = dynamic(() => import('@/components/animations/mouse-spotlight').then(m => ({ default: m.MouseSpotlight })), { ssr: false })
 
-const TourRouteFluid = dynamic(() => import('@/components/3d/tour-route-fluid').then(m => ({ default: m.TourRouteFluid })), {
+const ArmeniaMap = dynamic(() => import('@/components/ui/armenia-map').then(m => ({ default: m.ArmeniaMap })), {
   ssr: false,
-  loading: () => <div className="h-[200px] bg-transparent" />,
+  loading: () => <div className="h-[300px] bg-transparent flex items-center justify-center text-muted-foreground/60 text-xs">Loading Interactive Map of Armenia...</div>,
 })
+
+const Hero = dynamic(() => import('@/components/layout/Hero'), { ssr: false })
 
 /* ─── Animation helpers ─── */
 const staggerContainer = {
@@ -85,45 +90,24 @@ function AnimatedSection({ children, className = '', id = '' }: { children: Reac
 /* ─── Main Page ─── */
 export default function Home() {
   const { t } = useLocale()
-  const { data: session, status: sessionStatus } = useSession()
+
 
   // --- Auth state ---
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    if (typeof window === 'undefined') return false
-    try { return !!localStorage.getItem('auth_token') } catch { return false }
-  })
-  const [userName, setUserName] = useState(() => {
-    if (typeof window === 'undefined') return ''
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userName, setUserName] = useState('')
+
+  // Sync auth state from localStorage after mount
+  useEffect(() => {
     try {
+      const token = localStorage.getItem('auth_token')
       const userInfo = localStorage.getItem('user_info')
-      if (userInfo) {
+      if (token && userInfo) {
+        setIsLoggedIn(true)
         const user = JSON.parse(userInfo)
-        return `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email || ''
+        setUserName(`${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email || '')
       }
     } catch { /* ignore */ }
-    return ''
-  })
-
-  // Sync Google OAuth session with app auth state
-  useEffect(() => {
-    if (sessionStatus !== 'authenticated' || !session?.user?.email) return
-
-    // If already logged in via localStorage, skip
-    if (localStorage.getItem('auth_token')) return
-
-    // Fetch our custom token for this Google user
-    fetch('/api/auth/session')
-      .then(res => res.json())
-      .then(data => {
-        if (data.authenticated && data.token && data.user) {
-          localStorage.setItem('auth_token', data.token)
-          localStorage.setItem('user_info', JSON.stringify(data.user))
-          setIsLoggedIn(true)
-          setUserName(`${data.user.firstName} ${data.user.lastName}`.trim() || data.user.email)
-        }
-      })
-      .catch(console.error)
-  }, [session, sessionStatus])
+  }, [])
 
   // --- State ---
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
@@ -284,101 +268,11 @@ export default function Home() {
           SECTION 1: HERO — clean, dramatic, minimal
           ═══════════════════════════════════════════ */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-bg.jpg"
-            alt="Armenian Mountains"
-            fill
-            className="object-cover"
-            style={{ filter: 'brightness(0.3) saturate(0.6)' }}
-            priority
-            quality={90}
-          />
+        {/* Background panels grid (replacing static background image) */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-auto">
+          <Hero />
         </div>
 
-        {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/80 z-[3]" />
-
-        {/* Content — clean, centered, minimal */}
-        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="flex flex-col items-center"
-          >
-            {/* Thin line above heading */}
-            <motion.div variants={fadeUp} className="mb-8 h-px w-16 bg-foreground/15 sm:w-20" />
-
-            {/* Main heading — large, clean, white */}
-            <motion.h1
-              variants={fadeUp}
-              className="mb-5 text-5xl font-bold leading-[0.95] tracking-tight text-foreground dark:text-white sm:text-7xl md:text-8xl lg:text-[7rem]"
-            >
-              ARMENIA
-              <br />
-              <span className="gradient-text animate-gradient-shift" style={{ backgroundSize: '200% 200%' }}>TOURS</span>
-            </motion.h1>
-
-            {/* Subheading — clean, light */}
-            <motion.p
-              variants={fadeUp}
-              className="mb-12 max-w-xl text-sm font-light leading-relaxed text-muted-foreground sm:text-base"
-            >
-              {t('hero.subtitle')}
-            </motion.p>
-
-            {/* CTA Buttons — minimal style */}
-            <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
-              <Button
-                onClick={() => scrollToSection('tours')}
-                size="lg"
-                className="bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition-all duration-300 rounded-full px-8"
-              >
-                {t('hero.cta')}
-                <ArrowRight className="ml-2 size-4" />
-              </Button>
-            </motion.div>
-
-            {/* Stats bar — minimal */}
-            <motion.div
-              variants={fadeUp}
-              className="mt-20 grid w-full max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
-            >
-              {[
-                { value: '29+', label: t('hero.stat1') },
-                { value: '12+', label: t('hero.stat2') },
-                { value: '5K+', label: t('hero.stat3') },
-                { value: '15+', label: t('hero.stat4') },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="text-2xl font-semibold text-foreground dark:text-white sm:text-3xl">{stat.value}</p>
-                  <p className="mt-1 text-[11px] font-light uppercase tracking-[0.15em] text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.5 }}
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="text-[9px] font-light uppercase tracking-[0.25em] text-foreground/20">
-              {t('hero.scrollDown')}
-            </span>
-            <ChevronDown className="size-3 text-foreground/15" />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════
@@ -516,20 +410,21 @@ export default function Home() {
       </AnimatedSection>
 
       {/* ═══════════════════════════════════════════
-          SECTION: FLUID ROUTE ANIMATION
+          SECTION: INTERACTIVE MAP OF ARMENIA
           ═══════════════════════════════════════════ */}
-      <AnimatedSection className="relative py-16">
+      <AnimatedSection className="relative py-16" id="map">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="mb-8 text-center">
             <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.25em] text-primary/60">
               {t('tours.route')}
             </p>
-            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-              Explore the Paths of Armenia
+            <h2 className="text-3xl font-black text-foreground tracking-tight sm:text-4xl">
+              Explore the Regions of Armenia
             </h2>
+            <div className="mx-auto mt-4 h-px w-12 bg-primary/30" />
           </motion.div>
-          <motion.div variants={fadeIn} className="overflow-hidden rounded-2xl border border-border">
-            <TourRouteFluid />
+          <motion.div variants={fadeIn}>
+            <ArmeniaMap onSelectTour={handleSelectTour} />
           </motion.div>
         </div>
       </AnimatedSection>
@@ -628,41 +523,10 @@ export default function Home() {
       </AnimatedSection>
 
       {/* ═══════════════════════════════════════════
-          SECTION 6: NEWSLETTER
+          SECTION 6: CONTACT FORM
           ═══════════════════════════════════════════ */}
       <AnimatedSection className="relative py-24" id="contact">
-        <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeUp}
-            className="glass-strong rounded-2xl p-8 text-center sm:p-10"
-          >
-            <h2 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">
-              {t('newsletter.title')}
-            </h2>
-            <p className="mb-6 text-sm text-muted-foreground">
-              {t('newsletter.subtitle')}
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3 sm:flex-row">
-              <div className="relative flex-1">
-                <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-foreground/20" />
-                <Input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder={t('newsletter.placeholder')}
-                  required
-                  className="border-border bg-secondary py-2.5 pl-10 text-sm text-foreground placeholder:text-foreground/20 focus-visible:border-primary/30 focus-visible:ring-primary/10 rounded-full"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition-all duration-300 rounded-full px-6"
-              >
-                {newsletterSubscribed ? t('newsletter.subscribed') : t('newsletter.subscribe')}
-              </Button>
-            </form>
-          </motion.div>
-        </div>
+        <ContactForm />
       </AnimatedSection>
 
       {/* ─── Footer ─── */}
@@ -683,33 +547,19 @@ export default function Home() {
         onLoginClick={handleLoginClick}
       />
 
-      {/* Luxury tour booking modal — coming soon */}
-      {selectedLuxuryTour && isDetailModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => { setIsDetailModalOpen(false); setSelectedLuxuryTour(null) }}>
-          <div className="mx-4 max-w-md rounded-2xl border border-border bg-background p-8 text-center shadow-2xl" onClick={e => e.stopPropagation()}>
-            <Crown className="mx-auto mb-4 size-10 text-primary" />
-            <h3 className="mb-2 text-lg font-bold text-foreground">{selectedLuxuryTour.title}</h3>
-            <p className="mb-4 text-sm text-muted-foreground">{selectedLuxuryTour.duration} &bull; {selectedLuxuryTour.countries.join(' & ')}</p>
-            <p className="mb-6 text-sm text-muted-foreground">Online booking for luxury tours is coming soon. Please contact us directly to reserve your spot.</p>
-            <div className="flex gap-3 justify-center">
-              <Button
-                variant="outline"
-                onClick={() => { setIsDetailModalOpen(false); setSelectedLuxuryTour(null) }}
-              >
-                Close
-              </Button>
-              <Button
-                onClick={() => {
-                  window.location.href = 'mailto:thebeautyofarmenia@gmail.com?subject=Luxury Tour Booking: ' + encodeURIComponent(selectedLuxuryTour.title)
-                }}
-              >
-                <Mail className="mr-2 size-4" />
-                Contact Us
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Luxury tour booking modal */}
+      <LuxuryBookingModal
+        tour={selectedLuxuryTour}
+        open={isDetailModalOpen && selectedLuxuryTour !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setIsDetailModalOpen(false)
+            setSelectedLuxuryTour(null)
+          }
+        }}
+        isLoggedIn={isLoggedIn}
+        onLoginClick={handleLoginClick}
+      />
 
       <AuthModal
         open={isAuthModalOpen}
@@ -722,6 +572,8 @@ export default function Home() {
         open={isProfileModalOpen}
         onOpenChange={setIsProfileModalOpen}
       />
+
+      <ScrollToTop />
     </div>
   )
 }

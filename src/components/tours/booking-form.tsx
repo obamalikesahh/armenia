@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import { format } from 'date-fns'
 import {
   CalendarDays,
@@ -36,18 +36,68 @@ export interface BookingFormData {
   children: number
   hotelPickup: boolean
   totalPriceEUR: number
+  isPrivate?: boolean
 }
 
 const HOTEL_PICKUP_EUR = 8
 
 export function BookingForm({ tour, onSubmit }: BookingFormProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const [date, setDate] = useState<Date | undefined>(undefined)
   const [guideLanguage, setGuideLanguage] = useState<'armenian' | 'english-russian'>('armenian')
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [hotelPickup, setHotelPickup] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [isPrivate, setIsPrivate] = useState(false)
+
+  // Helpers to check tour names for scheduling rule tags
+  const isTatev = useMemo(() => {
+    if (!tour) return false
+    const nameLower = (tour.name.en + ' ' + tour.name.de + ' ' + tour.name.ru).toLowerCase()
+    return nameLower.includes('tatev')
+  }, [tour])
+
+  const isJermukEtc = useMemo(() => {
+    if (!tour) return false
+    const nameLower = (tour.name.en + ' ' + tour.name.de + ' ' + tour.name.ru).toLowerCase()
+    return nameLower.includes('jermuk') ||
+           nameLower.includes('garni') ||
+           nameLower.includes('geghard') ||
+           nameLower.includes('dilijan')
+  }, [tour])
+
+  // Custom calendar date disable logic
+  const isDateDisabled = useCallback((d: Date) => {
+    // 1. Past dates are always disabled
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    if (d < today) return true
+
+    // 2. Tatev tour: any day except Monday (index 1)
+    if (isTatev) {
+      return d.getDay() === 1
+    }
+
+    // 3. Jermuk, Garni, Geghard, Dilijan: any day
+    if (isJermukEtc) {
+      return false
+    }
+
+    // 4. All other tours: any day if private, Saturday/Sunday only if group
+    if (isPrivate) {
+      return false
+    } else {
+      return d.getDay() !== 0 && d.getDay() !== 6
+    }
+  }, [isTatev, isJermukEtc, isPrivate])
+
+  // Invalidate selected date if rules change and it is no longer allowed
+  useEffect(() => {
+    if (date && isDateDisabled(date)) {
+      setDate(undefined)
+    }
+  }, [isPrivate, date, isDateDisabled])
 
   const pricePerPersonEUR = useMemo(
     () => (guideLanguage === 'armenian' ? tour.priceEUR : tour.priceForeignEUR),
@@ -73,6 +123,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
         children,
         hotelPickup,
         totalPriceEUR: breakdown.totalEUR,
+        isPrivate,
       })
     } finally {
       setIsProcessing(false)
@@ -83,6 +134,28 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
 
   return (
     <div className="space-y-5">
+      {/* Private Tour Toggle Switch */}
+      <div className="flex items-center justify-between rounded-xl border border-border bg-secondary p-4 transition-all hover:bg-secondary/80">
+        <div className="space-y-0.5 pr-2">
+          <Label htmlFor="private-tour-toggle" className="text-sm font-semibold cursor-pointer text-foreground font-medium">
+            {t('tours.wantPrivate')}
+          </Label>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {locale === 'de'
+              ? 'Buchen Sie diese Tour als exklusive Privattour an jedem beliebigen Tag.'
+              : locale === 'ru'
+              ? 'Забронируйте эту экскурсию как индивидуальную в любой день.'
+              : 'Book this tour as an exclusive private experience on any day of the week.'}
+          </p>
+        </div>
+        <Switch
+          id="private-tour-toggle"
+          checked={isPrivate}
+          onCheckedChange={setIsPrivate}
+          className="data-[state=checked]:bg-primary shrink-0"
+        />
+      </div>
+
       {/* Date picker */}
       <div>
         <Label className="mb-2 text-foreground/60">{t('booking.selectDate')}</Label>
@@ -101,7 +174,7 @@ export function BookingForm({ tour, onSubmit }: BookingFormProps) {
               mode="single"
               selected={date}
               onSelect={setDate}
-              disabled={(d) => d < new Date()}
+              disabled={isDateDisabled}
               className="bg-transparent text-foreground"
             />
           </PopoverContent>

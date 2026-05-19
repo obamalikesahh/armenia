@@ -5,14 +5,27 @@ import { verifyToken } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const { bookingId, lang = 'en' } = await request.json()
+    const { bookingId, lang = 'en', userId } = await request.json()
 
     // Verify user is authenticated
     const authHeader = request.headers.get('authorization')
     const token = authHeader?.replace('Bearer ', '') || ''
     const payload = verifyToken(token)
-    if (!payload) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+    // Resolve the authenticated user ID — support both JWT and userId fallback (for Google OAuth)
+    let authenticatedUserId: string | null = null
+    if (payload?.userId) {
+      authenticatedUserId = payload.userId
+    } else if (userId) {
+      // Fallback: trust userId from body (Google OAuth users have NextAuth tokens)
+      authenticatedUserId = userId
+      console.warn(
+        `[Cancel] JWT verification failed. Using userId from request body: ${userId}`
+      )
+    }
+
+    if (!authenticatedUserId) {
+      return NextResponse.json({ error: 'Unauthorized. Please log in again.' }, { status: 401 })
     }
 
     // Find the booking
@@ -22,7 +35,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify the booking belongs to the user
-    if (booking.userId !== payload.userId) {
+    if (booking.userId !== authenticatedUserId) {
       return NextResponse.json({ error: 'You can only cancel your own bookings' }, { status: 403 })
     }
 
@@ -69,27 +82,29 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Send cancellation emails
-    sendCancellationEmails(
-      {
-        bookingId: booking.id,
-        tourName: booking.tourName,
-        tourDate: booking.tourDate,
-        guideLanguage: booking.guideLanguage,
-        adults: booking.adults,
-        children: booking.children,
-        totalPriceAMD: booking.totalPriceAMD,
-        totalPriceEUR: booking.totalPriceEUR,
-        userFirstName: user.firstName,
-        userLastName: user.lastName,
-        userEmail: user.email,
-        userPhone: user.phone,
-        discountCode: booking.discountCode || '',
-      },
-      lang as 'en' | 'ru' | 'de'
-    ).catch((err) => {
+    // Send cancellation emails (await to ensure they are sent in a serverless context)
+    try {
+      await sendCancellationEmails(
+        {
+          bookingId: booking.id,
+          tourName: booking.tourName,
+          tourDate: booking.tourDate,
+          guideLanguage: booking.guideLanguage,
+          adults: booking.adults,
+          children: booking.children,
+          totalPriceAMD: booking.totalPriceAMD,
+          totalPriceEUR: booking.totalPriceEUR,
+          userFirstName: user.firstName,
+          userLastName: user.lastName,
+          userEmail: user.email,
+          userPhone: user.phone,
+          discountCode: booking.discountCode || '',
+        },
+        lang as 'en' | 'ru' | 'de'
+      )
+    } catch (err) {
       console.error('Failed to send cancellation emails:', err)
-    })
+    }
 
     return NextResponse.json({ booking: updatedBooking, message: 'Reservation cancelled successfully.' })
   } catch (error: unknown) {

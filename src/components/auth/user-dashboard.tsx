@@ -77,11 +77,11 @@ export function UserDashboard({ open, onOpenChange, user, token, onLogout }: Use
 
   // Fetch bookings
   const fetchBookings = useCallback(async () => {
-    if (!token) return
+    if (!token || !user) return
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/bookings', {
+      const res = await fetch(`/api/bookings?userId=${user.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       const data = await res.json()
@@ -94,7 +94,7 @@ export function UserDashboard({ open, onOpenChange, user, token, onLogout }: Use
     } finally {
       setLoading(false)
     }
-  }, [token])
+  }, [token, user])
 
   useEffect(() => {
     if (open && token) {
@@ -104,7 +104,7 @@ export function UserDashboard({ open, onOpenChange, user, token, onLogout }: Use
 
   // Cancel booking
   const handleCancelBooking = useCallback(async (bookingId: string) => {
-    if (!token) return
+    if (!token || !user) return
     setCancellingId(bookingId)
     setCancelError('')
     try {
@@ -114,7 +114,7 @@ export function UserDashboard({ open, onOpenChange, user, token, onLogout }: Use
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ bookingId, lang: locale }),
+        body: JSON.stringify({ bookingId, lang: locale, userId: user.id }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -128,7 +128,7 @@ export function UserDashboard({ open, onOpenChange, user, token, onLogout }: Use
     } finally {
       setCancellingId(null)
     }
-  }, [token, locale, fetchBookings])
+  }, [token, user, locale, fetchBookings])
 
   // Check if booking is within 24h cancellation window
   const canCancel = useCallback((booking: Booking) => {

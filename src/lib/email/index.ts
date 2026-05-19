@@ -93,6 +93,9 @@ interface EmailBookingData {
   userEmail: string
   userPhone: string
   discountCode: string
+  luxuryTour?: boolean
+  hotelCategory?: string
+  singleSupplement?: boolean
 }
 
 // ─── Customer Confirmation Email ───
@@ -116,6 +119,12 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
       bookingId: 'Reservation ID',
       regards: 'Best regards,<br/>OneWay Tour Team',
       payAtOffice: 'PAY AT OFFICE',
+      tourTypeLabel: 'Tour Type',
+      hotelCategoryLabel: 'Hotel Category',
+      singleSupplementLabel: 'Single Supplement',
+      luxuryTourValue: 'Luxury Tour (Premium)',
+      yes: 'Yes',
+      no: 'No',
     },
     ru: {
       subject: `Бронирование подтверждено — ${data.tourName}`,
@@ -135,6 +144,12 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
       bookingId: 'Номер бронирования',
       regards: 'С уважением,<br/>Команда OneWay Tour',
       payAtOffice: 'ОПЛАТА В ОФИСЕ',
+      tourTypeLabel: 'Тип тура',
+      hotelCategoryLabel: 'Категория отеля',
+      singleSupplementLabel: 'Одноместное размещение',
+      luxuryTourValue: 'Люкс-тур (Премиум)',
+      yes: 'Да',
+      no: 'Нет',
     },
     de: {
       subject: `Reservierung bestätigt — ${data.tourName}`,
@@ -148,12 +163,18 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
       adultsLabel: 'Erwachsene',
       childrenLabel: 'Kinder',
       totalPriceLabel: 'Gesamtpreis',
-      payInPerson: 'Sie bezahlen bei Ankunft im OneWay Tour-Büro in Eriwan bar. Bitte zeigen Sie diese Bestätigungs-E-Mail vor.',
+      payInPerson: 'Sie bezahlen bei Ankunft im OneWay Tour-Büro in Jerevan bar. Bitte zeigen Sie diese Bestätigungs-E-Mail vor.',
       discountInfo: `🎉 Sonderangebot: Verwenden Sie den Code <strong style="color:#c9a84c;font-size:18px;">${data.discountCode}</strong> und erhalten Sie <strong>${DISCOUNT_PERCENT}% Rabatt</strong> bei Barzahlung vor Ort! Zeigen Sie diese E-Mail im Büro vor, um Ihren Rabatt einzulösen.`,
       cancellation: 'Sie können Ihre Reservierung innerhalb von 24 Stunden nach Buchung kostenlos stornieren. Zur Stornierung antworten Sie auf diese E-Mail oder kontaktieren Sie uns.',
       bookingId: 'Reservierungs-ID',
       regards: 'Mit freundlichen Grüßen,<br/>Ihr OneWay Tour-Team',
       payAtOffice: 'VOR ORT ZAHLEN',
+      tourTypeLabel: 'Reisetyp',
+      hotelCategoryLabel: 'Hotelkategorie',
+      singleSupplementLabel: 'Einzelzimmerzuschlag',
+      luxuryTourValue: 'Luxusreise (Premium)',
+      yes: 'Ja',
+      no: 'Nein',
     },
   }
 
@@ -208,6 +229,20 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
           <td style="padding:8px 0;color:#888;">${t.childrenLabel}</td>
           <td style="padding:8px 0;text-align:right;color:#e8e8e8;">${data.children}</td>
         </tr>` : ''}
+        ${data.luxuryTour ? `
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td style="padding:8px 0;color:#888;">${t.tourTypeLabel}</td>
+          <td style="padding:8px 0;text-align:right;color:#c9a84c;font-weight:bold;">${t.luxuryTourValue}</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td style="padding:8px 0;color:#888;">${t.hotelCategoryLabel}</td>
+          <td style="padding:8px 0;text-align:right;color:#e8e8e8;font-weight:bold;">${data.hotelCategory === '4star' ? '4 Superior Hotel' : '3 and 4 Standard Hotel'}</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td style="padding:8px 0;color:#888;">${t.singleSupplementLabel}</td>
+          <td style="padding:8px 0;text-align:right;color:#e8e8e8;">${data.singleSupplement ? t.yes : t.no}</td>
+        </tr>
+        ` : ''}
         <tr>
           <td style="padding:8px 0;color:#888;font-weight:bold;">${t.totalPriceLabel}</td>
           <td style="padding:8px 0;text-align:right;">
@@ -298,6 +333,20 @@ function getOwnerConfirmationHTML(data: EmailBookingData): string {
           <td style="padding:8px 0;color:#888;">Children</td>
           <td style="padding:8px 0;text-align:right;color:#e8e8e8;">${data.children}</td>
         </tr>` : ''}
+        ${data.luxuryTour ? `
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td style="padding:8px 0;color:#888;">Tour Type</td>
+          <td style="padding:8px 0;text-align:right;color:#c9a84c;font-weight:bold;">Luxury Tour (Premium)</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td style="padding:8px 0;color:#888;">Hotel Category</td>
+          <td style="padding:8px 0;text-align:right;color:#e8e8e8;font-weight:bold;">${data.hotelCategory === '4star' ? '4 Superior Hotel' : '3 and 4 Standard Hotel'}</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td style="padding:8px 0;color:#888;">Single Supplement</td>
+          <td style="padding:8px 0;text-align:right;color:#e8e8e8;">${data.singleSupplement ? 'Yes' : 'No'}</td>
+        </tr>
+        ` : ''}
         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
           <td style="padding:8px 0;color:#888;">Discount Code</td>
           <td style="padding:8px 0;text-align:right;color:#c9a84c;font-weight:bold;">${data.discountCode}</td>
@@ -455,6 +504,8 @@ function getOwnerCancellationHTML(data: EmailBookingData): string {
 
 // ─── Send Confirmation Emails ───
 export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
+  const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'incoming@onewaytour.com', 'caxkal22@gmail.com']
+
   // Send to customer
   await sendEmail({
     to: data.userEmail,
@@ -462,16 +513,27 @@ export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' 
     html: getCustomerConfirmationHTML(data, lang),
   })
 
-  // Send to owner
-  await sendEmail({
-    to: OWNER_EMAIL,
-    subject: `[NEW RESERVATION] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`,
-    html: getOwnerConfirmationHTML(data),
-  })
+  // Send copy to ALL admin emails
+  const adminSubject = `[NEW RESERVATION] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`
+  const adminHtml = getOwnerConfirmationHTML(data)
+
+  await Promise.all(
+    ADMIN_EMAILS.map(adminEmail =>
+      sendEmail({
+        to: adminEmail,
+        subject: adminSubject,
+        html: adminHtml,
+      }).catch(err => {
+        console.error(`Failed to send confirmation copy to admin ${adminEmail}:`, err)
+      })
+    )
+  )
 }
 
 // ─── Send Cancellation Emails ───
 export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
+  const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'incoming@onewaytour.com', 'caxkal22@gmail.com']
+
   // Send to customer
   await sendEmail({
     to: data.userEmail,
@@ -479,12 +541,21 @@ export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' 
     html: getCustomerCancellationHTML(data, lang),
   })
 
-  // Send to owner
-  await sendEmail({
-    to: OWNER_EMAIL,
-    subject: `[CANCELLED] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`,
-    html: getOwnerCancellationHTML(data),
-  })
+  // Send copy to ALL admin emails
+  const adminSubject = `[CANCELLED] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`
+  const adminHtml = getOwnerCancellationHTML(data)
+
+  await Promise.all(
+    ADMIN_EMAILS.map(adminEmail =>
+      sendEmail({
+        to: adminEmail,
+        subject: adminSubject,
+        html: adminHtml,
+      }).catch(err => {
+        console.error(`Failed to send cancellation copy to admin ${adminEmail}:`, err)
+      })
+    )
+  )
 }
 
 export { DISCOUNT_CODE, DISCOUNT_PERCENT, OWNER_EMAIL }

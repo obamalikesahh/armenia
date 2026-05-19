@@ -120,6 +120,7 @@ export function BookingsModal({ open, onOpenChange }: BookingsModalProps) {
         body: JSON.stringify({
           bookingId: cancelBookingId,
           lang: locale,
+          userId: JSON.parse(localStorage.getItem('user_info') || '{}').id,
         }),
       })
       const data = await res.json()

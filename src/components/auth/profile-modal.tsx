@@ -96,8 +96,17 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
           'Content-Type': 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ bookingId }),
+        body: JSON.stringify({ 
+          bookingId,
+          userId: userInfo?.id,
+          lang: localStorage.getItem('armenian-tours-locale') || 'en'
+        }),
       })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Failed to cancel booking')
+        return
+      }
       if (res.ok) {
         setBookings((prev) =>
           prev.map((b) => (b.id === bookingId ? { ...b, status: 'cancelled' } : b))
