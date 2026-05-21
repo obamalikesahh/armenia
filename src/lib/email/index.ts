@@ -125,6 +125,11 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
       luxuryTourValue: 'Luxury Tour (Premium)',
       yes: 'Yes',
       no: 'No',
+      contactTitle: 'OneWay Tour Contact Details',
+      phoneLabel: 'Phone',
+      emailLabel: 'Email',
+      locationLabel: 'Office Location',
+      locationValue: 'Parpetsi 16, Yerevan, Armenia',
     },
     ru: {
       subject: `Бронирование подтверждено — ${data.tourName}`,
@@ -150,6 +155,11 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
       luxuryTourValue: 'Люкс-тур (Премиум)',
       yes: 'Да',
       no: 'Нет',
+      contactTitle: 'Контакты OneWay Tour',
+      phoneLabel: 'Телефон',
+      emailLabel: 'Email',
+      locationLabel: 'Адрес офиса',
+      locationValue: 'ул. Парпеци 16, Ереван, Армения',
     },
     de: {
       subject: `Reservierung bestätigt — ${data.tourName}`,
@@ -175,6 +185,11 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
       luxuryTourValue: 'Luxusreise (Premium)',
       yes: 'Ja',
       no: 'Nein',
+      contactTitle: 'OneWay Tour Kontaktdaten',
+      phoneLabel: 'Telefon',
+      emailLabel: 'E-Mail',
+      locationLabel: 'Büro-Standort',
+      locationValue: 'Parpetsi 16, Jerevan, Armenien',
     },
   }
 
@@ -261,6 +276,14 @@ function getCustomerConfirmationHTML(data: EmailBookingData, lang: 'en' | 'ru' |
     <!-- Pay in person notice -->
     <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;margin:20px 0;">
       <p style="margin:0;font-size:14px;line-height:1.6;color:#999;">${t.payInPerson}</p>
+    </div>
+
+    <!-- Contact Information Box -->
+    <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;margin:20px 0;text-align:left;">
+      <p style="color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:6px;">${t.contactTitle}</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0 0 6px;"><strong style="color:rgba(255,255,255,0.7);">${t.phoneLabel}:</strong> +374 41 362 131</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0 0 6px;"><strong style="color:rgba(255,255,255,0.7);">${t.emailLabel}:</strong> incoming@onewaytour.com</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0;"><strong style="color:rgba(255,255,255,0.7);">${t.locationLabel}:</strong> ${t.locationValue}</p>
     </div>
 
     <!-- Cancellation -->
