@@ -66,6 +66,9 @@ export interface Tour {
   priceTiers?: PriceTier[];
   singleSupplementSuperior?: number;
   singleSupplementStandard?: number;
+  isPrivateOnly?: boolean;
+  isGroupOnly?: boolean;
+  privateBasePriceEUR?: number;
 }
 
 // Price formatting
@@ -780,11 +783,11 @@ export const tours: Tour[] = [
       ru: 'Откройте розовый город — от величественных площадей до древних рукописей и видов на Арарат.',
       de: 'Entdecken Sie die rosafarbene Stadt — von grandiosen Plätzen bis zu antiken Manuskripten und Ararat-Blicken.',
     },
-    image: 'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b431fc-dil1.png',
+    image: '/images/dest-yerevan-new.jpg',
     images: [
-      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a60b431fc-dil1.png',
-      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67e2a645707cc-sevan1.png',
-      'https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/680b7b5875053-noravank1.webp',
+      '/images/dest-yerevan-new.jpg',
+      '/images/yerevan_cascade_night.png',
+      '/images/yerevan_opera_sunset.png',
     ],
     duration: 'half day',
     startTime: '10:00',
@@ -1687,9 +1690,4424 @@ export const tours: Tour[] = [
       { name: 'Goshavank Monastery', lat: 40.7233, lng: 44.8717, heading: 120, pitch: 15 },
     ],
   },
+
+      // Private Tour 101: Yerevan walking city tour
+  {
+    id: 101,
+    slug: "yerevan-walking-city-tour-private",
+    name: {
+      en: "Yerevan walking city tour",
+      ru: "Пеший тур по Еревану",
+      de: "Yerevan Stadtrundgang"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Yerevan walking city tour. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Пеший тур по Еревану. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Yerevan Stadtrundgang. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Yerevan walking city tour. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Пеший тур по Еревану. Премиум-сервис.",
+      de: "Exklusive private Tour nach Yerevan Stadtrundgang. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/66e2a0746d5a8_YVN1.png",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/66e2a0746d5a8_YVN1.png"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 67,
+    priceForeignEUR: 67,
+    category: "Historical",
+    region: "Yerevan",
+    route: [
+      {
+        name: "Yerevan walking city tour",
+        description: "Premium private stop at Yerevan walking city tour. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 67
+  },
+
+  // Private Tour 102: Etchmiadzin (Mother Cathedral, St. Gayane, St. Hripsime), Zvartnots Cathedral
+  {
+    id: 102,
+    slug: "etchmiadzin-mother-cathedral-st-gayane-st-hripsime-zvartnots-cathedral-private",
+    name: {
+      en: "Etchmiadzin (Mother Cathedral, St. Gayane, St. Hripsime), Zvartnots Cathedral",
+      ru: "Эчмиадзин (Кафедральный собор, Св. Гаяне, Св. Рипсиме), Звартноц",
+      de: "Etschmiadsin (Mutterkathedrale, St. Gayane, St. Hripsime), Kathedrale von Swartnoz"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Etchmiadzin (Mother Cathedral, St. Gayane, St. Hripsime), Zvartnots Cathedral. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Эчмиадзин (Кафедральный собор, Св. Гаяне, Св. Рипсиме), Звартноц. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Etschmiadsin (Mutterkathedrale, St. Gayane, St. Hripsime), Kathedrale von Swartnoz. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Etchmiadzin (Mother Cathedral, St. Gayane, St. Hripsime) and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Эчмиадзин (Кафедральный собор, Св. Гаяне, Св. Рипсиме) и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Etschmiadsin (Mutterkathedrale, St. Gayane, St. Hripsime) und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67484c839bcd5-etchmiatsin1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67484c839bcd5-etchmiatsin1.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 83,
+    priceForeignEUR: 83,
+    category: "Cultural",
+    region: "Armavir",
+    route: [
+      {
+        name: "Etchmiadzin (Mother Cathedral",
+        description: "Premium private stop at Etchmiadzin (Mother Cathedral. Detailed exploration with your private team."
+      },
+      {
+        name: "St. Gayane",
+        description: "Premium private stop at St. Gayane. Detailed exploration with your private team."
+      },
+      {
+        name: "St. Hripsime)",
+        description: "Premium private stop at St. Hripsime). Detailed exploration with your private team."
+      },
+      {
+        name: "Zvartnots Cathedral",
+        description: "Premium private stop at Zvartnots Cathedral. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 83
+  },
+
+  // Private Tour 103: Byurakan Observatory, secrets of the universe
+  {
+    id: 103,
+    slug: "byurakan-private",
+    name: {
+      en: "Byurakan Observatory, secrets of the universe",
+      ru: "Бюраканская обсерватория, тайны вселенной",
+      de: "Observatorium Byurakan, Geheimnisse des Universums"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Byurakan Observatory, secrets of the universe. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Бюраканская обсерватория, тайны вселенной. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Observatorium Byurakan, Geheimnisse des Universums. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Byurakan Observatory, secrets of the universe. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Бюраканская обсерватория, тайны вселенной. Премиум-сервис.",
+      de: "Exklusive private Tour nach Observatorium Byurakan, Geheimnisse des Universums. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745c347ac981-byurakan3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745c347ac981-byurakan3.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 64,
+    priceForeignEUR: 64,
+    category: "Adventure",
+    region: "Aragatsotn",
+    route: [
+      {
+        name: "Byurakan Observatory",
+        description: "Premium private stop at Byurakan Observatory. Detailed exploration with your private team."
+      },
+      {
+        name: "secrets of the universe",
+        description: "Premium private stop at secrets of the universe. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 64
+  },
+
+  // Private Tour 104: Garni temple, Geghard Monastery, Azat gorge, Lavash baking
+  {
+    id: 104,
+    slug: "arch-of-charents-garni-symphony-of-stones-geghard-lavash-baking-master-class-private",
+    name: {
+      en: "Garni temple, Geghard Monastery, Azat gorge, Lavash baking",
+      ru: "Храм Гарни, Гегард, ущелье Азата, выпечка лаваша",
+      de: "Tempel Garni, Kloster Geghard, Azat-Schlucht, Lavash-Backen"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Garni temple, Geghard Monastery, Azat gorge, Lavash baking. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Храм Гарни, Гегард, ущелье Азата, выпечка лаваша. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tempel Garni, Kloster Geghard, Azat-Schlucht, Lavash-Backen. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Garni temple, Geghard Monastery, Azat gorge and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Храм Гарни, Гегард, ущелье Азата и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tempel Garni, Kloster Geghard, Azat-Schlucht und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745b9220f1d3-garni2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745b9220f1d3-garni2.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 68,
+    priceForeignEUR: 68,
+    category: "Nature",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Garni temple",
+        description: "Premium private stop at Garni temple. Detailed exploration with your private team."
+      },
+      {
+        name: "Geghard Monastery",
+        description: "Premium private stop at Geghard Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Azat gorge",
+        description: "Premium private stop at Azat gorge. Detailed exploration with your private team."
+      },
+      {
+        name: "Lavash baking",
+        description: "Premium private stop at Lavash baking. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 68
+  },
+
+  // Private Tour 105: Khor Virap Monastery
+  {
+    id: 105,
+    slug: "khor-virap-private",
+    name: {
+      en: "Khor Virap Monastery",
+      ru: "Хор Вирап",
+      de: "Kloster Khor Virap"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap Monastery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Kloster Khor Virap. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap Monastery. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап. Премиум-сервис.",
+      de: "Exklusive private Tour nach Kloster Khor Virap. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745c3e458cd7-khorvirap4.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745c3e458cd7-khorvirap4.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 86,
+    priceForeignEUR: 86,
+    category: "Cultural",
+    region: "Ararat",
+    route: [
+      {
+        name: "Khor Virap Monastery",
+        description: "Premium private stop at Khor Virap Monastery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 86
+  },
+
+  // Private Tour 106: Tsaghkadzor Ski Resort, Kecharis, Ropeway
+  {
+    id: 106,
+    slug: "tsaghkadzor-ski-resort-kecharis-ropeway-private",
+    name: {
+      en: "Tsaghkadzor Ski Resort, Kecharis, Ropeway",
+      ru: "Горнолыжный курорт Цахкадзор, Кечарис, Канатная дорога",
+      de: "Skigebiet Zaghkadsor, Ketscharis, Seilbahn"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tsaghkadzor Ski Resort, Kecharis, Ropeway. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Горнолыжный курорт Цахкадзор, Кечарис, Канатная дорога. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Skigebiet Zaghkadsor, Ketscharis, Seilbahn. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tsaghkadzor Ski Resort, Kecharis, Ropeway. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Горнолыжный курорт Цахкадзор, Кечарис, Канатная дорога. Премиум-сервис.",
+      de: "Exklusive private Tour nach Skigebiet Zaghkadsor, Ketscharis, Seilbahn. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67484e8090ea3-tsaghkadzor.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67484e8090ea3-tsaghkadzor.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 88,
+    priceForeignEUR: 88,
+    category: "Adventure",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis",
+        description: "Premium private stop at Kecharis. Detailed exploration with your private team."
+      },
+      {
+        name: "Ropeway",
+        description: "Premium private stop at Ropeway. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 88
+  },
+
+  // Private Tour 107: Armenian Alphabet Monument, Lake Kari, Amberd Fortress, Vahramashen
+  {
+    id: 107,
+    slug: "armenian-alphabet-monument-lake-kari-amberd-fortress-vahramashen-private",
+    name: {
+      en: "Armenian Alphabet Monument, Lake Kari, Amberd Fortress, Vahramashen",
+      ru: "Аллея букв, озеро Кари, крепость Амберд, Ваармашен",
+      de: "Denkmal des armenischen Alphabets, Kari-See, Festung Amberd, Vahramaschen"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Armenian Alphabet Monument, Lake Kari, Amberd Fortress, Vahramashen. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Аллея букв, озеро Кари, крепость Амберд, Ваармашен. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Denkmal des armenischen Alphabets, Kari-See, Festung Amberd, Vahramaschen. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Armenian Alphabet Monument, Lake Kari, Amberd Fortress and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Аллея букв, озеро Кари, крепость Амберд и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Denkmal des armenischen Alphabets, Kari-See, Festung Amberd und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67a4cd160a9be-tareri-purak.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67a4cd160a9be-tareri-purak.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 113,
+    priceForeignEUR: 113,
+    category: "Nature",
+    region: "Aragatsotn",
+    route: [
+      {
+        name: "Armenian Alphabet Monument",
+        description: "Premium private stop at Armenian Alphabet Monument. Detailed exploration with your private team."
+      },
+      {
+        name: "Lake Kari",
+        description: "Premium private stop at Lake Kari. Detailed exploration with your private team."
+      },
+      {
+        name: "Amberd Fortress",
+        description: "Premium private stop at Amberd Fortress. Detailed exploration with your private team."
+      },
+      {
+        name: "Vahramashen",
+        description: "Premium private stop at Vahramashen. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 113
+  },
+
+  // Private Tour 108: Lake Sevan, Sevanavank Monastery
+  {
+    id: 108,
+    slug: "lake-sevan-sevanavank-monastery-private",
+    name: {
+      en: "Lake Sevan, Sevanavank Monastery",
+      ru: "Озеро Севан, Севанаванк",
+      de: "Sewansee, Kloster Sewanawank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Lake Sevan, Sevanavank Monastery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Озеро Севан, Севанаванк. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Sewansee, Kloster Sewanawank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Lake Sevan, Sevanavank Monastery. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Озеро Севан, Севанаванк. Премиум-сервис.",
+      de: "Exklusive private Tour nach Sewansee, Kloster Sewanawank. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748671b1ff8f-sevanavank1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748671b1ff8f-sevanavank1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 112,
+    priceForeignEUR: 112,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Lake Sevan",
+        description: "Premium private stop at Lake Sevan. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank Monastery",
+        description: "Premium private stop at Sevanavank Monastery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 112
+  },
+
+  // Private Tour 109: Garni Temple, Geghard Monastery, Azat Gorge, Khor Virap Monastery
+  {
+    id: 109,
+    slug: "arch-of-charents-garni-symphony-of-stones-geghard-lavash-baking-master-class-khor-virap-private",
+    name: {
+      en: "Garni Temple, Geghard Monastery, Azat Gorge, Khor Virap Monastery",
+      ru: "Арка Чаренца, Гарни, Симфония камней, Гегард, Мастер-класс по выпечке лаваша, Хор Вирап",
+      de: "Tempel Garni, Kloster Geghard, Azat-Schlucht, Kloster Khor Virap"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Garni Temple, Geghard Monastery, Azat Gorge, Khor Virap Monastery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Арка Чаренца, Гарни, Симфония камней, Гегард, Мастер-класс по выпечке лаваша, Хор Вирап. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tempel Garni, Kloster Geghard, Azat-Schlucht, Kloster Khor Virap. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Garni Temple, Geghard Monastery, Azat Gorge and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Арка Чаренца, Гарни, Симфония камней и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tempel Garni, Kloster Geghard, Azat-Schlucht und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745c0a74c480-garni3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745c0a74c480-garni3.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 107,
+    priceForeignEUR: 107,
+    category: "Nature",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Garni Temple",
+        description: "Premium private stop at Garni Temple. Detailed exploration with your private team."
+      },
+      {
+        name: "Geghard Monastery",
+        description: "Premium private stop at Geghard Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Azat Gorge",
+        description: "Premium private stop at Azat Gorge. Detailed exploration with your private team."
+      },
+      {
+        name: "Khor Virap Monastery",
+        description: "Premium private stop at Khor Virap Monastery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 107
+  },
+
+  // Private Tour 110: Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank
+  {
+    id: 110,
+    slug: "tsaghkadzor-kecharis-monastery-lake-sevan-sevanavank-monastery-private",
+    name: {
+      en: "Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank",
+      ru: "Горнолыжный курорт Цахкадзор, Кечарис, Канатная дорога, Озеро Севан, Севанаванк",
+      de: "Skigebiet Zaghkadsor, Ketscharis, Seilbahn, Sewansee, Sewanawank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Горнолыжный курорт Цахкадзор, Кечарис, Канатная дорога, Озеро Севан, Севанаванк. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Skigebiet Zaghkadsor, Ketscharis, Seilbahn, Sewansee, Sewanawank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tsaghkadzor Ski Resort, Kecharis, Ropeway and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Горнолыжный курорт Цахкадзор, Кечарис, Канатная дорога и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Skigebiet Zaghkadsor, Ketscharis, Seilbahn und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748683556223-tsaghkadzor2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748683556223-tsaghkadzor2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 100,
+    priceForeignEUR: 100,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis",
+        description: "Premium private stop at Kecharis. Detailed exploration with your private team."
+      },
+      {
+        name: "Ropeway",
+        description: "Premium private stop at Ropeway. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevan Lake",
+        description: "Premium private stop at Sevan Lake. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 100
+  },
+
+  // Private Tour 111: Garni Temple, Geghard Monastery, Azat Gorge, Sevan Lake, Sevanavank
+  {
+    id: 111,
+    slug: "garni-geghard-charents-arch-lake-sevan-sevanavank-private",
+    name: {
+      en: "Garni Temple, Geghard Monastery, Azat Gorge, Sevan Lake, Sevanavank",
+      ru: "Гарни, Гегард, Ущелье Азата, Озеро Севан, Севанаванк",
+      de: "Tempel Garni, Kloster Geghard, Azat-Schlucht, Sewansee, Sewanawank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Garni Temple, Geghard Monastery, Azat Gorge, Sevan Lake, Sevanavank. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Гарни, Гегард, Ущелье Азата, Озеро Севан, Севанаванк. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tempel Garni, Kloster Geghard, Azat-Schlucht, Sewansee, Sewanawank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Garni Temple, Geghard Monastery, Azat Gorge and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Гарни, Гегард, Ущелье Азата и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tempel Garni, Kloster Geghard, Azat-Schlucht und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749a873eb93e-lavash3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749a873eb93e-lavash3.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 116,
+    priceForeignEUR: 116,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Garni Temple",
+        description: "Premium private stop at Garni Temple. Detailed exploration with your private team."
+      },
+      {
+        name: "Geghard Monastery",
+        description: "Premium private stop at Geghard Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Azat Gorge",
+        description: "Premium private stop at Azat Gorge. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevan Lake",
+        description: "Premium private stop at Sevan Lake. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 116
+  },
+
+  // Private Tour 112: Lake Sevan, Hayravank, Noratus Crosstones, Selim Caravanserai, Jermuk
+  {
+    id: 112,
+    slug: "lake-sevan-hayravank-noratus-crosstones-selim-caravanserai-jermuk-private",
+    name: {
+      en: "Lake Sevan, Hayravank, Noratus Crosstones, Selim Caravanserai, Jermuk",
+      ru: "Озеро Севан, Айраванк, Крестовые камни Норатуса, Караван-сарай Селима, Джермук",
+      de: "Sewansee, Hayravank, Noratus-Kreuzsteine, Selim-Karawanserei, Dschermuk"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Lake Sevan, Hayravank, Noratus Crosstones, Selim Caravanserai, Jermuk. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Озеро Севан, Айраванк, Крестовые камни Норатуса, Караван-сарай Селима, Джермук. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Sewansee, Hayravank, Noratus-Kreuzsteine, Selim-Karawanserei, Dschermuk. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Lake Sevan, Hayravank, Noratus Crosstones and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Озеро Севан, Айраванк, Крестовые камни Норатуса и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Sewansee, Hayravank, Noratus-Kreuzsteine und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749865ae16e8-hayravank2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749865ae16e8-hayravank2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 178,
+    priceForeignEUR: 178,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Lake Sevan",
+        description: "Premium private stop at Lake Sevan. Detailed exploration with your private team."
+      },
+      {
+        name: "Hayravank",
+        description: "Premium private stop at Hayravank. Detailed exploration with your private team."
+      },
+      {
+        name: "Noratus Crosstones",
+        description: "Premium private stop at Noratus Crosstones. Detailed exploration with your private team."
+      },
+      {
+        name: "Selim Caravanserai",
+        description: "Premium private stop at Selim Caravanserai. Detailed exploration with your private team."
+      },
+      {
+        name: "Jermuk",
+        description: "Premium private stop at Jermuk. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 178
+  },
+
+  // Private Tour 113: Khor Virap, Sevan, Sevanavank
+  {
+    id: 113,
+    slug: "khor-virap-sevan-sevanavank-private",
+    name: {
+      en: "Khor Virap, Sevan, Sevanavank",
+      ru: "Хор Вирап, Севан, Севанаванк",
+      de: "Khor Virap, Sewan, Sewanawank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap, Sevan, Sevanavank. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап, Севан, Севанаванк. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Khor Virap, Sewan, Sewanawank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap, Sevan, Sevanavank. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап, Севан, Севанаванк. Премиум-сервис.",
+      de: "Exklusive private Tour nach Khor Virap, Sewan, Sewanawank. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674868ce888ac-khorvirap1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674868ce888ac-khorvirap1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 132,
+    priceForeignEUR: 132,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Khor Virap",
+        description: "Premium private stop at Khor Virap. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevan",
+        description: "Premium private stop at Sevan. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 132
+  },
+
+  // Private Tour 114: Noravank Monastic Complex
+  {
+    id: 114,
+    slug: "noravank-private",
+    name: {
+      en: "Noravank Monastic Complex",
+      ru: "Нораванк Монастырский Комплекс",
+      de: "Klosterkomplex Norawank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Noravank Monastic Complex. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Нораванк Монастырский Комплекс. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Klosterkomplex Norawank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Noravank Monastic Complex. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Нораванк Монастырский Комплекс. Премиум-сервис.",
+      de: "Exklusive private Tour nach Klosterkomplex Norawank. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673311a62ba48-670e0edaaa535-ll-6732fa0a82217-1.webp",
+    images: [
+      "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673311a62ba48-670e0edaaa535-ll-6732fa0a82217-1.webp"
+    ],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 135,
+    priceForeignEUR: 135,
+    category: "Historical",
+    region: "Vayots Dzor",
+    route: [
+      {
+        name: "Noravank Monastic Complex",
+        description: "Premium private stop at Noravank Monastic Complex. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 135
+  },
+
+  // Private Tour 115: Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress
+  {
+    id: 115,
+    slug: "gyumri-city-tour-dzitoghtsyan-museum-black-fortress-private",
+    name: {
+      en: "Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress",
+      ru: "Экскурсия по Гюмри, музей Дзитохцонц, Черная крепость",
+      de: "Stadtrundfahrt Gyumri, Dzitoghtsonts Haus-Museum, Schwarze Festung"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Экскурсия по Гюмри, музей Дзитохцонц, Черная крепость. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Stadtrundfahrt Gyumri, Dzitoghtsonts Haus-Museum, Schwarze Festung. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Экскурсия по Гюмри, музей Дзитохцонц, Черная крепость. Премиум-сервис.",
+      de: "Exklusive private Tour nach Stadtrundfahrt Gyumri, Dzitoghtsonts Haus-Museum, Schwarze Festung. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b2c2a0d9e-gyumri2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b2c2a0d9e-gyumri2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 123,
+    priceForeignEUR: 123,
+    category: "Historical",
+    region: "Shirak",
+    route: [
+      {
+        name: "Gyumri City Tour",
+        description: "Premium private stop at Gyumri City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Dzitoghtsonts House-Museum",
+        description: "Premium private stop at Dzitoghtsonts House-Museum. Detailed exploration with your private team."
+      },
+      {
+        name: "Black Fortress",
+        description: "Premium private stop at Black Fortress. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 123
+  },
+
+  // Private Tour 116: Harichavank, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress
+  {
+    id: 116,
+    slug: "harichavank-gyumri-city-tour-dzitoghtsyan-museum-black-fortress-private",
+    name: {
+      en: "Harichavank, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress",
+      ru: "Аричаванк, Экскурсия по городу Гюмри, Музей Дзитохцян, Черная крепость",
+      de: "Haritschawank, Stadtrundfahrt Gyumri, Dzitoghtsyan-Museum, Schwarze Festung"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Harichavank, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Аричаванк, Экскурсия по городу Гюмри, Музей Дзитохцян, Черная крепость. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Haritschawank, Stadtrundfahrt Gyumri, Dzitoghtsyan-Museum, Schwarze Festung. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Harichavank, Gyumri City Tour, Dzitoghtsyan Museum and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Аричаванк, Экскурсия по городу Гюмри, Музей Дзитохцян и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Haritschawank, Stadtrundfahrt Gyumri, Dzitoghtsyan-Museum und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b45d35b83-harichavank.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b45d35b83-harichavank.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 128,
+    priceForeignEUR: 128,
+    category: "Historical",
+    region: "Shirak",
+    route: [
+      {
+        name: "Harichavank",
+        description: "Premium private stop at Harichavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Gyumri City Tour",
+        description: "Premium private stop at Gyumri City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Dzitoghtsyan Museum",
+        description: "Premium private stop at Dzitoghtsyan Museum. Detailed exploration with your private team."
+      },
+      {
+        name: "Black Fortress",
+        description: "Premium private stop at Black Fortress. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 128
+  },
+
+  // Private Tour 117: Sevan Lake, Sevanavank, Haghartsin, Goshavank, Old Dilijan Complex
+  {
+    id: 117,
+    slug: "sevan-lake-sevanavank-haghartsin-goshavank-old-dilijan-complex-private",
+    name: {
+      en: "Sevan Lake, Sevanavank, Haghartsin, Goshavank, Old Dilijan Complex",
+      ru: "Озеро Севан, Севанаванк, Агарцин, Гошаванк, Комплекс Старый Дилижан",
+      de: "Sewansee, Sewanawank, Haghartsin, Goshawank, Alt-Dilidschan-Komplex"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Sevan Lake, Sevanavank, Haghartsin, Goshavank, Old Dilijan Complex. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Озеро Севан, Севанаванк, Агарцин, Гошаванк, Комплекс Старый Дилижан. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Sewansee, Sewanawank, Haghartsin, Goshawank, Alt-Dilidschan-Komplex. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Sevan Lake, Sevanavank, Haghartsin and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Озеро Севан, Севанаванк, Агарцин и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Sewansee, Sewanawank, Haghartsin und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67497a75a710b-haghartsin3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67497a75a710b-haghartsin3.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 124,
+    priceForeignEUR: 124,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Sevan Lake",
+        description: "Premium private stop at Sevan Lake. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Haghartsin",
+        description: "Premium private stop at Haghartsin. Detailed exploration with your private team."
+      },
+      {
+        name: "Goshavank",
+        description: "Premium private stop at Goshavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Old Dilijan Complex",
+        description: "Premium private stop at Old Dilijan Complex. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 124
+  },
+
+  // Private Tour 118: Khor Virap, Noravank, Areni Cave, Winery
+  {
+    id: 118,
+    slug: "khor-virap-noravank-areni-cave-winery-private",
+    name: {
+      en: "Khor Virap, Noravank, Areni Cave, Winery",
+      ru: "Хор Вирап, Нораванк, Пещера Арени, Винодельня",
+      de: "Khor Virap, Norawank, Areni-Höhle, Weingut"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap, Noravank, Areni Cave, Winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап, Нораванк, Пещера Арени, Винодельня. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Khor Virap, Norawank, Areni-Höhle, Weingut. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap, Noravank, Areni Cave and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап, Нораванк, Пещера Арени и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Khor Virap, Norawank, Areni-Höhle und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749aa6e29a9d-khorvirap3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749aa6e29a9d-khorvirap3.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 124,
+    priceForeignEUR: 124,
+    category: "Wine",
+    region: "Vayots Dzor",
+    route: [
+      {
+        name: "Khor Virap",
+        description: "Premium private stop at Khor Virap. Detailed exploration with your private team."
+      },
+      {
+        name: "Noravank",
+        description: "Premium private stop at Noravank. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni Cave",
+        description: "Premium private stop at Areni Cave. Detailed exploration with your private team."
+      },
+      {
+        name: "Winery",
+        description: "Premium private stop at Winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 124
+  },
+
+  // Private Tour 119: Haghpat and Sanahin monastic complexes
+  {
+    id: 119,
+    slug: "haghpat-sanahin-private",
+    name: {
+      en: "Haghpat and Sanahin monastic complexes",
+      ru: "Ахпат и Санаин Монастырские Комплексы",
+      de: "Klosterkomplexe Haghpat und Sanahin"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Haghpat and Sanahin monastic complexes. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Ахпат и Санаин Монастырские Комплексы. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Klosterkomplexe Haghpat und Sanahin. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Haghpat, Sanahin monastic complexes. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Ахпат и Санаин Монастырские Комплексы. Премиум-сервис.",
+      de: "Exklusive private Tour nach Klosterkomplexe Haghpat, Sanahin. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748699b0e8e2-haghpat5.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748699b0e8e2-haghpat5.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 160,
+    priceForeignEUR: 160,
+    category: "Historical",
+    region: "Lori",
+    route: [
+      {
+        name: "Haghpat",
+        description: "Premium private stop at Haghpat. Detailed exploration with your private team."
+      },
+      {
+        name: "Sanahin monastic complexes",
+        description: "Premium private stop at Sanahin monastic complexes. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 160
+  },
+
+  // Private Tour 120: Khor Virap Monastery, Noravank, Jermuk, Areni Cave and Winery
+  {
+    id: 120,
+    slug: "khor-virap-noravank-areni-cave-jermuk-winery-private",
+    name: {
+      en: "Khor Virap Monastery, Noravank, Jermuk, Areni Cave and Winery",
+      ru: "Хор Вирап Монастырь, Нораванк, Джермук, Пещера Арени, Винодельня",
+      de: "Kloster Chor Virap, Norawank, Dschermuk, Areni-Höhle und Weingut"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap Monastery, Noravank, Jermuk, Areni Cave and Winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап Монастырь, Нораванк, Джермук, Пещера Арени, Винодельня. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Kloster Chor Virap, Norawank, Dschermuk, Areni-Höhle und Weingut. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap Monastery, Noravank, Jermuk and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап Монастырь, Нораванк, Джермук и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Kloster Chor Virap, Norawank, Dschermuk und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67497fea19db9-jermuk1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67497fea19db9-jermuk1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 168,
+    priceForeignEUR: 168,
+    category: "Wine",
+    region: "Vayots Dzor",
+    route: [
+      {
+        name: "Khor Virap Monastery",
+        description: "Premium private stop at Khor Virap Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Noravank",
+        description: "Premium private stop at Noravank. Detailed exploration with your private team."
+      },
+      {
+        name: "Jermuk",
+        description: "Premium private stop at Jermuk. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni Cave",
+        description: "Premium private stop at Areni Cave. Detailed exploration with your private team."
+      },
+      {
+        name: "Winery",
+        description: "Premium private stop at Winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 168
+  },
+
+  // Private Tour 121: Akhtala Monastery, Haghpat, and Sanahin Monastic Complexes
+  {
+    id: 121,
+    slug: "akhtala-haghpat-sanahin-private",
+    name: {
+      en: "Akhtala Monastery, Haghpat, and Sanahin Monastic Complexes",
+      ru: "Ахтала Монастырь, Ахпат и Санаин Монастырские Комплексы",
+      de: "Kloster Achtala sowie die Klosterkomplexe Haghpat und Sanahin"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Akhtala Monastery, Haghpat, and Sanahin Monastic Complexes. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Ахтала Монастырь, Ахпат и Санаин Монастырские Комплексы. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Kloster Achtala sowie die Klosterkomplexe Haghpat und Sanahin. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Akhtala Monastery, Haghpat, Sanahin Monastic Complexes. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Ахтала Монастырь, Ахпат и Санаин Монастырские Комплексы. Премиум-сервис.",
+      de: "Exklusive private Tour nach Kloster Achtala sowie die Klosterkomplexe Haghpat, Sanahin. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67486a055342d-akhtala4.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67486a055342d-akhtala4.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 170,
+    priceForeignEUR: 170,
+    category: "Cultural",
+    region: "Lori",
+    route: [
+      {
+        name: "Akhtala Monastery",
+        description: "Premium private stop at Akhtala Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Haghpat",
+        description: "Premium private stop at Haghpat. Detailed exploration with your private team."
+      },
+      {
+        name: "Sanahin Monastic Complexes",
+        description: "Premium private stop at Sanahin Monastic Complexes. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 170
+  },
+
+  // Private Tour 122: Noravank Monastery, Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni Winery
+  {
+    id: 122,
+    slug: "noravank-tatev-ropeway-shaki-areni-private",
+    name: {
+      en: "Noravank Monastery, Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni Winery",
+      ru: "Нораванк монастырь, Татев, Канатная дорога «Крылья Татева», Водопад Шаки, Винодельня Арени",
+      de: "Kloster Norawank, Kloster Tatew, Seilbahn „Wings of Tatev“, Shaki-Wasserfall, Weingut Areni"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Noravank Monastery, Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni Winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Нораванк монастырь, Татев, Канатная дорога «Крылья Татева», Водопад Шаки, Винодельня Арени. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Kloster Norawank, Kloster Tatew, Seilbahn „Wings of Tatev“, Shaki-Wasserfall, Weingut Areni. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Noravank Monastery, Tatev Monastery, ''Wings of Tatev'' Ropeway and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Нораванк монастырь, Татев, Канатная дорога «Крылья Татева» и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Kloster Norawank, Kloster Tatew, Seilbahn „Wings of Tatev“ und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b6b192a03-noravank2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b6b192a03-noravank2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 231,
+    priceForeignEUR: 231,
+    category: "Wine",
+    region: "Syunik",
+    route: [
+      {
+        name: "Noravank Monastery",
+        description: "Premium private stop at Noravank Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Tatev Monastery",
+        description: "Premium private stop at Tatev Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "''Wings of Tatev'' Ropeway",
+        description: "Premium private stop at ''Wings of Tatev'' Ropeway. Detailed exploration with your private team."
+      },
+      {
+        name: "Shaki waterfall",
+        description: "Premium private stop at Shaki waterfall. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni Winery",
+        description: "Premium private stop at Areni Winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 231
+  },
+
+  // Private Tour 123: Tatev Monastery, ''Wings of Tatev'' Ropeway, Khndzoresk cave, Shaki waterfall, Areni winery
+  {
+    id: 123,
+    slug: "tatev-monastery-khndzoresk-shaki-areni-private",
+    name: {
+      en: "Tatev Monastery, ''Wings of Tatev'' Ropeway, Khndzoresk cave, Shaki waterfall, Areni winery",
+      ru: "Татев монастырь, Канатная дорога «Крылья Татева», Хндзореск, водопад Шаки, винодельня Арени",
+      de: "Kloster Tatew, Seilbahn „Wings of Tatev“, Höhle von Chndsoresk, Shaki-Wasserfall, Weingut Areni"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tatev Monastery, ''Wings of Tatev'' Ropeway, Khndzoresk cave, Shaki waterfall, Areni winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Татев монастырь, Канатная дорога «Крылья Татева», Хндзореск, водопад Шаки, винодельня Арени. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Kloster Tatew, Seilbahn „Wings of Tatev“, Höhle von Chndsoresk, Shaki-Wasserfall, Weingut Areni. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tatev Monastery, ''Wings of Tatev'' Ropeway, Khndzoresk cave and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Татев монастырь, Канатная дорога «Крылья Татева», Хндзореск и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Kloster Tatew, Seilbahn „Wings of Tatev“, Höhle von Chndsoresk und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b7c8e6a16-khndzoresk1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b7c8e6a16-khndzoresk1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 241,
+    priceForeignEUR: 241,
+    category: "Wine",
+    region: "Syunik",
+    route: [
+      {
+        name: "Tatev Monastery",
+        description: "Premium private stop at Tatev Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "''Wings of Tatev'' Ropeway",
+        description: "Premium private stop at ''Wings of Tatev'' Ropeway. Detailed exploration with your private team."
+      },
+      {
+        name: "Khndzoresk cave",
+        description: "Premium private stop at Khndzoresk cave. Detailed exploration with your private team."
+      },
+      {
+        name: "Shaki waterfall",
+        description: "Premium private stop at Shaki waterfall. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni winery",
+        description: "Premium private stop at Areni winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 241
+  },
+
+  // Private Tour 124: Tbilisi City Tour
+  {
+    id: 124,
+    slug: "yerevan-tbilisi-private",
+    name: {
+      en: "Tbilisi City Tour",
+      ru: "Тбилиси, городксой тур",
+      de: "Stadtrundfahrt in Tiflis"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tbilisi City Tour. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Тбилиси, городксой тур. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Stadtrundfahrt in Tiflis. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tbilisi City Tour. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Тбилиси, городксой тур. Премиум-сервис.",
+      de: "Exklusive private Tour nach Stadtrundfahrt in Tiflis. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6731b24ee3daf-66e13448643ea-thbilisi3-6731b21a226bd-1.webp",
+    images: [
+      "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6731b24ee3daf-66e13448643ea-thbilisi3-6731b21a226bd-1.webp"
+    ],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 236,
+    priceForeignEUR: 236,
+    category: "Historical",
+    region: "Georgia",
+    route: [
+      {
+        name: "Tbilisi City Tour",
+        description: "Premium private stop at Tbilisi City Tour. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 236
+  },
+
+  // Private Tour 125: Yerevan City Tour, "GUM" Market, Matenadaran, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square
+  {
+    id: 125,
+    slug: "yerevan-city-tour-gum-market-matenadaran-victory-park-tsitsernakaberd-memorial-complex-republic-square-private",
+    name: {
+      en: "Yerevan City Tour, \"GUM\" Market, Matenadaran, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square",
+      ru: "Ереван, օбзорная экскурсия, рынок «ГУМ», Матенадаран, Парк Победы, Мемориальный комплекс Цицернакаберд, Площадь Республики",
+      de: "Yerevan City Tour, \"GUM\" Market, Matenadaran, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Yerevan City Tour, \"GUM\" Market, Matenadaran, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Ереван, օбзорная экскурсия, рынок «ГУМ», Матенадаран, Парк Победы, Мемориальный комплекс Цицернакаберд, Площадь Республики. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Yerevan City Tour, \"GUM\" Market, Matenadaran, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Yerevan City Tour, \"GUM\" Market, Matenadaran and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Ереван, օбзорная экскурсия, рынок «ГУМ» и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Yerevan City Tour, \"GUM\" Market, Matenadaran und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673dcd4b427fd-matenadaran3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673dcd4b427fd-matenadaran3.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 48,
+    priceForeignEUR: 48,
+    category: "Historical",
+    region: "Yerevan",
+    route: [
+      {
+        name: "Yerevan City Tour",
+        description: "Premium private stop at Yerevan City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "\"GUM\" Market",
+        description: "Premium private stop at \"GUM\" Market. Detailed exploration with your private team."
+      },
+      {
+        name: "Matenadaran",
+        description: "Premium private stop at Matenadaran. Detailed exploration with your private team."
+      },
+      {
+        name: "Victory Park",
+        description: "Premium private stop at Victory Park. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsitsernakaberd Memorial Complex",
+        description: "Premium private stop at Tsitsernakaberd Memorial Complex. Detailed exploration with your private team."
+      },
+      {
+        name: "Republic Square",
+        description: "Premium private stop at Republic Square. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 48
+  },
+
+  // Private Tour 126: Yerevan City Tour, Ararat Brandy Factory, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square
+  {
+    id: 126,
+    slug: "yerevan-city-tour-ararat-brandy-factory-victory-park-tsitsernakaberd-memorial-complex-republic-square-private",
+    name: {
+      en: "Yerevan City Tour, Ararat Brandy Factory, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square",
+      ru: "Экскурсия по Еревану, коньячный завод «Арарат», парк Победы, мемориальный комплекс «Цицернакаберд», площадь Республики",
+      de: "Yerevan City Tour, Ararat Brandy Factory, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Yerevan City Tour, Ararat Brandy Factory, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Экскурсия по Еревану, коньячный завод «Арарат», парк Победы, мемориальный комплекс «Цицернакаберд», площадь Республики. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Yerevan City Tour, Ararat Brandy Factory, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Yerevan City Tour, Ararat Brandy Factory, Victory Park and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Экскурсия по Еревану, коньячный завод «Арарат», парк Победы и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Yerevan City Tour, Ararat Brandy Factory, Victory Park und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673dddac6807d-ararat1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673dddac6807d-ararat1.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 50,
+    priceForeignEUR: 50,
+    category: "Historical",
+    region: "Multiple",
+    route: [
+      {
+        name: "Yerevan City Tour",
+        description: "Premium private stop at Yerevan City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Ararat Brandy Factory",
+        description: "Premium private stop at Ararat Brandy Factory. Detailed exploration with your private team."
+      },
+      {
+        name: "Victory Park",
+        description: "Premium private stop at Victory Park. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsitsernakaberd Memorial Complex",
+        description: "Premium private stop at Tsitsernakaberd Memorial Complex. Detailed exploration with your private team."
+      },
+      {
+        name: "Republic Square",
+        description: "Premium private stop at Republic Square. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 50
+  },
+
+  // Private Tour 127: Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex, Victory Park, Republic Square
+  {
+    id: 127,
+    slug: "khor-virap-yerevan-city-tour-tsitsernakaberd-memorial-complex-victory-park-republic-square-private",
+    name: {
+      en: "Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex, Victory Park, Republic Square",
+      ru: "Хор Вирап, Обзорная экскурсия по Еревану, Мемориальный комплекс Цицернакаберд, Парк Победы, Площадь Республики",
+      de: "Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex, Victory Park, Republic Square"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex, Victory Park, Republic Square. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап, Обзорная экскурсия по Еревану, Мемориальный комплекс Цицернакаберд, Парк Победы, Площадь Республики. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex, Victory Park, Republic Square. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап, Обзорная экскурсия по Еревану, Мемориальный комплекс Цицернакаберд и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Khor Virap, Yerevan City Tour, Tsitsernakaberd Memorial Complex und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745bdb422848-khorvirap3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745bdb422848-khorvirap3.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 82,
+    priceForeignEUR: 82,
+    category: "Historical",
+    region: "Ararat",
+    route: [
+      {
+        name: "Khor Virap",
+        description: "Premium private stop at Khor Virap. Detailed exploration with your private team."
+      },
+      {
+        name: "Yerevan City Tour",
+        description: "Premium private stop at Yerevan City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsitsernakaberd Memorial Complex",
+        description: "Premium private stop at Tsitsernakaberd Memorial Complex. Detailed exploration with your private team."
+      },
+      {
+        name: "Victory Park",
+        description: "Premium private stop at Victory Park. Detailed exploration with your private team."
+      },
+      {
+        name: "Republic Square",
+        description: "Premium private stop at Republic Square. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 82
+  },
+
+  // Private Tour 128: Garni temple, Geghard Monastery, Yerevan City Tour, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square
+  {
+    id: 128,
+    slug: "arch-of-charents-garni-symphony-of-stones-geghard-yerevan-city-tour-victory-park-tsitsernakaberd-memorial-complex-republic-square-private",
+    name: {
+      en: "Garni temple, Geghard Monastery, Yerevan City Tour, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square",
+      ru: "Гарни, Гегард, обзорная экскурсия по Еревану, Парк Победы, Мемориальный комплекс Цицернакаберд, Площадь Республики",
+      de: "Garni temple, Geghard Monastery, Yerevan City Tour, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Garni temple, Geghard Monastery, Yerevan City Tour, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Гарни, Гегард, обзорная экскурсия по Еревану, Парк Победы, Мемориальный комплекс Цицернакаберд, Площадь Республики. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Garni temple, Geghard Monastery, Yerevan City Tour, Victory Park, Tsitsernakaberd Memorial Complex, Republic Square. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Garni temple, Geghard Monastery, Yerevan City Tour and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Гарни, Гегард, обзорная экскурсия по Еревану и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Garni temple, Geghard Monastery, Yerevan City Tour und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745ba298a4b1-charents1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6745ba298a4b1-charents1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 115,
+    priceForeignEUR: 115,
+    category: "Cultural",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Garni temple",
+        description: "Premium private stop at Garni temple. Detailed exploration with your private team."
+      },
+      {
+        name: "Geghard Monastery",
+        description: "Premium private stop at Geghard Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Yerevan City Tour",
+        description: "Premium private stop at Yerevan City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Victory Park",
+        description: "Premium private stop at Victory Park. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsitsernakaberd Memorial Complex",
+        description: "Premium private stop at Tsitsernakaberd Memorial Complex. Detailed exploration with your private team."
+      },
+      {
+        name: "Republic Square",
+        description: "Premium private stop at Republic Square. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 115
+  },
+
+  // Private Tour 129: Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress,  Republic Square
+  {
+    id: 129,
+    slug: "yerevan-city-tour-tstitsernakaberd-memorial-complex-erebuni-fortress-republic-square-private",
+    name: {
+      en: "Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress,  Republic Square",
+      ru: "Обзорная экскурсия по Еревану, Мемориальный комплекс Цицернакаберд, крепость Эребуни, площадь Республики.",
+      de: "Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress,  Republic Square"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress,  Republic Square. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Обзорная экскурсия по Еревану, Мемориальный комплекс Цицернакаберд, крепость Эребуни, площадь Республики.. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress,  Republic Square. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Обзорная экскурсия по Еревану, Мемориальный комплекс Цицернакаберд, крепость Эребуни и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Yerevan City Tour, Tstitsernakaberd Memorial Complex, Erebuni Fortress und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673dd3b384829-republic-square2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/673dd3b384829-republic-square2.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 44,
+    priceForeignEUR: 44,
+    category: "Historical",
+    region: "Yerevan",
+    route: [
+      {
+        name: "Yerevan City Tour",
+        description: "Premium private stop at Yerevan City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Tstitsernakaberd Memorial Complex",
+        description: "Premium private stop at Tstitsernakaberd Memorial Complex. Detailed exploration with your private team."
+      },
+      {
+        name: "Erebuni Fortress",
+        description: "Premium private stop at Erebuni Fortress. Detailed exploration with your private team."
+      },
+      {
+        name: "Republic Square",
+        description: "Premium private stop at Republic Square. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 44
+  },
+
+  // Private Tour 130: Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral, Yerevan City Tour
+  {
+    id: 130,
+    slug: "etchmiadzin-mother-cathedral-st-gayane-st-hripsime-zvartnots-cathedral-yerevan-city-tour-private",
+    name: {
+      en: "Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral, Yerevan City Tour",
+      ru: "Эчмиадзин, Кафедральный собор, Св. Гаяне, Св. Рипсиме, Собор Звартноц, Экскурсия по Еревану",
+      de: "Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral, Yerevan City Tour"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral, Yerevan City Tour. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Эчмиадзин, Кафедральный собор, Св. Гаяне, Св. Рипсиме, Собор Звартноц, Экскурсия по Еревану. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral, Yerevan City Tour. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Etchmiadzin, Mother Cathedral, St. Gayane and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Эчмиадзин, Кафедральный собор, Св. Гаяне и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Etchmiadzin, Mother Cathedral, St. Gayane und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67484d002ea24-etchmiatsin1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67484d002ea24-etchmiatsin1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 96,
+    priceForeignEUR: 96,
+    category: "Cultural",
+    region: "Armavir",
+    route: [
+      {
+        name: "Etchmiadzin",
+        description: "Premium private stop at Etchmiadzin. Detailed exploration with your private team."
+      },
+      {
+        name: "Mother Cathedral",
+        description: "Premium private stop at Mother Cathedral. Detailed exploration with your private team."
+      },
+      {
+        name: "St. Gayane",
+        description: "Premium private stop at St. Gayane. Detailed exploration with your private team."
+      },
+      {
+        name: "St. Hripsime",
+        description: "Premium private stop at St. Hripsime. Detailed exploration with your private team."
+      },
+      {
+        name: "Zvartnots Cathedral",
+        description: "Premium private stop at Zvartnots Cathedral. Detailed exploration with your private team."
+      },
+      {
+        name: "Yerevan City Tour",
+        description: "Premium private stop at Yerevan City Tour. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 96
+  },
+
+  // Private Tour 131: Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort, Kecharis Monastery, Ropeway
+  {
+    id: 131,
+    slug: "saint-astvatsatsin-church-bjni-tsaghkadzor-ski-resort-kecharis-ropeway-private",
+    name: {
+      en: "Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort, Kecharis Monastery, Ropeway",
+      ru: "Бжни, церковь Сурб Аствацацин, Цахкадзор, Кечарис, Канатная дорога",
+      de: "Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort, Kecharis Monastery, Ropeway"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort, Kecharis Monastery, Ropeway. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Бжни, церковь Сурб Аствацацин, Цахкадзор, Кечарис, Канатная дорога. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort, Kecharis Monastery, Ropeway. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Бжни, церковь Сурб Аствацацин, Цахкадзор и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Bjni, Saint Astvatsatsin Church, Tsaghkadzor Ski Resort und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748511e372e7-bjni.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6748511e372e7-bjni.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 102,
+    priceForeignEUR: 102,
+    category: "Adventure",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Bjni",
+        description: "Premium private stop at Bjni. Detailed exploration with your private team."
+      },
+      {
+        name: "Saint Astvatsatsin Church",
+        description: "Premium private stop at Saint Astvatsatsin Church. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis Monastery",
+        description: "Premium private stop at Kecharis Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Ropeway",
+        description: "Premium private stop at Ropeway. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 102
+  },
+
+  // Private Tour 132: Amberd Fortress, Vahramashen, Tegher, Byurakan Observatory
+  {
+    id: 132,
+    slug: "amberd-fortress-vahramashen-tegher-byurakan-observatory-private",
+    name: {
+      en: "Amberd Fortress, Vahramashen, Tegher, Byurakan Observatory",
+      ru: "Крепость Амберд, Ваграмашен, Тегер, Бюраканская обсерватория",
+      de: "Amberd Fortress, Vahramashen, Tegher, Byurakan Observatory"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Amberd Fortress, Vahramashen, Tegher, Byurakan Observatory. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Крепость Амберд, Ваграмашен, Тегер, Бюраканская обсерватория. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Amberd Fortress, Vahramashen, Tegher, Byurakan Observatory. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Amberd Fortress, Vahramashen, Tegher and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Крепость Амберд, Ваграмашен, Тегер и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Amberd Fortress, Vahramashen, Tegher und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67485234869a2-amberd1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67485234869a2-amberd1.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 103,
+    priceForeignEUR: 103,
+    category: "Adventure",
+    region: "Aragatsotn",
+    route: [
+      {
+        name: "Amberd Fortress",
+        description: "Premium private stop at Amberd Fortress. Detailed exploration with your private team."
+      },
+      {
+        name: "Vahramashen",
+        description: "Premium private stop at Vahramashen. Detailed exploration with your private team."
+      },
+      {
+        name: "Tegher",
+        description: "Premium private stop at Tegher. Detailed exploration with your private team."
+      },
+      {
+        name: "Byurakan Observatory",
+        description: "Premium private stop at Byurakan Observatory. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 103
+  },
+
+  // Private Tour 133: Etchmiadzin, Mother Cathedral, Zvartnots Cathedral, Tsaghkadzor Ski Resort, Kecharis Monastery, ropeway
+  {
+    id: 133,
+    slug: "etchmiadzin-mother-cathedral-st-gayane-st-hripsime-zvartnots-cathedral-tsaghkadzor-ski-resort-kecharis-ropeway-private",
+    name: {
+      en: "Etchmiadzin, Mother Cathedral, Zvartnots Cathedral, Tsaghkadzor Ski Resort, Kecharis Monastery, ropeway",
+      ru: "Эчмиадзин, Кафедральный собор, Звартноц, Цахкадзор, Кечарис монастырь, канатная дорога",
+      de: "Etchmiadzin, Mother Cathedral, Zvartnots Cathedral, Tsaghkadzor Ski Resort, Kecharis Monastery, ropeway"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Etchmiadzin, Mother Cathedral, Zvartnots Cathedral, Tsaghkadzor Ski Resort, Kecharis Monastery, ropeway. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Эчмиадзин, Кафедральный собор, Звартноц, Цахкадзор, Кечарис монастырь, канатная дорога. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Etchmiadzin, Mother Cathedral, Zvartnots Cathedral, Tsaghkadzor Ski Resort, Kecharis Monastery, ropeway. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Etchmiadzin, Mother Cathedral, Zvartnots Cathedral and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Эчмиадзин, Кафедральный собор, Звартноц и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Etchmiadzin, Mother Cathedral, Zvartnots Cathedral und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674852b1c7619-etchmiatsin2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674852b1c7619-etchmiatsin2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 102,
+    priceForeignEUR: 102,
+    category: "Adventure",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Etchmiadzin",
+        description: "Premium private stop at Etchmiadzin. Detailed exploration with your private team."
+      },
+      {
+        name: "Mother Cathedral",
+        description: "Premium private stop at Mother Cathedral. Detailed exploration with your private team."
+      },
+      {
+        name: "Zvartnots Cathedral",
+        description: "Premium private stop at Zvartnots Cathedral. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis Monastery",
+        description: "Premium private stop at Kecharis Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "ropeway",
+        description: "Premium private stop at ropeway. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 102
+  },
+
+  // Private Tour 134: Lake Kari, Amberd Fortress, Vahramashen, Saghmosavank
+  {
+    id: 134,
+    slug: "lake-kari-amberd-fortress-vahramashen-saghmosavank-private",
+    name: {
+      en: "Lake Kari, Amberd Fortress, Vahramashen, Saghmosavank",
+      ru: "Озеро Кари, Крепость Амберд, Ваграмашен, Сагмосаванк",
+      de: "Lake Kari, Amberd Fortress, Vahramashen, Saghmosavank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Lake Kari, Amberd Fortress, Vahramashen, Saghmosavank. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Озеро Кари, Крепость Амберд, Ваграмашен, Сагмосаванк. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Lake Kari, Amberd Fortress, Vahramashen, Saghmosavank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Lake Kari, Amberd Fortress, Vahramashen and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Озеро Кари, Крепость Амберд, Ваграмашен и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Lake Kari, Amberd Fortress, Vahramashen und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b1784eb02-amberd1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b1784eb02-amberd1.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 101,
+    priceForeignEUR: 101,
+    category: "Nature",
+    region: "Aragatsotn",
+    route: [
+      {
+        name: "Lake Kari",
+        description: "Premium private stop at Lake Kari. Detailed exploration with your private team."
+      },
+      {
+        name: "Amberd Fortress",
+        description: "Premium private stop at Amberd Fortress. Detailed exploration with your private team."
+      },
+      {
+        name: "Vahramashen",
+        description: "Premium private stop at Vahramashen. Detailed exploration with your private team."
+      },
+      {
+        name: "Saghmosavank",
+        description: "Premium private stop at Saghmosavank. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 101
+  },
+
+  // Private Tour 135: Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort, Kecharis, Ropeway
+  {
+    id: 135,
+    slug: "arch-of-charents-garni-symphony-of-stones-geghard-lavash-baking-master-class-tsaghkadzor-kecharis-ropeway-private",
+    name: {
+      en: "Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort, Kecharis, Ropeway",
+      ru: "Гарни, Гегард, Цахкадзор, Кечарис, Канатная дорога",
+      de: "Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort, Kecharis, Ropeway"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort, Kecharis, Ropeway. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Гарни, Гегард, Цахкадзор, Кечарис, Канатная дорога. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort, Kecharis, Ropeway. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Гарни, Гегард, Цахкадзор и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Garni temple, Geghard Monastery, Tsaghkadzor Ski Resort und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67485389e410a-garni3.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67485389e410a-garni3.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 107,
+    priceForeignEUR: 107,
+    category: "Adventure",
+    region: "Kotayk",
+    route: [
+      {
+        name: "Garni temple",
+        description: "Premium private stop at Garni temple. Detailed exploration with your private team."
+      },
+      {
+        name: "Geghard Monastery",
+        description: "Premium private stop at Geghard Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis",
+        description: "Premium private stop at Kecharis. Detailed exploration with your private team."
+      },
+      {
+        name: "Ropeway",
+        description: "Premium private stop at Ropeway. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 107
+  },
+
+  // Private Tour 136: Dilijan, Haghartsin and Goshavank monasteries, Old Dilijan Complex
+  {
+    id: 136,
+    slug: "haghartsin-goshavank-old-dilijan-complex-private",
+    name: {
+      en: "Dilijan, Haghartsin and Goshavank monasteries, Old Dilijan Complex",
+      ru: "Дилижан, Агарцин, Гошаванк, Старый Дилижан Комплекс",
+      de: "Dilijan, Haghartsin and Goshavank monasteries, Old Dilijan Complex"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Dilijan, Haghartsin and Goshavank monasteries, Old Dilijan Complex. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Дилижан, Агарцин, Гошаванк, Старый Дилижан Комплекс. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Dilijan, Haghartsin and Goshavank monasteries, Old Dilijan Complex. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Dilijan, Haghartsin, Goshavank monasteries and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Дилижан, Агарцин, Гошаванк и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Dilijan, Haghartsin and Goshavank monasteries, Old Dilijan Complex. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674978d2a0f7b-haghartsin4.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674978d2a0f7b-haghartsin4.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 134,
+    priceForeignEUR: 134,
+    category: "Cultural",
+    region: "Tavush",
+    route: [
+      {
+        name: "Dilijan",
+        description: "Premium private stop at Dilijan. Detailed exploration with your private team."
+      },
+      {
+        name: "Haghartsin",
+        description: "Premium private stop at Haghartsin. Detailed exploration with your private team."
+      },
+      {
+        name: "Goshavank monasteries",
+        description: "Premium private stop at Goshavank monasteries. Detailed exploration with your private team."
+      },
+      {
+        name: "Old Dilijan Complex",
+        description: "Premium private stop at Old Dilijan Complex. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 134
+  },
+
+  // Private Tour 137: Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank, Dilijan, Haghartsin Monastery
+  {
+    id: 137,
+    slug: "tsaghkadzor-kecharis-ropeway-sevan-lake-sevanavank-haghartsin-old-dilijan-complex-private",
+    name: {
+      en: "Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank, Dilijan, Haghartsin Monastery",
+      ru: "Цахкадзор, Кечарис, Канатная дорога, Озеро Севан, Севанаванк, Дилижан, Агарцин монастырь",
+      de: "Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank, Dilijan, Haghartsin Monastery"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank, Dilijan, Haghartsin Monastery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Цахкадзор, Кечарис, Канатная дорога, Озеро Севан, Севанаванк, Дилижан, Агарцин монастырь. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tsaghkadzor Ski Resort, Kecharis, Ropeway, Sevan Lake, Sevanavank, Dilijan, Haghartsin Monastery. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tsaghkadzor Ski Resort, Kecharis, Ropeway and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Цахкадзор, Кечарис, Канатная дорога и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tsaghkadzor Ski Resort, Kecharis, Ropeway und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67497e071b608-tsaghkadzor2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67497e071b608-tsaghkadzor2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 127,
+    priceForeignEUR: 127,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis",
+        description: "Premium private stop at Kecharis. Detailed exploration with your private team."
+      },
+      {
+        name: "Ropeway",
+        description: "Premium private stop at Ropeway. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevan Lake",
+        description: "Premium private stop at Sevan Lake. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Dilijan",
+        description: "Premium private stop at Dilijan. Detailed exploration with your private team."
+      },
+      {
+        name: "Haghartsin Monastery",
+        description: "Premium private stop at Haghartsin Monastery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 127
+  },
+
+  // Private Tour 138: Aruch, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress
+  {
+    id: 138,
+    slug: "aruch-gyumri-city-tour-dzitoghtsyan-museum-black-fortress-private",
+    name: {
+      en: "Aruch, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress",
+      ru: "Аруч, Экскурсия по городу Гюмри, Музей Дзитохцян, Черная крепость",
+      de: "Aruch, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Aruch, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Аруч, Экскурсия по городу Гюмри, Музей Дзитохцян, Черная крепость. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Aruch, Gyumri City Tour, Dzitoghtsyan Museum, Black Fortress. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Aruch, Gyumri City Tour, Dzitoghtsyan Museum and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Аруч, Экскурсия по городу Гюмри, Музей Дзитохцян и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Aruch, Gyumri City Tour, Dzitoghtsyan Museum und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b35aeb6ea-aruch.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b35aeb6ea-aruch.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 124,
+    priceForeignEUR: 124,
+    category: "Historical",
+    region: "Shirak",
+    route: [
+      {
+        name: "Aruch",
+        description: "Premium private stop at Aruch. Detailed exploration with your private team."
+      },
+      {
+        name: "Gyumri City Tour",
+        description: "Premium private stop at Gyumri City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Dzitoghtsyan Museum",
+        description: "Premium private stop at Dzitoghtsyan Museum. Detailed exploration with your private team."
+      },
+      {
+        name: "Black Fortress",
+        description: "Premium private stop at Black Fortress. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 124
+  },
+
+  // Private Tour 139: Sevan Lake, Sevanavank, Haghartsin, Lake Parz, Goshavank, Old Dilijan Complex
+  {
+    id: 139,
+    slug: "sevan-lake-sevanavank-haghartsin-lake-parz-goshavank-old-dilijan-complex-private",
+    name: {
+      en: "Sevan Lake, Sevanavank, Haghartsin, Lake Parz, Goshavank, Old Dilijan Complex",
+      ru: "Озеро Севан, Севанаванк, Агарцин, Озеро Парз, Гошаванк, Старый Дилижан комплекс",
+      de: "Sevan Lake, Sevanavank, Haghartsin, Lake Parz, Goshavank, Old Dilijan Complex"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Sevan Lake, Sevanavank, Haghartsin, Lake Parz, Goshavank, Old Dilijan Complex. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Озеро Севан, Севанаванк, Агарцин, Озеро Парз, Гошаванк, Старый Дилижан комплекс. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Sevan Lake, Sevanavank, Haghartsin, Lake Parz, Goshavank, Old Dilijan Complex. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Sevan Lake, Sevanavank, Haghartsin and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Озеро Севан, Севанаванк, Агарцин и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Sevan Lake, Sevanavank, Haghartsin und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674981d57b58d-sevanavank1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674981d57b58d-sevanavank1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 136,
+    priceForeignEUR: 136,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Sevan Lake",
+        description: "Premium private stop at Sevan Lake. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Haghartsin",
+        description: "Premium private stop at Haghartsin. Detailed exploration with your private team."
+      },
+      {
+        name: "Lake Parz",
+        description: "Premium private stop at Lake Parz. Detailed exploration with your private team."
+      },
+      {
+        name: "Goshavank",
+        description: "Premium private stop at Goshavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Old Dilijan Complex",
+        description: "Premium private stop at Old Dilijan Complex. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 136
+  },
+
+  // Private Tour 140: Akhtala, Haghpat, Sanahin, Odzun, ''Mendz er'' Cave
+  {
+    id: 140,
+    slug: "akhtala-haghpat-sanahin-mendz-er-cave-odzun-private",
+    name: {
+      en: "Akhtala, Haghpat, Sanahin, Odzun, ''Mendz er'' Cave",
+      ru: "Ахтала, Ахпат, Санаин, Одзун, пещера «Мендз эр»",
+      de: "Akhtala, Haghpat, Sanahin, Odzun, ''Mendz er'' Cave"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Akhtala, Haghpat, Sanahin, Odzun, ''Mendz er'' Cave. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Ахтала, Ахпат, Санаин, Одзун, пещера «Мендз эр». Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Akhtala, Haghpat, Sanahin, Odzun, ''Mendz er'' Cave. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Akhtala, Haghpat, Sanahin and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Ахтала, Ахпат, Санаин и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Akhtala, Haghpat, Sanahin und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749857534a95-odzun.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749857534a95-odzun.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 167,
+    priceForeignEUR: 167,
+    category: "Historical",
+    region: "Lori",
+    route: [
+      {
+        name: "Akhtala",
+        description: "Premium private stop at Akhtala. Detailed exploration with your private team."
+      },
+      {
+        name: "Haghpat",
+        description: "Premium private stop at Haghpat. Detailed exploration with your private team."
+      },
+      {
+        name: "Sanahin",
+        description: "Premium private stop at Sanahin. Detailed exploration with your private team."
+      },
+      {
+        name: "Odzun",
+        description: "Premium private stop at Odzun. Detailed exploration with your private team."
+      },
+      {
+        name: "''Mendz er'' Cave",
+        description: "Premium private stop at ''Mendz er'' Cave. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 167
+  },
+
+  // Private Tour 141: Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress, Marmashen
+  {
+    id: 141,
+    slug: "gyumri-city-tour-dzitoghtsyan-museum-black-fortress-marmashen-private",
+    name: {
+      en: "Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress, Marmashen",
+      ru: "Гюмри, музей Дзитохцян, Черная крепость, Мармашен",
+      de: "Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress, Marmashen"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress, Marmashen. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Гюмри, музей Дзитохцян, Черная крепость, Мармашен. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress, Marmashen. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Гюмри, музей Дзитохцян, Черная крепость и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Gyumri City Tour, Dzitoghtsonts House-Museum, Black Fortress und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b4c89e23a-marmashen.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b4c89e23a-marmashen.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 132,
+    priceForeignEUR: 132,
+    category: "Historical",
+    region: "Shirak",
+    route: [
+      {
+        name: "Gyumri City Tour",
+        description: "Premium private stop at Gyumri City Tour. Detailed exploration with your private team."
+      },
+      {
+        name: "Dzitoghtsonts House-Museum",
+        description: "Premium private stop at Dzitoghtsonts House-Museum. Detailed exploration with your private team."
+      },
+      {
+        name: "Black Fortress",
+        description: "Premium private stop at Black Fortress. Detailed exploration with your private team."
+      },
+      {
+        name: "Marmashen",
+        description: "Premium private stop at Marmashen. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 132
+  },
+
+  // Private Tour 142: Tatev Monastery, "Wings of Tatev", Devil's Bridge, Shaki Waterfall, Areni Winery
+  {
+    id: 142,
+    slug: "tatev-monastery-wings-of-tatev-devils-bridge-shaki-waterfall-areni-winery-private",
+    name: {
+      en: "Tatev Monastery, \"Wings of Tatev\", Devil's Bridge, Shaki Waterfall, Areni Winery",
+      ru: "Татев, «Крылья Татева», Чертов мост, Шакинский водопад, винодельня Арени",
+      de: "Tatev Monastery, \"Wings of Tatev\", Devil's Bridge, Shaki Waterfall, Areni Winery"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tatev Monastery, \"Wings of Tatev\", Devil's Bridge, Shaki Waterfall, Areni Winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Татев, «Крылья Татева», Чертов мост, Шакинский водопад, винодельня Арени. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tatev Monastery, \"Wings of Tatev\", Devil's Bridge, Shaki Waterfall, Areni Winery. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tatev Monastery, \"Wings of Tatev\", Devil's Bridge and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Татев, «Крылья Татева», Чертов мост и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tatev Monastery, \"Wings of Tatev\", Devil's Bridge und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6746ffea4640d-tatev.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6746ffea4640d-tatev.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 224,
+    priceForeignEUR: 224,
+    category: "Wine",
+    region: "Syunik",
+    route: [
+      {
+        name: "Tatev Monastery",
+        description: "Premium private stop at Tatev Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "\"Wings of Tatev\"",
+        description: "Premium private stop at \"Wings of Tatev\". Detailed exploration with your private team."
+      },
+      {
+        name: "Devil's Bridge",
+        description: "Premium private stop at Devil's Bridge. Detailed exploration with your private team."
+      },
+      {
+        name: "Shaki Waterfall",
+        description: "Premium private stop at Shaki Waterfall. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni Winery",
+        description: "Premium private stop at Areni Winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 224
+  },
+
+  // Private Tour 143: Khndzoresk, Karahunj, Shaki Waterfall, Areni Winery
+  {
+    id: 143,
+    slug: "khndzoresk-karahunj-shaki-waterfall-areni-winery-private",
+    name: {
+      en: "Khndzoresk, Karahunj, Shaki Waterfall, Areni Winery",
+      ru: "Хндзореск, Караундж, Шакинский водопад, Винодельня Арени",
+      de: "Khndzoresk, Karahunj, Shaki Waterfall, Areni Winery"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khndzoresk, Karahunj, Shaki Waterfall, Areni Winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хндзореск, Караундж, Шакинский водопад, Винодельня Арени. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Khndzoresk, Karahunj, Shaki Waterfall, Areni Winery. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khndzoresk, Karahunj, Shaki Waterfall and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хндзореск, Караундж, Шакинский водопад и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Khndzoresk, Karahunj, Shaki Waterfall und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674880d5afd19-khndzoresk2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674880d5afd19-khndzoresk2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 222,
+    priceForeignEUR: 222,
+    category: "Wine",
+    region: "Syunik",
+    route: [
+      {
+        name: "Khndzoresk",
+        description: "Premium private stop at Khndzoresk. Detailed exploration with your private team."
+      },
+      {
+        name: "Karahunj",
+        description: "Premium private stop at Karahunj. Detailed exploration with your private team."
+      },
+      {
+        name: "Shaki Waterfall",
+        description: "Premium private stop at Shaki Waterfall. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni Winery",
+        description: "Premium private stop at Areni Winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 222
+  },
+
+  // Private Tour 144: Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni winery
+  {
+    id: 144,
+    slug: "tatev-monastery-wings-of-tatev-ropeway-shaki-areni-private",
+    name: {
+      en: "Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni winery",
+      ru: "Татевский монастырь, канатная дорога «Крылья Татева», водопад Шаки, винодельня Арени",
+      de: "Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni winery"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Татевский монастырь, канатная дорога «Крылья Татева», водопад Шаки, винодельня Арени. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall, Areni winery. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Татевский монастырь, канатная дорога «Крылья Татева», водопад Шаки и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tatev Monastery, ''Wings of Tatev'' Ropeway, Shaki waterfall und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674707cfd6867-tatev.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/674707cfd6867-tatev.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 224,
+    priceForeignEUR: 224,
+    category: "Wine",
+    region: "Syunik",
+    route: [
+      {
+        name: "Tatev Monastery",
+        description: "Premium private stop at Tatev Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "''Wings of Tatev'' Ropeway",
+        description: "Premium private stop at ''Wings of Tatev'' Ropeway. Detailed exploration with your private team."
+      },
+      {
+        name: "Shaki waterfall",
+        description: "Premium private stop at Shaki waterfall. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni winery",
+        description: "Premium private stop at Areni winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 224
+  },
+
+  // Private Tour 145: Khor Virap, Noravank, Tatev Monastery, ''Wings of Tatev'' Ropeway
+  {
+    id: 145,
+    slug: "khor-virap-noravank-tatev-monastery-wings-of-tatev-ropeway-private",
+    name: {
+      en: "Khor Virap, Noravank, Tatev Monastery, ''Wings of Tatev'' Ropeway",
+      ru: "Хор Вирап, Нораванк, Монастырь Татев, Канатная дорога «Крылья Татева»",
+      de: "Khor Virap, Noravank, Tatev Monastery, ''Wings of Tatev'' Ropeway"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap, Noravank, Tatev Monastery, ''Wings of Tatev'' Ropeway. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап, Нораванк, Монастырь Татев, Канатная дорога «Крылья Татева». Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Khor Virap, Noravank, Tatev Monastery, ''Wings of Tatev'' Ropeway. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap, Noravank, Tatev Monastery and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап, Нораванк, Монастырь Татев и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Khor Virap, Noravank, Tatev Monastery und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b635ac9e2-khorvirap4.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b635ac9e2-khorvirap4.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 229,
+    priceForeignEUR: 229,
+    category: "Adventure",
+    region: "Syunik",
+    route: [
+      {
+        name: "Khor Virap",
+        description: "Premium private stop at Khor Virap. Detailed exploration with your private team."
+      },
+      {
+        name: "Noravank",
+        description: "Premium private stop at Noravank. Detailed exploration with your private team."
+      },
+      {
+        name: "Tatev Monastery",
+        description: "Premium private stop at Tatev Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "''Wings of Tatev'' Ropeway",
+        description: "Premium private stop at ''Wings of Tatev'' Ropeway. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 229
+  },
+
+  // Private Tour 146: Tatev Monastery, "Wings of Tatev", Karahunj, Shaki Waterfall, Areni Winery
+  {
+    id: 146,
+    slug: "tatev-monastery-wings-of-tatev-karahunj-shaki-waterfall-areni-winery-private",
+    name: {
+      en: "Tatev Monastery, \"Wings of Tatev\", Karahunj, Shaki Waterfall, Areni Winery",
+      ru: "Монастырь Татев, «Крылья Татева», Караундж, водопад Шаки, винодельня Арени",
+      de: "Tatev Monastery, \"Wings of Tatev\", Karahunj, Shaki Waterfall, Areni Winery"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Tatev Monastery, \"Wings of Tatev\", Karahunj, Shaki Waterfall, Areni Winery. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Монастырь Татев, «Крылья Татева», Караундж, водопад Шаки, винодельня Арени. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Tatev Monastery, \"Wings of Tatev\", Karahunj, Shaki Waterfall, Areni Winery. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Tatev Monastery, \"Wings of Tatev\", Karahunj and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Монастырь Татев, «Крылья Татева», Караундж и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Tatev Monastery, \"Wings of Tatev\", Karahunj und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b73bc38aa-stonehenge2.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749b73bc38aa-stonehenge2.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 225,
+    priceForeignEUR: 225,
+    category: "Wine",
+    region: "Syunik",
+    route: [
+      {
+        name: "Tatev Monastery",
+        description: "Premium private stop at Tatev Monastery. Detailed exploration with your private team."
+      },
+      {
+        name: "\"Wings of Tatev\"",
+        description: "Premium private stop at \"Wings of Tatev\". Detailed exploration with your private team."
+      },
+      {
+        name: "Karahunj",
+        description: "Premium private stop at Karahunj. Detailed exploration with your private team."
+      },
+      {
+        name: "Shaki Waterfall",
+        description: "Premium private stop at Shaki Waterfall. Detailed exploration with your private team."
+      },
+      {
+        name: "Areni Winery",
+        description: "Premium private stop at Areni Winery. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 225
+  },
+
+  // Private Tour 147: Khor Virap, Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral
+  {
+    id: 147,
+    slug: "khor-virap-etchmiadzin-mother-cathedral-st-gayane-st-hripsime-zvartnots-cathedral-private",
+    name: {
+      en: "Khor Virap, Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral",
+      ru: "Хор Вирап, Эчмиадзин, Кафедральный собор, Св. Гаяне, Св. Рипсиме, Собор Звартноц",
+      de: "Khor Virap, Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Khor Virap, Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Хор Вирап, Эчмиадзин, Кафедральный собор, Св. Гаяне, Св. Рипсиме, Собор Звартноц. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Khor Virap, Etchmiadzin, Mother Cathedral, St. Gayane, St. Hripsime, Zvartnots Cathedral. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Khor Virap, Etchmiadzin, Mother Cathedral and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Хор Вирап, Эчмиадзин, Кафедральный собор и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Khor Virap, Etchmiadzin, Mother Cathedral und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67487247ed730-khorvirap4.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67487247ed730-khorvirap4.webp"],
+    duration: "half day",
+    startTime: "09:00",
+    endTime: "14:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 91,
+    priceForeignEUR: 91,
+    category: "Cultural",
+    region: "Armavir",
+    route: [
+      {
+        name: "Khor Virap",
+        description: "Premium private stop at Khor Virap. Detailed exploration with your private team."
+      },
+      {
+        name: "Etchmiadzin",
+        description: "Premium private stop at Etchmiadzin. Detailed exploration with your private team."
+      },
+      {
+        name: "Mother Cathedral",
+        description: "Premium private stop at Mother Cathedral. Detailed exploration with your private team."
+      },
+      {
+        name: "St. Gayane",
+        description: "Premium private stop at St. Gayane. Detailed exploration with your private team."
+      },
+      {
+        name: "St. Hripsime",
+        description: "Premium private stop at St. Hripsime. Detailed exploration with your private team."
+      },
+      {
+        name: "Zvartnots Cathedral",
+        description: "Premium private stop at Zvartnots Cathedral. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 91
+  },
+
+  // Private Tour 148: Noratus, Hayravank, Sevan Lake, Sevanavank
+  {
+    id: 148,
+    slug: "noratus-hayravank-sevan-lake-sevanavank-private",
+    name: {
+      en: "Noratus, Hayravank, Sevan Lake, Sevanavank",
+      ru: "Норатус, Айраванк, Озеро Севан, Севанаванк",
+      de: "Noratus, Hayravank, Sevan Lake, Sevanavank"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Noratus, Hayravank, Sevan Lake, Sevanavank. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Норатус, Айраванк, Озеро Севан, Севанаванк. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Noratus, Hayravank, Sevan Lake, Sevanavank. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Noratus, Hayravank, Sevan Lake and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Норатус, Айраванк, Озеро Севан и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Noratus, Hayravank, Sevan Lake und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67499e6d3f6e4-noratus1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/67499e6d3f6e4-noratus1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 121,
+    priceForeignEUR: 121,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Noratus",
+        description: "Premium private stop at Noratus. Detailed exploration with your private team."
+      },
+      {
+        name: "Hayravank",
+        description: "Premium private stop at Hayravank. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevan Lake",
+        description: "Premium private stop at Sevan Lake. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 121
+  },
+
+  // Private Tour 149: Garni, Geghard, Azat Gorge, Sevan, Sevanavank, Tsaghkadzor Ski Resort, Kecharis
+  {
+    id: 149,
+    slug: "garni-geghard-sevan-lake-sevanavank-tsaghkadzor-kecharis-private",
+    name: {
+      en: "Garni, Geghard, Azat Gorge, Sevan, Sevanavank, Tsaghkadzor Ski Resort, Kecharis",
+      ru: "Гарни, Гегард, Азатское ущелье, Севан, Севанаванк, Цахкадзор, Кечарис",
+      de: "Garni, Geghard, Azat Gorge, Sevan, Sevanavank, Tsaghkadzor Ski Resort, Kecharis"
+    },
+    description: {
+      en: "Experience the ultimate comfort and flexibility with our private tour exploring the historical and natural gems of Garni, Geghard, Azat Gorge, Sevan, Sevanavank, Tsaghkadzor Ski Resort, Kecharis. Perfect for families, couples, or solo travelers who want to set their own pace, skip the crowds, and enjoy a personalized guide experience. This tour is fully customizable to your preferences, featuring private air-conditioned transport and dedicated support.",
+      ru: "Оцените максимальный комфорт и гибкость в нашем индивидуальном туре, исследующем исторические и природные жемчужины: Гарни, Гегард, Азатское ущелье, Севан, Севанаванк, Цахкадзор, Кечарис. Идеально подходит для семей, пар или индивидуальных путешественников, которые хотят задавать свой собственный темп, избегать толпы и наслаждаться индивидуальным обслуживанием на высшем уровне.",
+      de: "Erleben Sie ultimativen Komfort und Flexibilität auf unserer privaten Tour zu den historischen und natürlichen Höhepunkten von Garni, Geghard, Azat Gorge, Sevan, Sevanavank, Tsaghkadzor Ski Resort, Kecharis. Perfekt für Familien, Paare oder Alleinreisende, die ihr eigenes Tempo bestimmen, Menschenmassen vermeiden und eine personalisierte Führung in einem privaten, klimatisierten Fahrzeug genießen möchten."
+    },
+    shortDescription: {
+      en: "Exclusive private tour to Garni, Geghard, Azat Gorge and more. Premium service and custom itinerary.",
+      ru: "Эксклюзивный индивидуальный тур в Гарни, Гегард, Азатское ущелье и многое другое. Премиум-сервис.",
+      de: "Exklusive private Tour nach Garni, Geghard, Azat Gorge und mehr. Premium-Service und individueller Reiseverlauf."
+    },
+    image: "https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749a08713c1c-garni1.webp",
+    images: ["https://d23etkghwwc7sj.cloudfront.net/uploads/tour/images/6749a08713c1c-garni1.webp"],
+    duration: "full day",
+    startTime: "09:00",
+    endTime: "18:00",
+    startEndPoint: "Yerevan",
+    language: [
+      "Armenian",
+      "English",
+      "Russian",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Arabic",
+      "Chinese",
+      "Hindi"
+    ],
+    priceEUR: 127,
+    priceForeignEUR: 127,
+    category: "Nature",
+    region: "Gegharkunik",
+    route: [
+      {
+        name: "Garni",
+        description: "Premium private stop at Garni. Detailed exploration with your private team."
+      },
+      {
+        name: "Geghard",
+        description: "Premium private stop at Geghard. Detailed exploration with your private team."
+      },
+      {
+        name: "Azat Gorge",
+        description: "Premium private stop at Azat Gorge. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevan",
+        description: "Premium private stop at Sevan. Detailed exploration with your private team."
+      },
+      {
+        name: "Sevanavank",
+        description: "Premium private stop at Sevanavank. Detailed exploration with your private team."
+      },
+      {
+        name: "Tsaghkadzor Ski Resort",
+        description: "Premium private stop at Tsaghkadzor Ski Resort. Detailed exploration with your private team."
+      },
+      {
+        name: "Kecharis",
+        description: "Premium private stop at Kecharis. Detailed exploration with your private team."
+      }
+    ],
+    included: [
+      "Private professional driver",
+      "Air-conditioned luxury sedan or minivan",
+      "Hotel pickup and drop-off in Yerevan",
+      "Free WiFi on board",
+      "Bottled water",
+      "All local taxes"
+    ],
+    excluded: [
+      "Tour guide service (premium upgrade available)",
+      "Entrance tickets to historical sights",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    bestPeriod: "Year round",
+    groupSize: "1-3 guests (Sedan) / 4-6 guests (Minivan)",
+    featured: false,
+    streetViewUrl: "https://maps.google.com/maps?q=40.1772,44.5034&t=k&z=15&ie=UTF8&iwloc=&output=embed",
+    streetViewLocations: [{
+  name: "Yerevan Startup Point",
+  lat: 40.1772,
+  lng: 44.5034,
+  heading: 0,
+  pitch: 0
+}],
+    isPrivateOnly: true,
+    privateBasePriceEUR: 127
+  }
 ];
 
 // Helper: get featured tours
+// Helper: get group tours
+export function getGroupTours(): Tour[] {
+  return tours.filter((tour) => !tour.isPrivateOnly);
+}
+
+// Helper: get private tours
+export function getPrivateTours(): Tour[] {
+  return tours.filter((tour) => tour.isPrivateOnly);
+}
+
 export function getFeaturedTours(): Tour[] {
   return tours.filter((tour) => tour.featured);
 }

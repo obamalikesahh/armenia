@@ -80,6 +80,81 @@ const DAY_KEY_MAP: Record<string, string> = {
   Sunday: 'days.sunday',
 }
 
+const PRIVATE_GUIDE_SURCHARGES: Record<string, number> = {
+  none: 0,
+  armenian: 20,
+  english: 30,
+  russian: 30,
+  german: 40,
+  french: 40,
+  spanish: 40,
+  italian: 40,
+  arabic: 50,
+  chinese: 50,
+  hindi: 50,
+}
+
+const GUIDE_TRANSLATIONS: Record<string, Record<string, string>> = {
+  en: {
+    none: 'No Guide (Driver only)',
+    armenian: 'Armenian Guide',
+    english: 'English Guide',
+    russian: 'Russian Guide',
+    german: 'German Guide',
+    french: 'French Guide',
+    spanish: 'Spanish Guide',
+    italian: 'Italian Guide',
+    arabic: 'Arabic Guide',
+    chinese: 'Chinese Guide',
+    hindi: 'Hindi Guide',
+  },
+  de: {
+    none: 'Ohne Guide (Nur Fahrer)',
+    armenian: 'Armenischsprachiger Guide',
+    english: 'Englischsprachiger Guide',
+    russian: 'Russischsprachiger Guide',
+    german: 'Deutschsprachiger Guide',
+    french: 'Französischsprachiger Guide',
+    spanish: 'Spanischsprachiger Guide',
+    italian: 'Italienischsprachiger Guide',
+    arabic: 'Arabischsprachiger Guide',
+    chinese: 'Chinesischsprachiger Guide',
+    hindi: 'Hindi-sprechender Guide',
+  },
+  ru: {
+    none: 'Без гида (Только водитель)',
+    armenian: 'Армянский гид',
+    english: 'Английский гид',
+    russian: 'Русский гид',
+    german: 'Немецкий гид',
+    french: 'Французский гид',
+    spanish: 'Испанский гид',
+    italian: 'Итальянский гид',
+    arabic: 'Арабский гид',
+    chinese: 'Китайский гид',
+    hindi: 'Гид на хинди',
+  }
+}
+
+const BREAKDOWN_TRANSLATIONS: Record<string, Record<string, string>> = {
+  en: {
+    baseTour: 'Base Private Tour (Sedan, No Guide)',
+    vehicleUpgrade: 'Vehicle Upgrade',
+    guide: 'Guide',
+  },
+  de: {
+    baseTour: 'Private Basistour (Limousine, ohne Guide)',
+    vehicleUpgrade: 'Fahrzeug-Upgrade',
+    guide: 'Guide',
+  },
+  ru: {
+    baseTour: 'Индивидуальный базовый тур (Седан, без гида)',
+    vehicleUpgrade: 'Повышение класса автомобиля',
+    guide: 'Гид',
+  }
+}
+
+
 interface TourDetailModalProps {
   tour: Tour | null
   open: boolean
@@ -87,11 +162,12 @@ interface TourDetailModalProps {
   onReserve?: (tour: Tour, bookingData: BookingData) => void
   isLoggedIn?: boolean
   onLoginClick?: () => void
+  isPrivate?: boolean
 }
 
 export interface BookingData {
   date: Date | undefined
-  guideLanguage: 'armenian' | 'english-russian'
+  guideLanguage: string
   adults: number
   children: number
 }
@@ -105,12 +181,17 @@ export function TourDetailModal({
   onReserve,
   isLoggedIn = false,
   onLoginClick,
+  isPrivate = false,
 }: TourDetailModalProps) {
   const { locale, t } = useLocale()
   const [date, setDate] = useState<Date | undefined>(undefined)
   const [guideLanguage, setGuideLanguage] = useState<'armenian' | 'english-russian'>('armenian')
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
+  const [infants, setInfants] = useState(0)
+  const [vehicleType, setVehicleType] = useState<'sedan' | 'minivan' | 'minibus' | 'bus'>('sedan')
+  const [privateGuideLanguage, setPrivateGuideLanguage] = useState<'none' | 'armenian' | 'english' | 'russian' | 'german' | 'french' | 'spanish' | 'italian' | 'arabic' | 'chinese' | 'hindi'>('none')
+  const [privatePassengers, setPrivatePassengers] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isHoveringGallery, setIsHoveringGallery] = useState(false)
   const [activeTab, setActiveTab] = useState<ModalTab>('details')
@@ -118,9 +199,47 @@ export function TourDetailModal({
   const [availability, setAvailability] = useState<{ maxSeats: number; reservedSeats: number; availableSeats: number } | null>(null)
   const [reservationStatus, setReservationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [reservationError, setReservationError] = useState('')
-  const [isPrivate, setIsPrivate] = useState(false)
   const autoAdvanceRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const prevTourIdRef = useRef<number | undefined>(undefined)
+
+  const maxVehicleCapacity = useMemo(() => {
+    switch (vehicleType) {
+      case 'sedan': return 3
+      case 'minivan': return 6
+      case 'minibus': return 18
+      case 'bus': return 50
+    }
+  }, [vehicleType])
+
+  useEffect(() => {
+    if (isPrivate) {
+      const total = adults + children + infants
+      if (total > maxVehicleCapacity) {
+        let rem = total - maxVehicleCapacity
+        let newChildren = children
+        let newInfants = infants
+        let newAdults = adults
+        
+        if (rem > 0 && newChildren > 0) {
+          const diff = Math.min(rem, newChildren)
+          newChildren -= diff
+          rem -= diff
+        }
+        if (rem > 0 && newInfants > 0) {
+          const diff = Math.min(rem, newInfants)
+          newInfants -= diff
+          rem -= diff
+        }
+        if (rem > 0) {
+          newAdults = Math.max(1, newAdults - rem)
+        }
+        
+        setChildren(newChildren)
+        setInfants(newInfants)
+        setAdults(newAdults)
+      }
+    }
+  }, [isPrivate, maxVehicleCapacity, adults, children, infants])
 
   // Helpers to check tour names for scheduling rule tags
   const isTatev = useMemo(() => {
@@ -178,7 +297,6 @@ export function TourDetailModal({
     if (currentImageIndex !== 0) {
       setCurrentImageIndex(0)
     }
-    setIsPrivate(false)
   }
 
   const name = tour?.name[locale] || tour?.name.en || ''
@@ -190,10 +308,24 @@ export function TourDetailModal({
   }, [tour, guideLanguage])
 
   const totalPriceEUR = useMemo(() => {
-    const adultPrice = pricePerPersonEUR * adults
-    const childPrice = pricePerPersonEUR * 0.5 * children
-    return Math.round(adultPrice + childPrice)
-  }, [pricePerPersonEUR, adults, children])
+    if (!tour) return 0
+    if (isPrivate) {
+      const basePrivatePrice = tour.privateBasePriceEUR || Math.max(40, Math.round(tour.priceEUR * 3))
+      
+      let vehicleMultiplier = 1.0
+      if (vehicleType === 'minivan') vehicleMultiplier = 1.4
+      else if (vehicleType === 'minibus') vehicleMultiplier = 2.2
+      else if (vehicleType === 'bus') vehicleMultiplier = 3.8
+
+      const guideFee = PRIVATE_GUIDE_SURCHARGES[privateGuideLanguage] || 0
+
+      return Math.round(basePrivatePrice * vehicleMultiplier + guideFee)
+    } else {
+      const adultPrice = pricePerPersonEUR * adults
+      const childPrice = pricePerPersonEUR * 0.5 * children
+      return Math.round(adultPrice + childPrice)
+    }
+  }, [isPrivate, tour, vehicleType, privateGuideLanguage, pricePerPersonEUR, adults, children])
 
   const durationLabel = useMemo(() => {
     if (!tour) return ''
@@ -236,7 +368,7 @@ export function TourDetailModal({
       .catch(() => setAvailability(null))
   }, [tour, date])
 
-  const totalPeople = adults + children
+  const totalPeople = adults + children + infants
   const hasEnoughSeats = availability ? availability.availableSeats >= totalPeople : true
 
   // Auto-advance gallery
@@ -282,13 +414,16 @@ export function TourDetailModal({
     setGuideLanguage('armenian')
     setAdults(1)
     setChildren(0)
+    setInfants(0)
+    setVehicleType('sedan')
+    setPrivateGuideLanguage('none')
+    setPrivatePassengers(1)
     setCurrentImageIndex(0)
     setActiveTab('details')
     setSelectedLocationIdx(0)
     setAvailability(null)
     setReservationStatus('idle')
     setReservationError('')
-    setIsPrivate(false)
   }, [])
 
   const handleClose = useCallback((isOpen: boolean) => {
@@ -308,6 +443,13 @@ export function TourDetailModal({
     handleClose(isOpen)
   }, [tour?.id, handleClose])
 
+  const getGuideLabel = useCallback((guideKey: string) => {
+    const labels = GUIDE_TRANSLATIONS[locale] || GUIDE_TRANSLATIONS.en
+    const name = labels[guideKey] || guideKey
+    const charge = PRIVATE_GUIDE_SURCHARGES[guideKey] || 0
+    return charge > 0 ? `${name} (+€${charge})` : name
+  }, [locale])
+
   const handleReserve = async () => {
     if (!tour || !date) return
     if (!isLoggedIn) {
@@ -320,7 +462,6 @@ export function TourDetailModal({
 
     try {
       const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
-      // Get userId from localStorage for reliable user lookup
       let userId: string | undefined
       try {
         const userInfo = localStorage.getItem('user_info')
@@ -329,12 +470,19 @@ export function TourDetailModal({
           userId = parsed.id
         }
       } catch { /* ignore */ }
+      
       const getPrivateSuffix = () => {
-        if (locale === 'de') return ' (Privat)'
-        if (locale === 'ru') return ' (Индивидуальный)'
-        return ' (Private)'
+        const vehicleLabel = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)
+        const guideLabel = privateGuideLanguage === 'none' 
+          ? 'No Guide' 
+          : privateGuideLanguage.charAt(0).toUpperCase() + privateGuideLanguage.slice(1) + ' Guide'
+        return ` (Private Tour: ${vehicleLabel}, ${guideLabel})`
       }
       const tourNamePayload = isPrivate ? `${tour.name.en}${getPrivateSuffix()}` : tour.name.en
+
+      const guideLanguagePayload = isPrivate 
+        ? (privateGuideLanguage === 'none' ? 'No Guide (Driver only)' : `${privateGuideLanguage.charAt(0).toUpperCase() + privateGuideLanguage.slice(1)} (Private)`)
+        : guideLanguage
 
       const res = await fetch('/api/bookings', {
         method: 'POST',
@@ -346,7 +494,7 @@ export function TourDetailModal({
           tourId: String(tour.id),
           tourName: tourNamePayload,
           tourDate: date.toISOString().split('T')[0],
-          guideLanguage,
+          guideLanguage: guideLanguagePayload,
           adults,
           children,
           totalPriceEUR,
@@ -664,28 +812,6 @@ export function TourDetailModal({
                         </Badge>
                       </div>
 
-                      {/* Private Tour Toggle Switch */}
-                      <div className="flex items-center justify-between rounded-xl border border-border bg-secondary p-4 transition-all hover:bg-secondary/80">
-                        <div className="space-y-0.5 pr-2">
-                          <Label htmlFor="private-tour-toggle" className="text-sm font-semibold cursor-pointer text-foreground">
-                            {t('tours.wantPrivate')}
-                          </Label>
-                          <p className="text-xs text-muted-foreground leading-relaxed">
-                            {locale === 'de'
-                              ? 'Buchen Sie diese Tour als exklusive Privattour an jedem beliebigen Tag.'
-                              : locale === 'ru'
-                              ? 'Забронируйте эту экскурсию как индивидуальную в любой день.'
-                              : 'Book this tour as an exclusive private experience on any day of the week.'}
-                          </p>
-                        </div>
-                        <Switch
-                          id="private-tour-toggle"
-                          checked={isPrivate}
-                          onCheckedChange={setIsPrivate}
-                          className="data-[state=checked]:bg-primary shrink-0"
-                        />
-                      </div>
-
                       {/* Date picker */}
                       <div>
                         <Label className="mb-2 text-muted-foreground">
@@ -734,75 +860,205 @@ export function TourDetailModal({
                         </div>
                       )}
 
-                      {/* Guide language */}
-                      <div>
-                        <Label className="mb-3 text-muted-foreground">
-                          {t('booking.guideLanguage')}
-                        </Label>
-                        <RadioGroup
-                          value={guideLanguage}
-                          onValueChange={(val) => setGuideLanguage(val as 'armenian' | 'english-russian')}
-                          className="grid grid-cols-1 gap-3 sm:grid-cols-2"
-                        >
-                          <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
-                            guideLanguage === 'armenian'
-                              ? 'border-primary/30 bg-primary/8'
-                              : 'border-border bg-secondary hover:border-border'
-                          }`}>
-                            <RadioGroupItem value="armenian" id="armenian" />
-                            <Label htmlFor="armenian" className="cursor-pointer flex-1">
-                              <p className="font-medium text-foreground">{t('booking.armenianSpeaker')}</p>
-                              <p className="text-sm text-muted-foreground">
-                                {formatPrice(tour.priceEUR)} / {t('tours.perPerson')}
-                              </p>
+                      {isPrivate ? (
+                        <>
+                          {/* Vehicle Selection Grid */}
+                          <div className="space-y-2">
+                            <Label className="text-muted-foreground">
+                              {t('booking.vehicleCategory')}
                             </Label>
+                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                              {[
+                                { id: 'sedan', label: 'Sedan', seats: '1-3', base: 'Base' },
+                                { id: 'minivan', label: 'Minivan', seats: '4-6', base: '+40%' },
+                                { id: 'minibus', label: 'Minibus', seats: '7-18', base: '+120%' },
+                                { id: 'bus', label: 'Bus', seats: '19+', base: '+280%' }
+                              ].map((v) => (
+                                <button
+                                  key={v.id}
+                                  type="button"
+                                  onClick={() => setVehicleType(v.id as any)}
+                                  className={`flex flex-col items-center justify-center rounded-xl border p-3.5 transition-all text-center ${
+                                    vehicleType === v.id
+                                      ? 'border-primary/40 bg-primary/8 text-foreground'
+                                      : 'border-border bg-secondary hover:border-border hover:bg-white/[0.02] text-muted-foreground'
+                                  }`}
+                                >
+                                  <span className="text-sm font-bold block">{v.label}</span>
+                                  <span className="text-[10px] text-foreground/40 mt-1 block">{v.seats} seats</span>
+                                  <span className="text-[9px] text-primary/70 font-semibold mt-0.5 block">{v.base}</span>
+                                </button>
+                              ))}
+                            </div>
                           </div>
-                          <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
-                            guideLanguage === 'english-russian'
-                              ? 'border-primary/30 bg-primary/8'
-                              : 'border-border bg-secondary hover:border-border'
-                          }`}>
-                            <RadioGroupItem value="english-russian" id="english-russian" />
-                            <Label htmlFor="english-russian" className="cursor-pointer flex-1">
-                              <p className="font-medium text-foreground">{t('booking.englishRussianSpeaker')}</p>
-                              <p className="text-sm text-muted-foreground">
-                                {formatPrice(tour.priceForeignEUR)} / {t('tours.perPerson')}
-                              </p>
-                            </Label>
-                          </div>
-                        </RadioGroup>
-                      </div>
 
-                      {/* Adults / Children */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label className="mb-2 text-muted-foreground">{t('booking.adults')}</Label>
-                          <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
-                            <button onClick={() => setAdults(Math.max(1, adults - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
-                              <Minus className="size-4" />
-                            </button>
-                            <span className="flex-1 text-center font-semibold text-foreground">{adults}</span>
-                            <button onClick={() => setAdults(Math.min(20, adults + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
-                              <Plus className="size-4" />
-                            </button>
+                          {/* Guide Language Select Dropdown */}
+                          <div>
+                            <Label className="mb-2 text-muted-foreground block">
+                              {t('booking.guideLanguage')}
+                            </Label>
+                            <select
+                              value={privateGuideLanguage}
+                              onChange={(e) => setPrivateGuideLanguage(e.target.value as any)}
+                              className="w-full rounded-xl border border-border bg-secondary dark:bg-zinc-900 p-3 text-sm text-foreground/80 dark:text-white focus:border-primary/30 focus:outline-none"
+                            >
+                              {['none', 'armenian', 'english', 'russian', 'german', 'french', 'spanish', 'italian', 'arabic', 'chinese', 'hindi'].map((key) => (
+                                <option key={key} className="bg-white dark:bg-zinc-950 text-black dark:text-white" value={key}>
+                                  {getGuideLabel(key)}
+                                </option>
+                              ))}
+                            </select>
                           </div>
-                        </div>
-                        <div>
-                          <Label className="mb-2 text-muted-foreground">
-                            {t('booking.children')}
-                            <span className="ml-1 text-xs text-foreground/25">({t('booking.childrenDiscount')})</span>
-                          </Label>
-                          <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
-                            <button onClick={() => setChildren(Math.max(0, children - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
-                              <Minus className="size-4" />
-                            </button>
-                            <span className="flex-1 text-center font-semibold text-foreground">{children}</span>
-                            <button onClick={() => setChildren(Math.min(10, children + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
-                              <Plus className="size-4" />
-                            </button>
+
+                          {/* Tripartite Passenger Counters for Private Tour */}
+                          <div>
+                            <Label className="mb-2 text-muted-foreground flex justify-between items-center">
+                              <span>{t('booking.passengers')}</span>
+                              <span className="text-xs text-foreground/30">max {maxVehicleCapacity}</span>
+                            </Label>
+                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                              {/* Adults */}
+                              <div>
+                                <Label className="mb-2 text-muted-foreground flex flex-col gap-0.5">
+                                  <span className="text-xs font-semibold">{t('booking.adults')}</span>
+                                  <span className="text-[10px] text-foreground/30 font-normal">{t('booking.adultsBracket')}</span>
+                                </Label>
+                                <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                                  <button type="button" onClick={() => setAdults(Math.max(1, adults - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                    <Minus className="size-4" />
+                                  </button>
+                                  <span className="flex-1 text-center font-semibold text-foreground">{adults}</span>
+                                  <button type="button" onClick={() => setAdults(adults + 1)} disabled={adults + children + infants >= maxVehicleCapacity} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60 disabled:opacity-30">
+                                    <Plus className="size-4" />
+                                  </button>
+                                </div>
+                              </div>
+                              {/* Children */}
+                              <div>
+                                <Label className="mb-2 text-muted-foreground flex flex-col gap-0.5">
+                                  <span className="text-xs font-semibold">{t('booking.children')}</span>
+                                  <span className="text-[10px] text-primary/60 font-medium">{t('booking.childrenBracket')}</span>
+                                </Label>
+                                <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                                  <button type="button" onClick={() => setChildren(Math.max(0, children - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                    <Minus className="size-4" />
+                                  </button>
+                                  <span className="flex-1 text-center font-semibold text-foreground">{children}</span>
+                                  <button type="button" onClick={() => setChildren(children + 1)} disabled={adults + children + infants >= maxVehicleCapacity} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60 disabled:opacity-30">
+                                    <Plus className="size-4" />
+                                  </button>
+                                </div>
+                              </div>
+                              {/* Infants */}
+                              <div>
+                                <Label className="mb-2 text-muted-foreground flex flex-col gap-0.5">
+                                  <span className="text-xs font-semibold">{t('booking.infants')}</span>
+                                  <span className="text-[10px] text-green-400/60 font-medium">{t('booking.infantsBracket')}</span>
+                                </Label>
+                                <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                                  <button type="button" onClick={() => setInfants(Math.max(0, infants - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                    <Minus className="size-4" />
+                                  </button>
+                                  <span className="flex-1 text-center font-semibold text-foreground">{infants}</span>
+                                  <button type="button" onClick={() => setInfants(infants + 1)} disabled={adults + children + infants >= maxVehicleCapacity} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60 disabled:opacity-30">
+                                    <Plus className="size-4" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
+                        </>
+                      ) : (
+                        <>
+                          {/* Guide language */}
+                          <div>
+                            <Label className="mb-3 text-muted-foreground">
+                              {t('booking.guideLanguage')}
+                            </Label>
+                            <RadioGroup
+                              value={guideLanguage}
+                              onValueChange={(val) => setGuideLanguage(val as 'armenian' | 'english-russian')}
+                              className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+                            >
+                              <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
+                                guideLanguage === 'armenian'
+                                  ? 'border-primary/30 bg-primary/8'
+                                  : 'border-border bg-secondary hover:border-border'
+                              }`}>
+                                <RadioGroupItem value="armenian" id="armenian" />
+                                <Label htmlFor="armenian" className="cursor-pointer flex-1">
+                                  <p className="font-medium text-foreground">{t('booking.armenianSpeaker')}</p>
+                                  <p className="text-sm text-muted-foreground">
+                                    {formatPrice(tour.priceEUR)} / {t('tours.perPerson')}
+                                  </p>
+                                </Label>
+                              </div>
+                              <div className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
+                                guideLanguage === 'english-russian'
+                                  ? 'border-primary/30 bg-primary/8'
+                                  : 'border-border bg-secondary hover:border-border'
+                              }`}>
+                                <RadioGroupItem value="english-russian" id="english-russian" />
+                                <Label htmlFor="english-russian" className="cursor-pointer flex-1">
+                                  <p className="font-medium text-foreground">{t('booking.englishRussianSpeaker')}</p>
+                                  <p className="text-sm text-muted-foreground">
+                                    {formatPrice(tour.priceForeignEUR)} / {t('tours.perPerson')}
+                                  </p>
+                                </Label>
+                              </div>
+                            </RadioGroup>
+                          </div>
+
+                          {/* Adults / Children / Infants counters */}
+                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                            <div>
+                              <Label className="mb-2 text-muted-foreground flex flex-col gap-0.5">
+                                <span className="text-xs font-semibold">{t('booking.adults')}</span>
+                                <span className="text-[10px] text-foreground/30 font-normal">{t('booking.adultsBracket')}</span>
+                              </Label>
+                              <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                                <button type="button" onClick={() => setAdults(Math.max(1, adults - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                  <Minus className="size-4" />
+                                </button>
+                                <span className="flex-1 text-center font-semibold text-foreground">{adults}</span>
+                                <button type="button" onClick={() => setAdults(Math.min(20, adults + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                  <Plus className="size-4" />
+                                </button>
+                              </div>
+                            </div>
+                            <div>
+                              <Label className="mb-2 text-muted-foreground flex flex-col gap-0.5">
+                                <span className="text-xs font-semibold">{t('booking.children')}</span>
+                                <span className="text-[10px] text-primary/60 font-medium">{t('booking.childrenBracket')}</span>
+                              </Label>
+                              <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                                <button type="button" onClick={() => setChildren(Math.max(0, children - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                  <Minus className="size-4" />
+                                </button>
+                                <span className="flex-1 text-center font-semibold text-foreground">{children}</span>
+                                <button type="button" onClick={() => setChildren(Math.min(10, children + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                  <Plus className="size-4" />
+                                </button>
+                              </div>
+                            </div>
+                            <div>
+                              <Label className="mb-2 text-muted-foreground flex flex-col gap-0.5">
+                                <span className="text-xs font-semibold">{t('booking.infants')}</span>
+                                <span className="text-[10px] text-green-400/60 font-medium">{t('booking.infantsBracket')}</span>
+                              </Label>
+                              <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-2">
+                                <button type="button" onClick={() => setInfants(Math.max(0, infants - 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                  <Minus className="size-4" />
+                                </button>
+                                <span className="flex-1 text-center font-semibold text-foreground">{infants}</span>
+                                <button type="button" onClick={() => setInfants(Math.min(10, infants + 1))} className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground/60">
+                                  <Plus className="size-4" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )}
 
                       {/* Price breakdown */}
                       <div className="rounded-xl border border-primary/15 bg-primary/3 p-4">
@@ -810,23 +1066,74 @@ export function TourDetailModal({
                           {t('booking.priceBreakdown')}
                         </h4>
                         <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-muted-foreground">
-                              {adults} x {t('booking.adults')} ({formatPrice(pricePerPersonEUR)})
-                            </span>
-                            <span className="text-foreground/70">
-                              {formatPrice(pricePerPersonEUR * adults)}
-                            </span>
-                          </div>
-                          {children > 0 && (
-                            <div className="flex justify-between text-sm">
-                              <span className="text-muted-foreground">
-                                {children} x {t('booking.children')} ({t('booking.childrenDiscount')})
-                              </span>
-                              <span className="text-foreground/70">
-                                {formatPrice(Math.round(pricePerPersonEUR * 0.5 * children))}
-                              </span>
-                            </div>
+                          {isPrivate ? (
+                            <>
+                              <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">
+                                  {(BREAKDOWN_TRANSLATIONS[locale] || BREAKDOWN_TRANSLATIONS.en).baseTour}
+                                </span>
+                                <span className="text-foreground/70">
+                                  {formatPrice(tour.privateBasePriceEUR || Math.max(40, Math.round(tour.priceEUR * 3)))}
+                                </span>
+                              </div>
+                              {vehicleType !== 'sedan' && (
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">
+                                    {(BREAKDOWN_TRANSLATIONS[locale] || BREAKDOWN_TRANSLATIONS.en).vehicleUpgrade} ({vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)})
+                                  </span>
+                                  <span className="text-foreground/70">
+                                    + {vehicleType === 'minivan' ? '40%' : vehicleType === 'minibus' ? '120%' : '280%'}
+                                  </span>
+                                </div>
+                              )}
+                              {privateGuideLanguage !== 'none' && (
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">
+                                    {(BREAKDOWN_TRANSLATIONS[locale] || BREAKDOWN_TRANSLATIONS.en).guide}: {(GUIDE_TRANSLATIONS[locale] || GUIDE_TRANSLATIONS.en)[privateGuideLanguage]}
+                                  </span>
+                                  <span className="text-foreground/70">
+                                    + {formatPrice(PRIVATE_GUIDE_SURCHARGES[privateGuideLanguage] || 0)}
+                                  </span>
+                                </div>
+                              )}
+                              <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">
+                                  {adults} {t('booking.adults')}{children > 0 ? ` + ${children} ${t('booking.children')}` : ''}{infants > 0 ? ` + ${infants} ${t('booking.infants')}` : ''}
+                                </span>
+                                <span className="text-foreground/40 text-xs">{t('booking.passengers')}: {adults + children + infants}</span>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">
+                                  {adults} x {t('booking.adults')} ({formatPrice(pricePerPersonEUR)})
+                                </span>
+                                <span className="text-foreground/70">
+                                  {formatPrice(pricePerPersonEUR * adults)}
+                                </span>
+                              </div>
+                              {children > 0 && (
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">
+                                    {children} x {t('booking.children')} ({t('booking.childrenDiscount')})
+                                  </span>
+                                  <span className="text-foreground/70">
+                                    {formatPrice(Math.round(pricePerPersonEUR * 0.5 * children))}
+                                  </span>
+                                </div>
+                              )}
+                              {infants > 0 && (
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">
+                                    {infants} x {t('booking.infants')}
+                                  </span>
+                                  <span className="text-green-400 font-semibold">
+                                    {locale === 'de' ? 'Kostenlos' : locale === 'ru' ? 'Бесплатно' : 'Free'}
+                                  </span>
+                                </div>
+                              )}
+                            </>
                           )}
                           <Separator className="bg-secondary" />
                           <div className="flex justify-between">
@@ -857,6 +1164,7 @@ export function TourDetailModal({
 
                       {/* Reserve button */}
                       <Button
+                        type="button"
                         onClick={handleReserve}
                         disabled={!date || !hasEnoughSeats || reservationStatus === 'loading'}
                         className="w-full bg-primary text-primary-foreground font-medium shadow-lg transition-all duration-300 hover:bg-primary/80 hover:shadow-primary/10 disabled:opacity-50"

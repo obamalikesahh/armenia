@@ -20,6 +20,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { TourCard } from '@/components/tours/tour-card'
@@ -34,6 +35,8 @@ import { ScrollToTop } from '@/components/ui/scroll-to-top'
 import {
   tours,
   getFeaturedTours,
+  getGroupTours,
+  getPrivateTours,
   type Tour,
 } from '@/lib/tours-data'
 import { luxuryTours as luxuryToursData, type LuxuryTour } from '@/lib/luxury-tours-data'
@@ -112,6 +115,7 @@ export default function Home() {
   // --- State ---
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
+  const [isBookingPrivate, setIsBookingPrivate] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
   const [authTab, setAuthTab] = useState<'login' | 'register'>('login')
@@ -121,7 +125,8 @@ export default function Home() {
     duration: 'all',
     search: '',
   })
-  const [displayCount, setDisplayCount] = useState(9)
+  const [groupDisplayCount, setGroupDisplayCount] = useState(9)
+  const [privateDisplayCount, setPrivateDisplayCount] = useState(9)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false)
   const [selectedLuxuryTour, setSelectedLuxuryTour] = useState<LuxuryTour | null>(null)
@@ -150,8 +155,11 @@ export default function Home() {
   }, [isPaused])
 
   // --- Filtered tours ---
-  const filteredTours = useMemo(() => {
-    return tours.filter((tour) => {
+  const groupToursData = useMemo(() => getGroupTours(), [])
+  const privateToursData = useMemo(() => getPrivateTours(), [])
+
+  const filteredGroupTours = useMemo(() => {
+    return groupToursData.filter((tour) => {
       if (filters.category !== 'all' && tour.category !== filters.category) return false
       if (filters.region !== 'all' && tour.region !== filters.region) return false
       if (filters.duration !== 'all') {
@@ -169,18 +177,42 @@ export default function Home() {
       }
       return true
     })
-  }, [filters])
+  }, [groupToursData, filters])
 
-  const displayedTours = useMemo(() => filteredTours.slice(0, displayCount), [filteredTours, displayCount])
+  const filteredPrivateTours = useMemo(() => {
+    return privateToursData.filter((tour) => {
+      if (filters.category !== 'all' && tour.category !== filters.category) return false
+      if (filters.region !== 'all' && tour.region !== filters.region) return false
+      if (filters.duration !== 'all') {
+        if (filters.duration === 'half day' && tour.duration !== 'half day') return false
+        if (filters.duration === 'full day' && tour.duration !== 'full day') return false
+        if (filters.duration === 'multi-day' && !tour.duration.includes('day')) return false
+        if (filters.duration === 'multi-day' && (tour.duration === 'half day' || tour.duration === 'full day')) return false
+      }
+      if (filters.search) {
+        const q = filters.search.toLowerCase()
+        const nameMatch = tour.name.en.toLowerCase().includes(q) || tour.name.ru.toLowerCase().includes(q) || tour.name.de.toLowerCase().includes(q)
+        const regionMatch = tour.region.toLowerCase().includes(q)
+        const categoryMatch = tour.category.toLowerCase().includes(q)
+        if (!nameMatch && !regionMatch && !categoryMatch) return false
+      }
+      return true
+    })
+  }, [privateToursData, filters])
+
+  const displayedGroupTours = useMemo(() => filteredGroupTours.slice(0, groupDisplayCount), [filteredGroupTours, groupDisplayCount])
+  const displayedPrivateTours = useMemo(() => filteredPrivateTours.slice(0, privateDisplayCount), [filteredPrivateTours, privateDisplayCount])
 
   // --- Handlers ---
-  const handleBookNow = useCallback((tour: Tour) => {
+  const handleBookNow = useCallback((tour: Tour, isPrivate: boolean = false) => {
     setSelectedTour(tour)
+    setIsBookingPrivate(isPrivate)
     setIsDetailModalOpen(true)
   }, [])
 
-  const handleSelectTour = useCallback((tour: Tour) => {
+  const handleSelectTour = useCallback((tour: Tour, isPrivate: boolean = false) => {
     setSelectedTour(tour)
+    setIsBookingPrivate(isPrivate)
     setIsDetailModalOpen(true)
   }, [])
 
@@ -246,7 +278,8 @@ export default function Home() {
 
   const setFilters = useCallback((newFilters: TourFiltersState) => {
     setFiltersRaw(newFilters)
-    setDisplayCount(9)
+    setGroupDisplayCount(9)
+    setPrivateDisplayCount(9)
   }, [])
 
   return (
@@ -314,7 +347,12 @@ export default function Home() {
             >
               {featuredTours.map((tour) => (
                 <div key={tour.id} className="w-[300px] shrink-0 sm:w-[340px]">
-                  <TourCard tour={tour} onBookNow={handleBookNow} onSelect={handleSelectTour} />
+                  <TourCard
+                    tour={tour}
+                    isPrivate={false}
+                    onBookNow={handleBookNow}
+                    onSelect={handleSelectTour}
+                  />
                 </div>
               ))}
             </div>
@@ -334,57 +372,149 @@ export default function Home() {
       </AnimatedSection>
 
       {/* ═══════════════════════════════════════════
-          SECTION 3: ALL TOURS (FILTERABLE GRID)
+          SECTION 3: TOURS & EXPERIENCES (FILTERABLE GRIDS)
           ═══════════════════════════════════════════ */}
       <AnimatedSection className="relative py-20" id="tours">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="mb-10 text-center">
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
+          <motion.div variants={fadeUp} className="mb-10 flex flex-col items-center">
+            <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl mb-4 text-center">
               {t('tours.allTours')}
             </h2>
-            <div className="mx-auto mt-4 h-px w-10 bg-primary/30" />
+            <p className="max-w-xl text-center text-sm text-muted-foreground mb-6">
+              Browse our diverse offerings. Use the filters below to narrow down your search by category, region, or duration.
+            </p>
+            <div className="mx-auto h-px w-12 bg-primary/30 mb-8" />
           </motion.div>
 
-          <motion.div variants={fadeUp} className="mb-8">
+          <motion.div variants={fadeUp} className="mb-16">
             <TourFilters filters={filters} onFiltersChange={setFilters} />
           </motion.div>
 
-          {filteredTours.length === 0 ? (
-            <motion.div variants={fadeIn} className="py-20 text-center">
-              <Mountain className="mx-auto mb-4 size-10 text-foreground/10" />
-              <p className="text-sm text-muted-foreground">{t('tours.noResults')}</p>
+          {/* ─── GROUP TOURS SECTION ─── */}
+          <div id="group-tours" className="scroll-mt-20 mb-24">
+            <motion.div variants={fadeUp} className="mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-border/40 pb-4">
+                <div>
+                  <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                    {t('nav.groupTours')}
+                  </h3>
+                  <p className="mt-1.5 text-xs text-muted-foreground max-w-xl">
+                    {t('tours.groupSubtitle')}
+                  </p>
+                </div>
+                <Badge variant="outline" className="mt-2 sm:mt-0 w-fit border-primary/20 bg-primary/5 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+                  {filteredGroupTours.length} {t('tours.toursAvailable')}
+                </Badge>
+              </div>
             </motion.div>
-          ) : (
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {displayedTours.map((tour, i) => (
-                <motion.div
-                  key={tour.id}
-                  variants={fadeUp}
-                  transition={{ delay: i * 0.04 }}
-                >
-                  <TourCard tour={tour} onBookNow={handleBookNow} onSelect={handleSelectTour} />
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
 
-          {filteredTours.length > displayCount && (
-            <motion.div variants={fadeUp} className="mt-10 text-center">
-              <Button
-                onClick={() => setDisplayCount((prev) => prev + 6)}
-                variant="outline"
-                size="lg"
-                className="border-border bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground/60 rounded-full px-6"
-              >
-                {t('common.more')} {t('tours.title')}
-              </Button>
+            {filteredGroupTours.length === 0 ? (
+              <motion.div variants={fadeIn} className="py-12 text-center border border-dashed border-border/40 rounded-2xl bg-secondary/10">
+                <Mountain className="mx-auto mb-3 size-8 text-foreground/10" />
+                <p className="text-xs text-muted-foreground">{t('tours.noResults')}</p>
+              </motion.div>
+            ) : (
+              <>
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                >
+                  {displayedGroupTours.map((tour, i) => (
+                    <motion.div
+                      key={tour.id}
+                      variants={fadeUp}
+                      transition={{ delay: i * 0.03 }}
+                    >
+                      <TourCard
+                        tour={tour}
+                        isPrivate={false}
+                        onBookNow={handleBookNow}
+                        onSelect={handleSelectTour}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {filteredGroupTours.length > groupDisplayCount && (
+                  <motion.div variants={fadeUp} className="mt-10 text-center">
+                    <Button
+                      onClick={() => setGroupDisplayCount((prev) => prev + 6)}
+                      variant="outline"
+                      size="sm"
+                      className="border-border bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground/60 rounded-full px-6"
+                    >
+                      {t('common.more')} {t('nav.groupTours')}
+                    </Button>
+                  </motion.div>
+                )}
+              </>
+            )}
+          </div>
+
+          {/* ─── PRIVATE TOURS SECTION ─── */}
+          <div id="private-tours" className="scroll-mt-20">
+            <motion.div variants={fadeUp} className="mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-border/40 pb-4">
+                <div>
+                  <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                    {t('nav.privateTours')}
+                  </h3>
+                  <p className="mt-1.5 text-xs text-muted-foreground max-w-xl">
+                    {t('tours.privateSubtitle')}
+                  </p>
+                </div>
+                <Badge variant="outline" className="mt-2 sm:mt-0 w-fit border-primary/20 bg-primary/5 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+                  {filteredPrivateTours.length} {t('tours.toursAvailable')}
+                </Badge>
+              </div>
             </motion.div>
-          )}
+
+            {filteredPrivateTours.length === 0 ? (
+              <motion.div variants={fadeIn} className="py-12 text-center border border-dashed border-border/40 rounded-2xl bg-secondary/10">
+                <Mountain className="mx-auto mb-3 size-8 text-foreground/10" />
+                <p className="text-xs text-muted-foreground">{t('tours.noResults')}</p>
+              </motion.div>
+            ) : (
+              <>
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                >
+                  {displayedPrivateTours.map((tour, i) => (
+                    <motion.div
+                      key={tour.id}
+                      variants={fadeUp}
+                      transition={{ delay: i * 0.03 }}
+                    >
+                      <TourCard
+                        tour={tour}
+                        isPrivate={true}
+                        onBookNow={handleBookNow}
+                        onSelect={handleSelectTour}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {filteredPrivateTours.length > privateDisplayCount && (
+                  <motion.div variants={fadeUp} className="mt-10 text-center">
+                    <Button
+                      onClick={() => setPrivateDisplayCount((prev) => prev + 6)}
+                      variant="outline"
+                      size="sm"
+                      className="border-border bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground/60 rounded-full px-6"
+                    >
+                      {t('common.more')} {t('nav.privateTours')}
+                    </Button>
+                  </motion.div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </AnimatedSection>
 
@@ -536,6 +666,7 @@ export default function Home() {
       <TourDetailModal
         tour={selectedTour}
         open={isDetailModalOpen && selectedTour !== null}
+        isPrivate={isBookingPrivate}
         onOpenChange={(open) => {
           if (!open) {
             setIsDetailModalOpen(false)

@@ -8,7 +8,7 @@ const SMTP_USER = process.env.SMTP_USER || 'thebeautyofarmenia@gmail.com'
 const SMTP_PASS = process.env.SMTP_PASS || ''
 
 const FROM_EMAIL = `"The Beauty of Armenia" <${SMTP_USER}>`
-const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'incoming@onewaytour.com', 'caxkal22@gmail.com']
+const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
 
 export const DISCOUNT_CODE = 'Armen5'
 
@@ -161,12 +161,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">5% off when you pay in person at the office</p>
           </div>
-          <!-- Contact Information Box -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: left;">
-            <p style="color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">OneWay Tour Contact Details</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Phone:</strong> +374 41 362 131</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Email:</strong> incoming@onewaytour.com</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;"><strong style="color: rgba(255,255,255,0.7);">Office Location:</strong> Parpetsi 16, Yerevan, Armenia</p>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; margin: 0 0 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Need Help? Contact OneWay Tour</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Address:</strong> 16 Parpetsi St, Yerevan, Armenia</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Phone:</strong> +374 41 362 131</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;"><strong style="color: rgba(255,255,255,0.7);">Email:</strong> onewaytour@incoming.com</p>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Pay in person at the OneWay Tour office in Yerevan. Show this email to get your discount. Free cancellation within 24 hours.</p>
         </div>
@@ -200,12 +199,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">Скидка 5% при оплате в офисе</p>
           </div>
-          <!-- Блок контактной информации -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: left;">
-            <p style="color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">Контакты OneWay Tour</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Телефон:</strong> +374 41 362 131</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Email:</strong> incoming@onewaytour.com</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;"><strong style="color: rgba(255,255,255,0.7);">Адрес офиса:</strong> ул. Парпеци 16, Ереван, Армения</p>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; margin: 0 0 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Нужна помощь? Свяжитесь с OneWay Tour</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Адрес:</strong> ул. Парпеци 16, Ереван, Армения</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Телефон:</strong> +374 41 362 131</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;"><strong style="color: rgba(255,255,255,0.7);">Email:</strong> onewaytour@incoming.com</p>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Оплата наличными в офисе OneWay Tour в Ереване. Покажите это письмо для получения скидки. Бесплатная отмена в течение 24 часов.</p>
         </div>
@@ -239,12 +237,11 @@ const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string
             <p style="color: #94A3B8; font-size: 28px; font-weight: 700; letter-spacing: 0.2em; margin: 0 0 6px;">${d.discountCode}</p>
             <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin: 0;">5% Rabatt bei Zahlung im Büro</p>
           </div>
-          <!-- Kontaktinformationen-Box -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: left;">
-            <p style="color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">OneWay Tour Kontaktdaten</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Telefon:</strong> +374 41 362 131</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">E-Mail:</strong> incoming@onewaytour.com</p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;"><strong style="color: rgba(255,255,255,0.7);">Büro-Standort:</strong> Parpetsi 16, Jerevan, Armenien</p>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; margin: 0 0 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Brauchen Sie Hilfe? Kontaktieren Sie OneWay Tour</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Adresse:</strong> Parpetsi Str. 16, Jerewan, Armenien</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0 0 6px;"><strong style="color: rgba(255,255,255,0.7);">Telefon:</strong> +374 41 362 131</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;"><strong style="color: rgba(255,255,255,0.7);">E-Mail:</strong> onewaytour@incoming.com</p>
           </div>
           <p style="color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; margin: 0;">Zahlung vor Ort im OneWay Tour-Büro in Jerevan. Zeigen Sie diese E-Mail für den Rabatt. Kostenlose Stornierung innerhalb von 24 Stunden.</p>
         </div>

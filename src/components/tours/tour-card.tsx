@@ -13,8 +13,9 @@ import { useLocale } from '@/hooks/use-locale'
 
 interface TourCardProps {
   tour: Tour
-  onBookNow?: (tour: Tour) => void
-  onSelect?: (tour: Tour) => void
+  isPrivate?: boolean
+  onBookNow?: (tour: Tour, isPrivate: boolean) => void
+  onSelect?: (tour: Tour, isPrivate: boolean) => void
 }
 
 // Map region names to translation keys
@@ -44,7 +45,7 @@ const CATEGORY_KEY_MAP: Record<string, string> = {
   Wellness: 'categories.wellness',
 }
 
-export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
+export function TourCard({ tour, isPrivate = false, onBookNow, onSelect }: TourCardProps) {
   const { locale, t } = useLocale()
 
   const getRegionTranslation = (region: string) => {
@@ -110,7 +111,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
   const handleImageClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (images.length <= 1) {
-        onSelect?.(tour)
+        onSelect?.(tour, isPrivate)
         return
       }
       const rect = e.currentTarget.getBoundingClientRect()
@@ -222,7 +223,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
               variant="outline"
               className="border-border bg-background/50 text-foreground/60 backdrop-blur-sm"
             >
-              {getCategoryTranslation(tour.category)}
+              {isPrivate ? t('nav.privateTours') : getCategoryTranslation(tour.category)}
             </Badge>
           </div>
 
@@ -238,7 +239,7 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
           {/* Tour name */}
           <h3
             className="mb-1.5 line-clamp-2 cursor-pointer text-base font-semibold text-foreground transition-colors hover:text-primary sm:text-lg"
-            onClick={() => onSelect?.(tour)}
+            onClick={() => onSelect?.(tour, isPrivate)}
           >
             {name}
           </h3>
@@ -250,29 +251,42 @@ export function TourCard({ tour, onBookNow, onSelect }: TourCardProps) {
 
           {/* Prices */}
           <div className="mb-4 flex flex-col gap-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-muted-foreground">
-                {t('tours.armenianGuide')}
-              </span>
-              <span className="text-sm font-semibold text-primary">
-                {t('common.from')} {formatPrice(priceEUR)}
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-muted-foreground">
-                {t('tours.englishGuide')}
-              </span>
-              <span className="text-sm font-semibold text-foreground/60">
-                {t('common.from')} {formatPrice(priceForeignEUR)}
-              </span>
-            </div>
+            {isPrivate ? (
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">
+                  Sedan (1-3 {t('booking.passengers').toLowerCase()})
+                </span>
+                <span className="text-sm font-semibold text-primary">
+                  {t('common.from')} {formatPrice(tour.privateBasePriceEUR || Math.max(40, Math.round(priceEUR * 3)))} <span className="text-xs font-normal text-muted-foreground">/ {t('tours.perVehicle')}</span>
+                </span>
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">
+                    {t('tours.armenianGuide')}
+                  </span>
+                  <span className="text-sm font-semibold text-primary">
+                    {t('common.from')} {formatPrice(priceEUR)}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">
+                    {t('tours.englishGuide')}
+                  </span>
+                  <span className="text-sm font-semibold text-foreground/60">
+                    {t('common.from')} {formatPrice(priceForeignEUR)}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Reserve Now button */}
           <Button
             onClick={(e) => {
               e.stopPropagation()
-              onBookNow?.(tour)
+              onBookNow?.(tour, isPrivate)
             }}
             className="mt-auto w-full bg-primary text-primary-foreground font-medium shadow-lg transition-all duration-300 hover:bg-primary/80 hover:shadow-primary/10 rounded-xl"
           >

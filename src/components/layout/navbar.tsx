@@ -34,16 +34,16 @@ interface NavbarProps {
   userName?: string
   onLogout?: () => void
   onProfileClick?: () => void
+  onTabChange?: (tab: 'group' | 'private') => void
 }
 
 const NAV_LINKS = [
   { key: 'nav.home', href: '#home' },
-  { key: 'nav.tours', href: '#tours' },
+  { key: 'nav.groupTours', href: '#group-tours', tab: 'group' },
+  { key: 'nav.privateTours', href: '#private-tours', tab: 'private' },
   { key: 'nav.about', href: '#about' },
   { key: 'nav.contact', href: '#contact' },
 ] as const
-
-
 
 export function Navbar({
   onLoginClick,
@@ -52,6 +52,7 @@ export function Navbar({
   userName,
   onLogout,
   onProfileClick,
+  onTabChange,
 }: NavbarProps) {
   const { locale, setLocale, t } = useLocale()
   const { theme } = useTheme()
@@ -102,7 +103,12 @@ export function Navbar({
             <a
               key={link.key}
               href={link.href}
-              onClick={() => setActiveLink(link.key)}
+              onClick={() => {
+                setActiveLink(link.key)
+                if ('tab' in link && link.tab) {
+                  onTabChange?.(link.tab)
+                }
+              }}
               className={`relative px-3 py-2 text-[13px] font-semibold transition-colors ${
                 useContrast ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'
               }`}
@@ -254,6 +260,9 @@ export function Navbar({
                         onClick={() => {
                           setActiveLink(link.key)
                           setMobileOpen(false)
+                          if ('tab' in link && link.tab) {
+                            onTabChange?.(link.tab)
+                          }
                         }}
                         className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                           activeLink === link.key
