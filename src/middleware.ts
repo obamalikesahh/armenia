@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
   }
 
   // 2. Basic IP Rate Limiting
-  const ip = request.ip ?? request.headers.get('x-forwarded-for') ?? 'unknown';
+  const ip = request.headers.get('x-forwarded-for') ?? request.headers.get('x-real-ip') ?? 'unknown';
   
   if (ip !== 'unknown') {
     const now = Date.now();
