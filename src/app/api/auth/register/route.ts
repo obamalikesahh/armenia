@@ -4,7 +4,7 @@ import { hashPassword } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password, firstName, lastName, phone, emailVerified } =
+    let { email, password, firstName, lastName, phone, emailVerified } =
       await request.json()
 
     // Validate required fields (phone is now required)
@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    password = password.trim()
 
     // Check that emailVerified flag is provided
     if (emailVerified !== true) {

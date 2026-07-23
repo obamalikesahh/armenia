@@ -4,7 +4,7 @@ import { verifyPassword, createToken } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json()
+    let { email, password } = await request.json()
 
     if (!email || !password) {
       return NextResponse.json(
@@ -12,10 +12,14 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+    
+    password = password.trim()
+
+    const normalizedEmail = email.toLowerCase().trim()
 
     // Find user by email
     const user = await db.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     })
 
     if (!user) {

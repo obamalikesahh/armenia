@@ -4,7 +4,7 @@ import { Resend } from 'resend'
 const OWNER_EMAIL = 'caxkal22@gmail.com'
 const DISCOUNT_CODE = 'Armen5'
 const DISCOUNT_PERCENT = 5
-const FROM_EMAIL = 'OneWay Tour Armenia <onewaytour@resend.dev>'
+const FROM_EMAIL = 'OneWay Tour Armenia <info@armenien-tours.com>'
 
 // Resend client (API-based, no SMTP needed)
 const getResend = () => {
@@ -504,7 +504,12 @@ function getOwnerCancellationHTML(data: EmailBookingData): string {
 
 // ─── Send Confirmation Emails ───
 export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
-  const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
+  const envAdminEmails = process.env.ADMIN_NOTIFICATION_EMAILS 
+    ? process.env.ADMIN_NOTIFICATION_EMAILS.split(',').map(e => e.trim()) 
+    : []
+  const ADMIN_EMAILS = envAdminEmails.length > 0 
+    ? envAdminEmails 
+    : ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
 
   // Send to customer
   await sendEmail({
@@ -532,7 +537,12 @@ export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' 
 
 // ─── Send Cancellation Emails ───
 export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
-  const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
+  const envAdminEmails = process.env.ADMIN_NOTIFICATION_EMAILS 
+    ? process.env.ADMIN_NOTIFICATION_EMAILS.split(',').map(e => e.trim()) 
+    : []
+  const ADMIN_EMAILS = envAdminEmails.length > 0 
+    ? envAdminEmails 
+    : ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
 
   // Send to customer
   await sendEmail({
