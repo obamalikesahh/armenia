@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { sendVerificationCodeEmail } from '@/lib/email'
 
+import { isValidEmail, isHoneypotTriggered, isRateLimited, getClientIp } from '@/lib/security'
+
 function generate6DigitCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString()
 }
@@ -13,10 +15,27 @@ const isDevMode = () => {
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, lang = 'en' } = await request.json()
+    const body = await request.json()
+    const { email, lang = 'en' } = body
 
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 })
+    // 1. Honeypot check
+    if (isHoneypotTriggered(body)) {
+      console.warn('[Security] Verify-send honeypot triggered')
+      return NextResponse.json({ message: 'Verification code sent to your email', emailSent: true }, { status: 200 })
+    }
+
+    // 2. Validate email presence & syntax
+    if (!email || typeof email !== 'string' || !isValidEmail(email)) {
+      return NextResponse.json({ error: 'Valid email address is required' }, { status: 400 })
+    }
+
+    // 3. IP Rate limiting (5 verification requests per 10 mins per IP)
+    const clientIp = getClientIp(request)
+    if (isRateLimited(clientIp, 'auth_verify_send', 5, 10 * 60 * 1000)) {
+      return NextResponse.json(
+        { error: 'Too many verification requests. Please try again later.' },
+        { status: 429 }
+      )
     }
 
     const normalizedEmail = email.toLowerCase().trim()

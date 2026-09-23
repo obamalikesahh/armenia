@@ -3,9 +3,18 @@ import { db } from '@/lib/db'
 import { sendConfirmationEmails, DISCOUNT_CODE } from '@/lib/email'
 import { verifyToken } from '@/lib/auth'
 
+import { isValidEmail, isHoneypotTriggered, isRateLimited, getClientIp } from '@/lib/security'
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+
+    // 1. Honeypot check
+    if (isHoneypotTriggered(body)) {
+      console.warn('[Security] Booking honeypot triggered')
+      return NextResponse.json({ message: 'Reservation confirmed!' }, { status: 201 })
+    }
+
     const {
       tourId,
       tourName,
@@ -19,6 +28,7 @@ export async function POST(request: NextRequest) {
       luxuryTour,
       hotelCategory,
       singleSupplement,
+      isPrivate,
     } = body
 
     // Try to verify JWT token, but don't immediately reject if it fails
@@ -128,6 +138,7 @@ export async function POST(request: NextRequest) {
           luxuryTour,
           hotelCategory,
           singleSupplement,
+          isPrivate: Boolean(isPrivate || luxuryTour || /private/i.test(tourName || '')),
         },
         lang as 'en' | 'ru' | 'de'
       )

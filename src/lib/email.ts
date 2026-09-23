@@ -8,7 +8,21 @@ const SMTP_USER = process.env.SMTP_USER || 'thebeautyofarmenia@gmail.com'
 const SMTP_PASS = process.env.SMTP_PASS || ''
 
 const FROM_EMAIL = `"The Beauty of Armenia" <${SMTP_USER}>`
-const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
+export function getAdminEmails(isPrivate: boolean = false): string[] {
+  const envAdmins = process.env.ADMIN_NOTIFICATION_EMAILS
+    ? process.env.ADMIN_NOTIFICATION_EMAILS.split(',').map(e => e.trim()).filter(Boolean)
+    : []
+
+  if (envAdmins.length > 0) {
+    return envAdmins
+  }
+
+  const baseAdmins = ['thebeautyofarmenia@gmail.com', 'caxkal22@gmail.com']
+  const tourAdmin = isPrivate ? 'onewaytour@incoming.com' : 'sales@onewaytour.com'
+  return [...baseAdmins, tourAdmin]
+}
+
+const ADMIN_EMAILS = ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'sales@onewaytour.com', 'caxkal22@gmail.com']
 
 export const DISCOUNT_CODE = 'Armen5'
 
@@ -131,6 +145,7 @@ interface BookingEmailData {
   luxuryTour?: boolean
   hotelCategory?: string
   singleSupplement?: boolean
+  isPrivate?: boolean
 }
 
 const CONFIRMATION_TEMPLATES: Record<string, { subject: (tour: string) => string; body: (d: BookingEmailData) => string }> = {
@@ -260,12 +275,20 @@ export async function sendConfirmationEmails(
   // Send to customer
   await sendMail(data.userEmail, template.subject(data.tourName), template.body(data))
 
-  // Send copy to ALL admin emails
-  const adminSubject = `[New Reservation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`
+  // Determine if private or group tour
+  const isPrivate = Boolean(
+    data.isPrivate ||
+    data.luxuryTour ||
+    (data.tourName && /private/i.test(data.tourName))
+  )
+  const targetAdminEmails = getAdminEmails(isPrivate)
+
+  // Send copy to correct admin emails (private -> onewaytour@incoming.com, group -> sales@onewaytour.com)
+  const adminSubject = `[${isPrivate ? 'Private Tour' : 'Group Tour'} Reservation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`
   const adminHtml = `
     <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15);">
       <div style="padding: 32px 28px;">
-        <h2 style="color: #94A3B8; font-size: 18px; margin: 0 0 16px;">New Tour Reservation</h2>
+        <h2 style="color: #94A3B8; font-size: 18px; margin: 0 0 16px;">New ${isPrivate ? 'Private' : 'Group'} Tour Reservation</h2>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Tour:</strong> ${data.tourName}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Date:</strong> ${data.tourDate}</p>
         <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 0 0 8px;"><strong style="color: rgba(255,255,255,0.8);">Guest:</strong> ${data.userFirstName} ${data.userLastName}</p>
@@ -283,9 +306,8 @@ export async function sendConfirmationEmails(
       </div>
     </div>
   `
-  // Send to ALL admin email addresses robustly
   await Promise.all(
-    ADMIN_EMAILS.map(adminEmail =>
+    targetAdminEmails.map(adminEmail =>
       sendMail(adminEmail, adminSubject, adminHtml).catch(err => {
         console.error(`Failed to send confirmation copy to admin ${adminEmail}:`, err)
       })
@@ -340,9 +362,17 @@ export async function sendCancellationEmails(
   // Send to customer
   await sendMail(data.userEmail, subject, html)
 
-  // Send notification to ALL admin emails robustly
+  // Determine if private or group tour
+  const isPrivate = Boolean(
+    data.isPrivate ||
+    data.luxuryTour ||
+    (data.tourName && /private/i.test(data.tourName))
+  )
+  const targetAdminEmails = getAdminEmails(isPrivate)
+
+  // Send notification to admin emails
   await Promise.all(
-    ADMIN_EMAILS.map(adminEmail => 
+    targetAdminEmails.map(adminEmail => 
       sendMail(adminEmail, `[Cancellation] ${data.tourName} — ${data.userFirstName} ${data.userLastName}`, `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #0a0a0a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,80,80,0.15);">
         <div style="padding: 32px 28px;">
@@ -389,8 +419,9 @@ export async function sendContactEmail(
     </div>
   `
 
+  const contactAdmins = ['thebeautyofarmenia@gmail.com', 'caxkal22@gmail.com', 'onewaytour@incoming.com', 'sales@onewaytour.com']
   await Promise.all(
-    ADMIN_EMAILS.map(adminEmail =>
+    contactAdmins.map(adminEmail =>
       sendMail(adminEmail, adminSubject, adminHtml).catch(err => {
         console.error(`Failed to send contact copy to admin ${adminEmail}:`, err)
       })

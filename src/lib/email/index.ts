@@ -96,6 +96,7 @@ interface EmailBookingData {
   luxuryTour?: boolean
   hotelCategory?: string
   singleSupplement?: boolean
+  isPrivate?: boolean
 }
 
 // ─── Customer Confirmation Email ───
@@ -502,14 +503,28 @@ function getOwnerCancellationHTML(data: EmailBookingData): string {
 </html>`
 }
 
+export function getAdminEmails(isPrivate: boolean = false): string[] {
+  const envAdmins = process.env.ADMIN_NOTIFICATION_EMAILS
+    ? process.env.ADMIN_NOTIFICATION_EMAILS.split(',').map(e => e.trim()).filter(Boolean)
+    : []
+
+  if (envAdmins.length > 0) {
+    return envAdmins
+  }
+
+  const baseAdmins = ['thebeautyofarmenia@gmail.com', 'caxkal22@gmail.com']
+  const tourAdmin = isPrivate ? 'onewaytour@incoming.com' : 'sales@onewaytour.com'
+  return [...baseAdmins, tourAdmin]
+}
+
 // ─── Send Confirmation Emails ───
 export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
-  const envAdminEmails = process.env.ADMIN_NOTIFICATION_EMAILS 
-    ? process.env.ADMIN_NOTIFICATION_EMAILS.split(',').map(e => e.trim()) 
-    : []
-  const ADMIN_EMAILS = envAdminEmails.length > 0 
-    ? envAdminEmails 
-    : ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
+  const isPrivate = Boolean(
+    data.isPrivate ||
+    data.luxuryTour ||
+    (data.tourName && /private/i.test(data.tourName))
+  )
+  const ADMIN_EMAILS = getAdminEmails(isPrivate)
 
   // Send to customer
   await sendEmail({
@@ -518,8 +533,8 @@ export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' 
     html: getCustomerConfirmationHTML(data, lang),
   })
 
-  // Send copy to ALL admin emails
-  const adminSubject = `[NEW RESERVATION] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`
+  // Send copy to correct admin emails
+  const adminSubject = `[${isPrivate ? 'PRIVATE' : 'GROUP'} RESERVATION] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`
   const adminHtml = getOwnerConfirmationHTML(data)
 
   await Promise.all(
@@ -537,12 +552,12 @@ export async function sendConfirmationEmails(data: EmailBookingData, lang: 'en' 
 
 // ─── Send Cancellation Emails ───
 export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' | 'ru' | 'de' = 'en') {
-  const envAdminEmails = process.env.ADMIN_NOTIFICATION_EMAILS 
-    ? process.env.ADMIN_NOTIFICATION_EMAILS.split(',').map(e => e.trim()) 
-    : []
-  const ADMIN_EMAILS = envAdminEmails.length > 0 
-    ? envAdminEmails 
-    : ['thebeautyofarmenia@gmail.com', 'onewaytour@incoming.com', 'caxkal22@gmail.com']
+  const isPrivate = Boolean(
+    data.isPrivate ||
+    data.luxuryTour ||
+    (data.tourName && /private/i.test(data.tourName))
+  )
+  const ADMIN_EMAILS = getAdminEmails(isPrivate)
 
   // Send to customer
   await sendEmail({
@@ -551,8 +566,8 @@ export async function sendCancellationEmails(data: EmailBookingData, lang: 'en' 
     html: getCustomerCancellationHTML(data, lang),
   })
 
-  // Send copy to ALL admin emails
-  const adminSubject = `[CANCELLED] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`
+  // Send copy to correct admin emails
+  const adminSubject = `[CANCELLED ${isPrivate ? 'PRIVATE' : 'GROUP'}] ${data.userFirstName} ${data.userLastName} — ${data.tourName}`
   const adminHtml = getOwnerCancellationHTML(data)
 
   await Promise.all(

@@ -60,6 +60,7 @@ export function ContactForm() {
     phone: '',
     subject: '',
     message: '',
+    website: '',
   })
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -90,6 +91,7 @@ export function ContactForm() {
         phone: '',
         subject: '',
         message: '',
+        website: '',
       })
       setTimeout(() => setStatus('idle'), 6000)
     } catch (err) {
@@ -122,6 +124,16 @@ export function ContactForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+          {/* Honeypot field for anti-spam protection */}
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden opacity-0 pointer-events-none w-0 h-0 absolute -z-10"
+          />
           <div className="grid gap-5 sm:grid-cols-2">
             {/* Name field */}
             <div className="relative">
